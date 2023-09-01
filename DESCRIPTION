@@ -1,0 +1,43 @@
+Package: lissyrtools
+Title: Tools for LISSY Jobs
+Version: 0.0.0.9033
+Authors@R: c(person("Josep", "Espasa Reig", role = c("aut", "cre"), email = "jespasareig@gmail.com"))
+Author: Josep Espasa Reig [aut, cre]
+Description: Tools for the computation of inequality indicators in LISSY. 
+  This package contains three different types of functions. 'Read', 'transformation' 
+   and 'output' functions. 'Read functions' should allow LISSY users to read LIS and LWS files
+  with functionalities that extend those provided by 'read.LIS()'. Transformation functions add
+  easy data manipulation stages to LISSY jobs. Output functions help users create outputs and
+  plots for their tasks.
+License: GPL-3
+URL: https://joseper.github.io/lissyrtools/, https://github.com/JosepER/lissyrtools
+Depends: R (>= 3.2.0)
+Imports:
+    dplyr,
+    ggplot2,
+    stringr,
+    rlang,
+    glue,
+    magrittr,
+    purrr,
+    lifecycle,
+    assertthat,
+    tibble,
+    readr,
+    haven,
+    fancycut,
+    here,
+    matrixStats
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
+Suggests: 
+    testthat,
+    covr,
+    knitr,
+    rmarkdown,
+    fs,
+    R.rsp
+RdMacros: lifecycle
+VignetteBuilder: R.rsp
