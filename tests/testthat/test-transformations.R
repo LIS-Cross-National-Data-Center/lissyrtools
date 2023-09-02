@@ -466,6 +466,20 @@ test_that("import_lisppp_data correctly imports data from 'lissyrtools' package"
 
 })
 
+test_that("import_lisppp_data throws an error if the local machine is not lissy and path_to_ppp_file is set to 'lissy' or default (has also 'lissy' as argument)", {
+  
+  if(!is_lissy_machine()){
+    
+    expect_error(import_lisppp_data(path_to_ppp_file = "lissy"),
+                 msg = "path_to_ppp_file = 'lissy' can only be specified when using LISSY")
+    
+    expect_error(import_lisppp_data(),
+                 msg = "path_to_ppp_file = 'lissy' can only be specified when using LISSY")
+    
+  }
+  
+})
+
 
 
 # get_lws_file_income_reference_year --------------------------------------
@@ -940,7 +954,7 @@ if(.run_local_tests){
                                             database = "lws",
                                             variable = "new_variable",
                                             income_variable = TRUE,
-                                            ppp_data = import_lisppp_data())[["new_variable"]][1],
+                                            ppp_data = import_lisppp_data(path_to_ppp_file = "lissyrtools"))[["new_variable"]][1],
                  1/deflators[deflators$iso2 == "it" & deflators$year == "2010", "lisppp", drop = TRUE],
                  tolerance = .0001)
 
