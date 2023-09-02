@@ -1,7 +1,7 @@
-# library(lissyrtools)
-# context("Functions from 'utils.R'")
-#
-#
+library(lissyrtools)
+context("Functions from 'utils.R'")
+
+
 # # intervals_with_single_value ---------------------------------------------
 #
 # test_that("intervals_with_single_value 1", {
@@ -438,218 +438,218 @@
 # })
 #
 #
-#
-# # is.unique ---------------------------------------------------------------
-#
-#
-#
-#
-# # is.all.same.value -------------------------------------------------------
-#
-# test_that("is.all.same.value works as expected", {
-#
-#   expect_equal(is.all.same.value(c(1,1,1,1,1)), TRUE)
-#
-#   expect_equal(is.all.same.value(rep("a", 5)), TRUE)
-#
-#   expect_equal(is.all.same.value(c(1,1,1,1,2)), FALSE)
-#
-# })
-#
-#
-# test_that("is.all.same.value fails if x is null or has length 0", {
-#
-#   expect_error(is.all.same.value(NULL))
-#
-#   expect_error(is.all.same.value(vector(length = 0)))
-#
-# })
-#
-#
-# test_that("is.all.same.value does not ignore NAs if na.rm = FALSE", {
-#
-#   expect_error(is.all.same.value(c(1,1,1,1,1, NA)),
-#                "'x' can not have NAs if 'na.rm = FALSE'")
-#
-#   expect_equal(is.all.same.value(c(1,1,1,1,1, NA), na.rm = TRUE), TRUE)
-#
-# })
-#
-#
-# test_that("is.all.same.value deals correctly with floating point error", {
-#
-#   expect_equal(is.all.same.value(c(sqrt(2)^2, 2)), TRUE)
-#
-# })
-#
-#
-# test_that("is.all.same.value uses tests of previous function: is.unique 1", {
-#
-#   expect_equal(is.all.same.value(1),
-#                TRUE)
-#
-#   expect_equal(is.all.same.value(c(1, 1, 1)),
-#                TRUE)
-#
-#   expect_equal(is.all.same.value(c(1, 1, c(1, 1) )),
-#                TRUE)
-#
-#   expect_equal(is.all.same.value(c(0, 1, 1)),
-#                FALSE)
-#
-#
-# })
-#
-# test_that("is.all.same.value uses tests of previous function: is.unique throws error if argument is not a vector", {
-#
-#   expect_error(is.all.same.value(list(a = c(1, 1, 1))))
-#
-#   expect_error(is.all.same.value(data.frame(a = c(1, 1, 1))))
-#
-#
-# })
-#
-#
-# test_that("is.all.same.value works well with factors",{
-#
-#   expect_equal(
-#     is.all.same.value(structure(c(2L, 2L, 2L),
-#                                 .Label = c("[0]Historical Wave",
-#                                            "[1]Wave I", "[2]Wave II"),
-#                                 class = "factor")),
-#     TRUE
-#   )
-#
-#   expect_equal(
-#     is.all.same.value(structure(c(1L, 2L, 2L),
-#                                 .Label = c("[0]Historical Wave",
-#                                            "[1]Wave I", "[2]Wave II"),
-#                                 class = "factor")),
-#     FALSE
-#   )
-#
-# })
-#
-#
-#
-#
-# # four_digit_year ---------------------------------------------------------
-#
-# test_that("four_digit_year works as expected", {
-#
-#   expect_equal(four_digit_year("10"), "2010")
-#
-#   expect_equal(four_digit_year("70"), "1970")
-#
-#   expect_equal(four_digit_year(70), "1970")
-#
-#   expect_error(four_digit_year("lu2010ih"),
-#                "Argument 'two_digit_year' should be two digits (00 to 99).",
-#                fixed = TRUE)
-#
-#   expect_error(four_digit_year("lu"),
-#                "Argument 'two_digit_year' should be two digits (00 to 99).",
-#                fixed = TRUE)
-#
-#
-# })
-#
-#
-#
-# # database_character_to_name ----------------------------------------------
-#
-# test_that("database_character_to_name works as expected", {
-#
-#   expect_equal(database_character_to_name("i"),
-#                "LIS")
-#
-#   expect_equal(database_character_to_name("w"),
-#                "LWS")
-#
-#   expect_equal(database_character_to_name("e"),
-#                "ERFLIS")
-#
-# })
-#
-#
-#
-#
-# # get_database ------------------------------------------------------------
-#
-# test_that("get_database works as expected", {
-#
-#   list_1 <- list(aa11ih = tibble::tibble(),
-#                  bb22ih = tibble::tibble())
-#
-#   list_2 <- list_1
-#
-#   list_3 <- list_1
-#
-#   list_4 <- list_1
-#
-#   attr(list_1, "database") <- "i"
-#
-#   attr(list_2, "database") <- "b"
-#
-#   attr(list_4, "database") <- c("i", "i")
-#
-#   expect_equal(get_database(list_1), "i")
-#
-#   expect_error(get_database(list_2),
-#                "Only 'lis', 'lws', 'erflis', 'i', 'w' and 'e' are valid values for databases. Got 'b'")
-#
-#   expect_error(get_database(list_3),
-#                "Attribute 'database' is NULL")
-#
-#   expect_error(get_database(list_4),
-#                "Attribute 'database' must have length 1.",
-#                fixed = TRUE)
-#
-#
-# })
-#
-#
-#
-# # get_index_hh_heads ------------------------------------------------------
-#
-# test_that("get_index_hh_heads works as expected on data from readstata13", {
-#
-#   zz55ip <- structure(list(hid = c(1L, 2L, 3L, 3L, 4L),
-#                  pid = c(1L, 1L, 1L, 2L, 1L),
-#                  relation = structure(c(1L, 1L, 1L, 3L, 1L),
-#                                       .Label = c("[1000]head",
-#                                                  "[2000]spouse/partner",
-#                                                  "[2100]spouse",
-#                                                  "[2200]cohabiting partner",
-#                                                  "[3000]child",
-#                                                  "[3100]own child (incl adopted)"),
-#                                       class = "factor")),
-#             row.names = c(NA, 5L),
-#             class = "data.frame")
-#
-#   expect_equal(get_index_hh_heads(zz55ip), c(TRUE, TRUE, TRUE, FALSE, TRUE))
-#
-# })
-#
-#
-# test_that("get_index_hh_heads works as expected on data from haven", {
-#
-#   zz55ip <- structure(list(hid = structure(c(1, 2, 3, 3, 4),
-#                                  label = "household identifier",
-#                                  format.stata = "%8.0g"),
-#                  pid = structure(c(1, 1, 1, 2, 1),
-#                                  label = "person identifier",
-#                                  format.stata = "%8.0g"),
-#                  relation = structure(c(1000, 1000, 1000, 2100, 1000),
-#                                       label = "relationship to household head",
-#                                       format.stata = "%50.0g",
-#                                       labels = c(`[1000]head` = 1000, `[2000]spouse/partner` = 2000,
-#                                                  `[2100]spouse` = 2100, `[2200]cohabiting partner` = 2200,
-#                                                  `[3000]child` = 3000, `[3100]own child (incl adopted)` = 3100),
-#                                       class = c("haven_labelled","vctrs_vctr", "double"))),
-#             row.names = c(NA, -5L),
-#             class = c("tbl_df", "tbl", "data.frame"))
-#
-#   expect_equal(get_index_hh_heads(zz55ip), c(TRUE, TRUE, TRUE, FALSE, TRUE))
-#
-# })
+
+# is.unique ---------------------------------------------------------------
+
+
+
+
+# is.all.same.value -------------------------------------------------------
+
+test_that("is.all.same.value works as expected", {
+
+  expect_equal(is.all.same.value(c(1,1,1,1,1)), TRUE)
+
+  expect_equal(is.all.same.value(rep("a", 5)), TRUE)
+
+  expect_equal(is.all.same.value(c(1,1,1,1,2)), FALSE)
+
+})
+
+
+test_that("is.all.same.value fails if x is null or has length 0", {
+
+  expect_error(is.all.same.value(NULL))
+
+  expect_error(is.all.same.value(vector(length = 0)))
+
+})
+
+
+test_that("is.all.same.value does not ignore NAs if na.rm = FALSE", {
+
+  expect_error(is.all.same.value(c(1,1,1,1,1, NA)),
+               "'x' can not have NAs if 'na.rm = FALSE'")
+
+  expect_equal(is.all.same.value(c(1,1,1,1,1, NA), na.rm = TRUE), TRUE)
+
+})
+
+
+test_that("is.all.same.value deals correctly with floating point error", {
+
+  expect_equal(is.all.same.value(c(sqrt(2)^2, 2)), TRUE)
+
+})
+
+
+test_that("is.all.same.value uses tests of previous function: is.unique 1", {
+
+  expect_equal(is.all.same.value(1),
+               TRUE)
+
+  expect_equal(is.all.same.value(c(1, 1, 1)),
+               TRUE)
+
+  expect_equal(is.all.same.value(c(1, 1, c(1, 1) )),
+               TRUE)
+
+  expect_equal(is.all.same.value(c(0, 1, 1)),
+               FALSE)
+
+
+})
+
+test_that("is.all.same.value uses tests of previous function: is.unique throws error if argument is not a vector", {
+
+  expect_error(is.all.same.value(list(a = c(1, 1, 1))))
+
+  expect_error(is.all.same.value(data.frame(a = c(1, 1, 1))))
+
+
+})
+
+
+test_that("is.all.same.value works well with factors",{
+
+  expect_equal(
+    is.all.same.value(structure(c(2L, 2L, 2L),
+                                .Label = c("[0]Historical Wave",
+                                           "[1]Wave I", "[2]Wave II"),
+                                class = "factor")),
+    TRUE
+  )
+
+  expect_equal(
+    is.all.same.value(structure(c(1L, 2L, 2L),
+                                .Label = c("[0]Historical Wave",
+                                           "[1]Wave I", "[2]Wave II"),
+                                class = "factor")),
+    FALSE
+  )
+
+})
+
+
+
+
+# four_digit_year ---------------------------------------------------------
+
+test_that("four_digit_year works as expected", {
+
+  expect_equal(four_digit_year("10"), "2010")
+
+  expect_equal(four_digit_year("70"), "1970")
+
+  expect_equal(four_digit_year(70), "1970")
+
+  expect_error(four_digit_year("lu2010ih"),
+               "Argument 'two_digit_year' should be two digits (00 to 99).",
+               fixed = TRUE)
+
+  expect_error(four_digit_year("lu"),
+               "Argument 'two_digit_year' should be two digits (00 to 99).",
+               fixed = TRUE)
+
+
+})
+
+
+
+# database_character_to_name ----------------------------------------------
+
+test_that("database_character_to_name works as expected", {
+
+  expect_equal(database_character_to_name("i"),
+               "LIS")
+
+  expect_equal(database_character_to_name("w"),
+               "LWS")
+
+  expect_equal(database_character_to_name("e"),
+               "ERFLIS")
+
+})
+
+
+
+
+# get_database ------------------------------------------------------------
+
+test_that("get_database works as expected", {
+
+  list_1 <- list(aa11ih = tibble::tibble(),
+                 bb22ih = tibble::tibble())
+
+  list_2 <- list_1
+
+  list_3 <- list_1
+
+  list_4 <- list_1
+
+  attr(list_1, "database") <- "i"
+
+  attr(list_2, "database") <- "b"
+
+  attr(list_4, "database") <- c("i", "i")
+
+  expect_equal(get_database(list_1), "i")
+
+  expect_error(get_database(list_2),
+               "Only 'lis', 'lws', 'erflis', 'i', 'w' and 'e' are valid values for databases. Got 'b'")
+
+  expect_error(get_database(list_3),
+               "Attribute 'database' is NULL")
+
+  expect_error(get_database(list_4),
+               "Attribute 'database' must have length 1.",
+               fixed = TRUE)
+
+
+})
+
+
+
+# get_index_hh_heads ------------------------------------------------------
+
+test_that("get_index_hh_heads works as expected on data from readstata13", {
+
+  zz55ip <- structure(list(hid = c(1L, 2L, 3L, 3L, 4L),
+                 pid = c(1L, 1L, 1L, 2L, 1L),
+                 relation = structure(c(1L, 1L, 1L, 3L, 1L),
+                                      .Label = c("[1000]head",
+                                                 "[2000]spouse/partner",
+                                                 "[2100]spouse",
+                                                 "[2200]cohabiting partner",
+                                                 "[3000]child",
+                                                 "[3100]own child (incl adopted)"),
+                                      class = "factor")),
+            row.names = c(NA, 5L),
+            class = "data.frame")
+
+  expect_equal(get_index_hh_heads(zz55ip), c(TRUE, TRUE, TRUE, FALSE, TRUE))
+
+})
+
+
+test_that("get_index_hh_heads works as expected on data from haven", {
+
+  zz55ip <- structure(list(hid = structure(c(1, 2, 3, 3, 4),
+                                 label = "household identifier",
+                                 format.stata = "%8.0g"),
+                 pid = structure(c(1, 1, 1, 2, 1),
+                                 label = "person identifier",
+                                 format.stata = "%8.0g"),
+                 relation = structure(c(1000, 1000, 1000, 2100, 1000),
+                                      label = "relationship to household head",
+                                      format.stata = "%50.0g",
+                                      labels = c(`[1000]head` = 1000, `[2000]spouse/partner` = 2000,
+                                                 `[2100]spouse` = 2100, `[2200]cohabiting partner` = 2200,
+                                                 `[3000]child` = 3000, `[3100]own child (incl adopted)` = 3100),
+                                      class = c("haven_labelled","vctrs_vctr", "double"))),
+            row.names = c(NA, -5L),
+            class = c("tbl_df", "tbl", "data.frame"))
+
+  expect_equal(get_index_hh_heads(zz55ip), c(TRUE, TRUE, TRUE, FALSE, TRUE))
+
+})
