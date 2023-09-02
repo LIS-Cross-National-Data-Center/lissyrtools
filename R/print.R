@@ -19,7 +19,7 @@ print_percentiles <- function(lissy_files, variable, na.rm = FALSE){
 
   purrr::imap(lissy_files, .f = function(file, file_name){
 
-    out_ <- compute_percentiles(dataset = x, variable = "dhi", na.rm = na.rm)
+    out_ <- compute_percentiles(file = x, file_name = file_name, variable = "dhi", na.rm = na.rm)
     out_[[paste0("cum_", y)]] <- cumsum(out_[["value"]])/sum(out_[["value"]])
 
     index_col_value <- which(names(out_) == "value")
@@ -53,7 +53,7 @@ print_gini <- function(lissy_files, variable, na.rm = FALSE){
   lissy_files %>%
     purrr::map_dbl(.f = function(x){
 
-      compute_gini(dataset = x, variable = variable, na.rm = na.rm)
+      compute_gini(file = x, file_name = file_name, variable = variable, na.rm = na.rm)
 
     })
 
