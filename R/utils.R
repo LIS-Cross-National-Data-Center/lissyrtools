@@ -35,36 +35,6 @@ split_consecutive_values <- function(x){
 
 
 
-#' Add values from duplicated groups
-#'
-#' Repeats values from groups of consecutive values that have been previously
-#' removed from a vector. To be used inside compute_lorenz_curve.
-#'
-#' @keywords internal
-add_duplicated_groups <- function(x, list_index_duplicated_groups){
-
-  length_previous_groups <- 0
-  for(group in list_index_duplicated_groups){
-    # play with this and add it as another function
-
-    index_start_group <- min(group) + length_previous_groups
-
-    x <- append(x = x,
-                values = rep(x[index_start_group],
-                             times = (length(group)-1) ),
-                after = index_start_group)
-
-    length_previous_groups <- length_previous_groups + length(group)-1
-
-  }
-
-  return(x)
-
-}
-
-
-
-
 #' Number of elements smaller than input
 #'
 #' Computes the number of elements in 'numbers' smaller than each of the
