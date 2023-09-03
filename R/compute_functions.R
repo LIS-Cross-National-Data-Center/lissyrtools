@@ -8,7 +8,7 @@
 #' @param file A LIS or LWS file.
 #' @param file_name The name of the LIS or LWS file.
 #' @param variable A character vector of length one with the indicator that needs to be transformed.
-#' @param breaks A numeric vector specifying the percentiles that should be computed. Defaults to all integers from 0 to 100.
+#' @param breaks A numeric vector specifying the percentiles that should be computed. Defaults to all deciles.
 #' @param weight A string with the name of the variable in 'file' that should be
 #'   used as sample weights.
 #' @param na.rm A boolean indicating if the computation should ignore missing

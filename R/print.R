@@ -8,6 +8,7 @@
 #'
 #' @param lissy_files A list of LIS or LWS files.
 #' @param variable A character vector of length one.
+#' @param breaks A numeric vector with specifying the percentiles that should be computed. Defaults to deciles.
 #' @param na.rm A boolean indicating if missing values should be ignored. Defaults to FALSE.
 #' @return A tibble with percentile absolute and cummulative values.
 #' @examples
@@ -15,15 +16,15 @@
 #' lissy_files <- read_lissy_files(c("fr84h", "fr94h", "fr10h"))
 #' print_percentiles(lissy_files = lissy_files, variable = "dhi")
 #' }
-print_percentiles <- function(lissy_files, variable, na.rm = FALSE){
+print_percentiles <- function(lissy_files, variable, breaks = seq(0, 1, 0.1), na.rm = FALSE){
 
   purrr::imap(lissy_files, .f = function(file, file_name){
 
-    out_ <- compute_percentiles(file = x, file_name = file_name, variable = "dhi", na.rm = na.rm)
-    out_[[paste0("cum_", y)]] <- cumsum(out_[["value"]])/sum(out_[["value"]])
+    out_ <- compute_percentiles(file = file, file_name = file_name, variable = "dhi", na.rm = na.rm)
+    out_[[paste0("cum_", file_name)]] <- cumsum(out_[["value"]])/sum(out_[["value"]])
 
     index_col_value <- which(names(out_) == "value")
-    names(out_)[2] <- paste0("value_", y)
+    names(out_)[2] <- paste0("value_", file_name)
 
     return(out_)
 
@@ -51,11 +52,13 @@ print_percentiles <- function(lissy_files, variable, na.rm = FALSE){
 print_gini <- function(lissy_files, variable, na.rm = FALSE){
 
   lissy_files %>%
-    purrr::map_dbl(.f = function(x){
-
-      compute_gini(file = x, file_name = file_name, variable = variable, na.rm = na.rm)
-
-    })
+    purrr::imap_dbl(
+      ~compute_gini(file = ..1,
+                    file_name = ..2,
+                    variable = ..3,
+                    na.rm = ..4),
+    variable,
+    na.rm)
 
 }
 
