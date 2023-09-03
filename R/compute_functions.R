@@ -14,7 +14,7 @@
 #' @param na.rm A boolean indicating if the computation should ignore missing
 #'   values in 'variable' and 'weight'.
 #'
-#' @return A tibble with two columns: 'percentile' and 'value'. The first contains
+#' @return A data.frame with two columns: 'percentile' and 'value'. The first contains
 #'   the label of the percentiles computed (e.g. '0.5' for median, '0.2' for first quintile).
 #'   The second contains the values of these in the distribution of 'variable'.
 #'
@@ -61,21 +61,25 @@ compute_percentiles <- function(file, file_name, variable, breaks = seq(0, 1, 0.
   if(any(is.na(var))){
 
     warning(glue::glue("'{variable}' in '{file_name}' contains NAs. Use na.rm = TRUE to ignore them."))
-    return(NA)
+    return(tibble::tibble(
+      percentile = breaks,
+      value = NA
+    ))
 
   }else if(any(is.na(weight_))){
 
     warning(glue::glue("There are NAs in the weighting variable '{weight}' in '{file_name}'. Use na.rm = TRUE to ignore them."))
-    return(NA)
+    return(tibble::tibble(
+      percentile = breaks,
+      value = NA
+    ))
 
-  }else{
-
+  }
     tibble::tibble(
       percentile = breaks,
       value = unname(wtd.quantile(x = var, weights = weight_, probs = breaks,
                    na.rm = na.rm, normwt = TRUE))
     )
-  }
 
 }
 

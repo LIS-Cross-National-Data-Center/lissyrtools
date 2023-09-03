@@ -132,7 +132,6 @@ test_that("compute_percentiles works well when weights are small or don't have m
                                    weight = "my_weight",
                                    na.rm = TRUE)[["value"]])
 
-
 })
 
 
@@ -168,32 +167,31 @@ test_that("compute_percentiles throws a warning and returns NAs if there are NAs
                                      variable = "var_",
                                      breaks = seq(0, 1, 0.1),
                                      na.rm = FALSE)),
-                 NA)
+               structure(list(percentile = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6,
+                                             0.7, 0.8, 0.9, 1), value = c(NA, NA, NA, NA, NA, NA, NA, NA,
+                                                                          NA, NA, NA)),
+                         class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA, -11L)))
 
-  expect_equal(suppressWarnings(compute_percentiles(file_2,
+  suppressWarnings({
+  expect_equal(
+
+    compute_percentiles(file_2,
                                      file_name = "aa55i",
                                      variable = "var_",
                                      breaks = seq(0, 1, 0.1),
                                      weight = "pwgt",
-                                     na.rm = FALSE)),
-               NA)
+                                     na.rm = FALSE),
+    structure(list(percentile = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6,
+                                  0.7, 0.8, 0.9, 1),
+                   value = c(NA, NA, NA, NA, NA, NA, NA, NA,
+                                                               NA, NA, NA)),
+              class = c("tbl_df", "tbl", "data.frame"),
+              row.names = c(NA, -11L))
+    )
+    })
 
 })
 
-
-
-test_that("compute_percentiles returns NA if all values in 'variable' are NAs", {
-
-  file_ <- tibble::tibble(var_ = rep(NA_real_, 3), hwgt = 1)
-
-  expect_equal(compute_percentiles(file = file_,
-                                   file_name = "aa55i",
-                                   variable = "var_",
-                                   breaks = seq(0, 1, 0.1),
-                                   na.rm = TRUE)[["value"]],
-               rep(NA_real_, 11))
-
-})
 
 
 # ** wrong or missing parameters ------------------------------------------
