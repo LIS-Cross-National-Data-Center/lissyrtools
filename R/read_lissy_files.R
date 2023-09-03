@@ -168,7 +168,7 @@ read_lissy_files <- function(files, col_select = NULL, full_year_names = TRUE){
 #'
 #' @param files A character vector containing file names. These need to contain
 #'   the country, year, database and level elements at the beginning of their name in 'ccyydl', or 'ccyyyydl' format.
-#'   E.g. c("it14h", "us16h") or c("it14ih_modified.dta", "us16ih_mydata.dta")
+#'   E.g. c("it14ih", "us16ih") or c("it14ih_modified.dta", "us16ih_mydata.dta")
 #' @param path_to_files A character string with the directory in which the files can be found.
 #'   The order should match that of the files passed in 'files'.
 #' @param col_select A character vector with the name of the variables
