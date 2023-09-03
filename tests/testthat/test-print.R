@@ -15,11 +15,6 @@ library(lissyrtools)
 
 # ** gini -----------------------------------------------------------------
 
-library(lissyrtools)
-context("Helper functions for computing estimates")
-set.seed(4)
-
-
 test_that("print_gini returns expected Gini coefficients", {
   lissy_files <- list(file1 = data.frame(var1 = c(1, 2, 3), weight = c(1, 1, 1)),
                       file2 = data.frame(var1 = c(4, 5, 6), weight = c(1, 1, 1)))
@@ -73,20 +68,81 @@ test_that("print_gini handles all NA or zero values in variable", {
 
 # ** percentiles ----------------------------------------------------------
 
-# test_that("print_indicator uses the right weight when computing percentiles with a p-level file", {
-#
-#
-#
-#
-# })
-#
-#
-# test_that("print_indicator uses the right weight when computing percentiles with a h-level file", {
-#
-#
-#
-#
-# })
+test_that("print_percentiles returns expected percentiles", {
+  lissy_files <- list(file1 = data.frame(var1 = c(1, 2, 3)),
+                      file2 = data.frame(var1 = c(4, 5, 6)))
+
+  result <- print_percentiles(lissy_files, "var1", breaks = c(0.25, 0.5, 0.75))
+  expect_is(result, "data.frame")
+  expect_equal(result$percentile, c(0.25, 0.5, 0.75))
+})
+
+test_that("print_percentiles handles NA values correctly", {
+
+  suppressWarnings({
+    lissy_files <- list(file1 = data.frame(var1 = c(1:50, NA)),
+                        file2 = data.frame(var1 = c(51:100, NA)))
+
+    result <- print_percentiles(lissy_files, variable = "var1", na.rm = FALSE)
+    expect_true(any(is.na(result$value_file1)))
+    expect_true(any(is.na(result$value_file2)))
+
+    result <- print_percentiles(lissy_files, variable = "var1", na.rm = TRUE)
+    expect_true(all(!is.na(result$value_file1)))
+    expect_true(all(!is.na(result$value_file2)))
+  })
+})
+
+test_that("print_percentiles handles all NA or zero values in variable", {
+  lissy_files <- list(file1 = data.frame(var1 = c(NA_integer_, NA_integer_, NA_integer_)),
+                      file2 = data.frame(var1 = c(0, 0, 0)))
+
+  result <- print_percentiles(lissy_files, "var1")
+  expect_true(all(is.na(result$value_file1)))
+  expect_true(all(is.na(result$value_file2)))
+})
+
+test_that("print_percentiles handles weight parameter in compute_percentiles", {
+  lissy_files <- list(file1 = data.frame(var1 = c(1, 2, 3), weight = c(1, 1, 1)),
+                      file2 = data.frame(var1 = c(4, 5, 6), weight = c(1, 1, 1)))
+
+  result <- print_percentiles(lissy_files, "var1")
+  expect_is(result, "data.frame")
+  expect_equal(result$percentile, seq(0, 1, 0.1))
+})
+
+test_that("print_percentiles handles weight parameter", {
+  lissy_files <- list(file1 = data.frame(var1 = c(1, 2, 3), weight = c(1, 1, 1)),
+                      file2 = data.frame(var1 = c(4, 5, 6), weight = c(1, 1, 1)))
+
+  result <- print_percentiles(lissy_files, "var1", weight = "weight")
+  expect_is(result, "data.frame")
+  expect_equal(result$percentile, seq(0, 1, 0.1))
+})
+
+test_that("print_percentiles applies weights", {
+  lissy_files <- list(file1 = data.frame(var1 = 1:100, weight = rep(1, 100)),
+                      file2 = data.frame(var1 = 1:100, weight = seq(1,100, 1) ))
+
+  result <- print_percentiles(lissy_files, "var1", weight = "weight")
+  bool <- any(result$value_file1 != result$value_file2)
+  expect_equal(bool, TRUE)
+})
+
+test_that("print_percentiles handles NA values in weight variable", {
+  suppressWarnings({
+  lissy_files <- list(file1 = data.frame(var1 = c(1, 2, 3), weight = c(1, NA, 1)),
+                      file2 = data.frame(var1 = c(4, 5, 6), weight = c(1, 1, 1)))
+
+  result <- print_percentiles(lissy_files, "var1", weight = "weight", na.rm = FALSE)
+  expect_true(any(is.na(result$value_file1)))
+  expect_true(all(!is.na(result$value_file2)))
+
+  result <- print_percentiles(lissy_files, "var1", weight = "weight", na.rm = TRUE)
+  expect_true(all(!is.na(result$value_file1)))
+  expect_true(all(!is.na(result$value_file2)))
+  })
+})
 
 # ** average --------------------------------------------------------------
 

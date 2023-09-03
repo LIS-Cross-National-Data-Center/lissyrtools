@@ -9,6 +9,7 @@
 #' @param lissy_files A list of LIS or LWS files.
 #' @param variable A character vector of length one.
 #' @param breaks A numeric vector with specifying the percentiles that should be computed. Defaults to deciles.
+#' @param weight A string with the name of the variable in 'file' that should be used as sample weights.
 #' @param na.rm A boolean indicating if missing values should be ignored. Defaults to FALSE.
 #' @return A tibble with percentile absolute and cummulative values.
 #' @examples
@@ -16,11 +17,11 @@
 #' lissy_files <- read_lissy_files(c("fr84h", "fr94h", "fr10h"))
 #' print_percentiles(lissy_files = lissy_files, variable = "dhi")
 #' }
-print_percentiles <- function(lissy_files, variable, breaks = seq(0, 1, 0.1), na.rm = FALSE){
+print_percentiles <- function(lissy_files, variable, breaks = seq(0, 1, 0.1), weight = NULL, na.rm = FALSE){
 
   purrr::imap(lissy_files, .f = function(file, file_name){
 
-    out_ <- compute_percentiles(file = file, file_name = file_name, variable = "dhi", na.rm = na.rm)
+    out_ <- compute_percentiles(file = file, file_name = file_name, variable = variable, weight = weight, breaks = breaks, na.rm = na.rm)
     out_[[paste0("cum_", file_name)]] <- cumsum(out_[["value"]])/sum(out_[["value"]])
 
     index_col_value <- which(names(out_) == "value")
@@ -29,9 +30,7 @@ print_percentiles <- function(lissy_files, variable, breaks = seq(0, 1, 0.1), na
     return(out_)
 
   }) %>%
-    purrr::reduce(dplyr::left_join, by = "percentile") %>%
-    print(n = Inf)
-
+    purrr::reduce(dplyr::left_join, by = "percentile")
 }
 
 
