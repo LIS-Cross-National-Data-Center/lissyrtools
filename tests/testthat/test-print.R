@@ -6,12 +6,6 @@ library(lissyrtools)
 .run_local_tests <- (Sys.info()[["effective_user"]] == "josep" && Sys.info()[["nodename"]] == "DEVV-CT01")
 
 
-# print_indicator ---------------------------------------------------------
-
-# copy tests from 'test-transformations' for
-# test when variable has only NAS
-
-# try also with single file list
 
 # ** gini -----------------------------------------------------------------
 
@@ -218,3 +212,150 @@ test_that("print_percentiles handles NA values in weight variable", {
 # ** using hh-level files -------------------------------------------------
 
 
+# print_indicator ---------------------------------------------------------
+
+test_that("print_indicator handles different types of indicators ", {
+  # h-level file
+  lissy_files_h <- list(file1 = data.frame(dhi = c(1, 2, 3), hwgt = c(1, 1, 1)))
+
+  result <- print_indicator(lissy_files_h, "dhi", "mean")
+  expect_equal(result, c(file1 = 2))
+
+  result <- print_indicator(lissy_files_h, "dhi", "median")
+  expect_equal(result, c(file1 = 2))
+
+  result <- suppressWarnings(print_indicator(lissy_files_h, "dhi", "ratio"))
+  expect_equal(result, c(file1 = 2.333333), tolerance = 0.1)
+
+  result <- print_indicator(lissy_files_h, "dhi", "gini")
+  expect_equal(result, c(file1 = 0.2222222), tolerance = 0.1)
+
+  result <- print_indicator(lissy_files_h, "dhi", "atkinson", epsilon = 1)
+  expect_equal(result, c(file1 = 0.0914397), tolerance = 0.1)
+
+  # p-level file
+  lissy_files_p <- list(file1 = data.frame(pi11 = c(1, 2, 3), pwgt = c(1, 1, 1)))
+
+  result <- print_indicator(lissy_files_p, "pi11", "mean")
+  expect_equal(result, c(file1 = 2))
+
+  result <- print_indicator(lissy_files_p, "pi11", "median")
+  expect_equal(result, c(file1 = 2))
+
+  result <- suppressWarnings(print_indicator(lissy_files_p, "pi11", "ratio"))
+  expect_equal(result, c(file1 = 2.333333), tolerance = 0.1)
+
+  result <- print_indicator(lissy_files_p, "pi11", "gini")
+  expect_equal(result, c(file1 = 0.2222222), tolerance = 0.1)
+
+  result <- print_indicator(lissy_files_p, "pi11", "atkinson", epsilon = 1)
+  expect_equal(result, c(file1 = 0.0914397), tolerance = 0.1)
+})
+
+test_that("print_indicator handles weight parameter", {
+  lissy_files <- list(file1 = data.frame(var1 = c(1, 2, 3), weight = c(1, 1, 1)))
+
+  result <- print_indicator(lissy_files, "var1", "mean", weight = "weight")
+  expect_equal(result, c(file1 = 2))
+})
+
+test_that("print_indicator handles na.rm parameter", {
+  lissy_files <- list(file1 = data.frame(dhi = c(1, 1, 1, NA), hwgt = c(1, 1, 1, NA)))
+
+  result <- print_indicator(lissy_files, "dhi", "mean", na.rm = TRUE)
+  expect_equal(result, c(file1 = 1))
+})
+
+test_that("print_indicator handles ratio and epsilon parameters", {
+  lissy_files <- list(file1 = data.frame(dhi = c(1, 2, 3), hwgt = c(1, 1, 1)))
+
+  result <- print_indicator(lissy_files, "dhi", "ratio", ratio = c(0.9, 0.1))
+  expect_equal(result, c(file1 = 2.333333), tolerance = 0.01)
+
+  result <- print_indicator(lissy_files, "dhi", "atkinson", epsilon = 0.5)
+  expect_equal(result, c(file1 = 0.04491621), tolerance = 0.01)
+})
+
+
+test_that("print_indicator correctly handles files_level and variable_level", {
+  lissy_files_h <- list(file1 = data.frame(hvar = c(1, 2, 3), hwgt = c(1, 1, 1)))
+
+  lissy_files_p <- list(file1 = data.frame(pvar = c(1, 2, 3), pwgt = c(1, 0, 0)))
+
+
+  # Test with files_level set to 'household' and variable_level set to 'person'
+  result <- print_indicator(lissy_files_p, "pvar", "mean", files_level = "person", variable_level = "person")
+  expect_equal(result, c(file1 = 1))
+
+  # Test with files_level set to 'person' and variable_level set to 'household'
+  result <- print_indicator(lissy_files_h, "hvar", "mean", files_level = "person", variable_level = "household")
+  expect_equal(result, c(file1 = 2))
+
+  # Test with files_level set to NULL (should use default) and variable_level set to 'person'
+  result <- print_indicator(lissy_files_p, "pvar", "mean", files_level = NULL, variable_level = "person")
+  expect_equal(result, c(file1 = 1))
+
+})
+
+
+
+# determine_weight --------------------------------------------------------
+
+ih_list <- list(aa11ih = tibble::tibble(hid = 1:5),
+                bb22ih = tibble::tibble(hid = 1:5))
+
+ip_list <- list(aa11ip = tibble::tibble(hid = 1:5,
+                                pid = 1),
+                bb22ip = tibble::tibble(hid = 1:5,
+                                pid = 1))
+
+attr(ih_list, "database") <- "i"
+attr(ip_list, "database") <- "i"
+
+attr(ih_list, "level") <- "h"
+attr(ip_list, "level") <- "p"
+
+
+test_that("determine_weight handles missing files_level", {
+  lissy_files <- list()
+  variable <- "pi11"
+  variable_level <- "person"
+
+  expect_equal(determine_weight(lissy_files, variable, NULL, variable_level), "pwgt")
+})
+
+test_that("determine_weight handles missing variable_level", {
+  lissy_files <- list()
+  variable <- "pi11"
+  files_level <- "person"
+
+  expect_equal(determine_weight(lissy_files, variable, files_level, NULL), "pwgt")
+})
+
+test_that("determine_weight handles both files_level and variable_level", {
+  lissy_files <- list()
+  variable <- "pi11"
+  files_level <- "person"
+  variable_level <- "person"
+
+  expect_equal(determine_weight(lissy_files, variable, files_level, variable_level), "pwgt")
+})
+
+test_that("determine_weight handles household level", {
+  lissy_files <- list()
+  variable <- "dhi"
+  files_level <- "household"
+  variable_level <- "household"
+
+  expect_equal(determine_weight(lissy_files, variable, files_level, variable_level), "hwgt")
+})
+
+test_that("determine_weight throws error for invalid variable_level", {
+  lissy_files <- list()
+  variable <- "pi11"
+  files_level <- "person"
+  variable_level <- "invalid"
+
+  expect_error(determine_weight(lissy_files, variable, files_level, variable_level),
+               "Argument 'variable_level' can only take 'person', 'p', 'household' or 'h' as values.")
+})
