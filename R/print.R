@@ -320,3 +320,132 @@ print_gini <- function(lissy_files, variable, weight = NULL, na.rm = FALSE, file
                   na.rm # ..5
   )
 }
+
+
+
+#' Print the Atkinson Index
+#'
+#' \lifecycle{experimental}
+#' Computes and displays the Atkinson index for a given variable across multiple files.
+#'
+#' @param lissy_files A list of LIS or LWS files.
+#' @param variable A character string indicating the variable for which the Atkinson index needs to be computed.
+#' @param epsilon A numeric vector of length one. The inequality aversion parameter. Needs to be epsilon > 0.
+#' @param weight A string with the name of the variable in 'file' that should be used as sample weights.
+#'   If NULL (default), the function tries to guess the needed weight to compute the Atkinson index.
+#'   This guess is made based on the information from files_level and variable_level.
+#' @param na.rm A boolean. Indicates if NAs should be ignored. Defaults to FALSE.
+#' @param files_level A string indicating the level of the file. Valid inputs are:
+#'   'household', 'h', 'person' or 'p'. If NULL (default), the file level will be retrieved from the 'lissy_files' attributes.
+#' @param variable_level Level of the variable. Should be either 'household', 'h', 'person' or 'p'.
+#'   If NULL (default), the function will try to guess the level of the variable.
+#'   This is done by comparing the value in 'variable' with pre-set lists of variables.
+#'
+#' @return A numeric vector containing the Atkinson index for each file.
+#'
+#' @examples
+#' \dontrun{
+#' lissy_files <- read_lissy_files(c("file1", "file2"))
+#' print_atkinson(lissy_files = lissy_files, variable = "income", epsilon = 0.5)
+#' }
+print_atkinson <- function(lissy_files, variable, epsilon, weight = NULL, na.rm = FALSE, files_level = NULL, variable_level = NULL) {
+
+  if(missing(weight)){
+    weight_var <- determine_weight(lissy_files, variable, files_level, variable_level)
+    message(glue::glue("{weight_var} will be used as weighting variable."))
+  }
+
+  level_ <- determine_file_level(lissy_files, files_level)
+
+  # for hh-level files, multiply the variable by 'nhhmem'
+  if(!is.null(level_) && level_ %in% c("household", "h")){
+    assertthat::assert_that(purrr::every(lissy_files,
+                                         ~"nhhmem" %in% names(.x) ),
+                            msg = "All files in 'lissy_data' should contain the 'nhhmem' variable if 'print_atkinson()' is used on household-level files.")
+
+    lissy_files <- lissy_files %>%
+      purrr::map(.f = function(file){
+        file[[weight_var]] <- file[[weight_var]] * file[["nhhmem"]]
+        return(file)
+      })
+  }
+
+  # Compute Atkinson
+  purrr::imap_dbl(lissy_files,
+                  .f = ~compute_atkinson(file = ..1, # .x
+                                         file_name = ..2, # .y,
+                                         variable = ..3,
+                                         weight = ..4,
+                                         epsilon = ..5,
+                                         na.rm= ..6),
+                  variable, # ..3
+                  weight_var, # ..4
+                  epsilon, # ..5
+                  na.rm # ..6
+  )
+}
+
+#' Print the Ratio Index
+#'
+#' \lifecycle{experimental}
+#' Computes and displays the ratio index for a given variable across multiple files.
+#'
+#' @param lissy_files A list of LIS or LWS files.
+#' @param variable A character string indicating the variable for which the ratio index needs to be computed.
+#' @param ratio A vector of two numeric values between 0 and 1.
+#'   Defines the percentiles in the numerator and denominator respectively.
+#'   E.g. (0.9, 0.1) computes the 90/10 ratio.
+#' @param weight A string with the name of the variable in 'file' that should be used as sample weights.
+#'   If NULL (default), the function tries to guess the needed weight to compute the ratio index.
+#'   This guess is made based on the information from files_level and variable_level.
+#' @param na.rm A boolean. Indicates if NAs should be ignored. Defaults to FALSE.
+#' @param files_level A string indicating the level of the file. Valid inputs are:
+#'   'household', 'h', 'person' or 'p'. If NULL (default), the file level will be retrieved from the 'lissy_files' attributes.
+#' @param variable_level Level of the variable. Should be either 'household', 'h', 'person' or 'p'.
+#'   If NULL (default), the function will try to guess the level of the variable.
+#'   This is done by comparing the value in 'variable' with pre-set lists of variables.
+#'
+#' @return A numeric vector containing the ratio index for each file.
+#'
+#' @examples
+#' \dontrun{
+#' lissy_files <- read_lissy_files(c("file1", "file2"))
+#' print_ratio(lissy_files = lissy_files, variable = "income", ratio = c(0.9, 0.1))
+#' }
+print_ratio <- function(lissy_files, variable, ratio, weight = NULL, na.rm = FALSE, files_level = NULL, variable_level = NULL) {
+
+  if(missing(weight)){
+    weight_var <- determine_weight(lissy_files, variable, files_level, variable_level)
+    message(glue::glue("{weight_var} will be used as weighting variable."))
+  }
+
+  level_ <- determine_file_level(lissy_files, files_level)
+
+  # for hh-level files, multiply the variable by 'nhhmem'
+  if(!is.null(level_) && level_ %in% c("household", "h")){
+    assertthat::assert_that(purrr::every(lissy_files,
+                                         ~"nhhmem" %in% names(.x) ),
+                            msg = "All files in 'lissy_data' should contain the 'nhhmem' variable if 'print_ratio()' is used on household-level files.")
+
+    lissy_files <- lissy_files %>%
+      purrr::map(.f = function(file){
+        file[[weight_var]] <- file[[weight_var]] * file[["nhhmem"]]
+        return(file)
+      })
+  }
+
+  # Compute Ratio
+  purrr::imap_dbl(lissy_files,
+                  .f = ~compute_ratio(file = ..1, # .x
+                                      file_name = ..2, # .y,
+                                      variable = ..3,
+                                      weight = ..4,
+                                      ratio = ..5,
+                                      na.rm= ..6),
+                  variable, # ..3
+                  weight_var, # ..4
+                  ratio, # ..5
+                  na.rm # ..6
+  )
+}
+

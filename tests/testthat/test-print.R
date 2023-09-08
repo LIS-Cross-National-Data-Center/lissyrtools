@@ -6,25 +6,6 @@ library(lissyrtools)
 .run_local_tests <- (Sys.info()[["effective_user"]] == "josep" && Sys.info()[["nodename"]] == "DEVV-CT01")
 
 
-
-# ** atkinson -------------------------------------------------------------
-
-# test_that("print_indicator uses the right weight when computing atkinson with a p-level file", {
-#
-#
-#
-#
-# })
-#
-#
-# test_that("print_indicator uses the right weight when computing atkinson with a h-level file", {
-#
-#
-#
-#
-# })
-
-
 # ** percentiles ----------------------------------------------------------
 
 test_that("print_percentiles returns expected percentiles", {
@@ -102,79 +83,6 @@ test_that("print_percentiles handles NA values in weight variable", {
   expect_true(all(!is.na(result$value_file2)))
   })
 })
-
-# ** average --------------------------------------------------------------
-
-# test_that("print_indicator uses the right weight when computing mean with a p-level file", {
-#
-#
-#
-#
-# })
-#
-#
-# test_that("print_indicator uses the right weight when computing mean with a h-level file", {
-#
-#
-#
-#
-# })
-
-
-# ** median ---------------------------------------------------------------
-
-
-# test_that("print_indicator uses the right weight when computing median with a p-level file", {
-#
-#
-#
-#
-# })
-#
-#
-# test_that("print_indicator uses the right weight when computing median with a h-level file", {
-#
-#
-#
-#
-# })
-
-
-
-
-# ** relative poverty -----------------------------------------------------
-
-
-
-
-
-
-# ** using p-level files -------------------------------------------------
-
-# **** mean ---------------------------------------------------------------
-
-# prints a warning if ratio or epsilon arguments are passed
-
-# **** median -------------------------------------------------------------
-# prints a warning if ratio or epsilon arguments are passed
-
-
-# **** ratio --------------------------------------------------------------
-
-# prints a warning if epsilon argument is passed
-
-
-# **** gini ---------------------------------------------------------------
-
-# prints a warning if ratio or epsilon arguments are passed
-
-# **** atkinson -----------------------------------------------------------
-
-# prints a warning if ratio argument is passed
-
-
-
-# ** using hh-level files -------------------------------------------------
 
 
 # print_indicator ---------------------------------------------------------
@@ -419,6 +327,96 @@ test_that("print_gini handles different file levels correctly", {
 
   # Test for household-level
   expect_equal(result_household[["file_household"]], expected_gini, tolerance = 0.0001)
+
+})
+
+
+# ** print_atkinson -------------------------------------------------------
+
+test_that("print_atkinson computes the Atkinson index correctly with different epsilon", {
+
+  # Mock data
+  file1 <- data.frame(dhi = c(8,5,1,3,5), hwgt = 1)
+  lissy_files <- list(file1 = file1)
+
+  # Test
+  expect_equal(print_atkinson(lissy_files = lissy_files, variable = "dhi", epsilon = 1)[["file1"]], 0.183083677559, tolerance = 0.0001)
+  expect_equal(print_atkinson(lissy_files = lissy_files, variable = "dhi", epsilon = 0.8)[["file1"]], 0.14249378376024, tolerance = 0.0001)
+  expect_equal(print_atkinson(lissy_files = lissy_files, variable = "dhi", epsilon = 1.2)[["file1"]], 0.2248733447899 , tolerance = 0.0001)
+
+})
+
+test_that("print_atkinson computes the Atkinson index correctly with weights", {
+
+  # Mock data with weights
+  file1 <- data.frame(dhi = c(8,5,1,3,5), hwgt = seq(0.1, 0.5, by = 0.1))
+  lissy_files <- list(file1 = file1)
+
+  # Compute Atkinson using print_atkinson
+  result <- print_atkinson(lissy_files = lissy_files, variable = "dhi", epsilon = 0.5)
+
+  # Expected Atkinson index with weights (Note: You'll need to compute this value based on your data and epsilon)
+  expected_atkinson <- 0.07232493
+
+  # Test
+  expect_equal(result[["file1"]], expected_atkinson, tolerance = 0.0001)
+
+})
+
+test_that("print_atkinson handles missing values correctly when na.rm = FALSE", {
+
+  # Mock data with NA
+  file1 <- data.frame(dhi = c(8,5,1,3,5,6,7,6,3, NA), hwgt = 1)
+  lissy_files <- list(file1 = file1)
+
+    # Compute Atkinson using print_atkinson
+  result <- suppressWarnings(print_atkinson(lissy_files = lissy_files, variable = "dhi", epsilon = 1, na.rm = FALSE))
+
+  # Test
+  expect_true(is.na(result[["file1"]]))
+
+})
+
+test_that("print_atkinson handles missing values correctly when na.rm = TRUE", {
+
+  # Mock data with NA
+  file1 <- data.frame(dhi = c(8,5,1,3,5, NA), hwgt = 1)
+  lissy_files <- list(file1 = file1)
+
+  # Compute Atkinson using print_atkinson
+  result <- print_atkinson(lissy_files = lissy_files, variable = "dhi", epsilon = 1, na.rm = TRUE)
+
+  # Expected Atkinson index (Note: You'll need to compute this value based on your data and epsilon)
+  expected_atkinson <- 0.183083677559
+
+  # Test
+  expect_equal(result[["file1"]], expected_atkinson, tolerance = 0.0001)
+
+})
+
+test_that("print_atkinson handles different file levels correctly", {
+
+  # Mock data for person-level and household-level
+  file_person <- data.frame(pi11 = c(8,5,1,3,5), pwgt = 1)
+  file_household <- data.frame(dhi = c(8,5,1,3,5), hwgt = 1, nhhmem = 1) # Added nhhmem
+
+  lissy_files_person <- list(file_person = file_person)
+  lissy_files_household <- list(file_household = file_household)
+
+  # Compute Atkinson using print_atkinson for person-level
+  result_person <- print_atkinson(lissy_files = lissy_files_person, variable = "pi11", epsilon = 1, files_level = "person")
+
+  # Compute Atkinson using print_atkinson for household-level
+  result_household <- print_atkinson(lissy_files = lissy_files_household, variable = "dhi", epsilon = 1, files_level = "household")
+
+  # Expected Atkinson index (Note: You'll need to compute this value based on your data and epsilon)
+  expected_atkinson <- 0.183083677559
+
+  # Test for person-level
+  expect_equal(result_person[["file_person"]], expected_atkinson, tolerance = 0.0001)
+
+  # Test for household-level
+  expect_equal(result_household[["file_household"]], expected_atkinson, tolerance = 0.0001)
 
 })
 
