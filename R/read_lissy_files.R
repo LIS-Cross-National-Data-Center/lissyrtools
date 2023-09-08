@@ -342,8 +342,7 @@ read_format_names <- function(file_name){
 read_rename_files <- function(list_files, new_names){
 
   assertthat::assert_that(assertthat::are_equal(length(list_files), length(new_names)),
-                        msg = "The length of 'new_names' should be the same as
-                        the lengh of the list of files.")
+                        msg = "The length of 'new_names' should be the same as the lengh of the list of files.")
 
   assertthat::assert_that(all(!is.na(new_names)),
                         msg = "'new_names' should not contain NAs.")
