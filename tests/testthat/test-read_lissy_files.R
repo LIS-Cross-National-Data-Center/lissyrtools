@@ -83,3 +83,38 @@ test_that("read_lissy_files_locally returns names in 'ccyydl' format when full_y
   expect_equal(names(files_h), "it14ih")
 
 })
+
+
+
+# read_rename_files -------------------------------------------------------
+
+
+# Test renaming with valid new names
+test_that("read_rename_files works with valid new names", {
+
+  files_h <- suppressWarnings(read_lissy_files_locally(files = c("it14ih", "us16ih"), path_to_files = dir_testdata))
+
+  renamed_files <- read_rename_files(files_h, c("Italy_2014_household", "US_2016_household"))
+
+  expect_equal(names(renamed_files), c("Italy_2014_household", "US_2016_household"))
+})
+
+# Test with mismatched lengths
+test_that("read_rename_files throws error with mismatched lengths", {
+
+  files_h <- suppressWarnings(read_lissy_files_locally(files = c("it14ih", "us16ih"), path_to_files = dir_testdata))
+
+  expect_error(read_rename_files(files_h, c("France_1984_household")),
+               "The length of 'new_names' should be the same as the lengh of the list of files.")
+})
+
+# Test with NA values
+test_that("read_rename_files throws error with NA values", {
+
+  files_h <- suppressWarnings(read_lissy_files_locally(files = c("it14ih", "us16ih"), path_to_files = dir_testdata))
+
+  expect_error(read_rename_files(files_h, c("Italy_2014_household", NA)),
+               "'new_names' should not contain NAs.")
+})
+
+
