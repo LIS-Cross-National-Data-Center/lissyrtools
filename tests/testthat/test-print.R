@@ -355,7 +355,6 @@ test_that("print_atkinson computes the Atkinson index correctly with weights", {
   # Compute Atkinson using print_atkinson
   result <- print_atkinson(lissy_files = lissy_files, variable = "dhi", epsilon = 0.5)
 
-  # Expected Atkinson index with weights (Note: You'll need to compute this value based on your data and epsilon)
   expected_atkinson <- 0.07232493
 
   # Test
@@ -386,7 +385,6 @@ test_that("print_atkinson handles missing values correctly when na.rm = TRUE", {
   # Compute Atkinson using print_atkinson
   result <- print_atkinson(lissy_files = lissy_files, variable = "dhi", epsilon = 1, na.rm = TRUE)
 
-  # Expected Atkinson index (Note: You'll need to compute this value based on your data and epsilon)
   expected_atkinson <- 0.183083677559
 
   # Test
@@ -409,7 +407,6 @@ test_that("print_atkinson handles different file levels correctly", {
   # Compute Atkinson using print_atkinson for household-level
   result_household <- print_atkinson(lissy_files = lissy_files_household, variable = "dhi", epsilon = 1, files_level = "household")
 
-  # Expected Atkinson index (Note: You'll need to compute this value based on your data and epsilon)
   expected_atkinson <- 0.183083677559
 
   # Test for person-level
@@ -417,6 +414,88 @@ test_that("print_atkinson handles different file levels correctly", {
 
   # Test for household-level
   expect_equal(result_household[["file_household"]], expected_atkinson, tolerance = 0.0001)
+
+})
+
+
+# print_ratio -------------------------------------------------------------
+
+test_that("print_ratio computes the ratio correctly", {
+
+  # Mock data
+  file1 <- data.frame(dhi = c(0:10), hwgt = 1)
+  lissy_files <- list(file1 = file1)
+
+  # Compute ratio using print_ratio
+  result <- print_ratio(lissy_files = lissy_files, variable = "dhi", ratio = c(0.9, 0.1))
+
+  # Test
+  expect_equal(result[["file1"]], 9, tolerance = 0.0001)
+
+})
+
+test_that("print_ratio computes the ratio correctly with weights", {
+
+  # Mock data with weights
+  file1 <- data.frame(dhi = c(0:10, 0:10), hwgt = c(rep(0, 11), rep(0.5, 11)))
+  lissy_files <- list(file1 = file1)
+
+  # Compute ratio using print_ratio
+  result <- print_ratio(lissy_files = lissy_files, variable = "dhi", ratio = c(0.9, 0.1))
+
+  # Test
+  expect_equal(result[["file1"]], 9, tolerance = 0.0001)
+
+})
+
+test_that("print_ratio handles missing values correctly when na.rm = FALSE", {
+
+  # Mock data with NA
+  file1 <- data.frame(dhi = c(0:10, NA), hwgt = 1)
+  lissy_files <- list(file1 = file1)
+
+  # Compute ratio using print_ratio
+  result <- suppressWarnings(print_ratio(lissy_files = lissy_files, variable = "dhi", ratio = c(0.9, 0.1), na.rm = FALSE))
+
+  # Test
+  expect_true(is.na(result[["file1"]]))
+
+})
+
+test_that("print_ratio handles missing values correctly when na.rm = TRUE", {
+
+  # Mock data with NA
+  file1 <- data.frame(dhi = c(0:10, NA), hwgt = 1)
+  lissy_files <- list(file1 = file1)
+
+  # Compute ratio using print_ratio
+  result <- print_ratio(lissy_files = lissy_files, variable = "dhi", ratio = c(0.9, 0.1), na.rm = TRUE)
+
+  # Test
+  expect_equal(result[["file1"]], 9, tolerance = 0.0001)
+
+})
+
+test_that("print_ratio handles different file levels correctly", {
+
+  # Mock data for person-level and household-level
+  file_person <- data.frame(pi11 = 0:10, pwgt = 1)
+  file_household <- data.frame(dhi = 0:10, hwgt = 1, nhhmem = 1) # Added nhhmem
+
+  lissy_files_person <- list(file_person = file_person)
+  lissy_files_household <- list(file_household = file_household)
+
+  # Compute ratio using print_ratio for person-level
+  result_person <- print_ratio(lissy_files = lissy_files_person, variable = "pi11", ratio = c(0.9, 0.1), files_level = "person")
+
+  # Compute ratio using print_ratio for household-level
+  result_household <- print_ratio(lissy_files = lissy_files_household, variable = "dhi", ratio = c(0.9, 0.1), files_level = "household")
+
+  # Test for person-level
+  expect_equal(result_person[["file_person"]], 9, tolerance = 0.0001)
+
+  # Test for household-level
+  expect_equal(result_household[["file_household"]], 9, tolerance = 0.0001)
 
 })
 
