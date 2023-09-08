@@ -34,42 +34,6 @@ print_percentiles <- function(lissy_files, variable, breaks = seq(0, 1, 0.1), we
 }
 
 
-#' Print Gini
-#'
-#' \lifecycle{experimental}
-#' Computes and displays the Gini coefficient.
-#'
-#' @param lissy_files A list of LIS or LWS files.
-#' @param variable A character string indicating the aggregate for which the indicator needs to be computed.
-#' @param weight A string with the name of the variable in 'file' that should be used as sample weights.
-#' @param na.rm A boolean. Indicates if NAs should be ignored. Defaults to FALSE.
-#' @param files_level  A string indicating the level of the file. Valid inputs are:
-#'   'household', 'h', 'person' or 'p'. If NULL (default), the file level will
-#'   be retrived from the 'lissy_files' attributes.
-#' @param variable_level Level of the variable. Should be either 'household', 'h', 'person' or 'p'.
-#'   If NULL (default), the function will try to guess the level of the variable.
-#'   This is done by comparing the value in 'variable' with pre-set lists of variables.
-#' @return A named numeric vector with the Gini coefficients.
-#' @examples
-#' \dontrun{
-#' lissy_datasets <- read_lissy_files(c("fr84h", "fr94h", "fr10h"))
-#' print_gini(lissy_datasets = lissy_datasets, variable = "dhi", na.rm = TRUE)
-#' }
-print_gini <- function(lissy_files, variable, weight = NULL, na.rm = FALSE, files_level = NULL, variable_level = NULL){
-
-  lissy_files %>%
-    purrr::imap_dbl(
-      ~compute_gini(file = ..1,
-                    file_name = ..2,
-                    variable = ..3,
-                    weight = ..4,
-                    na.rm = ..5),
-    variable,
-    weight,
-    na.rm)
-
-}
-
 
 
 #' Print all available files
@@ -294,4 +258,65 @@ determine_file_level <- function(lissy_files, files_level){
   }
 
   return(level_)
+}
+
+
+
+#' Print the Gini Coefficient
+#'
+#' \lifecycle{experimental}
+#' Computes and displays the Gini coefficient for a given variable across multiple files.
+#'
+#' @param lissy_files A list of LIS or LWS files.
+#' @param variable A character string indicating the variable for which the Gini coefficient needs to be computed.
+#' @param weight A string with the name of the variable in 'file' that should be used as sample weights.
+#'   If NULL (default), the function tries to guess the needed weight to compute the Gini coefficient.
+#'   This guess is made based on the information from files_level and variable_level.
+#' @param na.rm A boolean. Indicates if NAs should be ignored. Defaults to FALSE.
+#' @param files_level A string indicating the level of the file. Valid inputs are:
+#'   'household', 'h', 'person' or 'p'. If NULL (default), the file level will be retrieved from the 'lissy_files' attributes.
+#' @param variable_level Level of the variable. Should be either 'household', 'h', 'person' or 'p'.
+#'   If NULL (default), the function will try to guess the level of the variable.
+#'   This is done by comparing the value in 'variable' with pre-set lists of variables.
+#'
+#' @return A numeric vector containing the Gini coefficient for each file.
+#'
+#' @examples
+#' \dontrun{
+#' lissy_files <- read_lissy_files(c("file1", "file2"))
+#' print_gini(lissy_files = lissy_files, variable = "income")
+#' }
+print_gini <- function(lissy_files, variable, weight = NULL, na.rm = FALSE, files_level = NULL, variable_level = NULL) {
+
+  if(missing(weight)){
+    weight_var <- determine_weight(lissy_files, variable, files_level, variable_level)
+    message(glue::glue("{weight_var} will be used as weighting variable."))
+  }
+
+  level_ <- determine_file_level(lissy_files, files_level)
+
+  # for hh-level files, multiply the variable by 'nhhmem'
+  if(!is.null(level_) && level_ %in% c("household", "h")){
+    assertthat::assert_that(purrr::every(lissy_files,
+                                         ~"nhhmem" %in% names(.x) ),
+                            msg = "All files in 'lissy_data' should contain the 'nhhmem' variable if 'print_gini()' is used on household-level files.")
+
+    lissy_files <- lissy_files %>%
+      purrr::map(.f = function(file){
+        file[[weight_var]] <- file[[weight_var]] * file[["nhhmem"]]
+        return(file)
+      })
+  }
+
+  # Compute Gini
+  purrr::imap_dbl(lissy_files,
+                  .f = ~compute_gini(file = ..1, # .x
+                                     file_name = ..2, # .y,
+                                     variable = ..3,
+                                     weight = ..4,
+                                     na.rm= ..5),
+                  variable, # ..3
+                  weight_var, # ..4
+                  na.rm # ..5
+  )
 }

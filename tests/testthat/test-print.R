@@ -7,41 +7,6 @@ library(lissyrtools)
 
 
 
-# ** gini -----------------------------------------------------------------
-
-test_that("print_gini returns expected Gini coefficients", {
-  lissy_files <- list(file1 = data.frame(var1 = c(1, 2, 3), weight = c(1, 1, 1)),
-                      file2 = data.frame(var1 = c(4, 5, 6), weight = c(1, 1, 1)))
-
-  result <- print_gini(lissy_files, "var1", na.rm = FALSE)
-  expect_equal(class(result), "numeric")
-  expect_named(result, c("file1", "file2"))
-})
-
-test_that("print_gini handles NA values correctly", {
-
-  suppressWarnings({
-    lissy_files <- list(file1 = data.frame(var1 = c(1, 2, 3, NA), weight = c(1, 1, 1, 1)),
-                        file2 = data.frame(var1 = c(4, 5, 6, NA), weight = c(1, 1, 1, 1)))
-
-    result <- print_gini(lissy_files, "var1", na.rm = FALSE)
-    expect_true(any(is.na(result)))
-
-    result <- print_gini(lissy_files, "var1", na.rm = TRUE)
-    expect_true(all(!is.na(result)))
-  })
-
-})
-
-test_that("print_gini handles all NA or zero values in variable", {
-  lissy_files <- list(file1 = data.frame(var1 = c(NA_integer_, NA_integer_, NA_integer_), weight = c(1, 1, 1)),
-                      file2 = data.frame(var1 = c(0, 0, 0), weight = c(1, 1, 1)))
-
-  result <- print_gini(lissy_files, "var1", na.rm = FALSE)
-  expect_true(all(is.na(result)))
-})
-
-
 # ** atkinson -------------------------------------------------------------
 
 # test_that("print_indicator uses the right weight when computing atkinson with a p-level file", {
@@ -359,3 +324,102 @@ test_that("determine_weight throws error for invalid variable_level", {
   expect_error(determine_weight(lissy_files, variable, files_level, variable_level),
                "Argument 'variable_level' can only take 'person', 'p', 'household' or 'h' as values.")
 })
+
+
+
+
+
+# ** print_gini -----------------------------------------------------------------
+
+test_that("print_gini computes the Gini coefficient correctly", {
+
+  # Mock data
+  file1 <- data.frame(dhi = c(8,5,1,3,5,6,7,6,3), hwgt = 1)
+  lissy_files <- list(file1 = file1)
+
+  # Compute Gini using print_gini
+  result <- print_gini(lissy_files = lissy_files, variable = "dhi")
+
+  # Expected Gini coefficient
+  expected_gini <- 0.2373737
+
+  # Test
+  expect_equal(result[["file1"]], expected_gini, tolerance = 0.0001)
+
+})
+
+test_that("print_gini computes the Gini coefficient correctly with weights", {
+
+  # Mock data with weights
+  file1 <- data.frame(dhi = c(8,5,1,3,5,6,7,6,3), hwgt = seq(0.1, 0.9, by = 0.1))
+  lissy_files <- list(file1 = file1)
+
+  # Compute Gini using print_gini
+  result <- print_gini(lissy_files = lissy_files, variable = "dhi")
+
+  # Expected Gini coefficient with weights
+  expected_gini <- 0.2065239551478077
+
+  # Test
+  expect_equal(result[["file1"]], expected_gini, tolerance = 0.0001)
+
+})
+
+test_that("print_gini handles missing values correctly when na.rm = FALSE", {
+
+  # Mock data with NA
+  file1 <- data.frame(dhi = c(8,5,1,3,5,6,7,6,3, NA), hwgt = 1)
+  lissy_files <- list(file1 = file1)
+
+  # Compute Gini using print_gini
+  result <- suppressWarnings(print_gini(lissy_files = lissy_files, variable = "dhi", na.rm = FALSE))
+
+  # Test
+  expect_true(is.na(result[["file1"]]))
+
+})
+
+test_that("print_gini handles missing values correctly when na.rm = TRUE", {
+
+  # Mock data with NA
+  file1 <- data.frame(dhi = c(8,5,1,3,5,6,7,6,3, NA), hwgt = 1)
+  lissy_files <- list(file1 = file1)
+
+  # Compute Gini using print_gini
+  result <- print_gini(lissy_files = lissy_files, variable = "dhi", na.rm = TRUE)
+
+  # Expected Gini coefficient
+  expected_gini <- 0.2373737
+
+  # Test
+  expect_equal(result[["file1"]], expected_gini, tolerance = 0.0001)
+
+})
+
+test_that("print_gini handles different file levels correctly", {
+
+  # Mock data for person-level and household-level
+  file_person <- data.frame(pi11 = c(8,5,1,3,5,6,7,6,3), pwgt = 1)
+  file_household <- data.frame(dhi = c(8,5,1,3,5,6,7,6,3), hwgt = 1, nhhmem = 1) # Added nhhmem
+
+  lissy_files_person <- list(file_person = file_person)
+  lissy_files_household <- list(file_household = file_household)
+
+  # Compute Gini using print_gini for person-level
+  result_person <- print_gini(lissy_files = lissy_files_person, variable = "pi11", files_level = "person")
+
+  # Compute Gini using print_gini for household-level
+  result_household <- print_gini(lissy_files = lissy_files_household, variable = "dhi", files_level = "household")
+
+  # Expected Gini coefficient
+  expected_gini <- 0.2373737
+
+  # Test for person-level
+  expect_equal(result_person[["file_person"]], expected_gini, tolerance = 0.0001)
+
+  # Test for household-level
+  expect_equal(result_household[["file_household"]], expected_gini, tolerance = 0.0001)
+
+})
+
+
