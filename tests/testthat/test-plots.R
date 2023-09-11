@@ -1,5 +1,6 @@
-# library(testthat)
-# library(ggplot2)
+library(lissyrtools)
+library(testthat)
+library(ggplot2)
 # library(purrr)  # Make sure to load purrr
 #
 # # Test for plot_lorenz_curve
@@ -23,3 +24,139 @@
 #   dataset2 <- data.frame(dhi = c(2, 3, 4, 5, 6))
 #   expect_error(plot_indicator(list(dataset1, dataset2), "dhi", "unsupported_indicator"))
 # })
+
+
+# plot_indicator ----------------------------------------------------------
+mock_data <- list(
+    "us2010h" = data.frame(hwgt = 100, dhi = 50, nhhmem = 2),
+    "us2011h" = data.frame(hwgt = 200, dhi = 75, nhhmem = 3),
+    "ca2010h" = data.frame(hwgt = 150, dhi = 60, nhhmem = 2),
+    "ca2011h" = data.frame(hwgt = 175, dhi = 80, nhhmem = 3)
+)
+
+# test that plot_indicator() returns a ggplot object
+test_that("plot_indicator() returns a ggplot object", {
+    plot <- plot_indicator(mock_data, "hwgt", "mean")
+    expect_s3_class(plot, "gg")
+})
+
+# test that plot_indicator() returns a line plot when there are multiple countries and years
+test_that("plot_indicator() returns a line plot when there are multiple countries and years", {
+    plot <- plot_indicator(mock_data, "hwgt", "mean")
+    expect_true("GeomLine" %in% names(layer_data(plot)$geom))
+})
+
+# test that plot_indicator() returns a line plot when there are multiple years and only one country
+test_that("plot_indicator() returns a line plot when there are multiple years and only one country", {
+    plot <- plot_indicator(mock_data[c("us2010h", "us2011h")], "hwgt", "mean")
+    expect_true("GeomLine" %in% names(layer_data(plot)$geom))
+})
+
+# test that plot_indicator() returns a bar plot when there is only one year and multiple countries
+test_that("plot_indicator() returns a bar plot when there is only one year and multiple countries", {
+    plot <- plot_indicator(mock_data[c("us2010h", "ca2010h")], "hwgt", "mean")
+    expect_true("GeomCol" %in% names(layer_data(plot)$geom))
+})
+
+# decide_plot_type --------------------------------------------------------
+# Test for a data frame with multiple countries and multiple years
+results_df1 <- data.frame(
+    file = c("us2010h", "us2011h", "ca2010h", "ca2011h"),
+    country = c("US", "US", "CA", "CA"),
+    year = c(2010, 2011, 2010, 2011),
+    value = c(1, 2, 3, 4)
+)
+expected_output1 <- "line"
+test_that("decide_plot_type() returns the correct plot type for a data frame with multiple countries and multiple years", {
+    expect_equal(decide_plot_type(results_df1), expected_output1)
+})
+
+# Test for a data frame with multiple years and only one country
+results_df2 <- data.frame(
+    file = c("us2010h", "us2011h"),
+    country = c("US", "US"),
+    year = c(2010, 2011),
+    value = c(1, 2)
+)
+expected_output2 <- "line"
+test_that("decide_plot_type() returns the correct plot type for a data frame with multiple years and only one country", {
+    expect_equal(decide_plot_type(results_df2), expected_output2)
+})
+
+# Test for a data frame with only one year and multiple countries
+results_df3 <- data.frame(
+    file = c("us2010h", "ca2010h", "mx2010h"),
+    country = c("US", "CA", "MX"),
+    year = c(2010, 2010, 2010),
+    value = c(1, 2, 3)
+)
+expected_output3 <- "bar"
+test_that("decide_plot_type() returns the correct plot type for a data frame with only one year and multiple countries", {
+    expect_equal(decide_plot_type(results_df3), expected_output3)
+})
+
+# Test for a data frame with only one year and only one country
+results_df4 <- data.frame(
+    file = c("us2010h"),
+    country = c("US"),
+    year = c(2010),
+    value = c(1)
+)
+expected_output4 <- "bar"
+test_that("decide_plot_type() returns the correct plot type for a data frame with only one year and only one country", {
+    expect_equal(decide_plot_type(results_df4), expected_output4)
+})
+
+
+
+# plot_line ---------------------------------------------------------------
+results_df <- data.frame(
+    country = c("us", "us", "us", "us", "ca", "ca", "ca", "ca"),
+    file = c("us2010h", "us2011h", "us2012h", "us2013h", "ca2010h", "ca2011h", "ca2012h", "ca2013h"),
+    year = c(2010L, 2011L, 2012L, 2013L, 2010L, 2011L, 2012L, 2013L),
+    value = c(1, 2, 3, 4, 3, 4, 5, 6)
+)
+
+# Test that the function returns a ggplot object
+test_that("plot_line returns a ggplot object", {
+    expect_s3_class(plot_line(results_df), "ggplot")
+})
+
+# Test that the function plots the correct x-axis values
+test_that("plot_line plots the correct x-axis values", {
+    p <- plot_line(results_df)
+    expect_equal(sort(unique(results_df$year)), sort(unique(p$data[["year"]])))
+})
+
+# Test that the function plots the correct y-axis values
+test_that("plot_line plots the correct y-axis values", {
+    p <- plot_line(results_df)
+    expect_equal(sort(unique(results_df$value)), sort(unique(p$data[["value"]])))
+})
+
+
+# plot_bar ----------------------------------------------------------------
+
+# Create a test data frame
+results_df <- data.frame(
+    file = c("us2010h", "us2011h", "ca2010h", "ca2011h"),
+    country = c("us", "us", "ca", "ca"),
+    year = c(2010, 2011, 2010, 2011),
+    value = c(1, 2, 3, 4)
+)
+
+# Test that the function returns a ggplot object
+test_that("plot_bar returns a ggplot object", {
+    expect_s3_class(plot_bar(results_df), "ggplot")
+})
+
+test_that("plot_line plots the correct x-axis values", {
+    p <- plot_line(results_df)
+    expect_equal(sort(unique(results_df$year)), sort(unique(p$data[["year"]])))
+})
+
+# Test that the function plots the correct y-axis values
+test_that("plot_line plots the correct y-axis values", {
+    p <- plot_line(results_df)
+    expect_equal(sort(unique(results_df$value)), sort(unique(p$data[["value"]])))
+})
