@@ -27,36 +27,54 @@ library(ggplot2)
 
 
 # plot_indicator ----------------------------------------------------------
-mock_data <- list(
-    "us2010h" = data.frame(hwgt = 100, dhi = 50, nhhmem = 2),
-    "us2011h" = data.frame(hwgt = 200, dhi = 75, nhhmem = 3),
-    "ca2010h" = data.frame(hwgt = 150, dhi = 60, nhhmem = 2),
-    "ca2011h" = data.frame(hwgt = 175, dhi = 80, nhhmem = 3)
+
+# Sample data for testing
+sample_lissy_files <- list(
+    us2010ih = data.frame(dhi = rnorm(100), hwgt = 1),
+    us2011ih = data.frame(dhi = rnorm(100), hwgt = 1),
+    ca2010ih = data.frame(dhi = rnorm(100), hwgt = 1),
+    ca2011ih = data.frame(dhi = rnorm(100), hwgt = 1)
 )
 
-# test that plot_indicator() returns a ggplot object
-test_that("plot_indicator() returns a ggplot object", {
-    plot <- plot_indicator(mock_data, "hwgt", "mean")
-    expect_s3_class(plot, "gg")
+test_that("plot_indicator returns a ggplot2 plot for valid inputs", {
+    plot <- plot_indicator(lissy_files = sample_lissy_files, variable = "dhi", indicator = "mean")
+    expect_true(is.ggplot(plot))
 })
 
-# test that plot_indicator() returns a line plot when there are multiple countries and years
-test_that("plot_indicator() returns a line plot when there are multiple countries and years", {
-    plot <- plot_indicator(mock_data, "hwgt", "mean")
-    expect_true("GeomLine" %in% names(layer_data(plot)$geom))
+test_that("plot_indicator throws an error for invalid lissy_files names", {
+    invalid_files <- list(
+        invalid_namei = data.frame(dhi = rnorm(100))
+    )
+    expect_error(plot_indicator(invalid_files, "dhi", "mean"))
 })
 
-# test that plot_indicator() returns a line plot when there are multiple years and only one country
-test_that("plot_indicator() returns a line plot when there are multiple years and only one country", {
-    plot <- plot_indicator(mock_data[c("us2010h", "us2011h")], "hwgt", "mean")
-    expect_true("GeomLine" %in% names(layer_data(plot)$geom))
+test_that("plot_indicator throws an error for invalid type values", {
+    expect_error(plot_indicator(sample_lissy_files, "dhi", "mean", type = "invalid_type"))
 })
 
-# test that plot_indicator() returns a bar plot when there is only one year and multiple countries
-test_that("plot_indicator() returns a bar plot when there is only one year and multiple countries", {
-    plot <- plot_indicator(mock_data[c("us2010h", "ca2010h")], "hwgt", "mean")
-    expect_true("GeomCol" %in% names(layer_data(plot)$geom))
+test_that("plot_indicator throws an error for invalid indicator values", {
+    expect_error(plot_indicator(sample_lissy_files, "dhi", "invalid_indicator"))
 })
+
+test_that("plot_indicator handles NA values based on the na.rm parameter", {
+    files_with_na <- list(
+        us2010ih = data.frame(dhi = c(NA, rnorm(99)))
+    )
+    expect_error(
+        plot_indicator(lissy_files = files_with_na, variable = "dhi", indicator = "mean"),
+        "None of the indicators computed had valid values. Did you forget to pass na.rm = TRUE?"
+    )
+    expect_silent(plot_indicator(files_with_na, "dhi", "mean", na.rm = TRUE))
+})
+
+test_that("plot_indicator handles an empty list of lissy_files", {
+    expect_error(plot_indicator(list(), "dhi", "mean"))
+})
+
+test_that("plot_indicator handles missing parameters correctly", {
+    expect_silent(plot_indicator(sample_lissy_files, "dhi", "mean"))
+})
+
 
 # decide_plot_type --------------------------------------------------------
 # Test for a data frame with multiple countries and multiple years
