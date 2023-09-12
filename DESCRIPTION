@@ -1,6 +1,6 @@
 Package: lissyrtools
 Title: Tools for LISSY Jobs
-Version: 0.0.0.9033
+Version: 0.1.0
 Authors@R: c(person("Josep", "Espasa Reig", role = c("aut", "cre"), email = "jespasareig@gmail.com"))
 Author: Josep Espasa Reig [aut, cre]
 Description: Tools for the computation of inequality indicators in LISSY. 
@@ -10,7 +10,7 @@ Description: Tools for the computation of inequality indicators in LISSY.
   easy data manipulation stages to LISSY jobs. Output functions help users create outputs and
   plots for their tasks.
 License: GPL-3
-URL: https://joseper.github.io/lissyrtools/, https://github.com/JosepER/lissyrtools
+URL: https://github.com/LIS-Cross-National-Data-Center/lissyrtools
 Depends: R (>= 3.2.0)
 Imports:
     dplyr,
@@ -31,7 +31,7 @@ Imports:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Suggests: 
     testthat,
     covr,
@@ -40,4 +40,3 @@ Suggests:
     fs,
     R.rsp
 RdMacros: lifecycle
-VignetteBuilder: R.rsp

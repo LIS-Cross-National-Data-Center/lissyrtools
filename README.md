@@ -24,7 +24,7 @@ The package is already installed in LISSY by the LIS Data Center team.
 
 You can install the package locally to work with your own data or with the [LIS Sample Datasets](https://www.lisdatacenter.org/resources/self-teaching/) from this GitHub repo with:
 ```r
-devtools::install_github("https://github.com/nationalaccountslis/lissyrtools")
+devtools::install_github("https://github.com/LIS-Cross-National-Data-Center/lissyrtools")
 ```
 
 
