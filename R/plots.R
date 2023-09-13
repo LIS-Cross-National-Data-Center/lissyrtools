@@ -176,8 +176,7 @@ plot_line <- function(results_df) {
     data = results_df,
     mapping = ggplot2::aes(x = year, y = value, group = country, colour = country)
   ) +
-    ggplot2::geom_line() +
-    ggplot2::scale_x_continuous(breaks = scales::breaks_pretty(n = length(unique(results_df$year))))
+    ggplot2::geom_line()
 }
 
 
@@ -196,6 +195,5 @@ plot_bar <- function(results_df) {
     mapping = ggplot2::aes(x = reorder(country, value, mean), y = value, fill = country)
   ) +
     ggplot2::geom_col() +
-    ggplot2::scale_x_discrete(labels = stringr::str_to_title) +
-    ggplot2::scale_y_continuous(breaks = scales::breaks_pretty(n = length(unique(results_df$value))))
+    ggplot2::scale_x_discrete(labels = stringr::str_to_title)
 }
