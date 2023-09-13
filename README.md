@@ -93,3 +93,7 @@ files_h <- read_lissy_files_locally(c("it14ih", "us16ih", "mx18ih"),
 files_p <- read_lissy_files_locally(c("it14ip", "us16ip", "mx18ip"),
                                     path_to_files = "path/to/your/directory/")
 ```
+
+## Documentation and Support
+Please visit https://lis-cross-national-data-center.github.io/lissyrtools/ for documentation and vignettes with examples.
+
