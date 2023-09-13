@@ -1,279 +1,279 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/404.html</loc>
   </url>
   <url>
-    <loc>/LICENSE-text.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>/LICENSE.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/LICENSE.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/authors.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/index.html</loc>
   </url>
   <url>
-    <loc>/reference/add_leading_0s.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/add_leading_0s.html</loc>
   </url>
   <url>
-    <loc>/reference/add_unique_ids.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/add_unique_ids.html</loc>
   </url>
   <url>
-    <loc>/reference/all.is.numeric.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/all.is.numeric.html</loc>
   </url>
   <url>
-    <loc>/reference/all.values.equal.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/all.values.equal.html</loc>
   </url>
   <url>
-    <loc>/reference/bind_lissy_files.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/bind_lissy_files.html</loc>
   </url>
   <url>
-    <loc>/reference/change_file_name_format.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/change_file_name_format.html</loc>
   </url>
   <url>
-    <loc>/reference/check_file_lists_contain_same_datasets.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/check_file_lists_contain_same_datasets.html</loc>
   </url>
   <url>
-    <loc>/reference/check_variable_level.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/check_variable_level.html</loc>
   </url>
   <url>
-    <loc>/reference/checks_compute_functions.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/checks_compute_functions.html</loc>
   </url>
   <url>
-    <loc>/reference/compute_atkinson.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/compute_atkinson.html</loc>
   </url>
   <url>
-    <loc>/reference/compute_gini.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/compute_gini.html</loc>
   </url>
   <url>
-    <loc>/reference/compute_mean.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/compute_mean.html</loc>
   </url>
   <url>
-    <loc>/reference/compute_percentiles.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/compute_percentiles.html</loc>
   </url>
   <url>
-    <loc>/reference/compute_poverty_rate.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/compute_poverty_rate.html</loc>
   </url>
   <url>
-    <loc>/reference/database_character_to_name.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/database_character_to_name.html</loc>
   </url>
   <url>
-    <loc>/reference/define_option.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/define_option.html</loc>
   </url>
   <url>
-    <loc>/reference/deflators.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/deflators.html</loc>
   </url>
   <url>
-    <loc>/reference/determine_file_level.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/determine_file_level.html</loc>
   </url>
   <url>
-    <loc>/reference/determine_weight.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/determine_weight.html</loc>
   </url>
   <url>
-    <loc>/reference/extend_breaks_min_and_max.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/extend_breaks_min_and_max.html</loc>
   </url>
   <url>
-    <loc>/reference/extract_information_from_file_name.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/extract_information_from_file_name.html</loc>
   </url>
   <url>
-    <loc>/reference/four_digit_year.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/four_digit_year.html</loc>
   </url>
   <url>
-    <loc>/reference/get_database.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_database.html</loc>
   </url>
   <url>
-    <loc>/reference/get_directory.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_directory.html</loc>
   </url>
   <url>
-    <loc>/reference/get_file_lisppp.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_file_lisppp.html</loc>
   </url>
   <url>
-    <loc>/reference/get_index_hh_heads.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_index_hh_heads.html</loc>
   </url>
   <url>
-    <loc>/reference/get_lissy_attributes.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_lissy_attributes.html</loc>
   </url>
   <url>
-    <loc>/reference/get_lws_file_income_reference_year.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_lws_file_income_reference_year.html</loc>
   </url>
   <url>
-    <loc>/reference/has_lissy_attributes.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/has_lissy_attributes.html</loc>
   </url>
   <url>
-    <loc>/reference/implement_adjust_by_lisppp.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/implement_adjust_by_lisppp.html</loc>
   </url>
   <url>
-    <loc>/reference/implement_equivalise.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/implement_equivalise.html</loc>
   </url>
   <url>
-    <loc>/reference/implement_equivalise_oecd.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/implement_equivalise_oecd.html</loc>
   </url>
   <url>
-    <loc>/reference/implement_false_zeros_to_na.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/implement_false_zeros_to_na.html</loc>
   </url>
   <url>
-    <loc>/reference/implement_filter_age.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/implement_filter_age.html</loc>
   </url>
   <url>
-    <loc>/reference/implement_negative_values_to_zero.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/implement_negative_values_to_zero.html</loc>
   </url>
   <url>
-    <loc>/reference/implement_restrict_age.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/implement_restrict_age.html</loc>
   </url>
   <url>
-    <loc>/reference/implement_restrict_to_household_heads.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/implement_restrict_to_household_heads.html</loc>
   </url>
   <url>
-    <loc>/reference/implement_top_code_with_iqr.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/implement_top_code_with_iqr.html</loc>
   </url>
   <url>
-    <loc>/reference/implement_top_code_with_iqr_pfile.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/implement_top_code_with_iqr_pfile.html</loc>
   </url>
   <url>
-    <loc>/reference/implement_zeros_to_na.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/implement_zeros_to_na.html</loc>
   </url>
   <url>
-    <loc>/reference/import_lisppp_data.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/import_lisppp_data.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/intervals_with_single_value.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/intervals_with_single_value.html</loc>
   </url>
   <url>
-    <loc>/reference/is.all.na.or.zero.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/is.all.na.or.zero.html</loc>
   </url>
   <url>
-    <loc>/reference/is.all.same.value.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/is.all.same.value.html</loc>
   </url>
   <url>
-    <loc>/reference/is.household.dataset.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/is.household.dataset.html</loc>
   </url>
   <url>
-    <loc>/reference/is_change_possible.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/is_change_possible.html</loc>
   </url>
   <url>
-    <loc>/reference/is_lissy_machine.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/is_lissy_machine.html</loc>
   </url>
   <url>
-    <loc>/reference/lissy_map.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/lissy_map.html</loc>
   </url>
   <url>
-    <loc>/reference/lissyrtools.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/lissyrtools.html</loc>
   </url>
   <url>
-    <loc>/reference/merge_dataset_levels.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/merge_dataset_levels.html</loc>
   </url>
   <url>
-    <loc>/reference/merge_lis_dataset_levels.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/merge_lis_dataset_levels.html</loc>
   </url>
   <url>
-    <loc>/reference/missing_values_in_variable_warning.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/missing_values_in_variable_warning.html</loc>
   </url>
   <url>
-    <loc>/reference/n_numbers_smaller.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/n_numbers_smaller.html</loc>
   </url>
   <url>
-    <loc>/reference/paste_lissy_attributes.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/paste_lissy_attributes.html</loc>
   </url>
   <url>
-    <loc>/reference/pipe.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_indicator.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/plot_indicator.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_lorenz_curve.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/plot_lorenz_curve.html</loc>
   </url>
   <url>
-    <loc>/reference/print_all_lissy_files.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/print_all_lissy_files.html</loc>
   </url>
   <url>
-    <loc>/reference/print_gini.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/print_gini.html</loc>
   </url>
   <url>
-    <loc>/reference/print_indicator.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/print_indicator.html</loc>
   </url>
   <url>
-    <loc>/reference/print_percentiles.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/print_percentiles.html</loc>
   </url>
   <url>
-    <loc>/reference/read_LIS.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/read_LIS.html</loc>
   </url>
   <url>
-    <loc>/reference/read_file_name_format.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/read_file_name_format.html</loc>
   </url>
   <url>
-    <loc>/reference/read_format_names.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/read_format_names.html</loc>
   </url>
   <url>
-    <loc>/reference/read_lissy_files.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/read_lissy_files.html</loc>
   </url>
   <url>
-    <loc>/reference/read_lissy_files_locally.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/read_lissy_files_locally.html</loc>
   </url>
   <url>
-    <loc>/reference/read_rename_files.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/read_rename_files.html</loc>
   </url>
   <url>
-    <loc>/reference/retrieve_database_from_directory.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/retrieve_database_from_directory.html</loc>
   </url>
   <url>
-    <loc>/reference/retrieve_names_key_variables.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/retrieve_names_key_variables.html</loc>
   </url>
   <url>
-    <loc>/reference/return_desired_format.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/return_desired_format.html</loc>
   </url>
   <url>
-    <loc>/reference/set_lissy_attributes.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/set_lissy_attributes.html</loc>
   </url>
   <url>
-    <loc>/reference/sort_lissy_list.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/sort_lissy_list.html</loc>
   </url>
   <url>
-    <loc>/reference/split_consecutive_values.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/split_consecutive_values.html</loc>
   </url>
   <url>
-    <loc>/reference/testDateTime.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/testDateTime.html</loc>
   </url>
   <url>
-    <loc>/reference/transform_adjust_by_lisppp.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/transform_adjust_by_lisppp.html</loc>
   </url>
   <url>
-    <loc>/reference/transform_equivalise.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/transform_equivalise.html</loc>
   </url>
   <url>
-    <loc>/reference/transform_equivalise_oecd.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/transform_equivalise_oecd.html</loc>
   </url>
   <url>
-    <loc>/reference/transform_false_zeros_to_na.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/transform_false_zeros_to_na.html</loc>
   </url>
   <url>
-    <loc>/reference/transform_negative_values_to_zero.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/transform_negative_values_to_zero.html</loc>
   </url>
   <url>
-    <loc>/reference/transform_restrict_age.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/transform_restrict_age.html</loc>
   </url>
   <url>
-    <loc>/reference/transform_restrict_to_household_heads.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/transform_restrict_to_household_heads.html</loc>
   </url>
   <url>
-    <loc>/reference/transform_subset_age.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/transform_subset_age.html</loc>
   </url>
   <url>
-    <loc>/reference/transform_top_code_with_iqr.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/transform_top_code_with_iqr.html</loc>
   </url>
   <url>
-    <loc>/reference/transform_weight_by_hh_size.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/transform_weight_by_hh_size.html</loc>
   </url>
   <url>
-    <loc>/reference/transform_zeros_to_na.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/transform_zeros_to_na.html</loc>
   </url>
   <url>
-    <loc>/reference/wtd.quantile.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/wtd.quantile.html</loc>
   </url>
 </urlset>
