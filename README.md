@@ -28,3 +28,68 @@ devtools::install_github("https://github.com/LIS-Cross-National-Data-Center/liss
 ```
 
 
+## Usage
+
+### LISSY version
+```r
+library(lissyrtools)
+library(magrittr)
+
+# Read the datasets
+files_h <- read_lissy_files(c("ca14h", "ca15h", "ca16h", "ca17h", "ca18h", "ca19h"))
+files_p <- read_lissy_files(c("ca14p", "ca15p", "ca16p", "ca17p", "ca18p", "ca19p"))
+
+# Merge household and person-level files
+lissy_datasets <- merge_dataset_levels(files_h, files_p)
+
+# Clean target variables:
+## pi11
+lissy_datasets_transformed <- lissy_datasets %>%
+  transform_false_zeros_to_na("pi11") %>%
+  transform_negative_values_to_zero("pi11") %>%
+  transform_zeros_to_na("pi11") %>%
+  transform_top_code_with_iqr("pi11") %>%
+  transform_bottom_code_with_iqr("pi11") %>%
+  transform_adjust_by_lisppp("pi11") %>%
+  transform_restrict_age("pi11", from = 16, to = 64)
+
+## dhi
+lissy_datasets_transformed <- lissy_datasets_transformed %>%
+  transform_false_zeros_to_na("dhi") %>%
+  transform_negative_values_to_zero("dhi") %>%
+  transform_top_code_with_iqr("dhi") %>%
+  transform_bottom_code_with_iqr("dhi") %>%
+  transform_equivalise("dhi") %>%
+  transform_adjust_by_lisppp("dhi")
+
+# Compute indicators
+print_indicator(lissy_datasets_transformed,
+                             variable = "dhi",
+                             indicator = "gini",
+                             na.rm = TRUE)
+                             
+print_indicator(lissy_datasets_transformed,
+                             variable = "pi11",
+                             indicator = "gini",
+                             na.rm = TRUE)
+
+# Compute and plot indicators                        
+plot_indicator(lissy_datasets_transformed, variable = "dhi",
+                             indicator = "gini",
+                             na.rm = TRUE)
+
+```
+
+### Local version
+
+When working with `lissyrtools` locally, use `read_lissy_files_locally()`
+instead of `read_lissy_files()`. The file names then be passed with the
+`ccyydl` (e.g. 'us16ih') format instead of `ccyyl` ('us16h'). The path to the 
+files should also be specified. E.g. 
+
+```r
+files_h <- read_lissy_files_locally(c("it14ih", "us16ih", "mx18ih"),
+                                    path_to_files = "path/to/your/directory/")
+files_p <- read_lissy_files_locally(c("it14ip", "us16ip", "mx18ip"),
+                                    path_to_files = "path/to/your/directory/")
+```
