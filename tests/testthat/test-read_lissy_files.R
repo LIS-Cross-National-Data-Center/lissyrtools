@@ -135,3 +135,32 @@ test_that("read_rename_files throws error with NA values", {
 })
 
 
+
+# retrieve_database_from_directory ----------------------------------------
+
+test_that("retrieve_database_from_directory works as expected", {
+
+  assign(x = "LIS_DIR", value = "/lisdata/r/", envir = globalenv())
+
+  expect_equal(retrieve_database_from_directory(), "i")
+
+  assign(x = "LIS_DIR", value = "/lwsdata/r/", envir = globalenv())
+
+  expect_equal(retrieve_database_from_directory(), "w")
+
+  assign(x = "LIS_DIR", value = "/erflisdata/r/", envir = globalenv())
+
+  expect_equal(retrieve_database_from_directory(), "e")
+
+  assign(x = "LIS_DIR", value = "/another/", envir = globalenv())
+
+  expect_error(retrieve_database_from_directory(),
+               "Database couldn't be retrieved from '/another/'")
+
+  assign(x = "LIS_DIR", value = "anotherlws/", envir = globalenv())
+
+  expect_error(retrieve_database_from_directory(),
+               "Database couldn't be retrieved from 'anotherlws/'")
+
+})
+

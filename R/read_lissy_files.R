@@ -430,3 +430,37 @@ read_LIS <- function(LIS_DIR, file_name,  col_select = NULL){
 
 }
 
+
+# private_functions.R
+
+#' Get directory from parameters file
+#'
+#' @return A string with the LIS, LWS or ERFLIS directory.
+#'
+#' @keywords internal
+get_directory <- function(){
+
+  get(x = "LIS_DIR", envir = .GlobalEnv)
+
+}
+
+
+#' Get the database from a directory string
+#' @keyword internal
+retrieve_database_from_directory <- function(){
+
+  dir <- get_directory()
+
+  if(stringr::str_detect(dir, pattern = "/erflis")){
+    return("e")
+  }else if(stringr::str_detect(dir, pattern = "/lis")){
+    return("i")
+  }else if(stringr::str_detect(dir, pattern = "/lws")){
+    return("w")
+  }else{
+    stop(glue::glue("Database couldn't be retrieved from '{dir}'"))
+  }
+
+}
+
+
