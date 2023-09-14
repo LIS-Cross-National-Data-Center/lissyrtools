@@ -101,6 +101,7 @@ data_inc_ref_year <- tibble::tribble(
   "no16",                  2016L,
   "no19",                  2019L,
   "no20",                  2020L,
+  "no21",                  2021L,
   "sk10",                  2010L,
   "sk14",                  2013L,
   "sk17",                  2016L,
