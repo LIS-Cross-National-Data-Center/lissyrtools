@@ -5,30 +5,55 @@
 \title{Plot an Indicator.}
 \usage{
 plot_indicator(
-  list_datasets,
+  lissy_files,
   variable,
   indicator,
+  weight = NULL,
+  type = NULL,
   plot_theme = NULL,
   ratio = NULL,
+  epsilon = NULL,
   na.rm = FALSE,
-  ...
+  files_level = NULL,
+  variable_level = NULL
 )
 }
 \arguments{
-\item{list_datasets}{A list of LIS or LWS datasets.}
+\item{lissy_files}{A list of LIS or LWS files.}
 
-\item{variable}{A character string indicating the aggregate for which the indicator needs to be plotted.}
+\item{variable}{A character string indicating the aggregate for which the indicator needs to be computed.}
 
-\item{indicator}{A character string indicating the type of indicator to be computed.
+\item{indicator}{A character string indicating the type of indicator statistic to be computed.
 Currently the function supports only 'mean', 'median', 'ratio' and 'gini'.}
 
-\item{ratio}{Only used in the computation of 'ratio' indicator. A vector of
-two numeric values between 0 and 1. Defines the percentiles in the numerator
-and denominator respectively. E.g. (0.9, 0.1) computes the 90/10 ratio.}
+\item{weight}{A string with the name of the variable in 'file' that should be
+used as sample weights. If NULL (default), the function tries to guess the
+needed weight to compute the indicator. This guess is made on the information
+from files_level and variable_level.}
+
+\item{type}{A character vector indicating the type of plot to be used. Valid
+inputs are 'line' and 'bar'. If NULL (default), the function tries to guess
+the appropriate plot type based on the structure of the input data frame.}
+
+\item{ratio}{A vector of two numeric values between 0 and 1.Only used in the computation of 'ratio' indicator.
+Defines the percentiles in the numerator and denominator respectively.
+E.g. (0.9, 0.1) computes the 90/10 ratio.}
+
+\item{epsilon}{A numeric vector of length one. Only used in the computation of 'atkinson' indicator'.
+The inequality adversion parameter. Needs to be epsilon > 0.}
 
 \item{na.rm}{A boolean. Indicates if NAs should be ignored. Defaults to FALSE.}
 
-\item{theme}{A ggplot2 theme for the graph.}
+\item{files_level}{A string indicating the level of the file. Valid inputs are:
+'household', 'h', 'person' or 'p'. If NULL (default), the file level will
+be retrived from the 'lissy_files' attributes.}
+
+\item{variable_level}{Level of the variable. Should be either 'household', 'h', 'person' or 'p'.
+If NULL (default), the function will try to guess the level of the variable.
+This is done by comparing the value in 'variable' with pre-set lists of variables.}
+}
+\value{
+A ggplot2 plot.
 }
 \description{
 \lifecycle{experimental}

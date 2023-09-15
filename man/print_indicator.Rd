@@ -22,7 +22,9 @@ print_indicator(
 \item{variable}{A character string indicating the aggregate for which the indicator needs to be computed.}
 
 \item{indicator}{A character string indicating the type of indicator statistic to be computed.
-Currently the function supports only 'mean', 'median', 'ratio' and 'gini'.}
+Currently the function supports only 'mean', 'median', 'ratio', 'gini' and 'atkinson'.
+If 'ratio' is selected, the user must pass a value to the 'ratio' parameter.
+If 'atkinson', the user mus pass a value to 'epsilon'.}
 
 \item{weight}{A string with the name of the variable in 'file' that should be
 used as sample weights. If NULL (default), the function tries to guess the
@@ -51,5 +53,5 @@ A numeric vector.
 }
 \description{
 \lifecycle{experimental}
-Computes and displays an chosen with the 'indicator' argument.
+Computes and displays an indicator chosen with the 'indicator' argument.
 }
