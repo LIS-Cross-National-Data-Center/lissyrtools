@@ -65,7 +65,9 @@ print_all_lissy_files <- function(database){
 #' @param lissy_files A list of LIS or LWS files.
 #' @param variable A character string indicating the aggregate for which the indicator needs to be computed.
 #' @param indicator A character string indicating the type of indicator statistic to be computed.
-#'   Currently the function supports only 'mean', 'median', 'ratio' and 'gini'.
+#'   Currently the function supports only 'mean', 'median', 'ratio', 'gini' and 'atkinson'.
+#'   If 'ratio' is selected, the user must pass a value to the 'ratio' parameter.
+#'   If 'atkinson', the user mus pass a value to 'epsilon'.
 #' @param weight A string with the name of the variable in 'file' that should be
 #'   used as sample weights. If NULL (default), the function tries to guess the
 #'   needed weight to compute the indicator. This guess is made on the information
