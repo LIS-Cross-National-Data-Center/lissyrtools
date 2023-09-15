@@ -61,6 +61,9 @@
     <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/database_character_to_name.html</loc>
   </url>
   <url>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/decide_plot_type.html</loc>
+  </url>
+  <url>
     <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/define_option.html</loc>
   </url>
   <url>
@@ -184,13 +187,19 @@
     <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/pipe.html</loc>
   </url>
   <url>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/plot_bar.html</loc>
+  </url>
+  <url>
     <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/plot_indicator.html</loc>
   </url>
   <url>
-    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/plot_lorenz_curve.html</loc>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/plot_line.html</loc>
   </url>
   <url>
     <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/print_all_lissy_files.html</loc>
+  </url>
+  <url>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/print_atkinson.html</loc>
   </url>
   <url>
     <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/print_gini.html</loc>
@@ -200,6 +209,9 @@
   </url>
   <url>
     <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/print_percentiles.html</loc>
+  </url>
+  <url>
+    <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/print_ratio.html</loc>
   </url>
   <url>
     <loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/read_LIS.html</loc>

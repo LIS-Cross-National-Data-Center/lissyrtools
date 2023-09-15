@@ -55,45 +55,81 @@ Computes an indicator and plots it for one or multiple LIS or LWS datasets.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_indicator</span><span class="op">(</span></span>
-<span>  <span class="va">list_datasets</span>,</span>
+<span>  <span class="va">lissy_files</span>,</span>
 <span>  <span class="va">variable</span>,</span>
 <span>  <span class="va">indicator</span>,</span>
+<span>  weight <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  plot_theme <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ratio <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  epsilon <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  files_level <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  variable_level <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>list_datasets</dt>
-<dd><p>A list of LIS or LWS datasets.</p></dd>
+    <dl><dt>lissy_files</dt>
+<dd><p>A list of LIS or LWS files.</p></dd>
 
 
 <dt>variable</dt>
-<dd><p>A character string indicating the aggregate for which the indicator needs to be plotted.</p></dd>
+<dd><p>A character string indicating the aggregate for which the indicator needs to be computed.</p></dd>
 
 
 <dt>indicator</dt>
-<dd><p>A character string indicating the type of indicator to be computed.
+<dd><p>A character string indicating the type of indicator statistic to be computed.
 Currently the function supports only 'mean', 'median', 'ratio' and 'gini'.</p></dd>
 
 
+<dt>weight</dt>
+<dd><p>A string with the name of the variable in 'file' that should be
+used as sample weights. If NULL (default), the function tries to guess the
+needed weight to compute the indicator. This guess is made on the information
+from files_level and variable_level.</p></dd>
+
+
+<dt>type</dt>
+<dd><p>A character vector indicating the type of plot to be used. Valid
+inputs are 'line' and 'bar'. If NULL (default), the function tries to guess
+the appropriate plot type based on the structure of the input data frame.</p></dd>
+
+
 <dt>ratio</dt>
-<dd><p>Only used in the computation of 'ratio' indicator. A vector of
-two numeric values between 0 and 1. Defines the percentiles in the numerator
-and denominator respectively. E.g. (0.9, 0.1) computes the 90/10 ratio.</p></dd>
+<dd><p>A vector of two numeric values between 0 and 1.Only used in the computation of 'ratio' indicator.
+Defines the percentiles in the numerator and denominator respectively.
+E.g. (0.9, 0.1) computes the 90/10 ratio.</p></dd>
+
+
+<dt>epsilon</dt>
+<dd><p>A numeric vector of length one. Only used in the computation of 'atkinson' indicator'.
+The inequality adversion parameter. Needs to be epsilon &gt; 0.</p></dd>
 
 
 <dt>na.rm</dt>
 <dd><p>A boolean. Indicates if NAs should be ignored. Defaults to FALSE.</p></dd>
 
 
-<dt>theme</dt>
-<dd><p>A ggplot2 theme for the graph.</p></dd>
+<dt>files_level</dt>
+<dd><p>A string indicating the level of the file. Valid inputs are:
+'household', 'h', 'person' or 'p'. If NULL (default), the file level will
+be retrived from the 'lissy_files' attributes.</p></dd>
+
+
+<dt>variable_level</dt>
+<dd><p>Level of the variable. Should be either 'household', 'h', 'person' or 'p'.
+If NULL (default), the function will try to guess the level of the variable.
+This is done by comparing the value in 'variable' with pre-set lists of variables.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>A ggplot2 plot.</p>
+    </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
