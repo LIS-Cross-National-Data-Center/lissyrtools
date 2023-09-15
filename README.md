@@ -2,7 +2,7 @@
 
 ## Build & Testing Status
 <!-- badges: start -->
-  [![](https://img.shields.io/badge/devel%20version-0.1.0-blue.svg)](https://github.com/nationalaccountslis/lissyrtools)
+  [![](https://img.shields.io/badge/devel%20version-0.1.2-blue.svg)](https://github.com/LIS-Cross-National-Data-Center/lissyrtools)
   [![codecov](https://codecov.io/gh/LIS-Cross-National-Data-Center/lissyrtools/graph/badge.svg?token=kd2zXPsfWz)](https://codecov.io/gh/LIS-Cross-National-Data-Center/lissyrtools)
   <!-- badges: end -->
 
