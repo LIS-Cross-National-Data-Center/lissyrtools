@@ -40,10 +40,8 @@ inst/doc
 doc
 Meta
 # Folder with data for tests
-tests/testdata/
 archieved
 
-docs/
-man/
+docs
 
 todo.txt
