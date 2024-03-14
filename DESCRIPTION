@@ -1,6 +1,6 @@
 Package: lissyrtools
 Title: Tools for LISSY Jobs
-Version: 0.1.3
+Version: 0.1.4
 Authors@R: c(person("Josep", "Espasa Reig", role = c("aut", "cre"), email = "jespasareig@gmail.com"))
 Author: Josep Espasa Reig [aut, cre]
 Description: Tools for the computation of inequality indicators in LISSY. 
