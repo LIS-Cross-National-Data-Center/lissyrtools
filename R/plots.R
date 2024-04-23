@@ -131,6 +131,8 @@ plot_indicator <- function(lissy_files, variable, indicator, weight = NULL, type
 #'
 #' @keywords internal
 decide_plot_type <- function(results_df) {
+  # Extract Countries from files 
+  results_df$country <- stringr::str_sub(results_df$file,1,2)
   # Does it have multiple countries?
   multiple_countries_bool <- length(unique(results_df$country)) > 1
 
