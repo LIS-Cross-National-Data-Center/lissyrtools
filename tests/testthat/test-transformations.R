@@ -221,13 +221,13 @@ test_that("implement_equivalise_oecd works as expected", {
                            hwgt = 1,
                            hid = 1:10,
                            nhhmem = rep(1:2, 5),
-                           nhhmem17 = rep(0, 10))
+                           nhhmem13 = rep(0, 10))
 
   file_2 <- tibble::tibble(dhi = rep(100, 10),
                            hwgt = 1,
                            hid = 1:10,
                            nhhmem = 2,
-                           nhhmem17 = rep(c(0, 1), 5))
+                           nhhmem13 = rep(c(0, 1), 5))
 
   # expect no 0s
   expect_equal(implement_equivalise_oecd(file = file_1,
@@ -263,12 +263,12 @@ test_that("implement_equivalise_oecd throws informative errors", {
                            hwgt = 1,
                            hid = 1:10,
                            nhhmem = rep(1:2, 5),
-                           nhhmem17 = rep(0, 10))
+                           nhhmem13 = rep(0, 10))
 
   file_2 <- tibble::tibble(dhi = rep(100,10),
                            hwgt = 1,
                            hid = 1:10,
-                           nhhmem17 = rep(0, 10))
+                           nhhmem13 = rep(0, 10))
 
   file_3 <- tibble::tibble(dhi = rep(100,10), # 'mhi' instead of 'dhi'
                            hwgt = 1,
@@ -283,12 +283,12 @@ test_that("implement_equivalise_oecd throws informative errors", {
   expect_error(implement_equivalise_oecd(file = file_2,
                                     file_name = "zz55p",
                                     variable = "dhi"),
-               "'nhhmem' and 'nhhmem17' need to be in 'zz55p'.")
+               "'nhhmem' and 'nhhmem13' need to be in 'zz55p'.")
 
   expect_error(implement_equivalise_oecd(file = file_3,
                                     file_name = "zz55p",
                                     variable = "dhi"),
-               "'nhhmem' and 'nhhmem17' need to be in 'zz55p'.")
+               "'nhhmem' and 'nhhmem13' need to be in 'zz55p'.")
 
 })
 
@@ -299,7 +299,7 @@ test_that("implement_equivalise_oecd throws warning if applied to a person-level
                            hid = 1:10,
                            pid = 1:10,
                            nhhmem = rep(1:2, 5),
-                           nhhmem17 = rep(0, 10))
+                           nhhmem13 = rep(0, 10))
 
 
   expect_warning(implement_equivalise_oecd(file = file_1,
