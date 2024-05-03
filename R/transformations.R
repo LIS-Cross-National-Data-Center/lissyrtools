@@ -163,13 +163,13 @@ implement_equivalise_oecd <- function(file, file_name, variable, value_other_adu
 
   }
 
-  assertthat::assert_that(all(c("nhhmem", "nhhmem17") %in% names(file)),
-                          msg = glue::glue("'nhhmem' and 'nhhmem17' need to be in '{file_name}'."))
+  assertthat::assert_that(all(c("nhhmem", "nhhmem13") %in% names(file)),
+                          msg = glue::glue("'nhhmem' and 'nhhmem13' need to be in '{file_name}'."))
 
   if(!is.all.na.or.zero(file[[variable]])){
 
-    n_other_adults <- file[["nhhmem"]] - file[["nhhmem17"]] - 1
-    factor <- 1 + value_other_adults* n_other_adults + file[["nhhmem17"]] * value_children
+    n_other_adults <- file[["nhhmem"]] - file[["nhhmem13"]] - 1
+    factor <- 1 + value_other_adults* n_other_adults + file[["nhhmem13"]] * value_children
 
     file[[variable]] <- file[[variable]]/(factor)
   }
