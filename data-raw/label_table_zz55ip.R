@@ -15,7 +15,6 @@ label_table_zz15ip <- list(parents = c(`[100]living with parent(s)` = 100L, `[11
                   `[4210]housemate/roommate` = 4210L, `[4220]domestic employee and his/her family` = 4220L,
                   `[4230]guest/visitor/boarder/lodger` = 4230L),
      sex = structure(1:2, .Names = c("[1]male",  "[2]female")),
-     fpimpu = structure(0:1, .Names = c("[0]no income imputation",   "[1]income imputation")),
      currency = c(`[36]AUD - Australian Dollar` = 36L,  `[40]ATS - Schilling (historic)` = 40L,
                   `[56]BEF - Belgian franc (historic)` = 56L, `[124]CAD - Canadian Dollar` = 124L,
                   `[152]CLP - Chilean Peso` = 152L,  `[156]CNY - Yuan Renminbi` = 156L,

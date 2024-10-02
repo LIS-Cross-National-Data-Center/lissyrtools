@@ -1,9 +1,7 @@
 # label_table_zz55ih.R
 # 'label.table' attribute from it14ih sample dataset https://www.lisdatacenter.org/resources/self-teaching/
 
-label_table_zz15ih <- list(fhimpu = structure(0:1,
-                        .Names = c("[0]no income imputation",
-                                   "[1]income imputation")),
+label_table_zz15ih <- list(
      hpartner = structure(0:1,
                           .Names = c("[0]head not living with partner",  "[1]head living with partner")),
      nhhmem13 = structure(0:5,

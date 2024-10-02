@@ -1,5 +1,7 @@
 # household_&_person_variables.R
 
+    # revised on 2nd October 2024 due to template revision - Gonçalo Marques 
+
 lis_household_variables <- c("hid", "dhi", "hitotal", "hifactor", "hitransfer", "hilabour",
                              "hi11", "hi12", "hi121", "hi13", "hi14", "hicapital", "hi21",
                              "hi22", "hipension", "hi31", "hi311", "hi312", "hi32", "hi33",
@@ -15,7 +17,10 @@ lis_household_variables <- c("hid", "dhi", "hitotal", "hifactor", "hitransfer", 
                              "area_c", "rural", "own", "dweltyp", "farming", "did", "dname",
                              "cname", "iso2", "iso3", "year", "wave", "currency", "grossnet",
                              "nhhmem", "nhhmem65", "nhhmem17", "nhhmem13", "hhtype", "hpartner",
-                             "hwgt", "hpopwgt", "hwgta", "fhimpu")
+                             "hwgt", "hpopwgt", "hwgta" , "nrooms", "housing_c", "ore_c", "typehh", "nhhmem6", 
+                             "tchild", "hi321", "hi322", "hi323", "hi48", "hi4111", "hi4112", 
+                             "hi451", "hi452", "hi54", "hi541", "hi542", "hi512", 
+                             "hxitadj", "hxitcred", "hepension" )
 
 lis_person_variables <- c("hid", "pid", "pitotal", "pilabour", "pi11", "pi12", "pi13",
                           "pipension", "pi31", "pi311", "pi312", "pi32", "pi332", "pi33",
@@ -24,13 +29,17 @@ lis_person_variables <- c("hid", "pid", "pitotal", "pilabour", "pi11", "pi12", "
                           "lfs", "emp", "emp_ilo", "informal", "parleave", "secjob", "weeks",
                           "hours1", "hourstot", "ptime1", "status1", "temp1", "public1",
                           "ind1_c", "indd1", "indc1", "indb1", "inda1", "occ1_c", "occb1",
-                          "occa1", "gross1", "net1", "fyft", "wexptl", "enroll", "educ_c",
+                          "occa1", "fyft", "wexptl", "enroll", "educ_c",
                           "educlev", "educ", "illiterate", "edyrs", "edmom_c", "eddad_c",
                           "ctrybrth", "citizen", "yrsresid", "ethnic_c", "migrat_c", "immigr_c",
                           "immigr", "disabled", "health_c", "did", "dname", "cname", "iso2",
-                          "iso3", "year", "wave", "currency", "grossnet", "fpimpu", "age",
+                          "iso3", "year", "wave", "currency", "grossnet", "age",
                           "sex", "marital", "relation", "partner", "parents", "nchildren",
-                          "ageyoch", "pwgt", "ppopwgt", "pwgta")
+                          "ageyoch", "pwgt", "ppopwgt", "pwgta", "depchild", "oneparent", "momnum", 
+                          "dadnum", "partnum", "oneparent_c", "illness_c", "health2_c", "parleave_c", 
+                          "occdad_c", "occmom_c", "wage1", "hwage1", "occc1", "weeksft", "pi321", "pi322", 
+                          "pi323", "pi48", "pi4111", "pi4112", "pi54", "pi541", "pi542", "pxitadj", 
+                          "pxitcred", "pepension")
 
 lws_household_variables <- c("hid", "inum", "cir", "cia", "cig", "chc", "cha", "cnc", "cna",
                              "ppr", "ppy", "pir", "pia1", "pia2", "pia3", "pia4", "piy1",
@@ -60,7 +69,10 @@ lws_household_variables <- c("hid", "inum", "cir", "cia", "cig", "chc", "cha", "
                              "area_c", "rural", "own", "dweltyp", "farming", "did", "dname",
                              "cname", "iso2", "iso3", "year", "wave", "currency", "grossnet",
                              "nhhmem", "nhhmem65", "nhhmem17", "nhhmem13", "hhtype", "hpartner",
-                             "hwgt", "hpopwgt", "hwgta", "fhimpu")
+                             "hwgt", "hpopwgt", "hwgta", "nrooms", "housing_c", "ore_c", "typehh", 
+                             "nhhmem6", "tchild", "hi321", "hi322", "hi323", "hi48", "hi4111", 
+                             "hi4112", "hi451", "hi452", "hi54", "hi541", "hi542", "hi512", 
+                             "hxitadj", "hxitcred", "hepension")
 
 lws_person_variables <- c("hid", "inum", "pid", "basb", "basp1", "basp2", "basp3", "basp4",
                           "basp5", "basp6", "basp7", "basp8", "basp9", "bafr1_c", "bafr2_c",
@@ -74,14 +86,17 @@ lws_person_variables <- c("hid", "inum", "pid", "basb", "basp1", "basp2", "basp3
                           "pxitsc", "pxvcont", "lfs", "emp", "emp_ilo", "informal", "parleave",
                           "secjob", "weeks", "hours1", "hourstot", "ptime1", "status1",
                           "temp1", "public1", "ind1_c", "indd1", "indc1", "indb1", "inda1",
-                          "occ1_c", "occb1", "occa1", "gross1", "net1", "fyft", "wexptl",
+                          "occ1_c", "occb1", "occa1", "fyft", "wexptl",
                           "enroll", "educ_c", "educlev", "educ", "illiterate", "edyrs",
                           "edmom_c", "eddad_c", "ctrybrth", "citizen", "yrsresid", "ethnic_c",
                           "migrat_c", "immigr_c", "immigr", "disabled", "health_c", "did",
                           "dname", "cname", "iso2", "iso3", "year", "wave", "currency",
-                          "grossnet", "fpimpu", "age", "sex", "marital", "relation", "partner",
-                          "parents", "nchildren", "ageyoch", "pwgt", "ppopwgt", "pwgta"
-)
+                          "grossnet", "age", "sex", "marital", "relation", "partner",
+                          "parents", "nchildren", "ageyoch", "pwgt", "ppopwgt", "pwgta", "depchild", 
+                          "oneparent", "momnum", "dadnum", "partnum", "oneparent_c", "illness_c", "health2_c", 
+                          "parleave_c", "occdad_c", "occmom_c", "wage1", "hwage1", "occc1", "weeksft", "pi321", 
+                          "pi322", "pi323", "pi48", "pi4111", "pi4112", "pi54", "pi541", "pi542", 
+                          "pxitadj", "pxitcred", "pepension")
 
 erflis_household_variables <- c("hid", "dhi", "hitotal", "hifactor", "hitransfer", "hilabour",
                                "hi11", "hi12", "hi121", "hi13", "hi14", "hicapital", "hi21",
@@ -98,7 +113,7 @@ erflis_household_variables <- c("hid", "dhi", "hitotal", "hifactor", "hitransfer
                                "area_c", "rural", "own", "dweltyp", "farming", "did", "dname",
                                "cname", "iso2", "iso3", "year", "wave", "currency", "grossnet",
                                "nhhmem", "nhhmem65", "nhhmem17", "nhhmem13", "hhtype", "hpartner",
-                               "hwgt", "hpopwgt", "hwgta", "fhimpu", "room", "elect", "slight",
+                               "hwgt", "hpopwgt", "hwgta", "elect", "slight",
                                "scook", "wat", "tfacil", "sfacil", "hfacil", "toif", "toif_sh",
                                "grbg_dsp", "car", "car_n", "truck", "truck_n", "mbcycle", "mbcycle_n",
                                "telv", "telv_n", "radio", "radio_n", "satd_rec", "satd_rec_n",
@@ -121,7 +136,10 @@ erflis_household_variables <- c("hid", "dhi", "hitotal", "hifactor", "hitransfer
                                "medabr", "trveh", "oteq", "trserv", "schserv", "pttserv", "tteqp",
                                "culdur", "culeqp", "culser", "schcul", "preduc", "seduc", "teduc",
                                "oeduc", "educabr", "catser", "schrst", "accom", "pcexp", "spexp",
-                               "fexp", "fees", "ptransf")
+                               "fexp", "fees", "ptransf", "nrooms", "housing_c", "ore_c", 
+                               "typehh", "nhhmem6", "tchild", "hi321", "hi322", "hi323", "hi48", "hi4111", 
+                               "hi4112", "hi451", "hi452", "hi54", "hi541", "hi542", "hi512", 
+                               "hxitadj", "hxitcred", "hepension")
 
 erflis_person_variables <- c("hid", "pid", "pitotal", "pilabour", "pi11", "pi12", "pi13",
                             "pipension", "pi31", "pi311", "pi312", "pi32", "pi33", "pi331",
@@ -130,13 +148,17 @@ erflis_person_variables <- c("hid", "pid", "pitotal", "pilabour", "pi11", "pi12"
                             "lfs", "emp", "emp_ilo", "informal", "parleave", "secjob", "weeks",
                             "hours1", "hourstot", "ptime1", "status1", "temp1", "public1",
                             "ind1_c", "indd1", "indc1", "indb1", "inda1", "occ1_c", "occb1",
-                            "occa1", "gross1", "net1", "fyft", "wexptl", "enroll", "educ_c",
+                            "occa1", "fyft", "wexptl", "enroll", "educ_c",
                             "educlev", "educ", "illiterate", "edyrs", "edmom_c", "eddad_c",
                             "ctrybrth", "citizen", "yrsresid", "ethnic_c", "migrat_c", "immigr_c",
                             "immigr", "disabled", "health_c", "did", "dname", "cname", "iso2",
-                            "iso3", "year", "wave", "currency", "grossnet", "fpimpu", "age",
+                            "iso3", "year", "wave", "currency", "grossnet", "age",
                             "sex", "marital", "relation", "partner", "parents", "nchildren",
-                            "ageyoch", "pwgt", "ppopwgt", "pwgta")
+                            "ageyoch", "pwgt", "ppopwgt", "pwgta", "depchild", "oneparent", 
+                            "momnum", "dadnum", "partnum", "oneparent_c", "illness_c", "health2_c", 
+                            "parleave_c", "occdad_c", "occmom_c", "wage1", "hwage1", "occc1", "weeksft", 
+                            "pi321", "pi322", "pi323", "pi48", "pi4111", "pi4112", "pi54", "pi541", "pi542", 
+                            "pxitadj", "pxitcred", "pepension")
 
 
 key_vars_household_lis <- c("hid", "nhhmem", "hwgt", "hpopwgt", "hwgta")
