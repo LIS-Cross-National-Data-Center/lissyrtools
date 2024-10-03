@@ -15,7 +15,9 @@ names_ih_file <- c("hid", "dhi", "hitotal", "hifactor", "hitransfer", "hilabour"
                    "area_c", "rural", "own", "dweltyp", "farming", "did", "dname",
                    "cname", "iso2", "iso3", "year", "wave", "currency", "grossnet",
                    "nhhmem", "nhhmem65", "nhhmem17", "nhhmem13", "hhtype", "hpartner",
-                   "hwgt", "hpopwgt", "hwgta", "fhimpu")
+                   "hwgt", "hpopwgt", "hwgta", "nrooms", "housing_c", "ore_c", "typehh", 
+                   "nhhmem6", "tchild", "hi321", "hi322", "hi323", "hi48", "hi4111", "hi4112", 
+                   "hi451", "hi452", "hi54", "hi541", "hi542", "hi512", "hxitadj", "hxitcred", "hepension")
 
 
 names_ip_file <- c("hid", "pitotal", "pilabour", "pi11", "pi12", "pi13", "pipension",
@@ -24,14 +26,17 @@ names_ip_file <- c("hid", "pitotal", "pilabour", "pi11", "pi12", "pi13", "pipens
                    "pxitax", "pxscont", "pxitsc", "pxvcont", "lfs", "emp", "emp_ilo",
                    "informal", "parleave", "secjob", "weeks", "hours1", "hourstot",
                    "ptime1", "status1", "temp1", "public1", "ind1_c", "indd1", "indc1",
-                   "indb1", "inda1", "occ1_c", "occb1", "occa1", "gross1", "net1",
+                   "indb1", "inda1", "occ1_c", "occb1", "occa1",
                    "fyft", "wexptl", "enroll", "educ_c", "educlev", "educ", "illiterate",
                    "edyrs", "edmom_c", "eddad_c", "ctrybrth", "citizen", "yrsresid",
                    "ethnic_c", "migrat_c", "immigr_c", "immigr", "disabled", "health_c",
                    "did", "dname", "cname", "iso2", "iso3", "year", "wave", "currency",
-                   "grossnet", "fpimpu", "age", "sex", "marital", "relation", "partner",
+                   "grossnet", "age", "sex", "marital", "relation", "partner",
                    "parents", "nchildren", "ageyoch", "pwgt", "ppopwgt", "pwgta",
-                   "pid")
+                   "pid", "depchild", "oneparent", "momnum", "dadnum", "partnum", "oneparent_c", 
+                   "illness_c", "health2_c", "parleave_c", "occdad_c", "occmom_c", "wage1", 
+                   "hwage1", "occc1", "weeksft", "pi321", "pi322", "pi323", "pi48", "pi4111", 
+                   "pi4112", "pi54", "pi541", "pi542", "pxitadj", "pxitcred", "pepension")
 
 
 names_wh_file <- c("hid", "inum", "cir", "cig", "chc", "cha", "cnc", "cna", "ppr",
@@ -62,7 +67,10 @@ names_wh_file <- c("hid", "inum", "cir", "cig", "chc", "cha", "cnc", "cna", "ppr
                   "area_c", "rural", "own", "dweltyp", "farming", "did", "dname",
                   "cname", "iso2", "iso3", "year", "wave", "currency", "grossnet",
                   "nhhmem", "nhhmem65", "nhhmem17", "nhhmem13", "hhtype", "hpartner",
-                  "hwgt", "hpopwgt", "hwgta", "fhimpu")
+                  "hwgt", "hpopwgt", "hwgta", "nrooms", "housing_c", "ore_c", "typehh", 
+                  "nhhmem6", "tchild", "hi321", "hi322", "hi323", "hi48", "hi4111", 
+                  "hi4112", "hi451", "hi452", "hi54", "hi541", "hi542", "hi512", "hxitadj", 
+                  "hxitcred", "hepension", "hafct", "hafcs", "hafiss", "hafiso", "hafom")
 
 
 names_wp_file <- c("hid", "inum", "pid", "basb", "basp1", "basp2", "basp3", "basp4",
@@ -77,13 +85,17 @@ names_wp_file <- c("hid", "inum", "pid", "basb", "basp1", "basp2", "basp3", "bas
                    "pxitsc", "pxvcont", "lfs", "emp", "emp_ilo", "informal", "parleave",
                    "secjob", "weeks", "hours1", "hourstot", "ptime1", "status1",
                    "temp1", "public1", "ind1_c", "indd1", "indc1", "indb1", "inda1",
-                   "occ1_c", "occb1", "occa1", "gross1", "net1", "fyft", "wexptl",
+                   "occ1_c", "occb1", "occa1", "fyft", "wexptl",
                    "enroll", "educ_c", "educlev", "educ", "illiterate", "edyrs",
                    "edmom_c", "eddad_c", "ctrybrth", "citizen", "yrsresid", "ethnic_c",
                    "migrat_c", "immigr_c", "immigr", "disabled", "health_c", "did",
                    "dname", "cname", "iso2", "iso3", "year", "wave", "currency",
-                   "grossnet", "fpimpu", "age", "sex", "marital", "relation", "partner",
-                   "parents", "nchildren", "ageyoch", "pwgt", "ppopwgt", "pwgta")
+                   "grossnet", "age", "sex", "marital", "relation", "partner",
+                   "parents", "nchildren", "ageyoch", "pwgt", "ppopwgt", "pwgta", "depchild", 
+                   "oneparent", "momnum", "dadnum", "partnum", "oneparent_c", "illness_c", 
+                   "health2_c", "parleave_c", "occdad_c", "occmom_c", "wage1", "hwage1", 
+                   "occc1", "weeksft", "pi321", "pi322", "pi323", "pi48", "pi4111", "pi4112", 
+                   "pi54", "pi541", "pi542", "pxitadj", "pxitcred", "pepension")
 
 
 names_eh_file <- c("hid", "dhi", "hitotal", "hifactor", "hitransfer", "hilabour",
@@ -101,7 +113,7 @@ names_eh_file <- c("hid", "dhi", "hitotal", "hifactor", "hitransfer", "hilabour"
                    "area_c", "rural", "own", "dweltyp", "farming", "did", "dname",
                    "cname", "iso2", "iso3", "year", "wave", "currency", "grossnet",
                    "nhhmem", "nhhmem65", "nhhmem17", "nhhmem13", "hhtype", "hpartner",
-                   "hwgt", "hpopwgt", "hwgta", "fhimpu", "room", "elect", "slight",
+                   "hwgt", "hpopwgt", "hwgta", "elect", "slight",
                    "scook", "wat", "tfacil", "sfacil", "hfacil", "toif", "toif_sh",
                    "grbg_dsp", "car", "car_n", "truck", "truck_n", "mbcycle", "mbcycle_n",
                    "telv", "telv_n", "radio", "radio_n", "satd_rec", "satd_rec_n",
@@ -124,7 +136,9 @@ names_eh_file <- c("hid", "dhi", "hitotal", "hifactor", "hitransfer", "hilabour"
                    "medabr", "trveh", "oteq", "trserv", "schserv", "pttserv", "tteqp",
                    "culdur", "culeqp", "culser", "schcul", "preduc", "seduc", "teduc",
                    "oeduc", "educabr", "catser", "schrst", "accom", "pcexp", "spexp",
-                   "fexp", "fees", "ptransf")
+                   "fexp", "fees", "ptransf", "nrooms", "housing_c", "ore_c", "typehh", 
+                   "nhhmem6", "tchild", "hi321", "hi322", "hi323", "hi48", "hi4111", "hi4112", "hi451", 
+                   "hi452", "hi54", "hi541", "hi542", "hi512", "hxitadj", "hxitcred", "hepension")
 
 
 names_ep_file <- c("hid", "pid", "pitotal", "pilabour", "pi11", "pi12", "pi13",
@@ -134,10 +148,14 @@ names_ep_file <- c("hid", "pid", "pitotal", "pilabour", "pi11", "pi12", "pi13",
                    "lfs", "emp", "emp_ilo", "informal", "parleave", "secjob", "weeks",
                    "hours1", "hourstot", "ptime1", "status1", "temp1", "public1",
                    "ind1_c", "indd1", "indc1", "indb1", "inda1", "occ1_c", "occb1",
-                   "occa1", "gross1", "net1", "fyft", "wexptl", "enroll", "educ_c",
+                   "occa1", "fyft", "wexptl", "enroll", "educ_c",
                    "educlev", "educ", "illiterate", "edyrs", "edmom_c", "eddad_c",
                    "ctrybrth", "citizen", "yrsresid", "ethnic_c", "migrat_c", "immigr_c",
                    "immigr", "disabled", "health_c", "did", "dname", "cname", "iso2",
-                   "iso3", "year", "wave", "currency", "grossnet", "fpimpu", "age",
+                   "iso3", "year", "wave", "currency", "grossnet", "age",
                    "sex", "marital", "relation", "partner", "parents", "nchildren",
-                   "ageyoch", "pwgt", "ppopwgt", "pwgta")
+                   "ageyoch", "pwgt", "ppopwgt", "pwgta", "depchild", 
+                   "oneparent", "momnum", "dadnum", "partnum", "oneparent_c", "illness_c", 
+                   "health2_c", "parleave_c", "occdad_c", "occmom_c", "wage1", "hwage1", 
+                   "occc1", "weeksft", "pi321", "pi322", "pi323", "pi48", "pi4111", "pi4112", 
+                   "pi54", "pi541", "pi542", "pxitadj", "pxitcred", "pepension")

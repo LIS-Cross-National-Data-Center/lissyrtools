@@ -72,7 +72,7 @@ lws_household_variables <- c("hid", "inum", "cir", "cia", "cig", "chc", "cha", "
                              "hwgt", "hpopwgt", "hwgta", "nrooms", "housing_c", "ore_c", "typehh", 
                              "nhhmem6", "tchild", "hi321", "hi322", "hi323", "hi48", "hi4111", 
                              "hi4112", "hi451", "hi452", "hi54", "hi541", "hi542", "hi512", 
-                             "hxitadj", "hxitcred", "hepension")
+                             "hxitadj", "hxitcred", "hepension", "hfact", "hafcs", "hafiss", "hafiso", "hafom")
 
 lws_person_variables <- c("hid", "inum", "pid", "basb", "basp1", "basp2", "basp3", "basp4",
                           "basp5", "basp6", "basp7", "basp8", "basp9", "bafr1_c", "bafr2_c",
