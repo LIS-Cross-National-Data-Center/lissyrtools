@@ -178,20 +178,24 @@ usethis::use_data(lis_household_variables,
                   key_vars_person_lis,
                   key_vars_household_lws,
                   key_vars_person_lws,
-                  internal = TRUE,
+                  internal = TRUE, # to save on R/sysdata.rda
                   overwrite = TRUE)
 
 
-sysdata_filenames <- load("R/sysdata.rda")
-save(list = c(sysdata_filenames,
-              "lis_household_variables",
-              "lis_person_variables",
-              "lws_household_variables",
-              "lws_person_variables",
-              "erflis_household_variables",
-              "erflis_household_variables",
-              "key_vars_household_lis",
-              "key_vars_person_lis",
-              "key_vars_household_lws",
-              "key_vars_person_lws"),
-     file = "R/sysdata.rda")
+# sysdata_filenames <- load("R/sysdata.rda")
+# save(list = c(sysdata_filenames,
+          #    "lis_household_variables",
+          #    "lis_person_variables",
+          #    "lws_household_variables",
+          #    "lws_person_variables",
+          #    "erflis_household_variables",
+          #    "erflis_person_variables",
+          #   "key_vars_household_lis",
+          #    "key_vars_person_lis",
+          #    "key_vars_household_lws",
+          #    "key_vars_person_lws"),
+    #  file = "R/sysdata.rda")
+
+
+
+

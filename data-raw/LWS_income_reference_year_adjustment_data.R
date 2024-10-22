@@ -21,7 +21,7 @@ lws_income_variables <- c(
   "pi42", "pi421", "pi422", "pi43", "pi44", "pi511", "hi321", "hi322", "hi323", "hi48", 
   "hi4111", "hi4112", "hi451", "hi452", "hi54", "hi541", "hi542", "hi512", "hxitadj", 
   "hxitcred", "hepension", "pi321", "pi322", "pi323", "pi48", "pi4111", "pi4112", 
-  "pi54", "pi541", "pi542", "pxitadj", "pxitcred", "pepension")
+  "pi54", "pi541", "pi542", "pxitadj", "pxitcred", "pepension", "GONCALO_TRIAL")
 
 
 lws_non_income_variables <- c("hid", "inum", "cir", "cig", "chc", "cha", "cnc", "cna", "ppr",
@@ -57,7 +57,7 @@ lws_non_income_variables <- c("hid", "inum", "cir", "cig", "chc", "cha", "cnc", 
                               "pwgta", "nrooms", "housing_c", "ore_c", "typehh", "nhhmem6", "tchild",
                               "depchild", "oneparent", "momnum", "dadnum", "partnum", "oneparent_c",
                               "illness_c", "health2_c", "parleave_c", "occdad_c", "occmom_c", "wage1", 
-                              "hwage1", "occc1", "weeksft", "hafct", "hafcs", "hafiss", "hafiso", "hafom")
+                              "hwage1", "occc1", "weeksft", "hafct", "hafcs", "hafiss", "hafiso", "hafom", "GONCALO_TRIAL")
 
 # lws_reference_year ------------------------------------------------------
 
@@ -175,9 +175,9 @@ data_inc_ref_year <- tibble::tribble(
 
 usethis::use_data(data_inc_ref_year, internal = FALSE, overwrite = TRUE)
 
-sysdata_filenames <- load("R/sysdata.rda")
-save(list = c(sysdata_filenames, "lws_income_variables", "lws_non_income_variables"),
-     file = "R/sysdata.rda")
+#sysdata_filenames <- load("R/sysdata.rda")
+#save(list = c(sysdata_filenames, "lws_income_variables", "lws_non_income_variables"),
+    # file = "R/sysdata.rda")
 
-
+usethis::use_data(lws_income_variables, lws_non_income_variables, internal = TRUE, overwrite = TRUE) # to save on R/sysdata.rda
 
