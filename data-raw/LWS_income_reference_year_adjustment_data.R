@@ -80,9 +80,11 @@ data_inc_ref_year <- tibble::tribble(
   "cl07",                  2007L,
   "cl14",                  2014L,
   "cl17",                  2017L,
+  "cl21",                  2021L,
   "fi09",                  2009L,
   "fi13",                  2013L,
   "fi16",                  2016L,
+  "fi19",                  2019L,
   "de02",                  2001L,
   "de07",                  2006L,
   "de12",                  2011L,
@@ -98,6 +100,7 @@ data_inc_ref_year <- tibble::tribble(
   "gr09",                  2009L,
   "gr14",                  2014L,
   "gr18",                  2017L,
+  "gr21",                  2021L,
   "it95",                  1995L,
   "it98",                  1998L,
   "it00",                  2000L,
@@ -112,8 +115,18 @@ data_inc_ref_year <- tibble::tribble(
   "it20",                  2020L,
   "jp04",                  2003L,
   "jp09",                  2008L,
+  "jp10",                  2009L,
   "jp11",                  2010L,
+  "jp12",                  2011L,
+  "jp13",                  2012L,
   "jp14",                  2013L,
+  "jp15",                  2014L,
+  "jp16",                  2015L,
+  "jp17",                  2016L,
+  "jp18",                  2017L,
+  "jp19",                  2018L,
+  "jp20",                  2019L,
+  "jp21",                  2020L,
   "lu10",                  2009L,
   "lu14",                  2013L,
   "lu18",                  2017L,
@@ -165,7 +178,8 @@ data_inc_ref_year <- tibble::tribble(
   "us19",                  2018L,
   "us22",                  2021L,
   "ee13",                  2012L,
-  "ee17",                  2016L
+  "ee17",                  2016L,
+  "ee21",                  2020L
 )
                
 
