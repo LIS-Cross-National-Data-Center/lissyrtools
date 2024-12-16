@@ -70,7 +70,7 @@ lws_household_variables <- c("hid", "inum", "cir", "cia", "cig", "chc", "cha", "
                              "cname", "iso2", "iso3", "year", "wave", "currency", "grossnet",
                              "nhhmem", "nhhmem65", "nhhmem17", "nhhmem13", "hhtype", "hpartner",
                              "hwgt", "hpopwgt", "hwgta", "nrooms", "typehh", 
-                             "nhhmem6", "hfact", "hafcs", "hafiss", "hafiso", "hafom")
+                             "nhhmem6", "hafct", "hafcs", "hafiss", "hafiso", "hafom")
 
 lws_person_variables <- c("hid", "inum", "pid", "basb", "basp1", "basp2", "basp3", "basp4",
                           "basp5", "basp6", "basp7", "basp8", "basp9", "bafr1_c", "bafr2_c",
