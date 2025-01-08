@@ -2,62 +2,6 @@
 
 # revised on 2nd October 2024 due to template revision - Gonçalo Marques
 
-# lws_income_variables ----------------------------------------------------
-
-#lws_income_variables <- c(
- # "hitotal", "pitotal", "hifactor", "hitransfer",
-  #"dhi", "hitotal", "hxitsc",
-  #"hvalgs", "hi13" ,"hi14", "hi47", "hi53",
-  #"dhci", "hvalgs", "hxitsc",
-  #"hifactor", "hilabour", "hicapital",
-  #"hitransfer", "hipension", "hipubsoc", "hiprivate",
-  #"hpublic", "hpub_i", "ppub_i", "hpub_u", "hpub_a",
-  #"hid", "hi11", "hi12", "hi121", "hi21", "hi22", "hi31", "hi311",
-  #"hi312", "hi32", "hi33", "hi331", "hi332", "hi41", "hi411", "hi412",
-  #"hi42", "hi421", "hi422", "hi43", "hi44", "hi45", "hi46", "hi471",
-  #"hi51", "hi511", "hi52", "hi521", "hi522", "hi531", "hi532",
-  #"pilabour", "pi11", "pi12", "pi13", "pipension",
-  #"pi31", "pi311", "pi312", "pi32", "pi331", "pi332", "pi33", "pi411",
-  #"pi42", "pi421", "pi422", "pi43", "pi44", "pi511", "hi321", "hi322", "hi323", "hi48", 
-  #"hi4111", "hi4112", "hi451", "hi452", "hi54", "hi541", "hi542", "hi512", "hxitadj", 
-  #"hxitcred", "hepension", "pi321", "pi322", "pi323", "pi48", "pi4111", "pi4112", 
-  #"pi54", "pi541", "pi542", "pxitadj", "pxitcred", "pepension", "GONCALO_TRIAL")
-
-
-# lws_non_income_variables <- c("hid", "inum", "cir", "cig", "chc", "cha", "cnc", "cna", "ppr",
-                             # "ppy", "pir", "pia1", "pia2", "pia3", "pia4", "piy1", "piy2",
-                            #  "piy3", "piy4", "pit1", "pit2", "pit3", "pit4", "piw1", "piw2",
-                            #  "piw3", "piw4", "pim1", "pim2", "pim3", "pim4", "bopc", "bonc_c",
-                             # "boue", "boea", "bolc", "bocc1_c", "bocc2_c", "bocs_c", "bocd1_c",
-                            #  "bocd2_c", "boef_c", "boee1_c", "boee2_c", "bus1_c", "bus2_c",
-                            #  "bus3_c", "cia", "dnw", "anw", "inw", "tnw", "hanrp", "hanro",
-                            #  "hanr", "hannb", "hanncv", "hanncd", "hafc", "hafib", "hafis",
-                            #  "hafii", "hafo", "han", "hann", "hannc", "hanno", "haf", "hafi",
-                            #  "has", "hasi", "hasil", "hasip", "haso", "hasodb", "hasodc",
-                            #  "hass", "hassdb", "hassdc", "ha", "hlrp", "hlro", "hlncv", "hlncd",
-                            #  "hlno", "hlr", "hln", "hlni", "hlnc", "hlne", "hl", "hlsr", "hlsni",
-                            #  "hlsn", "hlsrp", "hlsro", "hlsng", "hlsnn", "nearn", "region_c",
-                            #  "locsz_c", "area_c", "rural", "own", "dweltyp", "farming", "did",
-                            #  "dname", "cname", "iso2", "iso3", "year", "wave", "currency",
-                            #  "grossnet", "nhhmem", "nhhmem65", "nhhmem17", "nhhmem13", "hhtype",
-                            #  "hpartner", "hwgt", "hpopwgt", "hwgta", "pid", "basb",
-                            #  "basp1", "basp2", "basp3", "basp4", "basp5", "basp6", "basp7",
-                            #  "basp8", "basp9", "bafr1_c", "bafr2_c", "bafr3_c", "bafp1_c",
-                            #  "bafp2_c", "bafl1_c", "bafl2_c", "bafl3_c", "bafl4_c", "bafi1_c",
-                            #  "bafi2_c", "bafi3_c", "bafi4_c", "bafi5_c", "ssyc", "pasil",
-                            #  "pasip", "pasodc", "pass", "pas", "pasi", "paso", "pasodb", "passdb",
-                            #  "passdc", "lfs", "emp", "emp_ilo", "informal", "parleave", "secjob",
-                             # "weeks", "hours1", "hourstot", "ptime1", "status1", "temp1",
-                            #  "public1", "ind1_c", "indd1", "indc1", "indb1", "inda1", "occ1_c",
-                            #  "occb1", "occa1", "fyft", "wexptl", "enroll", "educ_c", "educlev",
-                            # "educ", "illiterate", "edyrs", "edmom_c", "eddad_c", "ctrybrth",
-                            #  "citizen", "yrsresid", "ethnic_c", "migrat_c", "immigr_c", "immigr",
-                            #  "disabled", "health_c", "age", "sex", "marital", "relation",
-                             # "partner", "parents", "nchildren", "ageyoch", "pwgt", "ppopwgt",
-                            #  "pwgta", "nrooms", "housing_c", "ore_c", "typehh", "nhhmem6", "tchild",
-                            #  "depchild", "oneparent", "momnum", "dadnum", "partnum", "oneparent_c",
-                            #  "illness_c", "health2_c", "parleave_c", "occdad_c", "occmom_c", "wage1", 
-                            #  "hwage1", "occc1", "weeksft", "hafct", "hafcs", "hafiss", "hafiso", "hafom", "GONCALO_TRIAL")
 
 # lws_reference_year ------------------------------------------------------
 

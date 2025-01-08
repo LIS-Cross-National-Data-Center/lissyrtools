@@ -1309,8 +1309,8 @@ get_file_lisppp <- function(file_name, database, variable = NULL, income_variabl
     assertthat::assert_that(!is.null(variable),
                             msg = "The argument 'variable' can not be NULL (default) if 'database = 'lws''")
 
-    var_in_inc_vars <- variable %in% lissyrtools::lws_income_variables
-    var_in_non_inc_vars <- variable %in% lissyrtools::lws_non_income_variables
+    var_in_inc_vars <- variable %in% lissyrtools::lis_income_variables
+    var_in_non_inc_vars <- variable %in% setdiff(lissyrtools::lws_variables, lissyrtools::lis_income_variables)
 
     if(!var_in_inc_vars & !var_in_non_inc_vars & is.null(income_variable)){
       stop(glue::glue("The function could not figure out if '{variable}' is an income variable or not. The variable was not found in lissyrtools::lws_income_variables nor in lissyrtools::lws_non_income_variables and the argument 'income_variable' was not specified. /n Specify 'income_variable'."))
