@@ -309,12 +309,6 @@ usethis::use_data(lis_household_variables,
                   lws_wealth_categorical_variables,
                   lws_wealth_continuous_variables,
                   lws_wealth_country_specific_variables,
-                  
-                  
-                  
-                  
-                  lws_income_variables,
-                  lws_non_income_variables,
                   erflis_household_variables,
                   erflis_person_variables,
                   key_vars_household_lis,
@@ -323,9 +317,5 @@ usethis::use_data(lis_household_variables,
                   key_vars_person_lws,
                   internal = TRUE, # to save on R/sysdata.rda
                   overwrite = TRUE)
-
-
-
-
 
 
