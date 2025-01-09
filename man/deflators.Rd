@@ -8,7 +8,7 @@
 A data frame with 7 variables:
 }
 \source{
-\url{https://www.lisdatacenter.org/resources/ppp-deflators/
+\url{https://www.lisdatacenter.org/resources/ppp-deflators/}
 }
 \usage{
 deflators

@@ -446,7 +446,8 @@ get_directory <- function(){
 
 
 #' Get the database from a directory string
-#' @keyword internal
+#' 
+#' @keywords internal
 retrieve_database_from_directory <- function(){
 
   dir <- get_directory()

@@ -1,22 +1,21 @@
 # transform_subset.R
 
 
-#' Subset a sample by age
+#' Filter a sample by age
 #'
 #' \lifecycle{experimental}
 #' @description
-#' 'transform_subset_age()' subsets the rows in a LIS/LWS file so all cases have
+#' 'transform_filter_age()' filter the rows in a LIS/LWS file so all cases have
 #'   ages between two values (both included), returning a list with the files
 #'   containing only rows where the age is between those values. I.e. a subset
 #'   of rows.
-#' It can also be called with 'transform_filter_age()'.
 #'
 #' @param lissy_files A list of LIS or LWS p-level files.
 #' @param from An integer with the lower boundary value (included in the sample).
 #' @param to An integer with the higher boundary value (included in the sample).
 #'
 #' @return A list of tibbles with the subset of rows.
-transform_subset_age <- function(lissy_files, from, to){
+transform_filter_age <- function(lissy_files, from, to){
 
   copy_attributes <- get_lissy_attributes(lissy_files)
 
@@ -34,8 +33,7 @@ transform_subset_age <- function(lissy_files, from, to){
 
 }
 
-#' @rdname
-transform_filter_age <- transform_subset_age
+
 
 
 #' Filter a variable by age
@@ -44,7 +42,7 @@ transform_filter_age <- transform_subset_age
 #' @description
 #' 'transform_restrict_age()' recodes the indicated variable to NA when age is
 #'   outside the boundaries. Cases where age is NA are also recoded to NA.
-#' To remove rows outside of age boundaries use 'transform_subset_age()' instead.
+#' To remove rows outside of age boundaries use 'transform_filter_age()' instead.
 #'
 #' @param lissy_files A list of LIS or LWS files.
 #' @param variable A character string with the name of the variable that should be adjusted.

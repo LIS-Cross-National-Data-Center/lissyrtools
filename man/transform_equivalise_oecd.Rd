@@ -33,3 +33,9 @@ children.
 \details{
 Throws a warning if the function is applied to a person-level variable.
 }
+\examples{
+\dontrun{
+lissy_files <- read_lissy_files(c("fr84h", "fr94h", "fr10h"))
+transform_equivalise_oecd(list_files = lissy_files, variable = "dhi")
+}
+}

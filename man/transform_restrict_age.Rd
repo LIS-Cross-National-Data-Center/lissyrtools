@@ -17,7 +17,7 @@ A list of tibbles with the adjusted variable.
 \description{
 'transform_restrict_age()' recodes the indicated variable to NA when age is
 outside the boundaries. Cases where age is NA are also recoded to NA.
-To remove rows outside of age boundaries use 'transform_subset_age()' instead.
+To remove rows outside of age boundaries use 'transform_filter_age()' instead.
 }
 \details{
 \lifecycle{experimental}

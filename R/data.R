@@ -6,5 +6,14 @@
 #'
 #' @format A data frame with 7 variables:
 #'
-#' @source \url{https://www.lisdatacenter.org/resources/ppp-deflators/
+#' @source \url{https://www.lisdatacenter.org/resources/ppp-deflators/}
 "deflators"
+
+
+#' LIS and LWS datasets
+#'
+#' A data frame containing all the LIS and LWS datasets 
+#' that can be used through LISSY, including some of their characteristics.
+#'
+#' @format A data frame with 7 variables:
+"datasets"

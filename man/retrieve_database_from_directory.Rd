@@ -9,3 +9,4 @@ retrieve_database_from_directory()
 \description{
 Get the database from a directory string
 }
+\keyword{internal}

@@ -101,7 +101,7 @@ compute_percentiles <- function(file, file_name, variable, breaks = seq(0, 1, 0.
 #'
 #' @return A numeric vector with the gini index.
 #'
-#' @example
+#' @examples
 #' \dontrun{
 #' lissy_datasets <- read_lissy_files(c("fr84h", "fr94h", "fr10h"))
 #' compute_gini(lissy_datasets[["fr1984h"]], "dhi", na.rm = TRUE)

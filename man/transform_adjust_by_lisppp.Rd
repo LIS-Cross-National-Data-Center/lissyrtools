@@ -47,3 +47,12 @@ For LWS income variables, it takes into account the reference year of the datase
 \details{
 \lifecycle{experimental}
 }
+\examples{
+\dontrun{
+library(dplyr)
+library(magrittr)
+lissy_files <- read_lissy_files(c("fr84h", "fr94h", "fr10h"))
+lissy_files \%<>\%
+    transform_adjust_by_lisppp(variable = "dhi")
+}
+}

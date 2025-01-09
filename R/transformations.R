@@ -16,7 +16,7 @@
 #' @param eq_scale A real number.
 #'
 #' @return A list of tibbles with the transformed variable.
-#' @example
+#' @examples
 #' \dontrun{
 #' lissy_files <- read_lissy_files(c("fr84h", "fr94h", "fr10h"))
 #' transform_equivalise(list_files = lissy_files, variable = "dhi")
@@ -101,7 +101,7 @@ implement_equivalise <- function(file, file_name, variable, eq_scale = 0.5){
 #'   in the household.
 #'
 #' @return A list of tibbles with the transformed variable.
-#' @example
+#' @examples
 #' \dontrun{
 #' lissy_files <- read_lissy_files(c("fr84h", "fr94h", "fr10h"))
 #' transform_equivalise_oecd(list_files = lissy_files, variable = "dhi")
@@ -272,7 +272,7 @@ implement_zeros_to_na <- function(file, file_name, variable){
 #'   to use the same year as the year of the file regardless of the value passed to 'variable'.
 #' @return A list of tibbles with the adjusted variable.
 #'
-#' @example
+#' @examples
 #' \dontrun{
 #' library(dplyr)
 #' library(magrittr)

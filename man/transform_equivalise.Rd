@@ -24,3 +24,9 @@ or LWS variable measuring the number of members in the household.
 \details{
 Throws a warning if the function is applied to a person-level variable.
 }
+\examples{
+\dontrun{
+lissy_files <- read_lissy_files(c("fr84h", "fr94h", "fr10h"))
+transform_equivalise(list_files = lissy_files, variable = "dhi")
+}
+}
