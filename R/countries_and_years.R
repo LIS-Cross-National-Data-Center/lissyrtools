@@ -4,7 +4,6 @@
 #' Print all the country code in LIS
 #'
 #' @returns A data frame.
-#' @export
 #'
 #' @examples
 #' show_countries_lis()
@@ -25,7 +24,6 @@ show_countries_lis <- function() {
 #' Print all the country code in LWS
 #'
 #' @returns A data frame.
-#' @export
 #'
 #' @examples
 #' show_countries_lws()
@@ -50,7 +48,6 @@ show_countries_lws <- function() {
 #' @param iso2 A string with 2 characters, specifically an iso2 code present in show_countries_lis().
 #'
 #' @returns A numeric vector.
-#' @export
 #'
 #' @examples
 #' show_country_years_lis("it")
@@ -94,7 +91,6 @@ show_country_years_lis <- function(iso2 = NULL) {
 #' @param iso2 A string with 2 characters, specifically an iso2 code present in show_countries_lws()
 #'
 #' @returns A numeric vector.
-#' @export
 #'
 #' @examples
 #' show_country_years_lis("it")
