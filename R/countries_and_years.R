@@ -1,0 +1,132 @@
+
+
+
+#' Print all the country code in LIS
+#'
+#' @returns A data frame.
+#' @export
+#'
+#' @examples
+#' show_countries_lis()
+show_countries_lis <- function() {
+
+  output <- lissyrtools::datasets %>% 
+    dplyr::filter(database == "LIS") %>% 
+    dplyr::group_by(cname) %>% 
+    dplyr::filter(year == max(year)) %>% 
+    dplyr::ungroup() %>% 
+    dplyr::select(iso2, cname) %>% 
+    as.data.frame()
+  
+  return(output)
+}
+
+
+#' Print all the country code in LWS
+#'
+#' @returns A data frame.
+#' @export
+#'
+#' @examples
+#' show_countries_lws()
+show_countries_lws <- function() {
+  
+  output <- lissyrtools::datasets %>% 
+    dplyr::filter(database == "LWS") %>% 
+    dplyr::group_by(cname) %>% 
+    dplyr::filter(year == max(year)) %>% 
+    dplyr::ungroup() %>% 
+    dplyr::select(iso2, cname) %>% 
+    as.data.frame()
+  
+  return(output)
+}
+
+
+
+
+#' Print all the existing years in LIS for a given country.
+#'
+#' @param iso2 A string with 2 characters, specifically an iso2 code present in show_countries_lis().
+#'
+#' @returns A numeric vector.
+#' @export
+#'
+#' @examples
+#' show_country_years_lis("it")
+#' show_country_years_lis("us")
+show_country_years_lis <- function(iso2 = NULL) {
+
+  
+  if (!is.null(iso2)) {
+    
+    assertthat::assert_that(
+      length(iso2) ==  1,
+      msg = glue::glue("This function only accepts 1 iso2 code at the time.")
+    )
+    
+    assertthat::assert_that(
+      iso2 %in% unique(show_countries_lis()$iso2),
+      msg = glue::glue("The character '{iso2}' could not be found in unique(show_countries_lis()$iso2).")
+    )
+    
+    
+    output <- lissyrtools::datasets %>% 
+      dplyr::filter(database == "LIS" & iso2 == !!iso2) %>%  
+      dplyr::select(year) %>% 
+      unique() %>% 
+      dplyr::pull() %>% 
+      sort()
+    
+  } else {
+    output <- NULL  
+  }
+  
+  return(output)  
+} 
+  
+
+
+
+
+#' Print all the existing years in LWS for a given country.
+#'
+#' @param iso2 A string with 2 characters, specifically an iso2 code present in show_countries_lws()
+#'
+#' @returns A numeric vector.
+#' @export
+#'
+#' @examples
+#' show_country_years_lis("it")
+#' show_country_years_lis("us")
+show_country_years_lws <- function(iso2 = NULL) {
+  
+  
+  if (!is.null(iso2)) {
+    
+    assertthat::assert_that(
+      length(iso2) ==  1,
+      msg = glue::glue("This function only accepts 1 iso2 code at the time.")
+    )
+    
+    assertthat::assert_that(
+      iso2 %in% unique(show_countries_lws()$iso2),
+      msg = glue::glue("The character '{iso2}' could not be found in unique(show_countries_lws()$iso2).")
+    )
+    
+    
+    output <- lissyrtools::datasets %>% 
+      dplyr::filter(database == "LWS" & iso2 == !!iso2) %>%  
+      dplyr::select(year) %>% 
+      unique() %>% 
+      dplyr::pull() %>% 
+      sort()
+    
+  } else {
+    output <- NULL  
+  }
+  
+  return(output)  
+} 
+
+
