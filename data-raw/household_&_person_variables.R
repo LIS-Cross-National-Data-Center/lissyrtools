@@ -279,11 +279,11 @@ erflis_person_variables <- c("hid", "pid", "pitotal", "pilabour", "pi11", "pi12"
 
 # ---- Keys ----
 
-key_vars_household_lis <- c("hid", "nhhmem", "hwgt", "hpopwgt", "hwgta", "iso2", "dname", "currency")
-key_vars_person_lis <- c("hid", "pid", "relation", "pwgt", "ppopwgt", "pwgta", "iso2", "dname", "currency")
+key_vars_household_lis <- c("hid", "nhhmem", "hwgt", "hpopwgt", "hwgta","year","iso2", "dname", "currency")
+key_vars_person_lis <- c("hid", "pid", "relation", "pwgt", "ppopwgt", "pwgta","year","iso2", "dname", "currency")
 
-key_vars_household_lws <- c("hid", "inum", "nhhmem", "hwgt", "hpopwgt", "hwgta", "iso2", "dname", "currency")
-key_vars_person_lws <- c("hid", "inum", "pid", "relation", "pwgt", "ppopwgt", "pwgta", "iso2", "dname", "currency")
+key_vars_household_lws <- c("hid", "inum", "nhhmem", "hwgt", "hpopwgt", "hwgta","year","iso2", "dname", "currency")
+key_vars_person_lws <- c("hid", "inum", "pid", "relation", "pwgt", "ppopwgt", "pwgta","year","iso2", "dname", "currency")
 
 
 

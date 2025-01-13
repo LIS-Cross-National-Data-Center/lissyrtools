@@ -12,6 +12,6 @@
 #' @section print functions:
 #' Compute estimates.
 #'
-#' @docType "_PACKAGE"
+#' @docType "package"
 #' @name lissyrtools
 NULL
