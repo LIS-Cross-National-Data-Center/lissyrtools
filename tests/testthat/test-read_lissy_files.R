@@ -78,11 +78,11 @@ test_that("read_lissy_files_locally selects specified columns correctly", {
   files_wh <- suppressWarnings(read_lissy_files_locally(files = c("it14wh"), path_to_files = dir_testdata, col_select = c("hid", "dhi")))
   files_wp <- suppressWarnings(read_lissy_files_locally(files = c("it14wp"), path_to_files = dir_testdata, col_select = c("hid", "pi11")))
 
-  expect_equal(names(files_ih[[1]]), c("hid", "dhi", "nhhmem", "hwgt", "hpopwgt", "hwgta"))
-  expect_equal(names(files_ip[[1]]), c("hid", "pi11", "relation", "pwgt", "ppopwgt", "pwgta", "pid"))
+  expect_equal(names(files_ih[[1]]), c("hid", "dhi", "nhhmem", "hwgt", "hpopwgt", "hwgta", "dname", "iso2", "currency"))
+  expect_equal(names(files_ip[[1]]), c("hid", "pi11", "relation", "pwgt", "ppopwgt", "pwgta", "pid", "dname", "iso2", "currency"))
 
-  expect_equal(names(files_wh[[1]]), c("hid", "inum", "dhi", "nhhmem", "hwgt", "hpopwgt", "hwgta"))
-  expect_equal(names(files_wp[[1]]), c("hid", "inum" , "pid", "pi11", "relation", "pwgt", "ppopwgt", "pwgta"))
+  expect_equal(names(files_wh[[1]]), c("hid", "inum", "dhi", "nhhmem", "hwgt", "hpopwgt", "hwgta", "dname", "iso2", "currency"))
+  expect_equal(names(files_wp[[1]]), c("hid", "inum" , "pid", "pi11", "relation", "pwgt", "ppopwgt", "pwgta", "dname", "iso2", "currency"))
 
 })
 
