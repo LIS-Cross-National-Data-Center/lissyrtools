@@ -14,8 +14,10 @@ show_countries_lis <- function() {
     dplyr::group_by(cname) %>% 
     dplyr::filter(year == max(year)) %>% 
     dplyr::ungroup() %>% 
-    dplyr::select(iso2, cname) %>% 
-    as.data.frame()
+    dplyr::select(iso2, cname)
+  
+  attributes(output[[1]]) <- NULL
+  attributes(output[[2]]) <- NULL
   
   return(output)
 }
@@ -34,8 +36,10 @@ show_countries_lws <- function() {
     dplyr::group_by(cname) %>% 
     dplyr::filter(year == max(year)) %>% 
     dplyr::ungroup() %>% 
-    dplyr::select(iso2, cname) %>% 
-    as.data.frame()
+    dplyr::select(iso2, cname) 
+  
+  attributes(output[[1]]) <- NULL
+  attributes(output[[2]]) <- NULL
   
   return(output)
 }
