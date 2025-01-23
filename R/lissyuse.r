@@ -67,8 +67,10 @@ lissyuse <- function(data = NULL , vars = NULL , subset = NULL , from = NULL, to
   
 # 4)  LISSY adjustment  -------------------------------------
   
+  if (exists("define_path")) {
   if (location == "L") {
     datasets <- lapply(datasets, as.data.frame)
+  }
   }
   
 # 5) Final assignment  -------------------------------------
