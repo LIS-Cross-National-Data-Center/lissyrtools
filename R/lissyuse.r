@@ -163,10 +163,10 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
       if (is.null(vars)) {
         
         files_h <-  purrr::map(data_to_load,
-                               ~read_dta(file = paste0(path_to_files, .x, "wh", ".dta")) ) 
+                               ~haven::read_dta(file = paste0(path_to_files, .x, "wh", ".dta")) ) 
         
         files_p <-  purrr::map(data_to_load,
-                               ~read_dta(file = paste0(path_to_files, .x, "wp", ".dta")) ) 
+                               ~haven::read_dta(file = paste0(path_to_files, .x, "wp", ".dta")) ) 
         
         
         list_with_data <- purrr::map2(files_h, files_p, ~ inner_join(.x, .y, c("hid", "inum")) %>% 
@@ -190,7 +190,7 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
         vars <- vars[vars %in% lissyrtools::lws_household_variables] # remove any invalid variables
         
         list_with_data <- purrr::map(data_to_load, 
-                                     ~read_dta(file = paste0(path_to_files, .x, "wh", ".dta"), 
+                                     ~haven::read_dta(file = paste0(path_to_files, .x, "wh", ".dta"), 
                                                col_select = unique(c(vars, lissyrtools::key_vars_household_lws)))) 
         names(list_with_data) <- paste0(data_to_load, "h")
         
@@ -209,7 +209,7 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
         vars <- vars[vars %in% lissyrtools::lws_person_variables]  
         
         list_with_data <- purrr::map(data_to_load,
-                                     ~read_dta(file = paste0(path_to_files, .x, "wp", ".dta"),
+                                     ~haven::read_dta(file = paste0(path_to_files, .x, "wp", ".dta"),
                                                col_select = unique(c(vars, lissyrtools::key_vars_person_lws))) )
         names(list_with_data) <- paste0(data_to_load, "p")
         
@@ -227,11 +227,11 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
         pvars <- vars[vars %in% lissyrtools::lws_person_variables]
         
         files_h <-  purrr::map(data_to_load,
-                               ~read_dta(file = paste0(path_to_files, .x, "wh", ".dta"), 
+                               ~haven::read_dta(file = paste0(path_to_files, .x, "wh", ".dta"), 
                                          col_select = unique(c(hvars, lissyrtools::key_vars_household_lws))))
         
         files_p <-  purrr::map(data_to_load,
-                               ~read_dta(file = paste0(path_to_files, .x, "wp", ".dta"), 
+                               ~haven::read_dta(file = paste0(path_to_files, .x, "wp", ".dta"), 
                                          col_select = unique(c(pvars, lissyrtools::key_vars_person_lws))) )
         
         
@@ -265,7 +265,7 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
         assertthat::assert_that(all(vars %in% lws_both_hp_variables))
         
         list_with_data <- purrr::map(data_to_load, 
-                                     ~read_dta(file = paste0(path_to_files, .x, "wh", ".dta"), 
+                                     ~haven::read_dta(file = paste0(path_to_files, .x, "wh", ".dta"), 
                                                col_select = unique(c(vars, lissyrtools::key_vars_household_lws)))) 
         names(list_with_data) <- paste0(data_to_load, "h")
         
@@ -296,10 +296,10 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
       if (is.null(vars)) {
         
         files_h <-  purrr::map(data_to_load,
-                               ~read_dta(file = paste0(path_to_files, .x, "ih", ".dta")) ) 
+                               ~haven::read_dta(file = paste0(path_to_files, .x, "ih", ".dta")) ) 
         
         files_p <-  purrr::map(data_to_load,
-                               ~read_dta(file = paste0(path_to_files, .x, "ip", ".dta")) ) 
+                               ~haven::read_dta(file = paste0(path_to_files, .x, "ip", ".dta")) ) 
         
         
         list_with_data <- purrr::map2(files_h, files_p, ~ inner_join(.x, .y, by = c("hid")) %>% 
@@ -322,7 +322,7 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
         vars <- vars[vars %in% lissyrtools::lis_household_variables] # remove any invalid variables
         
         list_with_data <- purrr::map(data_to_load, 
-                                     ~read_dta(file = paste0(path_to_files, .x, "ih", ".dta"), 
+                                     ~haven::read_dta(file = paste0(path_to_files, .x, "ih", ".dta"), 
                                                col_select = unique(c(vars, lissyrtools::key_vars_household_lis))))   
         names(list_with_data) <- paste0(data_to_load, "h")
         
@@ -338,7 +338,7 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
         vars <- vars[vars %in% lissyrtools::lis_person_variables] # remove any invalid variables
         
         list_with_data <- purrr::map(data_to_load,
-                                     ~read_dta(file = paste0(path_to_files, .x, "ip", ".dta"),
+                                     ~haven::read_dta(file = paste0(path_to_files, .x, "ip", ".dta"),
                                                col_select = unique(c(vars, lissyrtools::key_vars_person_lis))) )
         names(list_with_data) <- paste0(data_to_load, "p")
         
@@ -356,11 +356,11 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
         pvars <- vars[vars %in% lissyrtools::lis_person_variables] # remove any invalid variables
         
         files_h <-  purrr::map(data_to_load,
-                               ~read_dta(file = paste0(path_to_files, .x, "ih", ".dta"), 
+                               ~haven::read_dta(file = paste0(path_to_files, .x, "ih", ".dta"), 
                                          col_select = unique(c(hvars, lissyrtools::key_vars_household_lis))))
         
         files_p <-  purrr::map(data_to_load,
-                               ~read_dta(file = paste0(path_to_files, .x, "ip", ".dta"), 
+                               ~haven::read_dta(file = paste0(path_to_files, .x, "ip", ".dta"), 
                                          col_select = unique(c(pvars, lissyrtools::key_vars_person_lis))))
         
         
@@ -391,7 +391,7 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
         assertthat::assert_that(all(vars %in% lis_both_hp_variables))
         
         list_with_data <- purrr::map(data_to_load, 
-                                     ~read_dta(file = paste0(path_to_files, .x, "ih", ".dta"), 
+                                     ~haven::read_dta(file = paste0(path_to_files, .x, "ih", ".dta"), 
                                                col_select = unique(c(vars, lissyrtools::key_vars_household_lis))))  
         names(list_with_data) <- paste0(data_to_load, "h")
         
