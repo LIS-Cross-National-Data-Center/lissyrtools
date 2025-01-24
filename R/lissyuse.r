@@ -438,7 +438,7 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
         
         vars <- vars[vars %in% lissyrtools::lws_household_variables]
         
-        list_with_data <- purrr::map(data_to_load, ~.x   %>% filter(relation == 1000) %>% select(unique(c(vars, key_vars_household_lws))))
+        list_with_data <- purrr::map(data_to_load, ~.x   %>% filter(pid == 1) %>% select(unique(c(vars, key_vars_household_lws))))
         names(list_with_data) <- paste0(names(list_with_data), "h")
         
         message_to_print_in_the_end <- paste0(
@@ -481,7 +481,7 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
         vars <- vars[vars %in% lws_variables]
         assertthat::assert_that(all(vars %in% lws_both_hp_variables))
         
-        list_with_data <- purrr::map(data_to_load, ~.x %>% filter(relation  == 1000) %>% select(unique(c(vars, key_vars_household_lws))))
+        list_with_data <- purrr::map(data_to_load, ~.x %>% filter(pid == 1) %>% select(unique(c(vars, key_vars_household_lws))))
         names(list_with_data) <- paste0(names(list_with_data), "h")
         
         message_to_print_in_the_end <- paste0("The list `lws_datasets` is now available. It contains the following `sample` data frames: ", 
@@ -514,7 +514,7 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
         
         vars <- vars[vars %in% lissyrtools::lis_household_variables]
         
-        list_with_data <- purrr::map(data_to_load, ~.x   %>% filter(relation == 1000) %>% select(unique(c(vars, key_vars_household_lis))))
+        list_with_data <- purrr::map(data_to_load, ~.x   %>% filter(pid == 1) %>% select(unique(c(vars, key_vars_household_lis))))
         names(list_with_data) <- paste0(names(list_with_data), "h")
         
         message_to_print_in_the_end <- paste0(
@@ -557,7 +557,7 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
         vars <- vars[vars %in% lis_variables]
         assertthat::assert_that(all(vars %in% lis_both_hp_variables))
         
-        list_with_data <- purrr::map(data_to_load, ~.x %>% filter(relation  == 1000) %>% select(unique(c(vars, key_vars_household_lis))))
+        list_with_data <- purrr::map(data_to_load, ~.x %>% filter(pid == 1) %>% select(unique(c(vars, key_vars_household_lis))))
         names(list_with_data) <- paste0(names(list_with_data), "h")
         
         message_to_print_in_the_end <- paste0(

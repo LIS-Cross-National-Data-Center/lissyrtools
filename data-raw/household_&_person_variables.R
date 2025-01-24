@@ -67,32 +67,32 @@ lis_id_variables <- c("hid", "pid")
  
 # --- LIS Categorical vars ----
 
-lis_categorical_variables <- c("region_c", "rural", "area_c", "own", "dweltyp", "partner", "hpartner", 
+lis_categorical_variables <- c("region_c", "rural","locsz_c", "area_c", "own", "dweltyp", "partner", "hpartner", 
                                "hhtype", "typehh", "nhhmem", "nhhmem65", "nhhmem17", "nhhmem13", "nhhmem6", 
                                "nearn", "relation", "parents", "nchildren", "oneparent", "depchild", 
                                "sex", "marital", "immigr", "citizen", "ctrybrth", "disabled", "health_c", 
                                "educ", "educlev", "educ_c", "enroll", "illiterate", "emp", "emp_ilo", "lfs", 
                                "parleave", "fyft", "secjob", "status1", "inda1", "indb1", "indd1", "ind1_c", 
-                               "public1", "occa1", "occc1", "occ1_c", "ptime1")
+                               "public1", "occa1", "occc1", "occ1_c", "ptime1","farming", "temp1","indc1", "occb1", "edmom_c" , 
+                               "eddad_c" , "ethnic_c","migrat_c", "immigr_c")
 
 # --- LIS Continuous vars ----
 
-lis_continuous_variables <- c( "dhi", "hitotal", "hifactor", "hitransfer", "hilabour", "hi11", "hi12", "hi121", "hi13", 
-  "hi14", "hicapital", "hi21", "hi22", "hipension", "hi31", "hi311", "hi312", "hi32", 
-  "hi33", "hi331", "hi332", "hpublic", "hpub_i", "hpub_u", "hpub_a", "hipubsoc", "hi41", 
-  "hi411", "hi412", "hi42", "hi421", "hi422", "hi43", "hi44", "hi45", "hi46", 
-  "hi47", "hi471", "hiprivate", "hi51", "hi511", "hi52", "hi521", "hi522", "hi53", 
-  "hi531", "hi532", "dhci", "hvalgs", "hxitsc", "hxitax", "hxscont", "hxotax", "hxptax", 
-  "hxvcont", "hxiht", "hxalim", "hxremit", "hxmort", "hxintm", "hxloan", "hxintl", "hhouscost", 
-  "hrenti", "hcexp", "hc1", "hc2", "hc3", "hc4", "hc41", "hc5", "hc6", 
-  "hc7", "hc8", "hc9", "hc10", "hc11", "hc12", "helabour", "hecgain", "heinherit", 
-  "heoth", "locsz_c", "farming", "nrooms", "pitotal", "pilabour", "pi11", "pi12", 
-  "pi13", "pipension", "pi31", "pi311", "pi312", "pi32", "pi332", "pi33", "pi331", 
-  "ppub_i", "pi411", "pi42", "pi421", "pi422", "pi43", "pi44", "pi511", "pelabour", 
-  "pxitax", "pxscont", "pxitsc", "pxvcont", "informal", "weeks", "hours1", "hourstot", "temp1", 
-  "indc1", "occb1", "wexptl", "edyrs", "edmom_c", "eddad_c", "yrsresid", "ethnic_c", "migrat_c", 
-  "immigr_c", "age", "ageyoch", "momnum", "dadnum", "partnum", "wage1", "hwage1", 
-  "weeksft")
+lis_continuous_variables <- c("dhi", "hitotal", "hifactor", "hitransfer", "hilabour", "hi11", "hi12", "hi121", "hi13", 
+                               "hi14", "hicapital", "hi21", "hi22", "hipension", "hi31", "hi311", "hi312", "hi32", 
+                               "hi33", "hi331", "hi332", "hpublic", "hpub_i", "hpub_u", "hpub_a", "hipubsoc", "hi41", 
+                               "hi411", "hi412", "hi42", "hi421", "hi422", "hi43", "hi44", "hi45", "hi46", 
+                               "hi47", "hi471", "hiprivate", "hi51", "hi511", "hi52", "hi521", "hi522", "hi53", 
+                               "hi531", "hi532", "dhci", "hvalgs", "hxitsc", "hxitax", "hxscont", "hxotax", "hxptax", 
+                               "hxvcont", "hxiht", "hxalim", "hxremit", "hxmort", "hxintm", "hxloan", "hxintl", "hhouscost", 
+                               "hrenti", "hcexp", "hc1", "hc2", "hc3", "hc4", "hc41", "hc5", "hc6", 
+                               "hc7", "hc8", "hc9", "hc10", "hc11", "hc12", "helabour", "hecgain", "heinherit", 
+                               "heoth", "pitotal", "pilabour", "pi11", "pi12", 
+                               "pi13", "pipension", "pi31", "pi311", "pi312", "pi32", "pi332", "pi33", "pi331", 
+                               "ppub_i", "pi411", "pi42", "pi421", "pi422", "pi43", "pi44", "pi511", "pelabour", 
+                               "pxitax", "pxscont", "pxitsc", "pxvcont", "informal", "weeks", "hours1", 
+                               "hourstot", "wexptl", "yrsresid", "age", "ageyoch", "momnum", "dadnum", "partnum", "wage1", "hwage1", 
+                               "weeksft", "nrooms" , "edyrs")
 
 
 # --- LIS Country Specific vars ----
