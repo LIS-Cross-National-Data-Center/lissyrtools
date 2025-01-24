@@ -1,6 +1,9 @@
 
  
-#' Title
+#' Load data easily and efficiently with lissyuse
+#' 
+#' @description
+#' `lissyuse()` enables LISSY R-users to quickly import whole series of data from a specific country and/or within any time period.
 #'
 #' @param data 
 #' @param vars 
@@ -9,10 +12,11 @@
 #' @param to 
 #' @param lws 
 #'
-#' @return
+#' @return A list 
 #' @export
 #'
 #' @examples
+#' # LIS # 
 lissyuse <- function(data = NULL , vars = NULL , subset = NULL , from = NULL, to = NULL ,  lws = FALSE) {
   
   

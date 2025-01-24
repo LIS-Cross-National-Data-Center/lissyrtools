@@ -16,7 +16,7 @@ check_empty_data <- function(data, lws = FALSE) {
 
 check_length_iso2 <- function(data) {
   
-  invalid_length_iso2 <- data[!str_length(data) %in% c(2,4)]
+  invalid_length_iso2 <- data[!stringr::str_length(data) %in% c(2,4)]
 
   if (!all(stringr::str_length(data) %in% c(2, 4))) {
   stop(glue::glue(

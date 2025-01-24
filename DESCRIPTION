@@ -1,8 +1,12 @@
+Type: Package
 Package: lissyrtools
 Title: Tools for LISSY Jobs
-Version: 0.1.8
-Authors@R: c(person("Josep", "Espasa Reig", role = c("aut", "cre"), email = "jespasareig@gmail.com"))
-Author: Josep Espasa Reig [aut, cre]
+Version: 0.1.9
+Authors@R: c(
+    person("Josep", "Espasa Reig" , ,"jespasareig@gmail.com", role = c("aut", "cre")
+          ),
+    person("Gonçalo", "Marques", , "marques@lisdatacenter.org", role = "aut")
+  )
 Description: Tools for the computation of inequality indicators in LISSY. 
   This package contains three different types of functions. 'Read', 'transformation' 
    and 'output' functions. 'Read functions' should allow LISSY users to read LIS and LWS files
