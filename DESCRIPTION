@@ -3,9 +3,9 @@ Package: lissyrtools
 Title: Tools for LISSY Jobs
 Version: 0.1.9
 Authors@R: c(
-    person("Josep", "Espasa Reig" , ,"jespasareig@gmail.com", role = c("aut", "cre")
+    person("Josep", "Espasa Reig" , ,"jespasareig@gmail.com", role = c("aut")
           ),
-    person("Gonçalo", "Marques", , "marques@lisdatacenter.org", role = "aut")
+    person("Gonçalo", "Marques", , "marques@lisdatacenter.org", role = c("aut", "cre"))
   )
 Description: Tools for the computation of inequality indicators in LISSY. 
   This package contains three different types of functions. 'Read', 'transformation' 
