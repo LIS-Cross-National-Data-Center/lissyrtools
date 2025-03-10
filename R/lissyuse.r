@@ -61,7 +61,7 @@ lissyuse <- function(data = NULL , vars = NULL , subset = NULL , from = NULL, to
 # 3)  Filtering of rows based on the condition imposed in argument {subset}  -------------------------------------
   
   
-  datasets <- if (!is.null(subset)) {
+  datasets_final <- if (!is.null(subset)) {
     subset_expr <- rlang::parse_expr(subset)
     subset_datasets(intermediate_data_to_filter, lws, subset_expr)
   } else {
@@ -73,17 +73,43 @@ lissyuse <- function(data = NULL , vars = NULL , subset = NULL , from = NULL, to
   
   if (exists("define_path")) {
   if (location == "L") {
-    datasets <- lapply(datasets, as.data.frame)
+    datasets_final <- lapply(datasets_final, as.data.frame)
   }
   }
   
-# 5) Final assignment  -------------------------------------
-  assign(if (lws) "lws_datasets" else "lis_datasets", datasets, envir = .GlobalEnv)
+# 5) Attributes -------------------------
+  
+    # To delete in the future perhaps
+    # Needed to accomodate the earliest developments in lissyrtools package
+  
+  if (exists("relation", datasets_final[[1]])) {
+    attr(datasets_final, "level") <- "p" 
+    attr(datasets_final, "merged_levels") <- TRUE
+  }
+  else{
+    attr(datasets_final, "level") <- "h" 
+    attr(datasets_final, "merged_levels") <- FALSE 
+  }
+  
+  if (exists("inum", datasets_final[[1]])) {
+    attr(datasets_final, "database") <- "lis" 
+  }
+  else{
+    attr(datasets_final, "database") <- "lws" 
+  }
+  
+  
+  
+# 6) Final assignment  -------------------------------------
+  assign(if (lws) "lws_datasets" else "lis_datasets", datasets_final, envir = .GlobalEnv)
   
 
-# 6)  Print message on the availability of the list with the datasets and its names ----------
+# 7)  Print message on the availability of the list with the datasets and its names ----------
   cat(message, "\n")
 
+  
+
+  
 }
 
 
