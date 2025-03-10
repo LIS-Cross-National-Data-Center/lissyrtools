@@ -92,10 +92,10 @@ lissyuse <- function(data = NULL , vars = NULL , subset = NULL , from = NULL, to
   }
   
   if (exists("inum", datasets_final[[1]])) {
-    attr(datasets_final, "database") <- "lis" 
+    attr(datasets_final, "database") <- "lws" 
   }
   else{
-    attr(datasets_final, "database") <- "lws" 
+    attr(datasets_final, "database") <- "lis" 
   }
   
   
