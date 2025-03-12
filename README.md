@@ -34,7 +34,7 @@ devtools::install_github("https://github.com/LIS-Cross-National-Data-Center/liss
 
 lissyrtools provides its users with a set of functions and embedded objects designed to help users access and manipulate data in LIS's remote execution system: [LISSY](https://www.lisdatacenter.org/data-access/lissy/). By providing built-in sample datasets in lissyrtools, we also encourage users to develop their LISSY scripts locally, where debugging and writing R code are more efficient in IDEs like RStudio.
 
-[lissyuse](https://lis-cross-national-data-center.github.io/lissyuse_2.0_doc/)
+Data first needs to be loaded using the [lissyuse()](#0) function, which creates the list `lis_datasets` or `lws_datasets` if its argument `lws` == TRUE. Subsequently, the list can be transformed using other functions from **lissyrtools** in a pipeline structure, enabling users to generate aggregated figures for the entire dataset or specific subgroups.
 
 ### LISSY version
 
@@ -42,8 +42,14 @@ lissyrtools provides its users with a set of functions and embedded objects desi
 library(lissyrtools)
 library(dplyr)
 
-# Load the datasets
-lissyrtools::lissyuse(data = "ca", vars = c("dhi", "pi11", "age"), from = 2014, to = 2019)
+# Load the datasets 
+lissyrtools::lissyuse(
+  data = "ca", 
+  vars = c("dhi", "pi11", "age"), 
+  from = 2014, 
+  to = 2019
+  ) 
+# This function creates the list `lis_datasets`
 
 # Clean target variables:
 ## pi11
@@ -76,6 +82,18 @@ print_indicator(lissy_datasets_transformed,
                              indicator = "gini",
                              na.rm = TRUE)
 
+
+# To load LWS datasets, set the argument `lws` == TRUE:
+lissyuse(
+  data = c("us", "uk17", "uk19"), 
+  vars = "dnw", 
+  from = 2015, 
+  to = 2021,
+  lws = TRUE
+)
+
+# When working with LWS datasets, the list will be named lws_datasets
+names(lws_datasets)
 ```
 
 ### Local version
@@ -90,3 +108,11 @@ lissyuse(data = c("it14", "us16", "mx18"), lws = FALSE)
 ## Documentation and Support
 
 Please visit <https://lis-cross-national-data-center.github.io/lissyrtools/> for documentation and vignettes with examples.
+
+Dependencies references:
+
+-   [magrittr](https://magrittr.tidyverse.org/);
+
+-   [dplyr](https://dplyr.tidyverse.org/);
+
+-   [purrr](https://purrr.tidyverse.org/)
