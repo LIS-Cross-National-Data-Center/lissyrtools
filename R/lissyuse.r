@@ -3,20 +3,79 @@
 #' Load data easily and efficiently with lissyuse
 #' 
 #' @description
-#' `lissyuse()` enables LISSY R-users to quickly import whole series of data from a specific country and/or within any time period.
+#' `lissyuse()` enables the user to specify which variables to import, along with a set of default variables (IDs, weights, currency, year, relation, etc.). If both household-level and person-level variables are specified, lissyuse() will automatically merge the two types of files. For faster and more efficient processing, we strongly recommend selecting of a restricted set of variables in vars argument. Additionally, the function includes a subset argument that allows users to limit the data to a specific subgroup.
 #'
-#' @param data 
-#' @param vars 
-#' @param subset 
-#' @param from 
-#' @param to 
-#' @param lws 
+#' @param data A character vector containing the datasets to be loaded.
+#' @param vars A character vector specifying the LIS/LWS variables to be loaded. 
+#' @param subset A logical expression defining the criteria for subsetting the data. Observations for which the expression evaluates to TRUE are included in the subset.
+#' @param from A numeric value representing the year (inclusive) after which the LIS/LWS datasets should be loaded.
+#' @param to 	A numeric value representing the year (inclusive) up to which the LIS/LWS datasets should be loaded.
+#' @param lws A logical value indicating whether to load LWS data. If TRUE, LWS data is loaded; otherwise (default: FALSE), LIS data is loaded instead. Note that this does not eliminate the need to set the ‘Project’ field accordingly in the LISSY remote system.
 #'
-#' @return A list 
+#' @return A list named lis_datasets or lws_datasets. Each element of the list will be a data frame named after their respective dataset. See the naming formats in the examples below. Each data frame will contain as many columns as the selected variables, plus the default technical ones.
 #' @export
 #'
 #' @examples
-#' # LIS # 
+#' \dontrun{
+#' library(lissyrtools)
+#' library(dplyr)
+#' ----------------------------- LIS --------------------------------------- 
+#'
+#' Loading a list of data frames of using household-level and person-level variables 
+#'
+#'lissyuse( 
+#'  data = c("it", "de16", "us19"), 
+#'  vars  = c("dhi", "region_c", "age", "hourstot", "status1"), 
+#'  subset = "!is.na(status1) & relation %in% c(1000,2000)"
+#')
+#'
+# Checking the names of the data frames. 
+#'names(lis_datasets)
+#'
+#' Selecting certain elemennts of the list 
+#'lis_datasets[["it14"]]   # By their name
+#'lis_datasets[1:3]        # By their respective order within lis_datasets
+#'
+#' Selecting all the italian datasets, while restrict them to a certain year range. 
+#'lissyuse(
+#'  data = c("it"), 
+#'  vars  = c("dhi", "region_c"), 
+#'  from = 2004, 
+#'  to = 2016
+#')
+#'
+#'# In the previous line only household-level variables were selected. 
+#'# this will lead to slightly different names for the data frames. 
+#'names(lis_datasets)
+#'
+#'# The same occurs when only person-level variables were selected 
+#'lissyuse(
+#'  data = c("it"), 
+#'  vars  = c("age", "sex"), 
+#'  from = 2004, 
+#'  to = 2016
+#')
+#'
+#'names(lis_datasets)
+#'
+#'
+#' ----------------------------- LWS --------------------------------------- 
+#'
+#' Example for LWS 
+#'lissyuse(
+#'  data = c("us", "uk17", "uk19"), 
+#'  vars = "dnw", 
+#'  from = 2015, 
+#'  to = 2021,
+#'  lws = TRUE
+#')
+#'
+#' When working with LWS datasets, the list will be named lws_datasets
+#'names(lws_datasets)
+#'      }
+
+
+
 lissyuse <- function(data = NULL , vars = NULL , subset = NULL , from = NULL, to = NULL ,  lws = FALSE) {
   
   
