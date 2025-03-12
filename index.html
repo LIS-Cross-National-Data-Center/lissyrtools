@@ -58,6 +58,7 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
+<p>This package e</p>
 <p>Tools for computing inequality estimates in the <a href="https://www.lisdatacenter.org/" class="external-link">LIS Data Center</a> LISSY environment.</p>
 <p>It allows users to: * Read LIS data within the LISSY environment. * Carry out commonly performed data cleaning tasks. * Compute and plot estimates from microdata.</p>
 </div>
@@ -78,23 +79,21 @@
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
+<p>lissyrtools provides its users with a set of functions and embedded objects designed to help users access and manipulate data in LIS’s remote execution system: <a href="https://www.lisdatacenter.org/data-access/lissy/" class="external-link">LISSY</a>. By providing built-in sample datasets in lissyrtools, we also encourage users to develop their LISSY scripts locally, where debugging and writing R code are more efficient in IDEs like RStudio.</p>
+<p><a href="https://lis-cross-national-data-center.github.io/lissyuse_2.0_doc/" class="external-link">lissyuse</a></p>
 <div class="section level3">
 <h3 id="lissy-version">LISSY version<a class="anchor" aria-label="anchor" href="#lissy-version"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/LIS-Cross-National-Data-Center/lissyrtools" class="external-link">lissyrtools</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Read the datasets</span></span>
-<span><span class="va">files_h</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_lissy_files.html">read_lissy_files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ca14h"</span>, <span class="st">"ca15h"</span>, <span class="st">"ca16h"</span>, <span class="st">"ca17h"</span>, <span class="st">"ca18h"</span>, <span class="st">"ca19h"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">files_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_lissy_files.html">read_lissy_files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ca14p"</span>, <span class="st">"ca15p"</span>, <span class="st">"ca16p"</span>, <span class="st">"ca17p"</span>, <span class="st">"ca18p"</span>, <span class="st">"ca19p"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Merge household and person-level files</span></span>
-<span><span class="va">lissy_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/merge_dataset_levels.html">merge_dataset_levels</a></span><span class="op">(</span><span class="va">files_h</span>, <span class="va">files_p</span><span class="op">)</span></span>
+<span><span class="co"># Load the datasets</span></span>
+<span><span class="fu">lissyrtools</span><span class="fu">::</span><span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span>data <span class="op">=</span> <span class="st">"ca"</span>, vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dhi"</span>, <span class="st">"pi11"</span>, <span class="st">"age"</span><span class="op">)</span>, from <span class="op">=</span> <span class="fl">2014</span>, to <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Clean target variables:</span></span>
 <span><span class="co">## pi11</span></span>
-<span><span class="va">lissy_datasets_transformed</span> <span class="op">&lt;-</span> <span class="va">lissy_datasets</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">lissy_datasets_transformed</span> <span class="op">&lt;-</span> <span class="va">lis_datasets</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/transform_false_zeros_to_na.html">transform_false_zeros_to_na</a></span><span class="op">(</span><span class="st">"pi11"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/transform_negative_values_to_zero.html">transform_negative_values_to_zero</a></span><span class="op">(</span><span class="st">"pi11"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/transform_zeros_to_na.html">transform_zeros_to_na</a></span><span class="op">(</span><span class="st">"pi11"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
@@ -121,22 +120,15 @@
 <span><span class="fu"><a href="reference/print_indicator.html">print_indicator</a></span><span class="op">(</span><span class="va">lissy_datasets_transformed</span>,</span>
 <span>                             variable <span class="op">=</span> <span class="st">"pi11"</span>,</span>
 <span>                             indicator <span class="op">=</span> <span class="st">"gini"</span>,</span>
-<span>                             na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Compute and plot indicators                        </span></span>
-<span><span class="fu"><a href="reference/plot_indicator.html">plot_indicator</a></span><span class="op">(</span><span class="va">lissy_datasets_transformed</span>, variable <span class="op">=</span> <span class="st">"dhi"</span>,</span>
-<span>                             indicator <span class="op">=</span> <span class="st">"gini"</span>,</span>
 <span>                             na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="local-version">Local version<a class="anchor" aria-label="anchor" href="#local-version"></a>
 </h3>
-<p>When working with <code>lissyrtools</code> locally, use <code><a href="reference/read_lissy_files_locally.html">read_lissy_files_locally()</a></code> instead of <code><a href="reference/read_lissy_files.html">read_lissy_files()</a></code>. The file names then be passed with the <code>ccyydl</code> (e.g. ‘us16ih’) format instead of <code>ccyyl</code> (‘us16h’). The path to the files should also be specified. E.g.</p>
+<p>When working with <code>lissyrtools</code> locally, use <code><a href="reference/lissyuse.html">lissyuse()</a></code>, along with the <a href="https://www.lisdatacenter.org/resources/self-teaching/" class="external-link">sample files</a> made available in the package. For LIS we have the following, for LWS we have this other ones …..</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">files_h</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_lissy_files_locally.html">read_lissy_files_locally</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"it14ih"</span>, <span class="st">"us16ih"</span>, <span class="st">"mx18ih"</span><span class="op">)</span>,</span>
-<span>                                    path_to_files <span class="op">=</span> <span class="st">"path/to/your/directory/"</span><span class="op">)</span></span>
-<span><span class="va">files_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_lissy_files_locally.html">read_lissy_files_locally</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"it14ip"</span>, <span class="st">"us16ip"</span>, <span class="st">"mx18ip"</span><span class="op">)</span>,</span>
-<span>                                    path_to_files <span class="op">=</span> <span class="st">"path/to/your/directory/"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"it14"</span>, <span class="st">"us16"</span>, <span class="st">"mx18"</span><span class="op">)</span>, lws <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>                              </span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
