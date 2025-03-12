@@ -8,11 +8,15 @@
 
 ## Overview
 
-This package e
+A package with the tools needed to develop scripts with LIS data
 
-Tools for computing inequality estimates in the [LIS Data Center](https://www.lisdatacenter.org/) LISSY environment.
+It allows users to:
 
-It allows users to: \* Read LIS data within the LISSY environment. \* Carry out commonly performed data cleaning tasks. \* Compute and plot estimates from microdata.
+\* Read LIS data within the LISSY environment, or to use LIS sample files locally.
+
+\* Carry out commonly performed data cleaning tasks.
+
+\* Compute estimates from microdata.
 
 ## Version
 
@@ -34,7 +38,7 @@ devtools::install_github("https://github.com/LIS-Cross-National-Data-Center/liss
 
 lissyrtools provides its users with a set of functions and embedded objects designed to help users access and manipulate data in LIS's remote execution system: [LISSY](https://www.lisdatacenter.org/data-access/lissy/). By providing built-in sample datasets in lissyrtools, we also encourage users to develop their LISSY scripts locally, where debugging and writing R code are more efficient in IDEs like RStudio.
 
-Data first needs to be loaded using the [lissyuse()](#0) function, which creates the list `lis_datasets` or `lws_datasets` if its argument `lws` == TRUE. Subsequently, the list can be transformed using other functions from **lissyrtools** in a pipeline structure, enabling users to generate aggregated figures for the entire dataset or specific subgroups.
+Data first needs to be loaded using the [lissyuse()](https://lis-cross-national-data-center.github.io/lissyuse_2.0_doc/lissyuse_2.0_doc.html) function, which creates the list `lis_datasets` or `lws_datasets` if its argument `lws` == TRUE. Subsequently, the list can be transformed using other functions from **lissyrtools** in a pipeline structure, enabling users to generate aggregated figures for the entire dataset or specific subgroups.
 
 ### LISSY version
 
