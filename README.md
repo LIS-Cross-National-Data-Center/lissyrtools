@@ -1,50 +1,53 @@
 # lissyrtools
 
 ## Build & Testing Status
+
 <!-- badges: start -->
-  [![](https://img.shields.io/badge/devel%20version-0.1.2-blue.svg)](https://github.com/LIS-Cross-National-Data-Center/lissyrtools)
-  [![codecov](https://codecov.io/gh/LIS-Cross-National-Data-Center/lissyrtools/graph/badge.svg?token=kd2zXPsfWz)](https://codecov.io/gh/LIS-Cross-National-Data-Center/lissyrtools)
-  <!-- badges: end -->
+
+[![](https://img.shields.io/badge/devel%20version-0.1.2-blue.svg)](https://github.com/LIS-Cross-National-Data-Center/lissyrtools) [![codecov](https://codecov.io/gh/LIS-Cross-National-Data-Center/lissyrtools/graph/badge.svg?token=kd2zXPsfWz)](https://codecov.io/gh/LIS-Cross-National-Data-Center/lissyrtools) <!-- badges: end -->
 
 ## Overview
+
+This package e
+
 Tools for computing inequality estimates in the [LIS Data Center](https://www.lisdatacenter.org/) LISSY environment.
 
-It allows users to:
-* Read LIS data within the LISSY environment.
-* Carry out commonly performed data cleaning tasks.
-* Compute and plot estimates from microdata.
+It allows users to: \* Read LIS data within the LISSY environment. \* Carry out commonly performed data cleaning tasks. \* Compute and plot estimates from microdata.
 
 ## Version
+
 This package is currently in Beta version.
 
 For questions and help, email usersupport(add)lisdatacenter.org
 
 ## Installation
+
 The package is already installed in LISSY by the LIS Data Center team.
 
 You can install the package locally to work with your own data or with the [LIS Sample Datasets](https://www.lisdatacenter.org/resources/self-teaching/) from this GitHub repo with:
-```r
+
+``` r
 devtools::install_github("https://github.com/LIS-Cross-National-Data-Center/lissyrtools")
 ```
 
-
 ## Usage
 
+lissyrtools provides its users with a set of functions and embedded objects designed to help users access and manipulate data in LIS's remote execution system: [LISSY](https://www.lisdatacenter.org/data-access/lissy/). By providing built-in sample datasets in lissyrtools, we also encourage users to develop their LISSY scripts locally, where debugging and writing R code are more efficient in IDEs like RStudio.
+
+[lissyuse](https://lis-cross-national-data-center.github.io/lissyuse_2.0_doc/)
+
 ### LISSY version
-```r
+
+``` r
 library(lissyrtools)
-library(magrittr)
+library(dplyr)
 
-# Read the datasets
-files_h <- read_lissy_files(c("ca14h", "ca15h", "ca16h", "ca17h", "ca18h", "ca19h"))
-files_p <- read_lissy_files(c("ca14p", "ca15p", "ca16p", "ca17p", "ca18p", "ca19p"))
-
-# Merge household and person-level files
-lissy_datasets <- merge_dataset_levels(files_h, files_p)
+# Load the datasets
+lissyrtools::lissyuse(data = "ca", vars = c("dhi", "pi11", "age"), from = 2014, to = 2019)
 
 # Clean target variables:
 ## pi11
-lissy_datasets_transformed <- lissy_datasets %>%
+lissy_datasets_transformed <- lis_datasets %>%
   transform_false_zeros_to_na("pi11") %>%
   transform_negative_values_to_zero("pi11") %>%
   transform_zeros_to_na("pi11") %>%
@@ -73,27 +76,17 @@ print_indicator(lissy_datasets_transformed,
                              indicator = "gini",
                              na.rm = TRUE)
 
-# Compute and plot indicators                        
-plot_indicator(lissy_datasets_transformed, variable = "dhi",
-                             indicator = "gini",
-                             na.rm = TRUE)
-
 ```
 
 ### Local version
 
-When working with `lissyrtools` locally, use `read_lissy_files_locally()`
-instead of `read_lissy_files()`. The file names then be passed with the
-`ccyydl` (e.g. 'us16ih') format instead of `ccyyl` ('us16h'). The path to the 
-files should also be specified. E.g. 
+When working with `lissyrtools` locally, use `lissyuse()`, along with the [sample files](https://www.lisdatacenter.org/resources/self-teaching/) made available in the package. For LIS we have the following, for LWS we have this other ones .....
 
-```r
-files_h <- read_lissy_files_locally(c("it14ih", "us16ih", "mx18ih"),
-                                    path_to_files = "path/to/your/directory/")
-files_p <- read_lissy_files_locally(c("it14ip", "us16ip", "mx18ip"),
-                                    path_to_files = "path/to/your/directory/")
+``` r
+lissyuse(data = c("it14", "us16", "mx18"), lws = FALSE)
+                              
 ```
 
 ## Documentation and Support
-Please visit https://lis-cross-national-data-center.github.io/lissyrtools/ for documentation and vignettes with examples.
 
+Please visit <https://lis-cross-national-data-center.github.io/lissyrtools/> for documentation and vignettes with examples.
