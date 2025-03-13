@@ -1,4 +1,4 @@
-# lissyrtools
+# lissyrtools <a href="https://www.lisdatacenter.org/"><img src="man/figures/lissyrtools_badge_classic.png" align="right" height="138"/></a>
 
 ## Build & Testing Status
 
