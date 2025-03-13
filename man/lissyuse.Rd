@@ -33,6 +33,7 @@ A list named lis_datasets or lws_datasets. Each element of the list will be a da
 \code{lissyuse()} enables the user to specify which variables to import, along with a set of default variables (IDs, weights, currency, year, relation, etc.). If both household-level and person-level variables are specified, lissyuse() will automatically merge the two types of files. For faster and more efficient processing, we strongly recommend selecting of a restricted set of variables in vars argument. Additionally, the function includes a subset argument that allows users to limit the data to a specific subgroup.
 }
 \examples{
+\dontrun{
 library(lissyrtools)
 library(dplyr)
 
@@ -41,4 +42,5 @@ print(2+2)
 lissyuse(data = c("it", "de16", "us19"), vars  = c("dhi", "region_c", "age", "hourstot", "status1"), subset = "!is.na(status1) & relation \%in\% c(1000,2000)")
 
 names(lis_datasets)
+}
 }
