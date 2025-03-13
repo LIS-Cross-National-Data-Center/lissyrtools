@@ -19,12 +19,10 @@
 #' \dontrun{
 #' library(lissyrtools)
 #' library(dplyr)
-#'
-#'print(2+2)
-#'
+#'}
+#' \dontrun{
 #'lissyuse(data = c("it", "de16", "us19"), vars  = c("dhi", "region_c", "age", "hourstot", "status1"), subset = "!is.na(status1) & relation %in% c(1000,2000)")
-#'
-# Checking the names of the data frames. 
+#' # Checking the names of the data frames. 
 #'names(lis_datasets)
 #'}
 lissyuse <- function(data = NULL , vars = NULL , subset = NULL , from = NULL, to = NULL ,  lws = FALSE) {
