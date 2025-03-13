@@ -15,7 +15,8 @@
 #' @return A list named lis_datasets or lws_datasets. Each element of the list will be a data frame named after their respective dataset. See the naming formats in the examples below. Each data frame will contain as many columns as the selected variables, plus the default technical ones.
 #' @export
 #'
-#' @examples 
+#' @examples
+#' \dontrun{
 #' library(lissyrtools)
 #' library(dplyr)
 #'
@@ -25,6 +26,7 @@
 #'
 # Checking the names of the data frames. 
 #'names(lis_datasets)
+#'}
 lissyuse <- function(data = NULL , vars = NULL , subset = NULL , from = NULL, to = NULL ,  lws = FALSE) {
   
   
