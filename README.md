@@ -1,10 +1,14 @@
-# lissyrtools <a href="https://www.lisdatacenter.org/"><img src="man/figures/lissyrtools_badge_classic_orange.png" align="right" height="138" style="float:right; height:200px;"></a>
+# lissyrtools <a href="https://www.lisdatacenter.org/"><img src="man/figures/lissyrtools_badge_classic.png" align="right" height="200" style="float:right; height:200px;"/></a>
 
 <!-- badges: start -->
 
 [![](https://img.shields.io/badge/devel%20version-0.1.2-blue.svg)](https://github.com/LIS-Cross-National-Data-Center/lissyrtools) [![codecov](https://codecov.io/gh/LIS-Cross-National-Data-Center/lissyrtools/graph/badge.svg?token=kd2zXPsfWz)](https://codecov.io/gh/LIS-Cross-National-Data-Center/lissyrtools)
 
 <!-- badges: end -->
+
+<br>
+<br>
+<br>
 
 ## Overview
 
