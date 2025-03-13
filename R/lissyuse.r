@@ -18,62 +18,13 @@
 #' @examples 
 #' library(lissyrtools)
 #' library(dplyr)
-#' ----------------------------- LIS --------------------------------------- 
 #'
-#' Loading a list of data frames of using household-level and person-level variables 
+#'print(2+2)
 #'
-#'lissyuse( 
-#'  data = c("it", "de16", "us19"), 
-#'  vars  = c("dhi", "region_c", "age", "hourstot", "status1"), 
-#'  subset = "!is.na(status1) & relation %in% c(1000,2000)"
-#')
+#'lissyuse(data = c("it", "de16", "us19"), vars  = c("dhi", "region_c", "age", "hourstot", "status1"), subset = "!is.na(status1) & relation %in% c(1000,2000)")
 #'
 # Checking the names of the data frames. 
 #'names(lis_datasets)
-#'
-#' Selecting certain elemennts of the list 
-#'lis_datasets[["it14"]]   # By their name
-#'lis_datasets[1:3]        # By their respective order within lis_datasets
-#'
-#' Selecting all the italian datasets, while restrict them to a certain year range. 
-#'lissyuse(
-#'  data = c("it"), 
-#'  vars  = c("dhi", "region_c"), 
-#'  from = 2004, 
-#'  to = 2016
-#')
-#'
-#'# In the previous line only household-level variables were selected. 
-#'# this will lead to slightly different names for the data frames. 
-#'names(lis_datasets)
-#'
-#'# The same occurs when only person-level variables were selected 
-#'lissyuse(
-#'  data = c("it"), 
-#'  vars  = c("age", "sex"), 
-#'  from = 2004, 
-#'  to = 2016
-#')
-#'
-#'names(lis_datasets)
-#'
-#'
-#' ----------------------------- LWS --------------------------------------- 
-#'
-#' Example for LWS 
-#'lissyuse(
-#'  data = c("us", "uk17", "uk19"), 
-#'  vars = "dnw", 
-#'  from = 2015, 
-#'  to = 2021,
-#'  lws = TRUE
-#')
-#'
-#' When working with LWS datasets, the list will be named lws_datasets
-#'names(lws_datasets)
-
-
-
 lissyuse <- function(data = NULL , vars = NULL , subset = NULL , from = NULL, to = NULL ,  lws = FALSE) {
   
   
