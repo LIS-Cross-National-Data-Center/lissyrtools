@@ -1,4 +1,4 @@
-# lissyrtools <a href="https://www.lisdatacenter.org/"><img src="man/figures/lissyrtools_badge_classic.png" align="right" height="138"/></a>
+# lissyrtools <a href="https://www.lisdatacenter.org/"><img src="man/figures/lissyrtools_badge_classic.png" align="right" height="200" style="float:right; height:200px;"></a>
 
 <!-- badges: start -->
 
