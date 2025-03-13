@@ -15,7 +15,7 @@
 #' @return A list named lis_datasets or lws_datasets. Each element of the list will be a data frame named after their respective dataset. See the naming formats in the examples below. Each data frame will contain as many columns as the selected variables, plus the default technical ones.
 #' @export
 #'
-#' @examples
+#' @examples 
 #' \dontrun{
 #' library(lissyrtools)
 #' library(dplyr)
@@ -72,7 +72,7 @@
 #'
 #' When working with LWS datasets, the list will be named lws_datasets
 #'names(lws_datasets)
-#'      }
+#'}
 
 
 

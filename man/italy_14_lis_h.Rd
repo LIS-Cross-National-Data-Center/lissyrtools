@@ -22,6 +22,8 @@ users to build and test code locally, simulating its execution before running it
 (the LIS user interface) using the \code{lissyuse()} function.
 }
 \examples{
+\dontrun{
 italy_14_lis_h
+}
 }
 \keyword{datasets}

@@ -32,7 +32,9 @@
 #'
 #' @format Data frame with 1,000 rows and 112 columns.
 #' @examples
+#' \dontrun{
 #' italy_14_lis_h
+#' }
 "italy_14_lis_h"
 
 
@@ -49,7 +51,9 @@
 #'
 #' @format Data frame with 1,000 rows and 97 columns.
 #' @examples
+#'  \dontrun{
 #' italy_14_lis_p
+#' }
 "italy_14_lis_p"
 
 
@@ -66,7 +70,9 @@
 #'
 #' @format Data frame with 1,000 rows and 112 columns.
 #' @examples
+#' \dontrun{
 #' united_states_16_lis_h
+#' }
 "united_states_16_lis_h"
 
 #' Sample Individual-Level LIS Dataset (1,000 Rows)
@@ -82,7 +88,9 @@
 #'
 #' @format Data frame with 1,000 rows and 97 columns.
 #' @examples
+#' \dontrun{
 #' united_states_16_lis_p
+#' }
 "united_states_16_lis_p"
 
 #' Sample Household-Level LIS Dataset (1,000 Rows)
@@ -98,7 +106,9 @@
 #'
 #' @format Data frame with 1,000 rows and 112 columns.
 #' @examples
+#' \dontrun{
 #' mexico_18_lis_h
+#' }
 "mexico_18_lis_h"
 
 #' Sample Individual-Level LIS Dataset (1,000 Rows)
@@ -114,7 +124,9 @@
 #'
 #' @format Data frame with 1,000 rows and 97 columns.
 #' @examples
+#' \dontrun{
 #' mexico_18_lis_p
+#' }
 "mexico_18_lis_p"
 
 
@@ -131,7 +143,9 @@
 #'
 #' @format Data frame with 1,000 rows and 214 columns.
 #' @examples
+#' \dontrun{
 #' italy_14_lws_h
+#' }
 "italy_14_lws_h"
 
 #' Sample Individual-Level LWS Dataset (1,000 Rows)
@@ -147,7 +161,9 @@
 #'
 #' @format Data frame with 1,000 rows and 133 columns.
 #' @examples
+#' \dontrun{
 #' italy_14_lws_p
+#' }
 "italy_14_lws_p"
 
 
@@ -164,7 +180,9 @@
 #'
 #' @format Data frame with 1,000 rows and 214 columns.
 #' @examples
+#' \dontrun{
 #' united_states_16_lws_h
+#' }
 "united_states_16_lws_h"
 
 
@@ -181,5 +199,7 @@
 #'
 #' @format Data frame with 1,000 rows and 133 columns.
 #' @examples
+#' \dontrun{
 #' united_states_16_lws_p
+#' }
 "united_states_16_lws_p"

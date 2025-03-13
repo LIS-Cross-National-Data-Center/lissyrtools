@@ -88,5 +88,5 @@ lissyuse(
 
 When working with LWS datasets, the list will be named lws_datasets
 names(lws_datasets)
-     }
+}
 }
