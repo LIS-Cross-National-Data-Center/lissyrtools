@@ -3,5 +3,5 @@ template:
   bootstrap: 5
   logo: 
       src: "man/figures/logo.png"
-      width: 150px  
+      width: 30px  
       height: auto  
