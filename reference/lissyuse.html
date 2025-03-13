@@ -87,11 +87,35 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/LIS-Cross-National-Data-Center/lissyrtools" class="external-link">lissyrtools</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">lissyuse</span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"it"</span>, <span class="st">"de16"</span>, <span class="st">"us19"</span><span class="op">)</span>, vars  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dhi"</span>, <span class="st">"region_c"</span>, <span class="st">"age"</span>, <span class="st">"hourstot"</span>, <span class="st">"status1"</span><span class="op">)</span>, subset <span class="op">=</span> <span class="st">"!is.na(status1) &amp; relation %in% c(1000,2000)"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Checking the names of the data frames. </span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lis_datasets</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Selecting certain elemennts of the list </span></span></span>
+<span class="r-in"><span><span class="va">lis_datasets</span><span class="op">[[</span><span class="st">"it14"</span><span class="op">]</span><span class="op">]</span>   <span class="co"># By their name</span></span></span>
+<span class="r-in"><span><span class="va">lis_datasets</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>        <span class="co"># By their respective order within lis_datasets</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Selecting all the italian datasets, while restrict them to a certain year range. </span></span></span>
+<span class="r-in"><span><span class="fu">lissyuse</span><span class="op">(</span> data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"it"</span><span class="op">)</span>, vars  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dhi"</span>, <span class="st">"region_c"</span><span class="op">)</span>, from <span class="op">=</span> <span class="fl">2004</span>, to <span class="op">=</span> <span class="fl">2016</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># In the previous line only household-level variables were selected. </span></span></span>
+<span class="r-in"><span><span class="co"># this will lead to slightly different names for the data frames. </span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lis_datasets</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># The same occurs when only person-level variables were selected </span></span></span>
+<span class="r-in"><span><span class="fu">lissyuse</span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"it"</span><span class="op">)</span>, vars  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"sex"</span><span class="op">)</span>, from <span class="op">=</span> <span class="fl">2004</span>, to <span class="op">=</span> <span class="fl">2016</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lis_datasets</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># ------------ LWS ------------------ </span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Example for LWS </span></span></span>
+<span class="r-in"><span><span class="fu">lissyuse</span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"us"</span>, <span class="st">"uk17"</span>, <span class="st">"uk19"</span><span class="op">)</span>, vars <span class="op">=</span> <span class="st">"dnw"</span>, from <span class="op">=</span> <span class="fl">2015</span>, to <span class="op">=</span> <span class="fl">2021</span>, lws <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># When working with LWS datasets, the list will be named lws_datasets</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lws_datasets</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
