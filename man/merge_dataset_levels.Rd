@@ -15,10 +15,10 @@ merge_dataset_levels(lissy_hfiles, lissy_pfiles)
 A list with the merged files.
 }
 \description{
-\lifecycle{deprecated}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
 Merges the household and person-level files of datasets.
-}
-\details{
+
 The level of the files in 'lissy_hfiles' and 'lissy_pfiles' is determined by
 the 'level' attribute of the files.
 }

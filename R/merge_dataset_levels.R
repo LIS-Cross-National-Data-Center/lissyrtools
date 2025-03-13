@@ -4,7 +4,9 @@
 
 #' Merge household and person-level files
 #'
-#' \lifecycle{deprecated}
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' 
 #' Merges the household and person-level files of datasets.
 #'
 #' The level of the files in 'lissy_hfiles' and 'lissy_pfiles' is determined by

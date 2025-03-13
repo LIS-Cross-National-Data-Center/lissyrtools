@@ -16,7 +16,6 @@
 #' @export
 #'
 #' @examples 
-#' \dontrun{
 #' library(lissyrtools)
 #' library(dplyr)
 #' ----------------------------- LIS --------------------------------------- 
@@ -72,7 +71,6 @@
 #'
 #' When working with LWS datasets, the list will be named lws_datasets
 #'names(lws_datasets)
-#'}
 
 
 

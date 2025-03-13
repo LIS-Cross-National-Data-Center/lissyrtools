@@ -20,10 +20,10 @@ which should be selected from the files. E.g. c("hid", "dhi", "hifactor").}
 A named list with the loaded files.
 }
 \description{
-\lifecycle{deprecated}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
 Reads multiple LIS, LWS or ERFLIS files in the LISSY interface.
-}
-\details{
+
 All files need to be from the same database (e.g. LIS, LWS) and level
 (e.g. 'household', 'person') Computes the full year with four digits by default.
 }

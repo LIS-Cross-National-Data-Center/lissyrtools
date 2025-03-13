@@ -48,7 +48,9 @@ retrieve_names_key_variables <- function(database, level){
 
 #' Read files in LISSY
 #'
-#' \lifecycle{deprecated}
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' 
 #' Reads multiple LIS, LWS or ERFLIS files in the LISSY interface.
 #'
 #' All files need to be from the same database (e.g. LIS, LWS) and level
@@ -164,7 +166,9 @@ read_lissy_files <- function(files, col_select = NULL, full_year_names = TRUE){
 
 #' Read files locally
 #'
-#' \lifecycle{deprecated}
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' 
 #' Reads multiple LIS or LWS files outside of the LISSY interface.
 #'
 #' @param files A character vector containing file names. These need to contain
