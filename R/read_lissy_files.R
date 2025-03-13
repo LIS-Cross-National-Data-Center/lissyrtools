@@ -48,7 +48,7 @@ retrieve_names_key_variables <- function(database, level){
 
 #' Read files in LISSY
 #'
-#' \lifecycle{experimental}
+#' \lifecycle{deprecated}
 #' Reads multiple LIS, LWS or ERFLIS files in the LISSY interface.
 #'
 #' All files need to be from the same database (e.g. LIS, LWS) and level
@@ -153,6 +153,7 @@ read_lissy_files <- function(files, col_select = NULL, full_year_names = TRUE){
 
   }
 
+  .Deprecated("lissyuse", package = "lissyrtools", msg = "Both `read_lissy_files()`, and `merge_dataset_level()` are deprecated, please use `lissyuse()` instead.")
   return(output_list)
 
 }
@@ -163,7 +164,7 @@ read_lissy_files <- function(files, col_select = NULL, full_year_names = TRUE){
 
 #' Read files locally
 #'
-#' \lifecycle{experimental}
+#' \lifecycle{deprecated}
 #' Reads multiple LIS or LWS files outside of the LISSY interface.
 #'
 #' @param files A character vector containing file names. These need to contain
@@ -257,7 +258,7 @@ read_lissy_files_locally <- function(files, path_to_files, col_select = NULL, fu
 
   # get level from file_names
 
-
+  .Deprecated("lissyuse", package = "lissyrtools", msg = "`read_lissy_files_locally()`, is deprecated, please use `lissyuse()` instead.")
   return(output_list)
 
 }
