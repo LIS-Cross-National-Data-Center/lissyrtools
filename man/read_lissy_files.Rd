@@ -20,7 +20,7 @@ which should be selected from the files. E.g. c("hid", "dhi", "hifactor").}
 A named list with the loaded files.
 }
 \description{
-\lifecycle{experimental}
+\lifecycle{deprecated}
 Reads multiple LIS, LWS or ERFLIS files in the LISSY interface.
 }
 \details{

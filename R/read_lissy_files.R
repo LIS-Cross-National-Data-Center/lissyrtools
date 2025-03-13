@@ -153,7 +153,7 @@ read_lissy_files <- function(files, col_select = NULL, full_year_names = TRUE){
 
   }
 
-  .Deprecated("lissyuse", package = "lissyrtools", msg = "Both `read_lissy_files()`, and `merge_dataset_level()` are deprecated, please use `lissyuse()` instead.")
+  .Deprecated("lissyuse", package = "lissyrtools", msg = "Both `read_lissy_files()` and `merge_dataset_level()` are deprecated, please use `lissyuse()` instead.")
   return(output_list)
 
 }
@@ -258,7 +258,7 @@ read_lissy_files_locally <- function(files, path_to_files, col_select = NULL, fu
 
   # get level from file_names
 
-  .Deprecated("lissyuse", package = "lissyrtools", msg = "`read_lissy_files_locally()`, is deprecated, please use `lissyuse()` instead.")
+  .Deprecated("lissyuse", package = "lissyrtools", msg = "`read_lissy_files_locally()` is deprecated, please use `lissyuse()` instead.")
   return(output_list)
 
 }

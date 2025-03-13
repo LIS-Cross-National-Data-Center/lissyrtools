@@ -122,7 +122,7 @@ merge_dataset_levels <- function(lissy_hfiles, lissy_pfiles){
   attr(lissy_mfiles, "level") <- "p" # it is, in the end, a 'person-level' dataset.
   attr(lissy_mfiles, "merged_levels") <- TRUE
 
-  .Deprecated("lissyuse", package = "lissyrtools", msg = "Both `read_lissy_files()`, and `merge_dataset_level()` are deprecated, please use `lissyuse()` instead.")
+  .Deprecated("lissyuse", package = "lissyrtools", msg = "Both `read_lissy_files()` and `merge_dataset_level()` are deprecated, please use `lissyuse()` instead.")
   return(lissy_mfiles)
 
 }

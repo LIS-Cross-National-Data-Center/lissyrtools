@@ -15,6 +15,7 @@ merge_dataset_levels(lissy_hfiles, lissy_pfiles)
 A list with the merged files.
 }
 \description{
+\lifecycle{deprecated}
 Merges the household and person-level files of datasets.
 }
 \details{
