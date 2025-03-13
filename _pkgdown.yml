@@ -1,7 +1,8 @@
 url: https://lis-cross-national-data-center.github.io/lissyrtools/
 template:
-  bootstrap: 5
-  logo: 
-      src: "man/figures/logo.png"
+  params:
+    bootstrap: 5
+    logo: 
+      src: "man/figures/lissyrtools_badge_classic.png"
       width: 30px  
       height: auto  
