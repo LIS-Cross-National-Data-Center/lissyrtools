@@ -35,7 +35,7 @@ if (lws) {
   } else {
     
     data_to_load <- embedded_sample_data[stringr::str_sub(data,1,2)]
-    names(data_to_load) <-  paste0(names(data_to_load), sapply(data_to_load, function(x) { stringr::stringr::str_sub(unique(x$year),3,4) }))
+    names(data_to_load) <-  paste0(names(data_to_load), sapply(data_to_load, function(x) { stringr::str_sub(unique(x$year),3,4) }))
   }
   
 } 
