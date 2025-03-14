@@ -47,7 +47,7 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="lissyrtools-">lissyrtools <a href="https://www.lisdatacenter.org/" class="external-link"><img src="reference/figures/lissyrtools_badge_classic.png" align="right" height="195" style="float:right; height:195px;"></a>
+<div class="page-header"><h1 id="lissyrtools-">lissyrtools <a href="https://lis-cross-national-data-center.github.io/lissyrtools/"><img src="reference/figures/lissyrtools_badge_classic.png" align="right" height="195" style="float:right; height:195px;"></a>
 <a class="anchor" aria-label="anchor" href="#lissyrtools-"></a>
 </h1></div>
 <!-- badges: start -->
@@ -64,12 +64,6 @@
 <p>* Compute estimates from microdata.</p>
 </div>
 <div class="section level2">
-<h2 id="version">Version<a class="anchor" aria-label="anchor" href="#version"></a>
-</h2>
-<p>This package is currently in Beta version.</p>
-<p>For questions and help, email usersupport(add)lisdatacenter.org</p>
-</div>
-<div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>The package is already installed in LISSY by the LIS Data Center team.</p>
@@ -81,7 +75,7 @@
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <p>lissyrtools provides its users with a set of functions and embedded objects designed to help users access and manipulate data in LIS’s remote execution system: <a href="https://www.lisdatacenter.org/data-access/lissy/" class="external-link">LISSY</a>. By providing built-in sample datasets in lissyrtools, we also encourage users to develop their LISSY scripts locally, where debugging and writing R code are more efficient in IDEs like RStudio.</p>
-<p>Data first needs to be loaded using the <a href="https://lis-cross-national-data-center.github.io/lissyuse_2.0_doc/lissyuse_2.0_doc.html" class="external-link">lissyuse()</a> function, which creates the list <code>lis_datasets</code> or <code>lws_datasets</code> if its argument <code>lws</code> == TRUE. Subsequently, the list can be transformed using other functions from <strong>lissyrtools</strong> in a pipeline structure, enabling users to generate aggregated figures for the entire dataset or specific subgroups.</p>
+<p>Data first needs to be loaded using the <a href="https://lis-cross-national-data-center.github.io/lissyrtools/reference/lissyuse.html">lissyuse()</a> function, which creates the list <code>lis_datasets</code> or <code>lws_datasets</code> if its argument <code>lws</code> = TRUE. Subsequently, the list can be transformed using other functions from <strong>lissyrtools</strong> in a pipeline structure, enabling users to generate aggregated figures for the entire dataset or specific subgroups.</p>
 <div class="section level3">
 <h3 id="lissy-version">LISSY version<a class="anchor" aria-label="anchor" href="#lissy-version"></a>
 </h3>
@@ -90,16 +84,18 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load the datasets </span></span>
-<span><span class="fu">lissyrtools</span><span class="fu">::</span><span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span></span>
+<span><span class="co"># The output is a list whose elements are the datasets available in the LIS database for the countries selected within the specified time frame. </span></span>
+<span></span>
+<span><span class="va">lis_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="st">"ca"</span>, </span>
 <span>  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dhi"</span>, <span class="st">"pi11"</span>, <span class="st">"age"</span><span class="op">)</span>, </span>
 <span>  from <span class="op">=</span> <span class="fl">2014</span>, </span>
 <span>  to <span class="op">=</span> <span class="fl">2019</span></span>
 <span>  <span class="op">)</span> </span>
-<span><span class="co"># This function creates the list `lis_datasets`</span></span>
 <span></span>
-<span><span class="co"># Clean target variables:</span></span>
-<span><span class="co">## pi11</span></span>
+<span></span>
+<span><span class="co"># Example of further data cleaning using `transform_` functions:</span></span>
+<span></span>
 <span><span class="va">lissy_datasets_transformed</span> <span class="op">&lt;-</span> <span class="va">lis_datasets</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/transform_false_zeros_to_na.html">transform_false_zeros_to_na</a></span><span class="op">(</span><span class="st">"pi11"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/transform_negative_values_to_zero.html">transform_negative_values_to_zero</a></span><span class="op">(</span><span class="st">"pi11"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
@@ -109,7 +105,7 @@
 <span>  <span class="fu"><a href="reference/transform_adjust_by_lisppp.html">transform_adjust_by_lisppp</a></span><span class="op">(</span><span class="st">"pi11"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/transform_restrict_age.html">transform_restrict_age</a></span><span class="op">(</span><span class="st">"pi11"</span>, from <span class="op">=</span> <span class="fl">16</span>, to <span class="op">=</span> <span class="fl">64</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## dhi</span></span>
+<span></span>
 <span><span class="va">lissy_datasets_transformed</span> <span class="op">&lt;-</span> <span class="va">lissy_datasets_transformed</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/transform_false_zeros_to_na.html">transform_false_zeros_to_na</a></span><span class="op">(</span><span class="st">"dhi"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/transform_negative_values_to_zero.html">transform_negative_values_to_zero</a></span><span class="op">(</span><span class="st">"dhi"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
@@ -131,7 +127,7 @@
 <span></span>
 <span></span>
 <span><span class="co"># To load LWS datasets, set the argument `lws` == TRUE:</span></span>
-<span><span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span></span>
+<span><span class="va">lws_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"us"</span>, <span class="st">"uk17"</span>, <span class="st">"uk19"</span><span class="op">)</span>, </span>
 <span>  vars <span class="op">=</span> <span class="st">"dnw"</span>, </span>
 <span>  from <span class="op">=</span> <span class="fl">2015</span>, </span>
@@ -139,7 +135,6 @@
 <span>  lws <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># When working with LWS datasets, the list will be named lws_datasets</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lws_datasets</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -152,15 +147,11 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="documentation-and-support">Documentation and Support<a class="anchor" aria-label="anchor" href="#documentation-and-support"></a>
+<h2 id="user-support">User Support<a class="anchor" aria-label="anchor" href="#user-support"></a>
 </h2>
-<p>Please visit <a href="https://lis-cross-national-data-center.github.io/lissyrtools/" class="uri">https://lis-cross-national-data-center.github.io/lissyrtools/</a> for documentation and vignettes with examples.</p>
-<p>Dependencies references:</p>
-<ul>
-<li><p><a href="https://magrittr.tidyverse.org/" class="external-link">magrittr</a>;</p></li>
-<li><p><a href="https://dplyr.tidyverse.org/" class="external-link">dplyr</a>;</p></li>
-<li><p><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></p></li>
-</ul>
+<p>If you encounter any bugs, typos, or experience any issue while running jobs including this packages’ tools, please email us at: <a href="mailto:usersupport@lisdatacenter.org" class="email">usersupport@lisdatacenter.org</a>.</p>
+<p>For more information about LIS, visit our <a href="https://www.lisdatacenter.org/" class="external-link">website</a>, explore <a href="https://www.lisdatacenter.org/frontend#/home" class="external-link">METIS</a> for metadata, and check out our best practices for <a href="https://www.lisdatacenter.org/data-access/lissy/syntax/" class="external-link">job submission in LISSY</a>.</p>
+<p>Recommended checks on other packages that offer tools for data manipulation and list handling: <a href="https://magrittr.tidyverse.org/" class="external-link">magrittr</a>, <a href="https://dplyr.tidyverse.org/" class="external-link">dplyr</a> and <a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
