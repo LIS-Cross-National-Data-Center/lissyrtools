@@ -1,4 +1,4 @@
-# lissyrtools <a href="https://www.lisdatacenter.org/"><img src="man/figures/lissyrtools_badge_classic.png" align="right" height="195" style="float:right; height:195px;"/></a>
+# lissyrtools <a href="https://lis-cross-national-data-center.github.io/lissyrtools/"><img src="man/figures/lissyrtools_badge_classic.png" align="right" height="195" style="float:right; height:195px;"/></a>
 
 <!-- badges: start -->
 
@@ -7,7 +7,6 @@
 <!-- badges: end -->
 
 <br>
-
 
 ## Overview
 
@@ -20,12 +19,6 @@ It allows users to:
 \* Carry out commonly performed data cleaning tasks.
 
 \* Compute estimates from microdata.
-
-## Version
-
-This package is currently in Beta version.
-
-For questions and help, email usersupport(add)lisdatacenter.org
 
 ## Installation
 
@@ -41,7 +34,7 @@ devtools::install_github("https://github.com/LIS-Cross-National-Data-Center/liss
 
 lissyrtools provides its users with a set of functions and embedded objects designed to help users access and manipulate data in LIS's remote execution system: [LISSY](https://www.lisdatacenter.org/data-access/lissy/). By providing built-in sample datasets in lissyrtools, we also encourage users to develop their LISSY scripts locally, where debugging and writing R code are more efficient in IDEs like RStudio.
 
-Data first needs to be loaded using the [lissyuse()](https://lis-cross-national-data-center.github.io/lissyuse_2.0_doc/lissyuse_2.0_doc.html) function, which creates the list `lis_datasets` or `lws_datasets` if its argument `lws` == TRUE. Subsequently, the list can be transformed using other functions from **lissyrtools** in a pipeline structure, enabling users to generate aggregated figures for the entire dataset or specific subgroups.
+Data first needs to be loaded using the [lissyuse()](https://lis-cross-national-data-center.github.io/lissyrtools/reference/lissyuse.html) function, which creates the list `lis_datasets` or `lws_datasets` if its argument `lws` = TRUE. Subsequently, the list can be transformed using other functions from **lissyrtools** in a pipeline structure, enabling users to generate aggregated figures for the entire dataset or specific subgroups.
 
 ### LISSY version
 
@@ -50,16 +43,18 @@ library(lissyrtools)
 library(dplyr)
 
 # Load the datasets 
-lissyrtools::lissyuse(
+# The output is a list whose elements are the datasets available in the LIS database for the countries selected within the specified time frame. 
+
+lis_datasets <- lissyuse(
   data = "ca", 
   vars = c("dhi", "pi11", "age"), 
   from = 2014, 
   to = 2019
   ) 
-# This function creates the list `lis_datasets`
 
-# Clean target variables:
-## pi11
+
+# Example of further data cleaning using `transform_` functions:
+
 lissy_datasets_transformed <- lis_datasets %>%
   transform_false_zeros_to_na("pi11") %>%
   transform_negative_values_to_zero("pi11") %>%
@@ -69,7 +64,7 @@ lissy_datasets_transformed <- lis_datasets %>%
   transform_adjust_by_lisppp("pi11") %>%
   transform_restrict_age("pi11", from = 16, to = 64)
 
-## dhi
+
 lissy_datasets_transformed <- lissy_datasets_transformed %>%
   transform_false_zeros_to_na("dhi") %>%
   transform_negative_values_to_zero("dhi") %>%
@@ -91,7 +86,7 @@ print_indicator(lissy_datasets_transformed,
 
 
 # To load LWS datasets, set the argument `lws` == TRUE:
-lissyuse(
+lws_datasets <- lissyuse(
   data = c("us", "uk17", "uk19"), 
   vars = "dnw", 
   from = 2015, 
@@ -99,7 +94,6 @@ lissyuse(
   lws = TRUE
 )
 
-# When working with LWS datasets, the list will be named lws_datasets
 names(lws_datasets)
 ```
 
@@ -112,14 +106,10 @@ lissyuse(data = c("it14", "us16", "mx18"), lws = FALSE)
                               
 ```
 
-## Documentation and Support
+## User Support
 
-Please visit <https://lis-cross-national-data-center.github.io/lissyrtools/> for documentation and vignettes with examples.
+If you encounter any bugs, typos, or experience any issue while running jobs including this packages' tools, please email us at: [usersupport\@lisdatacenter.org](mailto:usersupport@lisdatacenter.org){.email}.
 
-Dependencies references:
+For more information about LIS, visit our [website](https://www.lisdatacenter.org/), explore [METIS](https://www.lisdatacenter.org/frontend#/home) for metadata, and check out our best practices for [job submission in LISSY](https://www.lisdatacenter.org/data-access/lissy/syntax/).
 
--   [magrittr](https://magrittr.tidyverse.org/);
-
--   [dplyr](https://dplyr.tidyverse.org/);
-
--   [purrr](https://purrr.tidyverse.org/)
+Recommended checks on other packages that offer tools for data manipulation and list handling: [magrittr](https://magrittr.tidyverse.org/), [dplyr](https://dplyr.tidyverse.org/) and [purrr](https://purrr.tidyverse.org/)
