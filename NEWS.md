@@ -1,4 +1,11 @@
-# lissyrtools (beta version)
+# lissyrtools
+
+# lissyrtools 0.1.11
+
+## Change in lissyuse()
+
+-  The output of `lissyuse()`now requires explicit assignment to a variable, whereas previously, the function automatically created and assigned a pre-named list (`lis_datasets` or `lws_datasets`) to the global environment.
+
 
 # lissyrtools 0.1.10
 

@@ -1,17 +1,15 @@
 Type: Package
 Package: lissyrtools
 Title: Tools for LISSY Jobs
-Version: 0.1.10
+Version: 0.1.11
 Authors@R: c(
-    person("Josep", "Espasa Reig" , ,"jespasareig@gmail.com", role = c("aut")
-          ),
     person("Gonçalo", "Marques", , "marques@lisdatacenter.org", role = c("aut", "cre"))
+    person("Josep", "Espasa Reig" , ,"jespasareig@gmail.com", role = c("aut")),
   )
 Description: Tools for the computation of inequality indicators in LISSY. 
-  This package contains three different types of functions. 'Read', 'transformation' 
-   and 'output' functions. 'Read functions' should allow LISSY users to read LIS and LWS files
-  with functionalities that extend those provided by 'read.LIS()'. Transformation functions add
-  easy data manipulation stages to LISSY jobs. Output functions help users create outputs and
+  This package contains three different types of functions. 'lissyuse', 'transformation' 
+   and 'output' functions. 'lissyuse' allows users to read LIS and LWS data. Transformation functions add
+  easy data manipulation stages to LISSY jobs. Output functions help users to print aggregated figures and
   plots for their tasks.
 License: GPL-3
 URL: https://github.com/LIS-Cross-National-Data-Center/lissyrtools, https://lis-cross-national-data-center.github.io/lissyrtools/
