@@ -75,7 +75,9 @@
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <p><strong>lissyrtools</strong> provides its users with a set of functions and embedded objects designed to help users access and manipulate data in LIS’s remote execution system: <a href="https://www.lisdatacenter.org/data-access/lissy/" class="external-link">LISSY</a>. By providing built-in sample datasets in <strong>lissyrtools</strong>, we also encourage users to develop their LISSY scripts locally, where debugging and writing R code are more efficient in IDEs like RStudio.</p>
-<p>Data first needs to be loaded using the <a href="https://lis-cross-national-data-center.github.io/lissyrtools/reference/lissyuse.html">lissyuse()</a> function, which creates the list <code>lis_datasets</code> or <code>lws_datasets</code> if its argument <code>lws</code> = TRUE. Subsequently, the list can be transformed using other functions from <strong>lissyrtools</strong> in a pipeline structure, enabling users to generate aggregated figures for the entire dataset or specific subgroups.</p>
+<p>Data first needs to be loaded using the <a href="https://lis-cross-national-data-center.github.io/lissyrtools/reference/lissyuse.html">lissyuse()</a> function. Its output will be a list whose elements are the datasets available in the LIS database for the countries selected within the specified time frame. LWS data can be loaded by setting the `lws` argument to TRUE (e.g lws = TRUE), with the Project dropdown adjusted to “LWS” as shown in the image below:</p>
+<p><img src="images/project_lws-01.png" width="470"></p>
+<p>Subsequently, the list can be transformed using other functions from <strong>lissyrtools</strong> in a pipeline structure, enabling users to generate aggregated figures for the entire dataset or specific subgroups.</p>
 <div class="section level3">
 <h3 id="lissy-version">LISSY version<a class="anchor" aria-label="anchor" href="#lissy-version"></a>
 </h3>
