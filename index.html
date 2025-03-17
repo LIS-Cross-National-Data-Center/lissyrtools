@@ -67,7 +67,7 @@
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>The package is already installed in LISSY by the LIS Data Center team.</p>
-<p>You can install the package locally to work with your own data or with the <a href="https://www.lisdatacenter.org/resources/self-teaching/" class="external-link">LIS Sample Datasets</a> from this GitHub repo with:</p>
+<p>You can install the package locally to work with the <a href="https://www.lisdatacenter.org/resources/self-teaching/" class="external-link">LIS Sample Datasets</a> from this GitHub repo with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"https://github.com/LIS-Cross-National-Data-Center/lissyrtools"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -140,16 +140,30 @@
 <div class="section level3">
 <h3 id="local-version">Local version<a class="anchor" aria-label="anchor" href="#local-version"></a>
 </h3>
-<p>When working with <code>lissyrtools</code> locally, use <code><a href="reference/lissyuse.html">lissyuse()</a></code>, along with the <a href="https://www.lisdatacenter.org/resources/self-teaching/" class="external-link">sample files</a> made available in the package. For LIS we have the following, for LWS we have this other ones …..</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"it14"</span>, <span class="st">"us16"</span>, <span class="st">"mx18"</span><span class="op">)</span>, lws <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span>                              </span></code></pre></div>
+<p>When working with <code>lissyrtools</code> locally, use <code><a href="reference/lissyuse.html">lissyuse()</a></code>, along with the <a href="https://www.lisdatacenter.org/resources/self-teaching/" class="external-link">sample files</a> made available in the package. We equipped this package with 3 sample files (1 for h-level and 1 for p-level) for LIS, and 2 sample files foe LWS:</p>
+<ul>
+<li><p><code>italy_14_lis_h</code>; <code>italy_14_lis_p</code>; <code>italy_14_lws_h</code> and <code>italy_14_lws_p</code>;</p></li>
+<li><p><code>united_states_16_lis_h</code>; <code>united_states_16_lis_p</code>; <code>united_states_16_lws_h</code> and <code>united_states_16_lws_h</code>;</p></li>
+<li><p><code>mexico_18_lis_h</code> and <code>mexico_18_lis_p.</code></p></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">library</span>(lissyrtools)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># Example where both household-level and individual-level variables are specified in `vars`</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>lis_datasets <span class="ot">&lt;-</span> <span class="fu">lissyuse</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="st">"it"</span>, <span class="st">"us"</span>, <span class="st">"mx"</span>), <span class="at">vars =</span> (<span class="st">"region_c"</span>, <span class="st">"dhi"</span>, <span class="st">"age"</span>, <span class="st">"pi11"</span>, <span class="st">"sex"</span>))</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="fu">names</span>(lis_datasets)</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co"># Example where only household-level are specified in `vars`</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>lis_datasets <span class="ot">&lt;-</span> <span class="fu">lissyuse</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="st">"it"</span>, <span class="st">"us"</span>, <span class="st">"mx"</span>), <span class="at">vars =</span> (<span class="st">"region_c"</span>, <span class="st">"dhi"</span>))</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="fu">names</span>(lis_datasets)</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>                             </span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="user-support">User Support<a class="anchor" aria-label="anchor" href="#user-support"></a>
 </h2>
-<p>If you encounter any bugs, typos, or experience any issue while running jobs including this packages’ tools, please email us at: <a href="mailto:usersupport@lisdatacenter.org" class="email">usersupport@lisdatacenter.org</a>.</p>
+<p>If you encounter any bugs, typos, or experience any issue while running jobs including this packages’ tools, please email us at: <a href="mailto:usersupport@lisdatacenter.org">usersupport@lisdatacenter.org</a>.</p>
 <p>For more information about LIS, visit our <a href="https://www.lisdatacenter.org/" class="external-link">website</a>, explore <a href="https://www.lisdatacenter.org/frontend#/home" class="external-link">METIS</a> for metadata, and check out our best practices for <a href="https://www.lisdatacenter.org/data-access/lissy/syntax/" class="external-link">job submission in LISSY</a>.</p>
 <p>Recommended checks on other packages that offer tools for data manipulation and list handling: <a href="https://magrittr.tidyverse.org/" class="external-link">magrittr</a>, <a href="https://dplyr.tidyverse.org/" class="external-link">dplyr</a> and <a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></p>
 </div>
