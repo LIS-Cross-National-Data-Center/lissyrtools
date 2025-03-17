@@ -24,7 +24,7 @@ It allows users to:
 
 The package is already installed in LISSY by the LIS Data Center team.
 
-You can install the package locally to work with your own data or with the [LIS Sample Datasets](https://www.lisdatacenter.org/resources/self-teaching/) from this GitHub repo with:
+You can install the package locally to work with the [LIS Sample Datasets](https://www.lisdatacenter.org/resources/self-teaching/) from this GitHub repo with:
 
 ``` r
 devtools::install_github("https://github.com/LIS-Cross-National-Data-Center/lissyrtools")
@@ -99,16 +99,32 @@ names(lws_datasets)
 
 ### Local version
 
-When working with `lissyrtools` locally, use `lissyuse()`, along with the [sample files](https://www.lisdatacenter.org/resources/self-teaching/) made available in the package. For LIS we have the following, for LWS we have this other ones .....
+When working with `lissyrtools` locally, use `lissyuse()`, along with the [sample files](https://www.lisdatacenter.org/resources/self-teaching/) made available in the package. We equipped this package with 3 sample files (1 for h-level and 1 for p-level) for LIS, and 2 sample files foe LWS:
+
+-   `italy_14_lis_h`; `italy_14_lis_p`; `italy_14_lws_h` and `italy_14_lws_p`;
+
+-   `united_states_16_lis_h`; `united_states_16_lis_p`; `united_states_16_lws_h` and `united_states_16_lws_h`;
+
+-   `mexico_18_lis_h` and `mexico_18_lis_p.`
 
 ``` r
-lissyuse(data = c("it14", "us16", "mx18"), lws = FALSE)
-                              
+library(lissyrtools)
+library(dplyr)
+
+# Example where both household-level and individual-level variables are specified in `vars`
+lis_datasets <- lissyuse(data = c("it", "us", "mx"), vars = ("region_c", "dhi", "age", "pi11", "sex"))
+names(lis_datasets)
+
+# Example where only household-level are specified in `vars`
+
+lis_datasets <- lissyuse(data = c("it", "us", "mx"), vars = ("region_c", "dhi"))
+names(lis_datasets)
+                             
 ```
 
 ## User Support
 
-If you encounter any bugs, typos, or experience any issue while running jobs including this packages' tools, please email us at: [usersupport\@lisdatacenter.org](mailto:usersupport@lisdatacenter.org){.email}.
+If you encounter any bugs, typos, or experience any issue while running jobs including this packages' tools, please email us at: [usersupport\@lisdatacenter.org](mailto:usersupport@lisdatacenter.org).
 
 For more information about LIS, visit our [website](https://www.lisdatacenter.org/), explore [METIS](https://www.lisdatacenter.org/frontend#/home) for metadata, and check out our best practices for [job submission in LISSY](https://www.lisdatacenter.org/data-access/lissy/syntax/).
 
