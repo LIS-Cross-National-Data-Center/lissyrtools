@@ -6,13 +6,11 @@ Authors@R: c(
     person("Gonçalo", "Marques", , "marques@lisdatacenter.org", role = c("aut", "cre")),
     person("Josep", "Espasa Reig" , ,"jespasareig@gmail.com", role = c("aut"))
   )
-Description: Tools for the computation of inequality indicators in LISSY. 
-  This package contains three different types of functions. 'lissyuse', 'transformation' 
-   and 'output' functions. 'lissyuse' allows users to read LIS and LWS data. Transformation functions add
-  easy data manipulation stages to LISSY jobs. Output functions help users to print aggregated figures and
-  plots for their tasks.
+Description: A package with the tools needed to develop scripts with LIS data. It allows users to:
+  1) Read LIS data within the LISSY environment, or to use LIS sample files locally; 2) Carry out commonly performed data cleaning tasks; 
+  3) Compute estimates from microdata.
 License: GPL-3
-URL: https://github.com/LIS-Cross-National-Data-Center/lissyrtools, https://lis-cross-national-data-center.github.io/lissyrtools/
+URL: https://lis-cross-national-data-center.github.io/lissyrtools/
 Depends: R (>= 3.2.0)
 Imports:
     dplyr,

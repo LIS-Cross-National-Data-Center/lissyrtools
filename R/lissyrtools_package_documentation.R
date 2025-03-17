@@ -1,17 +1,12 @@
 # Document package
 #' lissyrtools: Functions that can be used within LISSY
 #'
-#' The lissyrtools provides three types of functions:
-#' read, transform, and print. These can be chained using
-#' 'magrittr' pipes ('%>%') in 'tidyverse' style.
-#'
-#' @section read functions:
-#' Read and merge LISSY files.
-#' @section transform functions:
-#' Perform data processing/cleaning processes.
-#' @section print functions:
-#' Compute estimates.
-#'
-#' @docType _PACKAGE
+#'A package with the tools needed to develop scripts with LIS data.
+#'It allows users to:
+#'* Read LIS data within the LISSY environment, or to use LIS sample files locally.
+#'* Carry out commonly performed data cleaning tasks.
+#'* Compute estimates from microdata.
 #' @name lissyrtools
-NULL
+"_PACKAGE"
+
+
