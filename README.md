@@ -116,12 +116,12 @@ library(lissyrtools)
 library(dplyr)
 
 # Example where both household-level and individual-level variables are specified in `vars`
-lis_datasets <- lissyuse(data = c("it", "us", "mx"), vars = ("region_c", "dhi", "age", "pi11", "sex"))
+lis_datasets <- lissyuse(data = c("it", "us", "mx"), vars = c("region_c", "dhi", "age", "pi11", "sex"))
 names(lis_datasets)
 
 # Example where only household-level are specified in `vars`
 
-lis_datasets <- lissyuse(data = c("it", "us", "mx"), vars = ("region_c", "dhi"))
+lis_datasets <- lissyuse(data = c("it", "us", "mx"), vars = c("region_c", "dhi"))
 names(lis_datasets)
                              
 ```
