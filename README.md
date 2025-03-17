@@ -34,7 +34,11 @@ devtools::install_github("https://github.com/LIS-Cross-National-Data-Center/liss
 
 **lissyrtools** provides its users with a set of functions and embedded objects designed to help users access and manipulate data in LIS's remote execution system: [LISSY](https://www.lisdatacenter.org/data-access/lissy/). By providing built-in sample datasets in **lissyrtools**, we also encourage users to develop their LISSY scripts locally, where debugging and writing R code are more efficient in IDEs like RStudio.
 
-Data first needs to be loaded using the [lissyuse()](https://lis-cross-national-data-center.github.io/lissyrtools/reference/lissyuse.html) function, which creates the list `lis_datasets` or `lws_datasets` if its argument `lws` = TRUE. Subsequently, the list can be transformed using other functions from **lissyrtools** in a pipeline structure, enabling users to generate aggregated figures for the entire dataset or specific subgroups.
+Data first needs to be loaded using the [lissyuse()](https://lis-cross-national-data-center.github.io/lissyrtools/reference/lissyuse.html) function. Its output will be a list whose elements are the datasets available in the LIS database for the countries selected within the specified time frame. LWS data can be loaded by setting the \`lws\` argument to TRUE (e.g lws = TRUE), with the Project dropdown adjusted to "LWS" as shown in the image below:
+
+![](images/project_lws-01.png){width="470"}
+
+Subsequently, the list can be transformed using other functions from **lissyrtools** in a pipeline structure, enabling users to generate aggregated figures for the entire dataset or specific subgroups.
 
 ### LISSY version
 
