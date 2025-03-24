@@ -68,7 +68,7 @@ show_country_years_lis <- function(iso2 = NULL) {
     )
     
     assertthat::assert_that(
-      iso2 %in% unique(show_countries_lis()$iso2),
+      iso2 %in% unique(show_countries_lis()),
       msg = glue::glue("The character '{iso2}' could not be found in `show_countries_lis()`.")
     )
     
@@ -111,7 +111,7 @@ show_country_years_lws <- function(iso2 = NULL) {
     )
     
     assertthat::assert_that(
-      iso2 %in% unique(show_countries_lws()$iso2),
+      iso2 %in% unique(show_countries_lws()),
       msg = glue::glue("The character '{iso2}' could not be found in `show_countries_lws()`.")
     )
     
