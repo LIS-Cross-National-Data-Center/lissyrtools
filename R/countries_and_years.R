@@ -14,11 +14,12 @@ show_countries_lis <- function() {
     dplyr::group_by(cname) %>% 
     dplyr::filter(year == max(year)) %>% 
     dplyr::ungroup() %>% 
-    dplyr::select(iso2, cname)
+    dplyr::select(cname, iso2) %>% 
+    tibble::deframe()
   
-  attributes(output[[1]]) <- NULL
-  attributes(output[[2]]) <- NULL
   
+  attributes(output)[1] <- NULL
+
   return(output)
 }
 
@@ -36,10 +37,10 @@ show_countries_lws <- function() {
     dplyr::group_by(cname) %>% 
     dplyr::filter(year == max(year)) %>% 
     dplyr::ungroup() %>% 
-    dplyr::select(iso2, cname) 
+    dplyr::select(cname, iso2) %>% 
+    tibble::deframe()
   
-  attributes(output[[1]]) <- NULL
-  attributes(output[[2]]) <- NULL
+  attributes(output)[1] <- NULL
   
   return(output)
 }
@@ -68,7 +69,7 @@ show_country_years_lis <- function(iso2 = NULL) {
     
     assertthat::assert_that(
       iso2 %in% unique(show_countries_lis()$iso2),
-      msg = glue::glue("The character '{iso2}' could not be found in unique(show_countries_lis()$iso2).")
+      msg = glue::glue("The character '{iso2}' could not be found in `show_countries_lis()`.")
     )
     
     
@@ -111,7 +112,7 @@ show_country_years_lws <- function(iso2 = NULL) {
     
     assertthat::assert_that(
       iso2 %in% unique(show_countries_lws()$iso2),
-      msg = glue::glue("The character '{iso2}' could not be found in unique(show_countries_lws()$iso2).")
+      msg = glue::glue("The character '{iso2}' could not be found in `show_countries_lws()`.")
     )
     
     

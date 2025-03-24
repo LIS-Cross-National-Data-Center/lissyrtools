@@ -2,7 +2,7 @@
 
 check_empty_data <- function(data, lws = FALSE) {
  
-  all_iso2 <- if (lws) "lissyrtools::show_countries_lws()$iso2" else "lissyrtools::show_countries_lis()$iso2"
+  all_iso2 <- if (lws) "lissyrtools::show_countries_lws()" else "lissyrtools::show_countries_lis()"
   
   if (is.null(data)) {
     stop(
@@ -32,9 +32,9 @@ check_length_iso2 <- function(data) {
 check_iso2 <- function(data, lws = FALSE) {
   
   valid_iso2 <- if (lws) {
-    lissyrtools::show_countries_lws()[["iso2"]]
+    lissyrtools::show_countries_lws()
   } else {
-    lissyrtools::show_countries_lis()[["iso2"]]
+    lissyrtools::show_countries_lis()
   }
   
   data_iso2 <- stringr::str_sub(data, 1, 2)
