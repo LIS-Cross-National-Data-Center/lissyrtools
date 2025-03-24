@@ -103,7 +103,7 @@ names(lws_datasets)
 
 ### Local version
 
-When working with `lissyrtools` locally, use `lissyuse()`, along with the [sample files](https://www.lisdatacenter.org/resources/self-teaching/) made available in the package. We equipped this package with 3 sample files (1 for h-level and 1 for p-level) for LIS, and 2 sample files foe LWS:
+When working with `lissyrtools` locally, use `lissyuse()`, along with the [sample files](https://www.lisdatacenter.org/resources/self-teaching/) made available in the package. We equipped this package with 3 sample files (1 for h-level and 1 for p-level) for LIS, and 2 sample files for LWS:
 
 -   `italy_14_lis_h`; `italy_14_lis_p`; `italy_14_lws_h` and `italy_14_lws_p`;
 
