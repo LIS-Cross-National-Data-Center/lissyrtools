@@ -265,8 +265,9 @@ get_surveys_lws <- function(iso2) {
     surveys_to_output <- lissyrtools::datasets %>% 
       filter(database == "LWS" & iso2 == i) %>%
       select(year, survey) %>% 
-      arrange(year) %>% 
       tibble::deframe()
+    
+    surveys_to_output <- surveys_to_output[order(names(surveys_to_output))]
     
     attributes(surveys_to_output)[1] <- NULL
     
