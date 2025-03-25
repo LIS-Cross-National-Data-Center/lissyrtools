@@ -19,6 +19,22 @@
 "datasets"
 
 
+#' Variable labels
+#'
+#' A data frame containing all LIS and LWS variables and its labels. 
+#'
+#' @format A data frame with 2 variables:
+"data_vars_labels"
+
+#' Variable notes
+#'
+#' A data frame indicating whether a given variable in one of the LIS/LWS datasets has a note or not for a specific year.
+#'
+#' @format A data frame with 6 variables:
+"data_with_warnings"
+
+
+
 #' Sample Household-Level LIS Dataset (1,000 Rows)
 #'
 #' This dataset provides household-level data from the LIS database with 1,000 rows, 
