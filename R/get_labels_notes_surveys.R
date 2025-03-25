@@ -20,7 +20,7 @@
 get_vars_label <- function(vars = NULL) {
   
   if(is.null(vars)) {
-    output <- deframe(data_vars_labels)
+    output <- tibble::deframe(data_vars_labels)
     return(output)
   } 
   
@@ -45,7 +45,7 @@ get_vars_label <- function(vars = NULL) {
       
       vars_accepted <- vars[!vars %in% invalid_vars] 
       
-      output <- deframe(data_vars_labels)[vars_accepted] 
+      output <- tibble::deframe(data_vars_labels)[vars_accepted] 
       return(output)
     }
     
@@ -60,7 +60,7 @@ get_vars_label <- function(vars = NULL) {
       
       else {
         columns <- names(vars[[1]]) 
-        output <- deframe(data_vars_labels)[columns]
+        output <- tibble::deframe(data_vars_labels)[columns]
         return(output) 
       }
       
