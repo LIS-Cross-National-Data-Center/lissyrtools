@@ -87,9 +87,9 @@ get_years_lis <- function(iso2) {
   process_country <- function(i) {
     
     years_to_output <- lissyrtools::datasets %>% 
-      filter(database == "LIS" & iso2 == i) %>%
-      select(year) %>% 
-      pull()
+      dplyr::filter(database == "LIS" & iso2 == i) %>%
+      dplyr::select(year) %>% 
+      dplyr::pull()
     
     years_to_output <- years_to_output[order(names(years_to_output))]
     
@@ -146,9 +146,9 @@ get_years_lws <- function(iso2) {
   process_country <- function(i) {
     
     years_to_output <- lissyrtools::datasets %>% 
-      filter(database == "LWS" & iso2 == i) %>% 
-      select(year) %>% 
-      pull()
+      dplyr::filter(database == "LWS" & iso2 == i) %>% 
+      dplyr::select(year) %>% 
+      dplyr::pull()
     
     years_to_output <- years_to_output[order(names(years_to_output))]
     
