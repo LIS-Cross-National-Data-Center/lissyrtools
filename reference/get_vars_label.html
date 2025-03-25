@@ -58,7 +58,678 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># 1) Without any argument:</span></span></span>
 <span class="r-in"><span><span class="fu">get_vars_label</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in deframe(data_vars_labels):</span> could not find function "deframe"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           hid </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "household identifier" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           pid </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           "person identifier" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           did </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                  "unique country/year number" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         dname </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "country/year identifier" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         cname </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                "country name" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          iso2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               "2-letter country abbreviation" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          iso3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               "3-letter country abbreviation" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          year </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                              "reference year" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          wave </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                   "data wave" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       hpopwgt </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                            "household weight" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       ppopwgt </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                               "person weight" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hwgt </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 "normalised household weight" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pwgt </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                    "normalised person weight" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hwgta </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 "additional household weight" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         pwgta </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                    "additional person weight" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      currency </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                              "currency units" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      grossnet </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                "gross/net income information" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      region_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                    "region: country specific" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         rural </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                  "rural area" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       locsz_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          "size of locality: country specific" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        area_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              "type of area: country specific" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           own </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                "main residence tenure status" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       dweltyp </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                            "type of dwelling" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       farming </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                            "farming activity" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hhtype </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        "household composition (discontinued)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      hpartner </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              "household reference person living with partner" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        nhhmem </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 "number of household members" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      nhhmem65 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     "number of household members 65 or older" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      nhhmem17 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   "number of household members 17 or younger" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      nhhmem13 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   "number of household members 13 or younger" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         nearn </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              "number of household members with labour income" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      relation </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  "relationship to household reference person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       partner </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                         "living with partner" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       parents </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                         "living with parents" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     nchildren </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  "number of own children living in household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       ageyoch </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               "age of youngest own child living in household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           age </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                "age in years" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           sex </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      "gender" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       marital </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                              "marital status" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        immigr </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                   "immigrant" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       citizen </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                 "citizenship" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      ctrybrth </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                            "country of birth" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      yrsresid </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              "years since arrived in country" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      ethnic_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 "ethnicity: country specific" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      migrat_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        "internal migration: country specific" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      immigr_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             "other immigration information: country specific" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      disabled </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                    "indication of disability" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      health_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  "subjective health status: country specific" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          educ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               "education (3-category recode)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       educlev </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           "highest completed education level" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        educ_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   "highest education level: country specific" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        enroll </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       "enrolled in education" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         edyrs </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                          "years of education" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    illiterate </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                  "illiterate" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       edmom_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "education of mother: country specific" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       eddad_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "education of father: country specific" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           emp </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    "employed" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       emp_ilo </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                   "employed (ILO definition)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           lfs </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                         "labour force status" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      informal </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           "informal activity" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      parleave </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          "maternity/paternity/parental leave" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          fyft </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                  "worked full-year full-time" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      hourstot </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                   "total weekly hours worked" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         weeks </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                         "annual weeks worked" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        secjob </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "multiple jobs holder" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        wexptl </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              "years of total work experience" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       status1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "status in employment" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         inda1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            "economic activity (3 categories)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         indb1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            "economic activity (9 categories)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         indc1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             "economic activity (ISIC rev. 3.1: major groups)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         indd1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               "economic activity (ISIC rev. 4: major groups)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        ind1_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         "economic activity: country specific" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       public1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                               "public sector" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         occa1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                   "occupation (3 categories)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         occb1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          "occupation (ISCO-88: major groups)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        occ1_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                "occupation: country specific" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         temp1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "temporary employment" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        ptime1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "part-time employment" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hours1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             "weekly hours worked in main job" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          inum </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                            "implicate number" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       hitotal </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             "total current income, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           dhi </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      "disposable household income, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hvalgs </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      "value of goods and services, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          dhci </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 "disposable household cash income, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      hifactor </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                    "factor income, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    hitransfer </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                  "transfer income, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       hpublic </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 "public transfers, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hpub_i </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              "insurance transfers, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        ppub_i </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 "insurance transfers, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hpub_u </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              "universal transfers, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hpub_a </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             "assistance transfers, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       pitotal </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             "total individual income, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hcexp </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          "consumption expenditure, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     hhouscost </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                    "housing costs, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           dnw </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "disposable net worth" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           anw </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               "adjusted disposable net worth" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           inw </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "integrated net worth" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           tnw </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                             "total net worth" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      hilabour </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                    "labour income, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      pilabour </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       "labour income, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi11 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      "wage income, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pi11 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                         "wage income, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi12 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           "self-employment income, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pi12 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              "self-employment income, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hi121 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      "farm income, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi13 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                  "fringe benefits, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pi13 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "fringe benefits, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi14 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                  "own consumption, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     hicapital </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                   "capital income, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi21 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           "interest and dividends, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi22 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                    "rental income, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     hipension </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                         "pensions, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     pipension </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                            "pensions, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi31 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 "public non-contributory pensions, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pi31 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    "public non-contributory pensions, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hi311 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               "universal pensions, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         pi311 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                  "universal pensions, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hi312 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              "assistance pensions, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         pi312 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 "assistance pensions, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi32 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     "public contributory pensions, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pi32 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        "public contributory pensions, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi33 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 "private pensions, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pi33 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                    "private pensions, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hi331 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            "occupational pensions, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         pi331 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               "occupational pensions, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hi332 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              "individual pensions, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         pi332 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 "individual pensions, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      hipubsoc </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          "public social benefits (excl. pensions), household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi41 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                  "family benefits, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hi411 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             "maternity/paternity and parental leave payments" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         pi411 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             "maternity/paternity and parental leave payments" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hi412 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                  "child allowance, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi42 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            "unemployment benefits, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pi42 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               "unemployment benefits, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hi421 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           "unemployment insurance, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         pi421 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              "unemployment insurance, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hi422 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          "unemployment assistance, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         pi422 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             "unemployment assistance, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi43 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     "sickness/temporary work injury payments" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pi43 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     "sickness/temporary work injury payments" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi44 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   "disability/permanent work injury benefits" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pi44 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   "disability/permanent work injury benefits" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi45 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              "general asssistance, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi46 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 "housing benefits, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi47 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          "public in-kind benefits, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hi471 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                    "food benefits, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     hiprivate </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                "private transfers, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi51 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         "cash transfers from private institutions, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hi511 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "scholarships, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         pi511 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "scholarships, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi52 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   "inter-household cash transfers, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hi521 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        "alimony and child support, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hi522 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      "remittances, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hi53 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        "private in-kind transfers, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hi531 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      "in-kind transfers from private institutions, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hi532 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          "in-kind transfers from other households, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hxitsc </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   "income taxes and contributions, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        pxitsc </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      "income taxes and contributions, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hxitax </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "income taxes, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        pxitax </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "income taxes, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       hxscont </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    "social security contributions, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       pxscont </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "social security contributions, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hxotax </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               "other direct taxes, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hxptax </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                   "property taxes, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       hxvcont </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          "voluntary contributions, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       pxvcont </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             "voluntary contributions, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hxiht </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   "inter-household transfers paid, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hxalim </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   "alimony and child support paid, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       hxremit </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 "remittances paid, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hxmort </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       "mortgage installments" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hxintm </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "mortgage interests paid" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      helabour </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      "extraordinary labour income, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      pelabour </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         "extraordinary labour income, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       hecgain </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                    "capital gains, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     heinherit </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             "inheritance received, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         heoth </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "other extraordinary income, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hrenti </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "imputed rent, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           hc1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 "food and non-alcoholic beverages, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           hc2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              "alcohol and tobacco, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           hc3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            "clothing and footwear, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           hc4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        "actual rent and utilities, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hc41 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      "actual rent, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           hc5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                "housing equipment, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           hc6 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           "health, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           hc7 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "transport, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           hc8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                    "communication, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           hc9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           "recreation and culture, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hc10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "education, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hc11 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           "restaurants and hotels, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hc12 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 "miscellaneous goods and services, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hxloan </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                "installments for other loans" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hxintl </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               "interests paid on other loans" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           cir </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         "expects to receive inheritance/gift" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           cia </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         "amount of expected inheritance/gift" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           cig </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            "expects to give inheritance/gift" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           chc </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          "home equity line of credit (dummy)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           cha </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        "amount of home equity line of credit" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           cnc </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     "non-home equity lines of credit (dummy)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           cna </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   "amount of non-home equity lines of credit" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           ppr </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "purchase price of principal residence" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           ppy </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     "year of purchase of principal residence" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           pir </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           "inheritance/gift received (dummy)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pia1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "amount of inheritance/gift received 1" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pia2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "amount of inheritance/gift received 2" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pia3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "amount of inheritance/gift received 3" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pia4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "amount of inheritance/gift received 4" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          piy1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            "year inheritance/gift received 1" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          piy2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            "year inheritance/gift received 2" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          piy3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            "year inheritance/gift received 3" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          piy4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            "year inheritance/gift received 4" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pit1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         "type of inheritance/gift received 1" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pit2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         "type of inheritance/gift received 2" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pit3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         "type of inheritance/gift received 3" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pit4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         "type of inheritance/gift received 4" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          piw1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "from whom inheritance/gift received 1" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          piw2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "from whom inheritance/gift received 2" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          piw3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "from whom inheritance/gift received 3" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          piw4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "from whom inheritance/gift received 4" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pim1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            "household member who received inheritance/gift 1" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pim2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            "household member who received inheritance/gift 2" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pim3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            "household member who received inheritance/gift 3" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pim4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            "household member who received inheritance/gift 4" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          ssyc </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            "years of contributions to social security system" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        bus1_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "business indicator/type of business 1" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        bus2_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "business indicator/type of business 2" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        bus3_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "business indicator/type of business 3" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          basb </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           "savings behaviour" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         basp1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              "savings purpose: home purchase" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         basp2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      "savings purpose: other major purchases" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         basp3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> "savings purpose: financial investments (including business)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         basp4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         "savings purpose: old-age provisions" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         basp5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               "savings purpose: paying debts" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         basp6 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          "savings purpose: unexpected events" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         basp7 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      "savings purpose: recreation and travel" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         basp8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                  "savings purpose: education" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         basp9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      "savings purpose: other" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       bafr1_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "financial risk taking 1" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       bafr2_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "financial risk taking 2" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       bafr3_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "financial risk taking 3" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       bafp1_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "financial planning 1" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       bafp2_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "financial planning 2" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       bafl1_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "financial literacy 1" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       bafl2_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "financial literacy 2" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       bafl3_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "financial literacy 3" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       bafl4_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "financial literacy 4" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       bafi1_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "financial information 1" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       bafi2_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "financial information 2" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       bafi3_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "financial information 3" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       bafi4_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "financial information 4" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       bafi5_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "financial information 5" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          bopc </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          "possession of credit cards (dummy)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        bonc_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      "number of credit cards" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          boue </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  "amount needed to cover unexpected expenses" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          boea </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              "ability to get emergency financial aid (dummy)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          bolc </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                  "loan consolidation (dummy)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       bocc1_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              "objective credit constraints 1" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       bocc2_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              "objective credit constraints 2" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        bocs_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               "subjective credit constraints" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       bocd1_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             "constraints in debt repayment 1" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       bocd2_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             "constraints in debt repayment 2" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        boef_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "expectations about household finances" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       boee1_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            "expectations about the economy 1" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       boee2_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            "expectations about the economy 2" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                            ha </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                "total assets" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           han </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "non-financial assets" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hanr </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                 "real estate" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hanrp </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                         "principal residence" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hanro </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           "other real estate" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hann </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                          "non-housing assets" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hannb </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                             "business equity" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hannc </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                              "consumer goods" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hanncv </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    "vehicles" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hanncd </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                "other durables and valuables" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hanno </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                  "other non-financial assets" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           haf </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "financial assets (excluding pensions)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hafc </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                   "deposit accounts and cash" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hafi </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       "financial investments" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hafib </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             "bonds and other debt securities" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hafis </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "stocks and other equity" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hafii </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                "investment funds and alternative investments" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hafo </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          "other non-pension financial assets" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           has </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  "pension assets and other long-term savings" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           pas </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          "pension assets and other long-term savings, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hasi </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            "life insurance and voluntary individual pensions" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pasi </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    "life insurance and voluntary individual pensions, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hasil </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "life insurance accounts" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         pasil </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             "life insurance accounts, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hasip </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "individual voluntary pension accounts" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         pasip </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               "individual voluntary pension accounts, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          haso </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       "occupational pensions" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          paso </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               "occupational pensions, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hasodb </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          "occupational pensions (DB schemes)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        pasodb </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  "occupational pensions (DB schemes), person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hasodc </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          "occupational pensions (DC schemes)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        pasodc </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  "occupational pensions (DC schemes), person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hass </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        "social security pension entitlements" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          pass </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                "social security pension entitlements, person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hassdb </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                "social security (DB schemes)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        passdb </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        "social security (DB schemes), person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hassdc </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                "social security (DC schemes)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        passdc </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        "social security (DC schemes), person" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                            hl </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                           "total liabilities" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           hlr </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "real estate liabilities" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hlrp </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                   "principal residence loans" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hlro </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "other real estate loans" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                           hln </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "non-housing liabilities" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hlni </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                            "investment loans" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hlnc </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                        "consumer goods loans" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hlncv </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                               "vehicle loans" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hlncd </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       "other loans for goods and consumption" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hlne </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                             "education loans" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hlno </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               "other non-housing liabilities" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hlsr </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  "institutional loans secured by real estate" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hlsrp </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              "secured by principal residence" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hlsro </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                "secured by other real estate" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                          hlsn </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            "loans not secured by real estate" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hlsng </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              "guaranteed institutional loans" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hlsnn </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          "non-guaranteed institutional loans" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hlsni </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          "informal (non-institutional) loans" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        nrooms </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  "number of rooms available to the household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        typehh </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                              "household type" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       nhhmem6 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    "number of household members 6 or younger" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     oneparent </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                 "lone parent" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      depchild </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                             "dependent child" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        momnum </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       "pointer to the mother" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       partnum </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      "pointer to the partner" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        dadnum </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       "pointer to the father" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         occc1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          "occupation (ISCO-08: major groups)" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         wage1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                               "monthly  wage" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hwage1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                 "hourly wage" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       weeksft </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               "annual weeks worked full-time" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hafct </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               "transaction accounts and cash" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hafcs </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                             "saving accounts" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hafiss </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      "publicly traded stocks" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        hafiso </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            "unlisted shares and other equity" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                         hafom </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     "money owed to household" </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># 2) Using with the outputed list from lissyuse:</span></span></span>
 <span class="r-in"><span><span class="va">lis_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="lissyuse.html">lissyuse</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"uk"</span><span class="op">)</span>, vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hpub_i"</span>,<span class="st">"hpub_u"</span>, <span class="st">"hi42"</span>, <span class="st">"hi421"</span>, <span class="st">"hi422"</span>, <span class="st">"hi43"</span><span class="op">)</span>, from <span class="op">=</span> <span class="fl">2016</span><span class="op">)</span></span></span>
@@ -68,7 +739,16 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># 3) Using a character vector with LIS/LWS variables:</span></span></span>
 <span class="r-in"><span><span class="fu">get_vars_label</span><span class="op">(</span>vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fyft"</span>, <span class="st">"basb"</span>, <span class="st">"hxremit"</span>, <span class="st">"bafi1_c"</span>, <span class="st">"pasodc"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in deframe(data_vars_labels):</span> could not find function "deframe"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                         fyft </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 "worked full-year full-time" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                         basb </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          "savings behaviour" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      hxremit </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                "remittances paid, household" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      bafi1_c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    "financial information 1" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       pasodc </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> "occupational pensions (DC schemes), person" </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
