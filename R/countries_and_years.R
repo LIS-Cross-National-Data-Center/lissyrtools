@@ -89,7 +89,7 @@ get_years_lis <- function(iso2) {
     years_to_output <- lissyrtools::datasets %>% 
       filter(database == "LIS" & iso2 == i) %>%
       select(year) %>% 
-      dplyr::arrange(year) %>% 
+      arrange(year) %>% 
       pull()
     
     attributes(years_to_output)[1] <- NULL
@@ -147,7 +147,7 @@ get_years_lws <- function(iso2) {
     years_to_output <- lissyrtools::datasets %>% 
       filter(database == "LWS" & iso2 == i) %>% 
       select(year) %>% 
-      dplyr::arrange(year) %>% 
+      arrange(year) %>% 
       pull()
     
     attributes(years_to_output)[1] <- NULL
