@@ -19,6 +19,8 @@
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/compute_mean.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/compute_percentiles.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/compute_poverty_rate.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/data_vars_labels.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/data_with_warnings.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/database_character_to_name.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/datasets.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/decide_plot_type.html</loc></url>
@@ -35,6 +37,9 @@
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_index_hh_heads.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_lissy_attributes.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_lws_file_income_reference_year.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_surveys_lis.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_surveys_lws.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_vars_label.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/has_lissy_attributes.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/implement_adjust_by_lisppp.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/implement_equivalise.html</loc></url>
@@ -111,6 +116,7 @@
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/united_states_16_lis_p.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/united_states_16_lws_h.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/united_states_16_lws_p.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/variable_has_note.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/wtd.quantile.html</loc></url>
 </urlset>
 
