@@ -21,7 +21,7 @@
 
 -   These include the `datasets` data frame, as well as vector objects containing variables categorized into specific groups (e.g., `key_vars_household_lis`, `lis_weight_variables`, `lws_wealth_categorical_variables`, `lis_country_specific_variables`).
 
-## New "show\_" functions
+## New "show\_countries\_" and "get\_years\_" functions
 
 -   Four new functions have been added to print the ISO2 codes for each country in LIS and LWS, as well as the available years for a given country in either LIS or LWS.
 

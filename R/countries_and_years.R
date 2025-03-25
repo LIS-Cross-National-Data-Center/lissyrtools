@@ -50,42 +50,58 @@ show_countries_lws <- function() {
 
 #' Print all the existing years in LIS for a given country.
 #'
-#' @param iso2 A string with 2 characters, specifically an iso2 code present in show_countries_lis().
+#' @param iso2 A character vector with valid iso2 codes of countries present in LIS.
 #'
-#' @returns A numeric vector.
+#' @returns A list, made of numeric vectors. Each elements corresponds to a country in LIS.
 #'
 #' @examples
-#' show_country_years_lis("it")
-#' show_country_years_lis("us")
-show_country_years_lis <- function(iso2 = NULL) {
+#' get_years_lis("it")
+#' get_years_lis(iso2 = c("de", "jp"))
+get_years_lis <- function(iso2) {
 
   
-  if (!is.null(iso2)) {
-    
-    assertthat::assert_that(
-      length(iso2) ==  1,
-      msg = glue::glue("This function only accepts 1 iso2 code at the time.")
+  # ensure the validity of the iso2 codes
+  
+  valid_iso2 <- lissyrtools::show_countries_lis()
+  invalid_iso2 <- iso2[!iso2 %in% valid_iso2]
+  
+  if (length(invalid_iso2) == length(iso2)) {
+    # If no valid iso2 codes, stop with an error
+    stop(
+      glue::glue(
+        "None of the provided iso2 codes in argument 'iso2' are valid: {toString(iso2)}. ",
+        "Valid codes are stored in lissyrtools::show_countries_lis()."
+      )
     )
-    
-    assertthat::assert_that(
-      iso2 %in% unique(show_countries_lis()),
-      msg = glue::glue("The character '{iso2}' could not be found in `show_countries_lis()`.")
+  } else if (length(invalid_iso2) > 0) {
+    # If some codes are invalid, issue a warning
+    warning(
+      glue::glue(
+        "The argument 'iso2' contains invalid iso2 codes: {toString(invalid_iso2)}. ",
+        "These iso2 codes are not in the valid list for the selected database. See: lissyrtools::show_countries_lis()."
+      )
     )
-    
-    
-    output <- lissyrtools::datasets %>% 
-      dplyr::filter(database == "LIS" & iso2 == !!iso2) %>%  
-      dplyr::select(year) %>% 
-      unique() %>% 
-      dplyr::pull() %>% 
-      sort()
-    
-  } else {
-    output <- NULL  
   }
   
-  return(output)  
-} 
+  # body of the function
+  process_country <- function(i) {
+    
+    years_to_output <- lissyrtools::datasets %>% 
+      filter(database == "LIS" & iso2 == i) %>%
+      select(year) %>% 
+      arrange(year) %>% 
+      pull()
+    
+    attributes(years_to_output)[1] <- NULL
+    
+    return(years_to_output)
+  }
+  
+  result_list <- purrr::map(iso2,process_country)
+  names(result_list) <- iso2
+  return(result_list)
+}
+
   
 
 
@@ -93,41 +109,56 @@ show_country_years_lis <- function(iso2 = NULL) {
 
 #' Print all the existing years in LWS for a given country.
 #'
-#' @param iso2 A string with 2 characters, specifically an iso2 code present in show_countries_lws()
+#' @param iso2 A character vector with valid iso2 codes of countries present in LWS.
 #'
-#' @returns A numeric vector.
+#' @returns A list, made of numeric vectors. Each elements corresponds to a country in LWS.
 #'
 #' @examples
-#' show_country_years_lis("it")
-#' show_country_years_lis("us")
-show_country_years_lws <- function(iso2 = NULL) {
+#' get_years_lws("it")
+#' get_years_lws(iso2 = c("de", "jp"))
+get_years_lws <- function(iso2) {
   
+  # ensure the validity of the iso2 codes
   
-  if (!is.null(iso2)) {
-    
-    assertthat::assert_that(
-      length(iso2) ==  1,
-      msg = glue::glue("This function only accepts 1 iso2 code at the time.")
+  valid_iso2 <- lissyrtools::show_countries_lws()
+  invalid_iso2 <- iso2[!iso2 %in% valid_iso2]
+  
+  if (length(invalid_iso2) == length(iso2)) {
+    # If no valid iso2 codes, stop with an error
+    stop(
+      glue::glue(
+        "None of the provided iso2 codes in argument 'iso2' are valid: {toString(iso2)}. ",
+        "Valid codes are stored in lissyrtools::show_countries_lws()."
+      )
     )
-    
-    assertthat::assert_that(
-      iso2 %in% unique(show_countries_lws()),
-      msg = glue::glue("The character '{iso2}' could not be found in `show_countries_lws()`.")
+  } else if (length(invalid_iso2) > 0) {
+    # If some codes are invalid, issue a warning
+    warning(
+      glue::glue(
+        "The argument 'iso2' contains invalid iso2 codes: {toString(invalid_iso2)}. ",
+        "These iso2 codes are not in the valid list for the selected database. See: lissyrtools::show_countries_lws()."
+      )
     )
-    
-    
-    output <- lissyrtools::datasets %>% 
-      dplyr::filter(database == "LWS" & iso2 == !!iso2) %>%  
-      dplyr::select(year) %>% 
-      unique() %>% 
-      dplyr::pull() %>% 
-      sort()
-    
-  } else {
-    output <- NULL  
   }
   
-  return(output)  
-} 
+  # body of the function
+  process_country <- function(i) {
+    
+    years_to_output <- lissyrtools::datasets %>% 
+      filter(database == "LWS" & iso2 == i) %>% 
+      select(year) %>% 
+      arrange(year) %>% 
+      pull()
+    
+    attributes(years_to_output)[1] <- NULL
+    
+    return(years_to_output)
+  }
+  
+  result_list <- purrr::map(iso2,process_country)
+  names(result_list) <- iso2
+  return(result_list)
+}
+
 
 
