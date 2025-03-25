@@ -208,8 +208,8 @@ get_surveys_lis <- function(iso2) {
   process_country <- function(i) {
     
   surveys_to_output <- lissyrtools::datasets %>% 
-    filter(database == "LIS" & iso2 == i) %>%
-    select(year, survey) %>% 
+    dplyr::filter(database == "LIS" & iso2 == i) %>%
+    dplyr::select(year, survey) %>% 
     tibble::deframe()
   
   surveys_to_output <- surveys_to_output[order(names(surveys_to_output))]
@@ -263,8 +263,8 @@ get_surveys_lws <- function(iso2) {
   process_country <- function(i) {
     
     surveys_to_output <- lissyrtools::datasets %>% 
-      filter(database == "LWS" & iso2 == i) %>%
-      select(year, survey) %>% 
+      dplyr::filter(database == "LWS" & iso2 == i) %>%
+      dplyr::select(year, survey) %>% 
       tibble::deframe()
     
     surveys_to_output <- surveys_to_output[order(names(surveys_to_output))]
