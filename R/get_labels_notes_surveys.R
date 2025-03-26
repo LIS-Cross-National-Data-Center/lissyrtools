@@ -212,9 +212,8 @@ get_surveys_lis <- function(iso2) {
   surveys_to_output <- lissyrtools::datasets %>% 
     dplyr::filter(database == "LIS" & iso2 == i) %>%
     dplyr::select(year, survey) %>% 
+    dplyr::arrange(year) %>% 
     tibble::deframe()
-  
-  surveys_to_output <- surveys_to_output[order(names(surveys_to_output))]
   
   attributes(surveys_to_output)[1] <- NULL
   
@@ -267,9 +266,8 @@ get_surveys_lws <- function(iso2) {
     surveys_to_output <- lissyrtools::datasets %>% 
       dplyr::filter(database == "LWS" & iso2 == i) %>%
       dplyr::select(year, survey) %>% 
+      dplyr::arrange(year) %>% 
       tibble::deframe()
-    
-    surveys_to_output <- surveys_to_output[order(names(surveys_to_output))]
     
     attributes(surveys_to_output)[1] <- NULL
     
