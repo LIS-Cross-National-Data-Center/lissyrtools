@@ -159,7 +159,7 @@ variable_has_note <- function(variable, iso2, lws = FALSE) {
     return(year_status)
   }
   
-  result <- map(iso2, process_country)
+  result <- purrr::map(iso2, process_country)
   names(result) <- iso2
   
   return(result)
