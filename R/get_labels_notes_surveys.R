@@ -151,8 +151,8 @@ variable_has_note <- function(variable, iso2, lws = FALSE) {
     years <- get_years_function(i)[[1]]
     
     existing_years <- data_with_warnings %>%
-      filter(database == db, iso2 == i, var_name == variable) %>%
-      pull(year)
+      dplyr::filter(database == db, iso2 == i, var_name == variable) %>%
+      dplyr::pull(year)
     
     year_status <- ifelse(years %in% existing_years, "Yes", "No")
     names(year_status) <- years
