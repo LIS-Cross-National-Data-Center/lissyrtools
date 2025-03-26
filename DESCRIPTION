@@ -20,13 +20,10 @@ Imports:
     glue,
     magrittr,
     purrr,
-    lifecycle,
     assertthat,
     tibble,
     readr,
     haven,
-    fancycut,
-    here,
     matrixStats
 Encoding: UTF-8
 LazyData: true
