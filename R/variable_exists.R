@@ -111,7 +111,7 @@
       
   result <- list()
   result[[1]] <- share_to_output
-  names(result) <- paste0("Share of years across the series in ", if_else(lws, "LWS", "LIS"), " where: ", variable, " has values other than zeros and missings.")
+  names(result) <- paste0("Share of years across the series in ", dplyr::if_else(lws, "LWS", "LIS"), " where: ", variable, " has values other than zeros and missings.")
   return(result)
   }
 }
