@@ -82,8 +82,8 @@
   years <- get_years_function(i)[[1]]
   
   existing_var_years <- missing_or_zero_vars_all %>%
-    filter(database == db & iso2 == i & variable == {{variable}} & status == FALSE) %>%
-    pull(year)
+    dplyr::filter(database == db & iso2 == i & variable == {{variable}} & status == FALSE) %>%
+    dplyr::pull(year)
   
   
   year_status <- ifelse(years %in% existing_var_years, "Yes", "No")
@@ -101,11 +101,11 @@
       db <- if (lws) "LWS" else "LIS"
       
       share_to_output <- missing_or_zero_vars_all %>% 
-        filter(database == db, iso2 %in% {{iso2}} , variable == {{variable}})%>% 
-        group_by(iso2 , {{variable}}) %>% 
-        summarise(share = 100 - (sum(status) / n() * 100), .groups = "drop") %>% 
-        select(iso2,share) %>% 
-        mutate(share  =  round(share, digits = 1)) %>% 
+        dplyr::filter(database == db, iso2 %in% {{iso2}} , variable == {{variable}})%>% 
+        dplyr::group_by(iso2 , {{variable}}) %>% 
+        dplyr::summarise(share = 100 - (sum(status) / n() * 100), .groups = "drop") %>% 
+        dplyr::select(iso2,share) %>% 
+        dplyr::mutate(share  =  round(share, digits = 1)) %>% 
         tibble::deframe() 
       
       
