@@ -33,7 +33,12 @@
 #' @format A data frame with 6 variables:
 "data_with_warnings"
 
-
+#' Variable Status Data Frame
+#'
+#' A data frame that identifies whether a variable consists only of zeros or missing values for a given country and year.
+#'
+#' @format A data frame with 6 variables:
+"missing_or_zero_vars_all"
 
 #' Sample Household-Level LIS Dataset (1,000 Rows)
 #'
