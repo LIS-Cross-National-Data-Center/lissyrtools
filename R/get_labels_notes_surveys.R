@@ -146,9 +146,9 @@ variable_has_note <- function(variable, iso2, lws = FALSE) {
   process_country <- function(i) {
     
     db <- if (lws) "LWS" else "LIS"
-    show_years_function <- if (lws) show_country_years_lws else show_country_years_lis
+    get_years_function <- if (lws) lissyrtools::get_years_lws else lissyrtools::get_years_lis
     
-    years <- show_years_function(i)
+    years <- get_years_function(i)[[1]]
     
     existing_years <- data_with_warnings %>%
       filter(database == db, iso2 == i, var_name == variable) %>%
