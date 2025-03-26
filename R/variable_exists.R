@@ -81,7 +81,7 @@
 
   years <- get_years_function(i)[[1]]
   
-  existing_var_years <- missing_or_zero_vars_all %>%
+  existing_var_years <- lissyrtools::missing_or_zero_vars_all %>%
     dplyr::filter(database == db & iso2 == i & variable == {{variable}} & status == FALSE) %>%
     dplyr::pull(year)
   
@@ -100,10 +100,10 @@
   
       db <- if (lws) "LWS" else "LIS"
       
-      share_to_output <- missing_or_zero_vars_all %>% 
+      share_to_output <- lissyrtools::missing_or_zero_vars_all %>% 
         dplyr::filter(database == db, iso2 %in% {{iso2}} , variable == {{variable}})%>% 
         dplyr::group_by(iso2 , {{variable}}) %>% 
-        dplyr::summarise(share = 100 - (sum(status) / n() * 100), .groups = "drop") %>% 
+        dplyr::summarise(share = 100 - (sum(status) / dplyr::n() * 100), .groups = "drop") %>% 
         dplyr::select(iso2,share) %>% 
         dplyr::mutate(share  =  round(share, digits = 1)) %>% 
         tibble::deframe() 
