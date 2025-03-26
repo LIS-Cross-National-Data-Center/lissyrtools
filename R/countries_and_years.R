@@ -97,8 +97,10 @@ get_years_lis <- function(iso2) {
     return(years_to_output)
   }
   
-  result_list <- purrr::map(iso2,process_country)
-  names(result_list) <- iso2
+  
+  to_be_used_iso2 <- iso2[iso2 %in% valid_iso2]
+  result_list <- purrr::map(to_be_used_iso2,process_country)
+  names(result_list) <- to_be_used_iso2
   return(result_list)
 }
 
@@ -155,8 +157,9 @@ get_years_lws <- function(iso2) {
     return(years_to_output)
   }
   
-  result_list <- purrr::map(iso2,process_country)
-  names(result_list) <- iso2
+  to_be_used_iso2 <- iso2[iso2 %in% valid_iso2]
+  result_list <- purrr::map(to_be_used_iso2,process_country)
+  names(result_list) <- to_be_used_iso2
   return(result_list)
 }
 

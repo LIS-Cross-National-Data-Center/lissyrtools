@@ -91,17 +91,19 @@
   return(year_status)
   }
   
-  result <- purrr::map(iso2, process_country)
-  names(result) <- iso2
+  to_be_used_iso2 <- iso2[iso2 %in% valid_iso2]
+  result <- purrr::map(to_be_used_iso2, process_country)
+  names(result) <- to_be_used_iso2
   
   return(result)
   
   } else if (share == TRUE) {
   
       db <- if (lws) "LWS" else "LIS"
+      to_be_used_iso2 <- iso2[iso2 %in% valid_iso2]
       
       share_to_output <- lissyrtools::missing_or_zero_vars_all %>% 
-        dplyr::filter(database == db, iso2 %in% {{iso2}} , variable == {{variable}})%>% 
+        dplyr::filter(database == db, iso2 %in% to_be_used_iso2 , variable == {{variable}})%>% 
         dplyr::group_by(iso2 , {{variable}}) %>% 
         dplyr::summarise(share = 100 - (sum(status) / dplyr::n() * 100), .groups = "drop") %>% 
         dplyr::select(iso2,share) %>% 

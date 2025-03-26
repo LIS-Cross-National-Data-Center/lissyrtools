@@ -159,8 +159,9 @@ variable_has_note <- function(variable, iso2, lws = FALSE) {
     return(year_status)
   }
   
-  result <- purrr::map(iso2, process_country)
-  names(result) <- iso2
+  to_be_used_iso2 <- iso2[iso2 %in% valid_iso2]
+  result <- purrr::map(to_be_used_iso2, process_country)
+  names(result) <- to_be_used_iso2
   
   return(result)
 }
@@ -220,8 +221,9 @@ get_surveys_lis <- function(iso2) {
   return(surveys_to_output)
   }
   
-  result_list <- purrr::map(iso2,process_country)
-  names(result_list) <- iso2
+  to_be_used_iso2 <- iso2[iso2 %in% valid_iso2]
+  result_list <- purrr::map(to_be_used_iso2,process_country)
+  names(result_list) <- to_be_used_iso2
   return(result_list)
 }
 
@@ -274,8 +276,9 @@ get_surveys_lws <- function(iso2) {
     return(surveys_to_output)
   }
   
-  result_list <- purrr::map(iso2,process_country)
-  names(result_list) <- iso2
+  to_be_used_iso2 <- iso2[iso2 %in% valid_iso2]
+  result_list <- purrr::map(to_be_used_iso2,process_country)
+  names(result_list) <- to_be_used_iso2
   return(result_list)
 }
 
