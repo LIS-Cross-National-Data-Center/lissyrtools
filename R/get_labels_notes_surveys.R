@@ -11,9 +11,11 @@
 #' # 1) Without any argument:
 #' get_vars_label()
 #' 
+#' \dontrun{
 #' # 2) Using with the outputed list from lissyuse:
 #' lis_datasets <- lissyuse(data = c("uk"), vars = c("hpub_i","hpub_u", "hi42", "hi421", "hi422", "hi43"), from = 2016)
-#' get_vars_label(vars = lis_datasets) # ???? quotes, no quotes ? 
+#' get_vars_label(vars = lis_datasets)
+#' }
 #' 
 #' # 3) Using a character vector with LIS/LWS variables:
 #' get_vars_label(vars = c("fyft", "basb", "hxremit", "bafi1_c", "pasodc"))
