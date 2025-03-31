@@ -92,23 +92,23 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> "Yes"  "No"  "No"  "No"  "No" "Yes" "Yes" "Yes"  "No"  "No"  "No"  "No" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">get_country_specifc_categories</span><span class="op">(</span>variable <span class="op">=</span> <span class="st">"health_c"</span>, iso2 <span class="op">=</span> <span class="st">"it"</span>, from <span class="op">=</span> <span class="fl">1995</span>, to <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> </span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_country_specifc_categories(variable = "health_c", iso2 = "it",     from = 1995, to = 2020):</span> object 'final' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in select(., dname, year):</span> could not find function "select"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># To retrieve information on LWS datasets</span></span></span>
 <span class="r-in"><span><span class="fu">get_country_specifc_categories</span><span class="op">(</span>variable <span class="op">=</span> <span class="st">"bus1_c"</span>, iso2 <span class="op">=</span> <span class="st">"fi"</span>, lws <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_country_specifc_categories(variable = "bus1_c", iso2 = "fi",     lws = TRUE):</span> object 'final' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in select(., dname, year):</span> could not find function "select"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Using the `n_categories` argument</span></span></span>
 <span class="r-in"><span><span class="fu">get_country_specifc_categories</span><span class="op">(</span>variable <span class="op">=</span> <span class="st">"region_c"</span>, iso2 <span class="op">=</span> <span class="st">"es"</span>, n_categories <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_country_specifc_categories(variable = "region_c", iso2 = "es",     n_categories = TRUE):</span> object 'final' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in select(., dname, year):</span> could not find function "select"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># To use this function acroos multiples countries one could make use of the `purrr::map()` function </span></span></span>
 <span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="fu">lissyrtools</span><span class="fu">::</span><span class="fu"><a href="show_countries_lws.html">show_countries_lws</a></span><span class="op">(</span><span class="op">)</span>, <span class="op">~</span><span class="fu">get_country_specifc_categories</span><span class="op">(</span>variable <span class="op">=</span> <span class="st">"bus1_c"</span>, iso2 <span class="op">=</span> <span class="va">.x</span>, lws <span class="op">=</span> <span class="cn">TRUE</span> , n_categories <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.</span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in purrr::map(lissyrtools::show_countries_lws(), ~get_country_specifc_categories(variable = "bus1_c",     iso2 = .x, lws = TRUE, n_categories = TRUE)):</span> <span style="color: #00BBBB;">ℹ</span> In index: 1.</span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> With name: Australia.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `get_country_specifc_categories()`:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> object 'final' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `select()`:</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> could not find function "select"</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
