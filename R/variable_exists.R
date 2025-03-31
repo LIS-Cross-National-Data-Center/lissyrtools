@@ -3,11 +3,11 @@
 #' Inspect whether a given variable contains more than just non-missing or non-zero values for a selected group of countries in the LIS or LWS databases.
 #'
 #' @param variable A unit-length character vector containing specified LIS/LWS variables. 
-#' @param iso2 A character vector with valid iso2 codes of countries present in LIS/LWS 
-#' @param lws  A logical value, that guides the tool to search in the LIS or LWS database. The argument is FALSE by defualt, taking LIS as the databse to invetigated if nothing is specified.
-#' @param share A logical value indicating whether to output the share of datasets, across the entire time series for each country, where a variable has more than just non-missing or non-zero values, instead of displaying its presence year by year
+#' @param iso2 A character vector with valid iso2 codes of countries present in LIS/LWS. 
+#' @param lws  A logical value, that guides the tool to search in the LIS or LWS database. The argument is FALSE by default, taking LIS as the database to be investigated if nothing is specified.
+#' @param share A logical value indicating whether to output the share of datasets, across the entire time series for each country, where a variable has more than just non-missing or non-zero values, instead of displaying its presence year by year.           
 #'
-#' @return A list made of character vectors. 
+#' @return A list made of character vectors. If share = TRUE, then a list with a numeric vector. 
 #' @export
 #'
 #' @examples

@@ -9,14 +9,14 @@ variable_exists(variable, iso2, lws = FALSE, share = FALSE)
 \arguments{
 \item{variable}{A unit-length character vector containing specified LIS/LWS variables.}
 
-\item{iso2}{A character vector with valid iso2 codes of countries present in LIS/LWS}
+\item{iso2}{A character vector with valid iso2 codes of countries present in LIS/LWS.}
 
-\item{lws}{A logical value, that guides the tool to search in the LIS or LWS database. The argument is FALSE by defualt, taking LIS as the databse to invetigated if nothing is specified.}
+\item{lws}{A logical value, that guides the tool to search in the LIS or LWS database. The argument is FALSE by default, taking LIS as the database to be investigated if nothing is specified.}
 
-\item{share}{A logical value indicating whether to output the share of datasets, across the entire time series for each country, where a variable has more than just non-missing or non-zero values, instead of displaying its presence year by year}
+\item{share}{A logical value indicating whether to output the share of datasets, across the entire time series for each country, where a variable has more than just non-missing or non-zero values, instead of displaying its presence year by year.}
 }
 \value{
-A list made of character vectors.
+A list made of character vectors. If share = TRUE, then a list with a numeric vector.
 }
 \description{
 Inspect whether a given variable contains more than just non-missing or non-zero values for a selected group of countries in the LIS or LWS databases.

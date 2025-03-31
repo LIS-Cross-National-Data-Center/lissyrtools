@@ -40,6 +40,15 @@
 #' @format A data frame with 6 variables:
 "missing_or_zero_vars_all"
 
+
+#'  Value Labels for Country-Specific Variables in LIS and LWS Datasets
+#'
+#' A data frame containing the categorized values of country-specific variables in the LIS and LWS datasets, organized by country and year.
+#'
+#' @format A data frame with 9 variables:
+"value_label_c_data"
+
+
 #' Sample Household-Level LIS Dataset (1,000 Rows)
 #'
 #' This dataset provides household-level data from the LIS database with 1,000 rows, 
