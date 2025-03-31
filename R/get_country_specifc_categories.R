@@ -118,7 +118,7 @@ get_country_specifc_categories <- function(variable, iso2, from = NULL, to = NUL
   
   # auxilliary step to names of the elements of the list 
   
-  names_of_the_list <- final %>% 
+  names_of_the_list <- lissyrtools::value_label_c_data %>% 
     dplyr::filter(if(lws) database == "LWS" else database == "LIS") %>% 
     dplyr::filter(dname %in% valid_dnames) %>% 
     dplyr::left_join(lissyrtools::datasets %>% dplyr::filter(if(lws) database == "LWS" else database == "LIS") %>% select(dname, year), by = "dname")  %>% 
@@ -135,11 +135,11 @@ get_country_specifc_categories <- function(variable, iso2, from = NULL, to = NUL
     
     process_dnames <- function(i) { 
       
-      output_vector <- final %>% dplyr::filter(if(lws) database == "LWS" else database == "LIS") %>% 
+      output_vector <- lissyrtools::value_label_c_data %>% dplyr::filter(if(lws) database == "LWS" else database == "LIS") %>% 
         dplyr::filter(dname == i & var_name == {{variable}}) %>% 
         dplyr::select(value_label) %>% dplyr::pull()
       
-      names(output_vector) <-     final %>% dplyr::filter(if(lws) database == "LWS" else database == "LIS") %>% 
+      names(output_vector) <-     lissyrtools::value_label_c_data %>% dplyr::filter(if(lws) database == "LWS" else database == "LIS") %>% 
         dplyr::filter(dname == i & var_name == {{variable}}) %>% 
         dplyr::select(code) %>% dplyr::pull()
       
@@ -153,7 +153,7 @@ get_country_specifc_categories <- function(variable, iso2, from = NULL, to = NUL
   
   else if (n_categories == TRUE) {
     
-    output_data <- final %>% dplyr::filter(if(lws) database == "LWS" else database == "LIS") %>% 
+    output_data <- lissyrtools::value_label_c_data %>% dplyr::filter(if(lws) database == "LWS" else database == "LIS") %>% 
       dplyr::filter(dname %in% valid_dnames & var_name == {{variable}}) %>% 
       dplyr::left_join(lissyrtools::datasets %>% dplyr::filter(if(lws) database == "LWS" else database == "LIS") %>% dplyr::select(dname, year) , by = "dname") %>% 
       dplyr::group_by(dname, year) %>% 
