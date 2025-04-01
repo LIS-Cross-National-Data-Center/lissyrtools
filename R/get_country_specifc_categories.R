@@ -121,7 +121,7 @@ get_country_specifc_categories <- function(variable, iso2, from = NULL, to = NUL
   names_of_the_list <- lissyrtools::value_label_c_data %>% 
     dplyr::filter(if(lws) database == "LWS" else database == "LIS") %>% 
     dplyr::filter(dname %in% valid_dnames) %>% 
-    dplyr::left_join(lissyrtools::datasets %>% dplyr::filter(if(lws) database == "LWS" else database == "LIS") %>% select(dname, year), by = "dname")  %>% 
+    dplyr::left_join(lissyrtools::datasets %>% dplyr::filter(if(lws) database == "LWS" else database == "LIS") %>% dplyr::select(dname, year), by = "dname") %>% 
     dplyr::group_by(database, dname , year ,var_name) %>% 
     dplyr::filter(iso2 == {{iso2}} & var_name == {{variable}}) %>% 
     dplyr::summarize(alternative_label = paste(unique(alternative_label), collapse = ", "), .groups = "drop") %>% 
