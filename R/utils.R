@@ -581,17 +581,10 @@ get_database <- function(lissy_files){
 #' @keywords internal
 get_index_hh_heads <- function(file){
 
-  relation_ <- file[["relation"]]
+  relation_ <- as.double(file[["relation"]])
+  
+  return(!is.na(relation_) & relation == 1000)
 
-  if(is.factor(relation_)){
-
-    return(!is.na(relation_) & readr::parse_number(as.character(relation_)) == 1000)
-
-  }else{
-
-    return(!is.na(relation_) & relation_ == 1000)
-
-  }
 
 }
 
@@ -608,3 +601,59 @@ is_lissy_machine <- function(){
   Sys.info()[["effective_user"]] == "lissy"
 
 }
+
+
+#' Is Canada LWS on the loaded data ?
+#'
+#' @description
+#' Auxilliary function to remove any p-level Canadian datasets in LWS, from the list of loaded datasets, as it has no weights 
+#'
+#' @return a list
+#' @keywords internal
+remove_dname_with_missings_in_weights <- function(list, wgt_name) {
+ 
+  # p-level data from Canada/LWS have missing weights on those whose relation is not 1000 reference person
+  # be aware of other datasets that might entail these missings in weights.
+  
+  if (all(c("relation", "inum")  %in% names(list[[1]])) & !is.null(wgt_name)) {
+    clean_list <- purrr::discard(list, stringr::str_detect(names(list), "ca")) 
+    message(
+      "Note: Canadian LWS datasets contain missing weights for individuals not identified as the reference person. These datasets were excluded to ensure valid weighted calculations."
+    )
+    return(clean_list)
+  
+  } 
+  
+  else {
+    clean_list <- list
+    return(clean_list)
+  }
+}
+
+
+#' Validate the Weight Variable Input
+#'
+#' @description
+#' This function checks the validity of the weight variable provided by the user, issuing a helpful message if the variable name
+#' does not end with "wgt", as expected by LIS conventions.
+#'
+#' @param weight_var A character string of length 1 indicating the name of the weight variable used. 
+#'
+#' @return No return value. The function is used for validation and emits a message if the weight variable name seems unusual.
+#' @keywords internal
+check_input_in_weight_argument <- function(wgt_name) {
+  
+  
+  if (!is.null(wgt_name) && !stringr::str_detect(wgt_name, "wgt")) {
+    message(
+      "LIS advice: Please check whether you have used one of the following variables in the `wgt_name` argument:\n",
+      "  - \"hwgt\", \"hpopwgt\", \"hwgta\", \"pwgt\", \"ppopwgt\", or \"pwgta\".\n\n",
+      "If your data was loaded at the household level instead of the person level, you may need to use a multiple of one of these variables, such as `nhhmem * hwgt`."
+    )
+  }
+  
+}
+
+
+
+ 
