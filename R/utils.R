@@ -581,7 +581,7 @@ get_database <- function(lissy_files){
 #' @keywords internal
 get_index_hh_heads <- function(file){
 
-  relation_ <- as.double(file[["relation"]])
+  relation_ <- file[["relation"]]
   
   return(!is.na(relation_) & relation == 1000)
 
