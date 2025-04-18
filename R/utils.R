@@ -580,12 +580,19 @@ get_database <- function(lissy_files){
 #' @return A logical vector with TRUE for hh-heads and FALSE otherwise.
 #' @keywords internal
 get_index_hh_heads <- function(file){
-
+  
   relation_ <- file[["relation"]]
   
-  return(!is.na(relation_) & relation == 1000)
-
-
+  if(is.factor(relation_)){
+    
+    return(!is.na(relation_) & readr::parse_number(as.character(relation_)) == 1000)
+    
+  }else{
+    
+    return(!is.na(relation_) & relation_ == 1000)
+    
+  }
+  
 }
 
 
