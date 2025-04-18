@@ -12,6 +12,7 @@
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/bind_lissy_files.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/change_file_name_format.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/check_file_lists_contain_same_datasets.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/check_input_in_weight_argument.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/check_variable_level.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/checks_compute_functions.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/compute_atkinson.html</loc></url>
@@ -94,6 +95,7 @@
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/read_lissy_files.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/read_lissy_files_locally.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/read_rename_files.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/remove_dname_with_missings_in_weights.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/retrieve_database_from_directory.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/retrieve_names_key_variables.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/return_desired_format.html</loc></url>
