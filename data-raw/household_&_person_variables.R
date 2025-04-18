@@ -74,7 +74,7 @@ lis_categorical_variables <- c("region_c", "rural","locsz_c", "area_c", "own", "
                                "educ", "educlev", "educ_c", "enroll", "illiterate", "emp", "emp_ilo", "lfs", 
                                "parleave", "fyft", "secjob", "status1", "inda1", "indb1", "indd1", "ind1_c", 
                                "public1", "occa1", "occc1", "occ1_c", "ptime1","farming", "temp1","indc1", "occb1", "edmom_c" , 
-                               "eddad_c" , "ethnic_c","migrat_c", "immigr_c")
+                               "eddad_c" , "informal",  "ethnic_c","migrat_c", "immigr_c")
 
 # --- LIS Continuous vars ----
 
@@ -90,8 +90,8 @@ lis_continuous_variables <- c("dhi", "hitotal", "hifactor", "hitransfer", "hilab
                                "heoth", "pitotal", "pilabour", "pi11", "pi12", 
                                "pi13", "pipension", "pi31", "pi311", "pi312", "pi32", "pi332", "pi33", "pi331", 
                                "ppub_i", "pi411", "pi42", "pi421", "pi422", "pi43", "pi44", "pi511", "pelabour", 
-                               "pxitax", "pxscont", "pxitsc", "pxvcont", "informal", "weeks", "hours1", 
-                               "hourstot", "wexptl", "yrsresid", "age", "ageyoch", "momnum", "dadnum", "partnum", "wage1", "hwage1", 
+                               "pxitax", "pxscont", "pxitsc", "pxvcont", "weeks", "hours1", 
+                               "hourstot", "wexptl", "yrsresid", "age", "ageyoch", "wage1", "hwage1", 
                                "weeksft", "nrooms" , "edyrs")
 
 
