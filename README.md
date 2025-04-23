@@ -44,7 +44,6 @@ Subsequently, the list can be transformed using other functions from **lissyrtoo
 
 ``` r
 library(lissyrtools)
-library(dplyr)
 
 # Load the datasets 
 # The output is a list whose elements are the datasets available in the LIS database for the countries selected within the specified time frame. 
@@ -113,7 +112,6 @@ When working with `lissyrtools` locally, use `lissyuse()`, along with the [sampl
 
 ``` r
 library(lissyrtools)
-library(dplyr)
 
 # Example where both household-level and individual-level variables are specified in `vars`
 lis_datasets <- lissyuse(data = c("it", "us", "mx"), vars = c("region_c", "dhi", "age", "pi11", "sex"))

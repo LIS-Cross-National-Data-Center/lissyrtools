@@ -18,7 +18,6 @@
 #' @examples
 #' \dontrun{
 #' library(lissyrtools)
-#' library(dplyr)
 #' 
 #'lis_datasets <- lissyuse(data = c("it", "de16", "us19"), vars  = c("dhi", "region_c", "age", "hourstot", "status1"), subset = "!is.na(status1) & relation %in% c(1000,2000)")
 #' # Checking the names of the data frames. 
