@@ -11,7 +11,10 @@ Description: A package with the tools needed to develop scripts with LIS data. I
   3) Compute estimates from microdata.
 License: GPL-3
 URL: https://lis-cross-national-data-center.github.io/lissyrtools/
-Depends: R (>= 3.2.0)
+Depends: 
+    R (>= 3.2.0),
+    haven
+
 Imports:
     dplyr,
     ggplot2,
@@ -23,7 +26,6 @@ Imports:
     assertthat,
     tibble,
     readr,
-    haven,
     matrixStats,
     lifecycle, 
     here
