@@ -13,9 +13,9 @@ License: GPL-3
 URL: https://lis-cross-national-data-center.github.io/lissyrtools/
 Depends: 
     R (>= 3.2.0),
-    haven
+    haven,
+    dplyr
 Imports:
-    dplyr,
     ggplot2,
     stringr,
     rlang,
