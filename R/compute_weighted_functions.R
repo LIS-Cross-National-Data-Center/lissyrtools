@@ -51,8 +51,8 @@
 #' }
 run_weighted_percentiles <- function(data_list, var_name, wgt_name = NULL, probs = seq(0, 1, 0.25), share = FALSE, na.rm = TRUE) {
  
-   data_list <- remove_dname_with_missings_in_weights(data_list, wgt_name) # return a list cleaned 
-   check_input_in_weight_argument(wgt_name) 
+   data_list <- lissyrtools::remove_dname_with_missings_in_weights(data_list, wgt_name) # return a list cleaned 
+   lissyrtools::check_input_in_weight_argument(wgt_name) 
   
    output_run_weighted_percentiles <- purrr::imap(data_list, ~{
     var <- .x[[var_name]]
