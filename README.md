@@ -58,7 +58,7 @@ lis_datasets <- lissyuse(
 
 # Example of further data cleaning using `transform_` functions:
 
-lissy_datasets_transformed <- lis_datasets %>%
+lissy_datasets_transformed_pi11 <- lis_datasets %>%
   transform_false_zeros_to_na("pi11") %>%
   transform_negative_values_to_zero("pi11") %>%
   transform_zeros_to_na("pi11") %>%
@@ -68,7 +68,7 @@ lissy_datasets_transformed <- lis_datasets %>%
   transform_restrict_age("pi11", from = 16, to = 64)
 
 
-lissy_datasets_transformed <- lissy_datasets_transformed %>%
+lissy_datasets_transformed_dhi <- lis_datasets %>%
   transform_false_zeros_to_na("dhi") %>%
   transform_negative_values_to_zero("dhi") %>%
   transform_top_code_with_iqr("dhi") %>%
@@ -77,12 +77,12 @@ lissy_datasets_transformed <- lissy_datasets_transformed %>%
   transform_adjust_by_lisppp("dhi")
 
 # Compute indicators
-print_indicator(lissy_datasets_transformed,
+print_indicator(lissy_datasets_transformed_dhi,
                              variable = "dhi",
                              indicator = "gini",
                              na.rm = TRUE)
                              
-print_indicator(lissy_datasets_transformed,
+print_indicator(lissy_datasets_transformed_pi11,
                              variable = "pi11",
                              indicator = "gini",
                              na.rm = TRUE)

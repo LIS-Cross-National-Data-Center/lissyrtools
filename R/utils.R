@@ -646,16 +646,16 @@ remove_dname_with_missings_in_weights <- function(list, wgt_name) {
 #'
 #' @param weight_var A character string of length 1 indicating the name of the weight variable used. 
 #'
-#' @return No return value. The function is used for validation and emits a message if the weight variable name seems unusual.
+#' @return No return value. The function is used for validation and emits a warning if the weight variable name seems unusual.
 #' @keywords internal
 check_input_in_weight_argument <- function(wgt_name) {
   
   
   if (!is.null(wgt_name) && !stringr::str_detect(wgt_name, "wgt")) {
-    message(
+    warning(
       "LIS advice: Please check whether you have used one of the following variables in the `wgt_name` argument:\n",
       "  - \"hwgt\", \"hpopwgt\", \"hwgta\", \"pwgt\", \"ppopwgt\", or \"pwgta\".\n\n",
-      "If your data was loaded at the household level instead of the person level, you may need to use a multiple of one of these variables, such as `nhhmem * hwgt`."
+      "If your data was loaded at the household level instead of the person level, you may want to generate a multiple of one of these variables, such as `nhhmem * hwgt`."
     )
   }
   

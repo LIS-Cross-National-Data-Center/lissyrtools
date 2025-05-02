@@ -232,7 +232,7 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
         
         
         message_to_print_in_the_end <- paste0(
-          "The list contains the following data frames: ", 
+          "The list contains the following `person-level` data frames: ", 
           paste(names(list_with_data), collapse = ", "),
           ".\n", # Proper period and paragraph space
           "All variables were imported! We recommend specifying a character vector with the desired variables in the argument `vars`."
@@ -297,7 +297,7 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
         names(list_with_data) <- data_to_load
         
         message_to_print_in_the_end <- paste0(
-          "The list contains the following data frames: ", 
+          "The list contains the following `person-level` data frames: ", 
           paste(names(list_with_data), collapse = ", "), ".") 
         
         
@@ -364,7 +364,7 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
         
         
         message_to_print_in_the_end <- paste0(
-          "The list contains the following data frames: ", 
+          "The list contains the following `person-level` data frames: ", 
           paste(names(list_with_data), collapse = ", "),
           ".\n", # Proper period and paragraph space
           "All variables were imported! We recommend specifying a character vector with the desired variables in the argument `vars`."
@@ -426,7 +426,7 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
         names(list_with_data) <- data_to_load
         
         message_to_print_in_the_end <- paste0(
-          "The list contains the following data frames: ", 
+          "The list contains the following `person-level` data frames: ", 
           paste(names(list_with_data), collapse = ", "), ".")  
         
       } 
@@ -478,7 +478,7 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
       if (is.null(vars)) {
         list_with_data <- data_to_load
         message_to_print_in_the_end <- paste0(
-          "The list contains the following `sample` data frames: ", 
+          "The list contains the following `person-level sample` data frames: ", 
           paste(names(list_with_data), collapse = ", "),
           ".\n", # Proper period and paragraph space
           "All variables were imported! We recommend specifying a character vector with the desired variables in the argument `vars`."
@@ -518,7 +518,7 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
         list_with_data <- purrr::map(data_to_load, ~.x %>% select(unique(c(hvars, pvars, key_vars_household_lws ,key_vars_person_lws))))
         
         message_to_print_in_the_end <- paste0(
-          "The list contains the following `sample` data frames: ", 
+          "The list contains the following `person-level sample` data frames: ", 
           paste(names(list_with_data), collapse = ", "), ".") 
       }
       
@@ -554,7 +554,7 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
       if (is.null(vars)) {
         list_with_data <- data_to_load
         message_to_print_in_the_end <- paste0(
-          "The list contains the following `sample` data frames: ", 
+          "The list contains the following `person-level sample` data frames: ", 
           paste(names(list_with_data), collapse = ", "),
           ".\n", # Proper period and paragraph space
           "All variables were imported! We recommend specifying a character vector with the desired variables in the argument `vars`."
@@ -594,7 +594,7 @@ variable_selection_for_lissyuse <- function(data_to_load, path_to_files, vars = 
         list_with_data <- purrr::map(data_to_load, ~.x %>% select(unique(c(hvars, pvars, key_vars_household_lis ,key_vars_person_lis))))
         
         message_to_print_in_the_end <- paste0(
-          "The list contains the following `sample` data frames: ", 
+          "The list contains the following `person-level sample` data frames: ", 
           paste(names(list_with_data), collapse = ", "), ".") 
         
       }
