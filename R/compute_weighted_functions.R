@@ -106,7 +106,7 @@ run_weighted_percentiles <- function(data_list, var_name, wgt_name = NULL, probs
       result <- purrr::imap(split_df, function(sub_df, group_name) {
         var <- sub_df[[var_name]]
         wgt <- if (!is.null(wgt_name)) sub_df[[wgt_name]] else NULL
-        compute_weighted_percentiles(
+        lissyrtools::compute_weighted_percentiles(
           var = var,
           wgt = wgt,
           probs = probs,
@@ -125,7 +125,7 @@ run_weighted_percentiles <- function(data_list, var_name, wgt_name = NULL, probs
     } else {
       var <- df[[var_name]]
       wgt <- if (!is.null(wgt_name)) df[[wgt_name]] else NULL
-      compute_weighted_percentiles(
+      lissyrtools::compute_weighted_percentiles(
         var = var,
         wgt = wgt,
         probs = probs,
