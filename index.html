@@ -96,7 +96,7 @@
 <span></span>
 <span><span class="co"># Example of further data cleaning using `transform_` functions:</span></span>
 <span></span>
-<span><span class="va">lissy_datasets_transformed</span> <span class="op">&lt;-</span> <span class="va">lis_datasets</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">lissy_datasets_transformed_pi11</span> <span class="op">&lt;-</span> <span class="va">lis_datasets</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/transform_false_zeros_to_na.html">transform_false_zeros_to_na</a></span><span class="op">(</span><span class="st">"pi11"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/transform_negative_values_to_zero.html">transform_negative_values_to_zero</a></span><span class="op">(</span><span class="st">"pi11"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/transform_zeros_to_na.html">transform_zeros_to_na</a></span><span class="op">(</span><span class="st">"pi11"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
@@ -106,7 +106,7 @@
 <span>  <span class="fu"><a href="reference/transform_restrict_age.html">transform_restrict_age</a></span><span class="op">(</span><span class="st">"pi11"</span>, from <span class="op">=</span> <span class="fl">16</span>, to <span class="op">=</span> <span class="fl">64</span><span class="op">)</span></span>
 <span></span>
 <span></span>
-<span><span class="va">lissy_datasets_transformed</span> <span class="op">&lt;-</span> <span class="va">lissy_datasets_transformed</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">lissy_datasets_transformed_dhi</span> <span class="op">&lt;-</span> <span class="va">lis_datasets</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/transform_false_zeros_to_na.html">transform_false_zeros_to_na</a></span><span class="op">(</span><span class="st">"dhi"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/transform_negative_values_to_zero.html">transform_negative_values_to_zero</a></span><span class="op">(</span><span class="st">"dhi"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/transform_top_code_with_iqr.html">transform_top_code_with_iqr</a></span><span class="op">(</span><span class="st">"dhi"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
@@ -115,12 +115,12 @@
 <span>  <span class="fu"><a href="reference/transform_adjust_by_lisppp.html">transform_adjust_by_lisppp</a></span><span class="op">(</span><span class="st">"dhi"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Compute indicators</span></span>
-<span><span class="fu"><a href="reference/print_indicator.html">print_indicator</a></span><span class="op">(</span><span class="va">lissy_datasets_transformed</span>,</span>
+<span><span class="fu"><a href="reference/print_indicator.html">print_indicator</a></span><span class="op">(</span><span class="va">lissy_datasets_transformed_dhi</span>,</span>
 <span>                             variable <span class="op">=</span> <span class="st">"dhi"</span>,</span>
 <span>                             indicator <span class="op">=</span> <span class="st">"gini"</span>,</span>
 <span>                             na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span>                             </span>
-<span><span class="fu"><a href="reference/print_indicator.html">print_indicator</a></span><span class="op">(</span><span class="va">lissy_datasets_transformed</span>,</span>
+<span><span class="fu"><a href="reference/print_indicator.html">print_indicator</a></span><span class="op">(</span><span class="va">lissy_datasets_transformed_pi11</span>,</span>
 <span>                             variable <span class="op">=</span> <span class="st">"pi11"</span>,</span>
 <span>                             indicator <span class="op">=</span> <span class="st">"gini"</span>,</span>
 <span>                             na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -187,8 +187,8 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Gonçalo Marques <br><small class="roles"> Author, maintainer </small>  </li>
-<li>Josep Espasa Reig <br><small class="roles"> Author </small>  </li>
+<li>Gonçalo Marques <br><small class="roles"> Author, maintainer </small>   </li>
+<li>Josep Espasa Reig <br><small class="roles"> Author </small>   </li>
 </ul>
 </div>
 
@@ -209,7 +209,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
     </footer>

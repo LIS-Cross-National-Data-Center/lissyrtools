@@ -1,8 +1,8 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
+pkgdown: 2.1.2
 pkgdown_sha: ~
 articles: {}
-last_built: 2025-04-23T13:56Z
+last_built: 2025-05-02T14:22Z
 urls:
   reference: https://lis-cross-national-data-center.github.io/lissyrtools/reference
   article: https://lis-cross-national-data-center.github.io/lissyrtools/articles
