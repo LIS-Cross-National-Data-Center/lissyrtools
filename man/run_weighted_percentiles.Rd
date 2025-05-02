@@ -2,55 +2,65 @@
 % Please edit documentation in R/compute_weighted_functions.R
 \name{run_weighted_percentiles}
 \alias{run_weighted_percentiles}
-\title{Compute Weighted Percentiles Across a List of Data Frames}
+\title{Compute Weighted Percentiles Across a List of Data Frames (with optional grouping)}
 \usage{
 run_weighted_percentiles(
   data_list,
   var_name,
   wgt_name = NULL,
   probs = seq(0, 1, 0.25),
+  type = c("type_4", "type_2"),
   share = FALSE,
-  na.rm = TRUE
+  na.rm = TRUE,
+  by = NULL
 )
 }
 \arguments{
-\item{data_list}{A named list of data frames, typically from multiple countries, years, or datasets.}
+\item{data_list}{A named list of data frames, (e.g., across countries or years).}
 
-\item{var_name}{A string specifying the variable name for which percentiles or shares should be computed.}
+\item{var_name}{A string specifying the variable name (e.g., "dhi", "pilabour") to compute percentiles or shares for.}
 
-\item{wgt_name}{An optional string specifying the weight variable to be used. If \code{NULL}, no weights are applied.}
+\item{wgt_name}{An optional string specifying the weight variable to be used. If \code{NULL}, equal weights are assumed.}
 
-\item{probs}{A numeric vector of probabilities with values between 0 and 1. Used to determine percentile cutoffs.}
+\item{probs}{A numeric vector of probabilities with values between 0 and 1, defining percentiles (if \code{share = FALSE}) or the brackets between which shares are computed (if \code{share = TRUE}).}
 
-\item{share}{Logical. If \code{TRUE}, returns income shares between percentile brackets instead of the percentile values.}
+\item{type}{A character string indicating which percentile definition to use.
+#' Either \code{"type_4"} (default, linear interpolation-based of the empirical cdf - continuous sample quantile) or
+\code{"type_2"} (used in Stata commands like collapse and _pctile, inverse of empirical distribution function with averaging at discontinuities - discontinuous sample quantile).}
+
+\item{share}{Logical. If \code{TRUE}, returns income shares between percentile brackets instead of the percentile values. Default is \code{FALSE}.
+Note: This \strong{always uses} \code{definition = "type_4"} (interpolation), regardless of the \code{definition} parameter. It cannot be combined with \code{definition = "type_2"}.}
 
 \item{na.rm}{Logical. If \code{TRUE}, missing values in \code{var_name} or \code{wgt_name} are removed.}
+
+\item{by}{Optional string giving the name of a categorical variable to split the data within each data frame before computing statistics.}
 }
 \value{
-A named list containing the result (numeric vectors) for each element of \code{data_list}, with names inherited from the list.
+A named list of results. If \code{by} is used, unless if \code{share = FALSE} and \code{length(probs) ==1}, the result will be a nested list where the outer list is by data frame and the inner list is by subgroup.
+If \code{by} is \code{NULL}, the result is a simple list of numeric vectors (one per data frame).
 }
 \description{
 Applies the \code{compute_weighted_percentiles()} function to each data frame in a named list, using a specified variable and optional weight.
-The function returns either percentile values or share values, depending on the \code{share} argument.
+Supports optional grouping via a categorical \code{by} variable, and returns either percentile values or share values, depending on the \code{share} argument.
 }
 \details{
-Percentiles are computed using the weighted version of \strong{quantile definition 4} from Hyndman and Fan (1996).
+Percentiles are computed using weighted version of \strong{quantile definition 4} from Hyndman and Fan (1996), by default, or \strong{quantile definition 2} if specified.
 When \code{share = TRUE}, the function estimates Lorenz ordinates by taking quantiles from the running sum of the ordered outcome variable (divided by the total),
-according to the same quantile definition.
+according to the same \strong{quantile definition 4 only}.
 }
 \examples{
 \dontrun{  
 
 # Import data
-my_data_list <- lissyuse(data = "es")
+my_data_list <- lissyuse(data = "es", from  = 2016)
 
 # Retrieve the percentile estimates
 percentiles_result <- my_data_list \%>\% 
-  transform_negative_values_to_zero("dhi") \%>\%
   run_weighted_percentiles(
     var_name = "dhi",
     wgt_name = "hpopwgt",
-    probs = seq(0, 1, 0.1),
+    probs = seq(0.1, 0.9, 0.1),
+    type = "type_2",
     na.rm = TRUE
 )
 print(percentiles_result)
@@ -65,5 +75,18 @@ shares_result <- run_weighted_percentiles(
     na.rm = TRUE
 )
 print(shares_result)
+
+# Using the by option 
+by_result_median <- run_weighted_percentiles(
+    data_list = purrr::map(my_data_list[1:2], ~.x \%>\% filter(emp == 1)),
+    var_name = "pi11",
+    wgt_name = "ppopwgt",
+    probs = 0.5,
+    type = "type_2",
+    na.rm = TRUE, 
+    by = "region_c"
+   
+)
+print(by_result_median)
 }
 }

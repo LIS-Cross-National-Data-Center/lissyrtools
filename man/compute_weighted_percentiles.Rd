@@ -9,19 +9,24 @@ compute_weighted_percentiles(
   wgt = NULL,
   probs = seq(0, 1, 0.25),
   na.rm = TRUE,
-  share = FALSE
+  share = FALSE,
+  type = c("type_4", "type_2")
 )
 }
 \arguments{
+\item{var}{A numeric vector of values (e.g., .x$dhi, .x$pi11).}
+
+\item{wgt}{A numeric vector of weights (e.g., .x$hpopwgt, .x$pwgt). Must be the same length as \code{x}.}
+
 \item{probs}{A numeric vector of probabilities between 0 and 1 indicating which percentiles to compute. Default is \code{seq(0, 1, 0.25)}.}
 
 \item{na.rm}{Logical; if \code{TRUE}, missing values in \code{x} and \code{w} are removed before computation. Default is \code{TRUE}.}
 
-\item{share}{Logical; if \code{TRUE}, computes the share of total value (e.g., .x$dhi) within each interval defined by \code{probs}. If \code{FALSE}, returns the percentile values. Default is \code{FALSE}.}
+\item{share}{Logical; if \code{TRUE}, computes the share of total value (e.g., .x$dhi) within each interval defined by \code{probs}. If \code{FALSE}, returns the percentile values. Default is \code{FALSE}. Note: This option always uses \code{type = "type_4"}, and can not be used toghether with \code{type = "type_2"}.}
 
-\item{x}{A numeric vector of values (e.g., .x$dhi, .x$pi11).}
-
-\item{w}{A numeric vector of weights (e.g., .x$hpopwgt, .x$pwgt). Must be the same length as \code{x}.}
+\item{type}{A character string indicating which percentile definition to use.
+#' Either \code{"type_4"} (default, linear interpolation-based of the empirical cdf - continuous sample quantile) or
+\code{"type_2"} (used in Stata commands like collapse and _pctile, inverse of empirical distribution function with averaging at discontinuities - discontinuous sample quantile).}
 }
 \value{
 A named numeric vector. If \code{share = FALSE}, returns weighted percentiles with names corresponding to the percentiles (e.g., "25\%"). If \code{share = TRUE}, returns the share of the total value in each percentile range (e.g., "0-25\%").
