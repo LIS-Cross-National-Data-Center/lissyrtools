@@ -10,9 +10,12 @@
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/all.is.numeric.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/all.values.equal.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/bind_lissy_files.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/ccyy_to_cname.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/ccyy_to_yyyy.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/change_file_name_format.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/check_file_lists_contain_same_datasets.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/check_input_in_weight_argument.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/check_missing_share.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/check_variable_level.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/checks_compute_functions.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/compute_atkinson.html</loc></url>
@@ -20,7 +23,10 @@
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/compute_mean.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/compute_percentiles.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/compute_poverty_rate.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/compute_weighted_count.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/compute_weighted_mean.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/compute_weighted_percentiles.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/convert_list_from_ccyy_to_cc_names_yyyy.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/data_vars_labels.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/data_with_warnings.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/database_character_to_name.html</loc></url>
@@ -100,6 +106,8 @@
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/retrieve_database_from_directory.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/retrieve_names_key_variables.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/return_desired_format.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/run_weighted_count.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/run_weighted_mean.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/run_weighted_percentiles.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/set_lissy_attributes.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/show_countries_lis.html</loc></url>
