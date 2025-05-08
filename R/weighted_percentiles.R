@@ -1,6 +1,6 @@
 
 
-#' Compute Weighted Percentiles Across a List of Data Frames (with optional grouping)
+#' Compute Weighted Percentiles cross a List of Data Frames (with optional grouping)
 #' @description
 #' Applies the `compute_weighted_percentiles()` function to each data frame in a named list, using a specified variable and optional weight. 
 #'  Supports optional grouping via a categorical `by` variable, and returns either percentile values or share values, depending on the `share` argument.
@@ -20,7 +20,7 @@
 #' \code{"type_2"} (used in Stata commands like collapse and _pctile, inverse of empirical distribution function with averaging at discontinuities - discontinuous sample quantile).
 #' @param by Optional string giving the name of a categorical variable to split the data within each data frame before computing statistics. 
 #' 
-#' @return A named list of results. If `by` is used, unless if `share = FALSE` and `length(probs) ==1`, the result will be a nested list where the outer list is by data frame and the inner list is by subgroup. 
+#' @return A named list of data frames. If `by` is used, unless if `share = FALSE` and `length(probs) ==1`, the result will be a nested list where the outer list is by data frame and the inner list is by subgroup. 
 #' If `by` is `NULL`, the result is a simple list of numeric vectors (one per data frame).
 #' 
 #' @details
@@ -64,7 +64,7 @@
 #'     var_name = "pi11",
 #'     wgt_name = "ppopwgt",
 #'     probs = 0.5,
-#'     type = "type_2",
+#'     type = "type_4",
 #'     na.rm = TRUE, 
 #'     by = "region_c"
 #'    
@@ -84,18 +84,19 @@ run_weighted_percentiles <- function(data_list, var_name, wgt_name = NULL, probs
 
 
    if (!is.null(by)) {
-    allowed_categoricals <- c(lissyrtools::lis_categorical_variables, lissyrtools::lws_wealth_categorical_variables)
-    if (!by %in% allowed_categoricals) {
+    allowed_categoricals_in_by <- c(lissyrtools::lis_categorical_variables, lissyrtools::lws_wealth_categorical_variables)
+    if (!by %in% allowed_categoricals_in_by) {
       stop(sprintf("The `by` variable must be a categorical variable from `lissyrtools::lis_categorical_variables` or `lws_wealth_categorical_variables`."))
     }
 
     df_to_keep <- purrr::map_lgl(data_list, ~!all(is.na(.x[[by]])))
+    # change the data frames in `data_list` !
     if (any(!df_to_keep)) {
       warning(sprintf("The `by` variable '%s' contains only NAs in the following frames, which will be dropped: %s",
                       by, paste(names(df_to_keep)[!df_to_keep], collapse = ", ")))
       data_list <- data_list[df_to_keep]
     }
-  }
+   }
   
   result <- purrr::imap(data_list, function(df, name) {
     if (!is.null(by)) {
@@ -135,6 +136,11 @@ run_weighted_percentiles <- function(data_list, var_name, wgt_name = NULL, probs
       )
     }
   })
+  
+  if (length(probs) == 1 && share == FALSE && is.null(by)) {
+    result <- convert_list_from_ccyy_to_cc_names_yyyy(result)
+  } 
+
   return(result)
 }
 
@@ -155,11 +161,13 @@ run_weighted_percentiles <- function(data_list, var_name, wgt_name = NULL, probs
 #' #' Either \code{"type_4"} (default, linear interpolation-based of the empirical cdf - continuous sample quantile) or 
 #' \code{"type_2"} (used in Stata commands like collapse and _pctile, inverse of empirical distribution function with averaging at discontinuities - discontinuous sample quantile).
 #' 
-#' @return A named numeric vector. If \code{share = FALSE}, returns weighted percentiles with names corresponding to the percentiles (e.g., "25%"). If \code{share = TRUE}, returns the share of the total value in each percentile range (e.g., "0-25%"). 
-#' @keywords internal 
+#' @return A named numeric vector. If \code{share = FALSE}, returns weighted percentiles with names corresponding to the percentiles (e.g., "25%"). If \code{share = TRUE}, returns the share of the total value in each percentile range (e.g., "0-25%").  
 #'
+#' @export
+#' 
 #' @examples
 #' \dontrun{
+#' data <- lissyrtools::lissyuse(data = "es22", vars = c("dhi", "age"))
 #' compute_weighted_percentiles(data$es22$dhi, data$es22$ppopwgt)
 #' compute_weighted_percentiles(data$es22$dhi, data$es22$ppopwgt, probs = c(0.03, 0.72, 0.48, .01))
 #' compute_weighted_percentiles(data$es22$dhi, data$es22$ppopwgt, probs = c(0.03, 0.72, 0.48, .01), share = TRUE)
@@ -167,9 +175,7 @@ run_weighted_percentiles <- function(data_list, var_name, wgt_name = NULL, probs
 compute_weighted_percentiles <- function(var, wgt = NULL, probs = seq(0, 1, 0.25), na.rm = TRUE, share = FALSE, type = c("type_4", "type_2")) {
   
   type <- match.arg(type)
-  if (type == "type_2" && share) {
-    warning("Share computation is not implemented for definition = 'type_2'. Argument `type` is ignored and set to 'type_4'.")
-  }
+
 
   if (is.null(wgt)) {
     wgt <- rep(1, length(var))

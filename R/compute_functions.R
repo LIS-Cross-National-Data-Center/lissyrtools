@@ -81,6 +81,8 @@ compute_percentiles <- function(file, file_name, variable, breaks = seq(0, 1, 0.
                    na.rm = na.rm, normwt = TRUE))
     )
 
+  
+    .Deprecated("compute_weighted_percentiles", package = "lissyrtools", msg = "The function `compute_percentiles()` is now deprecated, please use `compute_weighted_percentiles()` and `run_weighted_percentiles()` for lists instead.")
 }
 
 
@@ -216,6 +218,8 @@ compute_mean <- function(file, file_name, variable, weight = NULL, na.rm = FALSE
              weights = weight_,
              na.rm = na.rm)
 
+  .Deprecated("compute_weighted_mean", package = "lissyrtools", msg = "The function `compute_mean()` is now deprecated, please use `compute_weighted_mean()` and `run_weighted_mean()` for lists instead.")
+
 }
 
 
@@ -252,6 +256,8 @@ compute_median <- function(file, file_name, variable, weight = NULL, na.rm = FAL
   unname(matrixStats::weightedMedian(x = file[[variable]],
                       w = weight_,
                       na.rm = na.rm))
+
+     .Deprecated("compute_weighted_percentiles", package = "lissyrtools", msg = "The function `compute_median()` is now deprecated, please use `compute_weighted_percentiles()` and `run_weighted_percentiles()` for lists instead. Argument `probs` needs to be selected and equal to 0.5")
 
 }
 
@@ -315,6 +321,9 @@ compute_ratio <- function(file, file_name, variable, ratio = c(0.9, 0.1), weight
                                                                 probs = c(ratio[2]),
                                                                 na.rm = na.rm, normwt = TRUE))
   }
+
+  .Deprecated("compute_weighted_percentiles", package = "lissyrtools", msg = "The function `compute_ratio()` is now deprecated, please use `compute_weighted_percentiles()` and `run_weighted_percentiles()` for lists instead.")
+
 }
 
 
