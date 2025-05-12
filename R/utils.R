@@ -681,7 +681,7 @@ ccyy_to_cname <- function(ccyy) {
 #' @return A list
 #' @keywords internal
 convert_list_from_ccyy_to_cc_names_yyyy <- function(data_list) {
-  list %>%
+  data_list  %>%
     imap_dfr(~{
       tibble(
         country = ccyy_to_cname(.y),

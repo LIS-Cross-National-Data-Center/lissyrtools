@@ -78,7 +78,7 @@ run_weighted_mean <- function(
               na.rm = na.rm
             )
           }
-        ) |>
+        ) %>%
           unlist()
       } else {
         var <- d[[var_name]]
