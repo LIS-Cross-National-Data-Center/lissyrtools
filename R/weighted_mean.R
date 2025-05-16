@@ -33,19 +33,52 @@ run_weighted_mean <- function(
     data_list,
     wgt_name
   )
-  lissyrtools::check_input_in_weight_argument(wgt_name)
+  
+
+    # Check that var_name exists
+    assertthat::assert_that(
+      var_name %in% names(data_list[[1]]),
+      msg = glue::glue(
+        "Variable '{var_name}' could not be found as a column name in the datasets."
+      )
+    )
+
+    # Check that all variables in `by` exist, if provided
+    if (!is.null(by)) {
+      assertthat::assert_that(
+        by %in% names(data_list[[1]]),
+        msg = glue::glue(
+          "Grouping variable '{by}' could not be found as a column name in the datasets."
+        )
+      )
+    }
+
+    # Check that wgt_name exists, if provided
+    if (!is.null(wgt_name)) {
+      assertthat::assert_that(
+        wgt_name %in% names(data_list[[1]]),
+        msg = glue::glue(
+          "Weight variable '{wgt_name}' could not be found as a column name in the datasets."
+        )
+      )
+    }
+    lissyrtools::check_input_in_weight_argument(wgt_name)
+  
+  
 
   if (!is.null(by)) {
     allowed_categoricals <- c(
       lissyrtools::lis_categorical_variables,
-      lissyrtools::lws_wealth_categorical_variables
+      lissyrtools::lws_wealth_categorical_variables,
+      "inum"
     )
     if (!by %in% allowed_categoricals) {
       stop(sprintf(
-        "The `by` variable must be a categorical variable in `lissyrtools::lis_categorical_variables` or `lissyrtools::lws_wealth_categorical_variables`"
+        "The `by` variable must be a categorical variable in `lissyrtools::lis_categorical_variables`, `lissyrtools::lws_wealth_categorical_variables`, or the variable 'inum'."
       ))
     }
 
+    
     df_to_keep <- purrr::map_lgl(data_list, ~ !all(is.na(.x[[by]])))
     to_drop <- names(df_to_keep[!df_to_keep])
     if (any(!df_to_keep)) {
@@ -95,7 +128,7 @@ run_weighted_mean <- function(
   if (!is.null(by)) {
     return(output_run_weighted_mean)
   } else {
-    output_run_weighted_mean <- convert_list_from_ccyy_to_cc_names_yyyy(
+    output_run_weighted_mean <- lissyrtools::convert_list_from_ccyy_to_cc_names_yyyy(
       output_run_weighted_mean
     )
     return(output_run_weighted_mean)

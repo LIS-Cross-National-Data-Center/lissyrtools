@@ -74,8 +74,41 @@
 run_weighted_percentiles <- function(data_list, var_name, wgt_name = NULL, probs = seq(0, 1, 0.25), type = c("type_4", "type_2"), share = FALSE, na.rm = TRUE, by = NULL) {
  
   
-  data_list <- lissyrtools::remove_dname_with_missings_in_weights(data_list, wgt_name) # return a list cleaned 
-  lissyrtools::check_input_in_weight_argument(wgt_name) 
+  data_list <- lissyrtools::remove_dname_with_missings_in_weights(
+    data_list,
+    wgt_name
+  ) # return a list cleaned
+
+  # Check that var_name exists
+  assertthat::assert_that(
+    var_name %in% names(data_list[[1]]),
+    msg = glue::glue(
+      "Variable '{var_name}' could not be found as a column name in the datasets."
+    )
+  )
+
+  # Check that all variables in `by` exist, if provided
+  if (!is.null(by)) {
+    assertthat::assert_that(
+      by %in% names(data_list[[1]]),
+      msg = glue::glue(
+        "Grouping variable '{by}' could not be found as a column name in the datasets."
+      )
+    )
+  }
+
+  # Check that wgt_name exists, if provided
+  if (!is.null(wgt_name)) {
+    assertthat::assert_that(
+      wgt_name %in% names(data_list[[1]]),
+      msg = glue::glue(
+        "Weight variable '{wgt_name}' could not be found as a column name in the datasets."
+      )
+    )
+  }
+  lissyrtools::check_input_in_weight_argument(wgt_name)
+  
+  
   
   type <- match.arg(type)
   if (share && type != "type_4") {
@@ -84,9 +117,9 @@ run_weighted_percentiles <- function(data_list, var_name, wgt_name = NULL, probs
 
 
    if (!is.null(by)) {
-    allowed_categoricals_in_by <- c(lissyrtools::lis_categorical_variables, lissyrtools::lws_wealth_categorical_variables)
+    allowed_categoricals_in_by <- c(lissyrtools::lis_categorical_variables, lissyrtools::lws_wealth_categorical_variables, "inum")
     if (!by %in% allowed_categoricals_in_by) {
-      stop(sprintf("The `by` variable must be a categorical variable from `lissyrtools::lis_categorical_variables` or `lws_wealth_categorical_variables`."))
+      stop(sprintf("The `by` variable must be a categorical variable from `lissyrtools::lis_categorical_variables`, `lws_wealth_categorical_variables`, or the variable 'inum'."))
     }
 
     df_to_keep <- purrr::map_lgl(data_list, ~!all(is.na(.x[[by]])))

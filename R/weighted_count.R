@@ -90,11 +90,39 @@ run_weighted_count <- function(
 ) {
 
   data_list <- lissyrtools::remove_dname_with_missings_in_weights(data_list, wgt_name) # return a list cleaned 
-  lissyrtools::check_input_in_weight_argument(wgt_name) 
+    
+  # Check that var_name exists
+    assertthat::assert_that(
+      var_name %in% names(data_list[[1]]),
+      msg = glue::glue(
+        "Variable '{var_name}' could not be found as a column name in the datasets."
+      )
+    )
 
-  allowed_categoricals_in_var_name <- c(lissyrtools::lis_categorical_variables, lissyrtools::lws_wealth_categorical_variables)
+    # Check that all variables in `by` exist, if provided
+    if (!is.null(by)) {
+      assertthat::assert_that(
+        by %in% names(data_list[[1]]),
+        msg = glue::glue(
+          "Grouping variable '{by}' could not be found as a column name in the datasets."
+        )
+      )
+    }
+
+    # Check that wgt_name exists, if provided
+    if (!is.null(wgt_name)) {
+      assertthat::assert_that(
+        wgt_name %in% names(data_list[[1]]),
+        msg = glue::glue(
+          "Weight variable '{wgt_name}' could not be found as a column name in the datasets."
+        )
+      )
+    }
+    lissyrtools::check_input_in_weight_argument(wgt_name)
+
+  allowed_categoricals_in_var_name <- c(lissyrtools::lis_categorical_variables, lissyrtools::lws_wealth_categorical_variables, "inum")
   if (!var_name %in% allowed_categoricals_in_var_name) {
-    stop(sprintf("The `var_name` variable must be a categorical (not continuous) variable from `lissyrtools::lis_categorical_variables` or `lws_wealth_categorical_variables`."))
+    stop(sprintf("The `var_name` variable must be a categorical (not continuous) variable from `lissyrtools::lis_categorical_variables`, `lws_wealth_categorical_variables`, or the variable 'inum'."))
   }
 
   if (!is.null(by)) {
