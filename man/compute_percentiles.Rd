@@ -34,10 +34,10 @@ the label of the percentiles computed (e.g. '0.5' for median, '0.2' for first qu
 The second contains the values of these in the distribution of 'variable'.
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
 Compute the  weighted percentages for a LIS or LWS variable.
-}
-\details{
+
 It uses 'pwgt' or 'hwgt' to weight the indicator.
 }
 \examples{

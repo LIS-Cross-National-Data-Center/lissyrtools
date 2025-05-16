@@ -1,6 +1,8 @@
 #' Compute percentiles.
 #'
-#' \lifecycle{experimental}
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' 
 #' Compute the  weighted percentages for a LIS or LWS variable.
 #'
 #' It uses 'pwgt' or 'hwgt' to weight the indicator.
@@ -172,7 +174,9 @@ compute_gini <- function(file, file_name, variable, weight = NULL, na.rm = FALSE
 
 #' Compute standard indicators.
 #'
-#' \lifecycle{experimental}
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' 
 #' Compute the weighted mean, median or percentile ratios for a variable.
 #'
 #' @param file A tibble or data.frame with a LIS or LWS file.
