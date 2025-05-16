@@ -9,6 +9,10 @@
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/add_unique_ids.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/all.is.numeric.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/all.values.equal.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/apply_iqr_top_bottom_coding.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/apply_oecd_equivalisation.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/apply_ppp_adjustment.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/apply_sqrt_equivalisation.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/bind_lissy_files.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/ccyy_to_cname.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/ccyy_to_yyyy.html</loc></url>
@@ -66,6 +70,7 @@
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/import_lisppp_data.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/index.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/intervals_with_single_value.html</loc></url>
+<url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/iqr_top_bottom_coding.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/is.all.na.or.zero.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/is.all.same.value.html</loc></url>
 <url><loc>https://lis-cross-national-data-center.github.io/lissyrtools/reference/is.household.dataset.html</loc></url>
