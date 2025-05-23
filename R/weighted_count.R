@@ -140,7 +140,6 @@ run_weighted_count <- function(
     
     if (any(!df_to_keep)) {
       dropped <- names(data_list)[!df_to_keep]
-      print(dropped)
       reasons <- purrr::map_chr(data_list[!df_to_keep], function(df) {
         by_na <- !is.null(by) && all(is.na(df[[by]]))
         var_na <- all(is.na(df[[var_name]]))
