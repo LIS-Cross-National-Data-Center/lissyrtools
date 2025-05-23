@@ -25,12 +25,18 @@
 #' @examples
 #' \dontrun{
 #' # Import data, ideally at the level of the variable of interest.
-#' data_hhd <- lissyrtools::lissyuse("it", vars = c("dhi"), from = 2016)
+#' data_hhd <- lissyrtools::lissyuse("it", vars = c("dhi"), from = 2010)
+#' 
+#' # No equivalisation case
+#' data_hhd  %>%
+#'  purrr::map(~ .x %>% filter(!is.na(dhi))) %>%
+#'  run_weighted_mean("dhi", "hpopwgt") 
 #' 
 #' # Default case: square-root equivalisation
-#' data_hhd[1]  %>%
+#' data_hhd  %>%
 #'  purrr::map(~ .x %>% filter(!is.na(dhi))) %>%
-#'  apply_sqrt_equivalisation("dhi")
+#'  apply_sqrt_equivalisation("dhi") %>% 
+#'  run_weighted_mean("dhi", "hpopwgt")
 #' }
 apply_sqrt_equivalisation <- function(data_list, var_name, eq_scale = 0.5) {
  
@@ -100,17 +106,24 @@ apply_sqrt_equivalisation <- function(data_list, var_name, eq_scale = 0.5) {
 #' \dontrun{
 #' # Import data, ideally at the level of the variable of interest.
 #' # The variable "nhhmem13" must be imported in advance in order to apply OECD-type equivalisation methods.
-#' data_hhd_with_nhhmem13 <- lissyrtools::lissyuse("it", vars = c("dhi", "nhhmem13"), from = 2016)
+#' data_hhd_with_nhhmem13 <- lissyrtools::lissyuse("it", vars = c("dhi", "nhhmem13"), from = 2010)
+#' 
+#' # No equivalisation case
+#' data_hhd  %>%
+#'  purrr::map(~ .x %>% filter(!is.na(dhi))) %>%
+#'  run_weighted_mean("dhi", "hpopwgt")  
 #' 
 #' # Default case: modified OECD scale equivalisation
-#' data_hhd_with_nhhmem13[1]  %>%
+#' data_hhd_with_nhhmem13  %>%
 #'  purrr::map(~ .x %>% filter(!is.na(dhi))) %>%
-#'  apply_oecd_equivalisation("dhi")
+#'  apply_oecd_equivalisation("dhi") %>% 
+#'  run_weighted_mean("dhi", "hpopwgt")  
 #' 
 #' # Standard OECD scale equivalisation
-#' data_hhd_with_nhhmem13[1]  %>%
+#' data_hhd_with_nhhmem13  %>%
 #'  purrr::map(~ .x %>% filter(!is.na(dhi))) %>%
-#'  apply_oecd_equivalisation("dhi", modified = FALSE) 
+#'  apply_oecd_equivalisation("dhi", modified = FALSE) %>% 
+#'  run_weighted_mean("dhi", "hpopwgt") 
 #' } 
 apply_oecd_equivalisation <- function(data_list, var_name, modified = TRUE) {
   # Check if variable exists in datasets

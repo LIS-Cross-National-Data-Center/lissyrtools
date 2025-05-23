@@ -33,11 +33,17 @@ since equivalisation is typically applied to household-level measures.
 \examples{
 \dontrun{
 # Import data, ideally at the level of the variable of interest.
-data_hhd <- lissyrtools::lissyuse("it", vars = c("dhi"), from = 2016)
+data_hhd <- lissyrtools::lissyuse("it", vars = c("dhi"), from = 2010)
+
+# No equivalisation case
+data_hhd  \%>\%
+ purrr::map(~ .x \%>\% filter(!is.na(dhi))) \%>\%
+ run_weighted_mean("dhi", "hpopwgt") 
 
 # Default case: square-root equivalisation
-data_hhd[1]  \%>\%
+data_hhd  \%>\%
  purrr::map(~ .x \%>\% filter(!is.na(dhi))) \%>\%
- apply_sqrt_equivalisation("dhi")
+ apply_sqrt_equivalisation("dhi") \%>\% 
+ run_weighted_mean("dhi", "hpopwgt")
 }
 }

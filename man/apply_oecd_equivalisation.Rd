@@ -41,16 +41,23 @@ The scale is computed as:
 \dontrun{
 # Import data, ideally at the level of the variable of interest.
 # The variable "nhhmem13" must be imported in advance in order to apply OECD-type equivalisation methods.
-data_hhd_with_nhhmem13 <- lissyrtools::lissyuse("it", vars = c("dhi", "nhhmem13"), from = 2016)
+data_hhd_with_nhhmem13 <- lissyrtools::lissyuse("it", vars = c("dhi", "nhhmem13"), from = 2010)
+
+# No equivalisation case
+data_hhd  \%>\%
+ purrr::map(~ .x \%>\% filter(!is.na(dhi))) \%>\%
+ run_weighted_mean("dhi", "hpopwgt")  
 
 # Default case: modified OECD scale equivalisation
-data_hhd_with_nhhmem13[1]  \%>\%
+data_hhd_with_nhhmem13  \%>\%
  purrr::map(~ .x \%>\% filter(!is.na(dhi))) \%>\%
- apply_oecd_equivalisation("dhi")
+ apply_oecd_equivalisation("dhi") \%>\% 
+ run_weighted_mean("dhi", "hpopwgt")  
 
 # Standard OECD scale equivalisation
-data_hhd_with_nhhmem13[1]  \%>\%
+data_hhd_with_nhhmem13  \%>\%
  purrr::map(~ .x \%>\% filter(!is.na(dhi))) \%>\%
- apply_oecd_equivalisation("dhi", modified = FALSE) 
+ apply_oecd_equivalisation("dhi", modified = FALSE) \%>\% 
+ run_weighted_mean("dhi", "hpopwgt") 
 } 
 }

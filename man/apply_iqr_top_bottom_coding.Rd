@@ -62,19 +62,22 @@ data_hhd <- lissyrtools::lissyuse("au", vars = c("dhi"), from = 2016)
 data_hhd[1]  \%>\%
  purrr::map(~ .x[!is.na(.x$dhi), ]) \%>\%
  purrr::map(~ .x \%>\% mutate(new_wgt = nhhmem * hwgt)) \%>\%
- apply_iqr_top_bottom_coding("dhi", "hwgt", times = 3)
+ apply_iqr_top_bottom_coding("dhi", "hwgt", times = 3) \%>\% 
+ run_weighted_mean("dhi", "new_wgt")
 
 # Example with the use or arguments `one_sided` = {"top", "bottom"} and `type`
 data_hhd[1]  \%>\%
  purrr::map(~ .x[!is.na(.x$dhi), ]) \%>\%
  purrr::map(~ .x \%>\% mutate(new_wgt = nhhmem * hwgt)) \%>\%
- apply_iqr_top_bottom_coding("dhi", "hwgt", one_sided = "top", type = "type_2") 
+ apply_iqr_top_bottom_coding("dhi", "hwgt", one_sided = "top", type = "type_2") \%>\% 
+ run_weighted_mean("dhi", "new_wgt")
 
 # Load individual-level datasets by selecting individual-level variables, if the target variable is at the individual level (e.g., "pilabour")
-data_ind <- lissyrtools::lissyuse("au", vars = c("dhi", "pilabour"), from = 2016)
+data_ind <- lissyrtools::lissyuse("au", vars = c("pilabour", "emp"), from = 2016)
 
 data_ind[1]  \%>\%
- purrr::map(~ .x[!is.na(.x$pilabour), ]) \%>\%
- apply_iqr_top_bottom_coding("pilabour", "ppopwgt")
+ purrr::map(~ .x[!is.na(.x$pilabour), ] \%>\% filter(emp ==1)) \%>\%
+ apply_iqr_top_bottom_coding("pilabour", "ppopwgt") \%>\% 
+ run_weighted_percentiles("pilabour", "ppopwgt", probs = seq(0.1, 0.9,0.1))
 }
 }
