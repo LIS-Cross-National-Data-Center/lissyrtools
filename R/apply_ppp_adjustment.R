@@ -177,8 +177,9 @@ apply_ppp_adjustment <- function(data_list, var_name, database,  transformation 
      # could be "lisppp" "cpi" "ppp"
     return(df)
   })
-
+  
   return(result_adj)
+  
 }
 
 
