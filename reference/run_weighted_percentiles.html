@@ -94,9 +94,10 @@ Note: This <strong>always uses</strong> <code>definition = "type_4"</code> (inte
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A named list of data frames. If <code>by</code> is used, unless if <code>share = FALSE</code> and <code>length(probs) ==1</code>, the result will be a nested list where the outer list is by data frame and the inner list is by subgroup.
-If <code>by</code> is <code>NULL</code>, the result is a simple list of numeric vectors (one per data frame).</p>
-    </div>
+    <p>A named list.</p><ul><li><p>If <code>by == NULL</code>, <code>share == FALSE</code> and <code>length(probs) == 1</code>: each list element is named by country and contains a named numeric vector, where the names are years and values are the computed statistics.</p></li>
+<li><p>If <code>by == NULL</code>, and either <code>share == TRUE</code> or <code>length(probs) &gt; 1</code>: each list element is named by <code>ccyy</code> (country-year) identifiers and contains a named numeric vector, where the names represent the share intervals or the percentiles defined in <code>probs</code>.</p></li>
+<li><p>If <code>by != NULL</code>: the list has <code>ccyy</code> identifiers as keys. Each element is a sublist, named after the categories of the <code>by</code> variable. Each sublist contains a named numeric vector of computed statistics.</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Percentiles are computed using weighted version of <strong>quantile definition 4</strong> from Hyndman and Fan (1996), by default, or <strong>quantile definition 2</strong> if specified.

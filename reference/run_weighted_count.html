@@ -87,8 +87,8 @@ If <code>FALSE</code>, it returns simple category counts.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list of named vectors:</p><ul><li><p>If <code>by</code> is not specified, returns a named vector of counts or percentages per dataset.</p></li>
-<li><p>If <code>by</code> is specified, returns a nested list, where the outer list is by dataset and the inner list is by <code>by</code> category.</p></li>
+    <p>A named list.</p><ul><li><p>If <code>by</code> is <code>NULL</code>: each list element is named by country and contains a named numeric vector, where the names are years and the values are counts or percentages.</p></li>
+<li><p>If <code>by</code> is not <code>NULL</code>: each list element is named by <code>ccyy</code> (country-year) identifiers and contains a named numeric vector, where the names represent the <code>by</code>-categories (e.g., gender, region) and the values are the corresponding counts or percentages.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>

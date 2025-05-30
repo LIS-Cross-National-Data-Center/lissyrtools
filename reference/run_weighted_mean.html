@@ -73,8 +73,9 @@
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A named list of data frames.</p>
-    </div>
+    <p>A named list.</p><ul><li><p>If <code>by</code> is <code>NULL</code>: each list element is named by country and contains a named numeric vector, where the names are years and the values are the computed statistics.</p></li>
+<li><p>If <code>by</code> is not <code>NULL</code>: each list element is named by <code>ccyy</code> (country-year) identifiers and contains a named numeric vector, where the names represent the <code>by</code>-categories (e.g., gender, region) and the values are the corresponding statistics.</p></li>
+</ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
