@@ -51,6 +51,7 @@ library(lissyrtools)
 library(RColorBrewer)
 library(ggthemes)
 library(purrr)
+library(forcats)
 
 data <- lissyrtools::lissyuse(data = c("es", "de"), vars = c("dhi", "educ", "pi11", "rural"), from = 2016)
 
