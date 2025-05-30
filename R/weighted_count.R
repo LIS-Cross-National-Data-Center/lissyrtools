@@ -78,7 +78,7 @@
 #' 
 #' # The same logic is applied with the `by` argument.
 #' run_weighted_count(
-#' data["uk15"], 
+#' data[names(data)[stringr::str_sub(names(data),3,4) == "18"]], 
 #' "educ", 
 #' na.rm = TRUE, 
 #' by = "area_c"
