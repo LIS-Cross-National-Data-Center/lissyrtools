@@ -156,7 +156,7 @@ run_weighted_percentiles <- function(data_list, var_name, wgt_name = NULL, probs
       })
       # Flatten if only one prob value (e.g., just median) and not share
       if (length(probs) == 1 && share == FALSE) {
-      result <- purrr::map(result, ~unname(.x)) |> unlist()
+      result <- purrr::map(result, ~unname(.x)) %>%  unlist()
       } 
 
       result  
