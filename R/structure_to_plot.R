@@ -136,7 +136,7 @@ structure_to_plot <- function(data_list) {
       ~ tibble::enframe(.x, name = "year", value = "value") %>% mutate(cname = .y)
     )) %>%
       mutate(cc = show_countries_lis()[cname],
-             yy = str_sub(year, 3, 4),
+             yy = stringr::str_sub(year, 3, 4),
              dname = paste0(cc, yy),
              year = as.integer(year)) %>% 
       select(cname, year, dname, value)
@@ -152,7 +152,7 @@ structure_to_plot <- function(data_list) {
       ~ tibble::enframe(.x, name = "category", value = "value") %>% mutate(dname = .y)
     )) %>%
       mutate(cname = ccyy_to_cname(dname), year =  ccyy_to_yyyy(dname),
-             category = str_remove(category, "^\\[\\d+\\]"),
+             category = stringr::str_remove(category, "^\\[\\d+\\]"),
              year = as.integer(year)) %>% 
       select(cname, year, dname, category, value)
    
@@ -164,8 +164,8 @@ structure_to_plot <- function(data_list) {
       list_rbind(purrr::imap(.x, function(sublist, subgroup) { # subgroup would be the categorical variable in run_weighted_mean or run_weighted_percentiles 
         tibble::enframe(sublist, name = "vector_names", value = "value") %>% # vector_names: could be percentiles, shares, or the by var in run_weighted_count
           mutate(dname = outer_name,
-                 category = str_remove(subgroup, "^\\[\\d+\\]"),
-                 name = str_remove(vector_names, "^\\[\\d+\\]"))
+                 category = stringr::str_remove(subgroup, "^\\[\\d+\\]"),
+                 name = stringr::str_remove(vector_names, "^\\[\\d+\\]"))
       }))
     })) %>%
       mutate(cname = ccyy_to_cname(dname), year =  as.integer(ccyy_to_yyyy(dname))) %>% 
@@ -175,9 +175,9 @@ structure_to_plot <- function(data_list) {
     # Rename the `name` column accordingly, specifically in the 3rd structure
     first_value <- result_df$name[1] 
     
-    if (str_detect(first_value, "%") &  str_detect(first_value, "-")) {
+    if (stringr::str_detect(first_value, "%") &  stringr::str_detect(first_value, "-")) {
       names(result_df)[names(result_df) == "name"] <- "share"
-    } else if (str_detect(first_value, "%")) {
+    } else if (stringr::str_detect(first_value, "%")) {
       names(result_df)[names(result_df) == "name"] <- "percentile" 
     } else {
       names(result_df)[names(result_df) == "name"] <- "by_var" 
