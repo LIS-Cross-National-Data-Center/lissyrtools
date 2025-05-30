@@ -40,6 +40,7 @@
 #' library(lissyrtools)
 #' library(RColorBrewer)
 #' library(ggthemes)
+#' library(purrr)
 #' 
 #' data <- lissyrtools::lissyuse(data = c("es", "de"), vars = c("dhi", "educ", "pi11", "rural"), from = 2016)
 #' 
@@ -130,9 +131,9 @@ structure_to_plot <- function(data_list) {
   # 1st structure
   if (all(names(data_list) %in% c(names(show_countries_lis()), names(show_countries_lws())))) {
     
-    result_df <- list_rbind(imap(
+    result_df <- list_rbind(purrr::imap(
       data_list ,
-      ~ enframe(.x, name = "year", value = "value") %>% mutate(cname = .y)
+      ~ tibble::enframe(.x, name = "year", value = "value") %>% mutate(cname = .y)
     )) %>%
       mutate(cc = show_countries_lis()[cname],
              yy = str_sub(year, 3, 4),
@@ -146,9 +147,9 @@ structure_to_plot <- function(data_list) {
     all(purrr::map_chr(data_list, ~ class(.x)[1]) %in% c("numeric", "integer"))
     ) {
     
-    result_df <- list_rbind(imap(
+    result_df <- list_rbind(purrr::imap(
       data_list ,
-      ~ enframe(.x, name = "category", value = "value") %>% mutate(dname = .y)
+      ~ tibble::enframe(.x, name = "category", value = "value") %>% mutate(dname = .y)
     )) %>%
       mutate(cname = ccyy_to_cname(dname), year =  ccyy_to_yyyy(dname),
              category = str_remove(category, "^\\[\\d+\\]"),
@@ -158,10 +159,10 @@ structure_to_plot <- function(data_list) {
   # 3rd structure     
   } else if (all(length(names(data_list) == 4) && all(purrr::map_chr(data_list, ~ class(.x)[1]) == "list"))) {
     
-    result_df <- list_rbind(imap(data_list, ~ {
+    result_df <- list_rbind(purrr::imap(data_list, ~ {
       outer_name <- .y
-      list_rbind(imap(.x, function(sublist, subgroup) { # subgroup would be the categorical variable in run_weighted_mean or run_weighted_percentiles 
-        enframe(sublist, name = "vector_names", value = "value") %>% # vector_names: could be percentiles, shares, or the by var in run_weighted_count
+      list_rbind(purrr::imap(.x, function(sublist, subgroup) { # subgroup would be the categorical variable in run_weighted_mean or run_weighted_percentiles 
+        tibble::enframe(sublist, name = "vector_names", value = "value") %>% # vector_names: could be percentiles, shares, or the by var in run_weighted_count
           mutate(dname = outer_name,
                  category = str_remove(subgroup, "^\\[\\d+\\]"),
                  name = str_remove(vector_names, "^\\[\\d+\\]"))
