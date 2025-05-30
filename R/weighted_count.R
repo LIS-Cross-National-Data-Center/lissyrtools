@@ -29,6 +29,8 @@
 #' 
 #' @examples
 #' \dontrun{ 
+#' library(lissyrtools)
+#' 
 #' data <- lissyrtools::lissyuse(data = c("de", "es", "uk"), vars = c("dhi", "region_c", "area_c", "educ", "emp"), from = 2016)
 #' 
 #' 

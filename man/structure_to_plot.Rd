@@ -50,6 +50,7 @@ library(ggplot2)
 library(lissyrtools)
 library(RColorBrewer)
 library(ggthemes)
+library(purrr)
 
 data <- lissyrtools::lissyuse(data = c("es", "de"), vars = c("dhi", "educ", "pi11", "rural"), from = 2016)
 

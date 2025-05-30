@@ -31,6 +31,9 @@ Compute Weighted Atkinson Across a List of Data Frames
 }
 \examples{
 \dontrun{
+library(lissyrtools)
+library(purrr)
+
 datasets <- lissyrtools::lissyuse(data = c("de", "es", "uk"), vars = c("dhi"), from = 2016)
 
 

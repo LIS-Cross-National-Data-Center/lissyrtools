@@ -16,6 +16,9 @@
 #'
 #' @examples
 #' \dontrun{
+#' library(lissyrtools)
+#' library(purrr)
+#' 
 #' data <- lissyrtools::lissyuse(data = c("de", "es", "uk"), vars = c("dhi", "age", "pi11", "region_c", "area_c", "educ", "emp"), from = 2016)
 #' 
 #' data %>% 
