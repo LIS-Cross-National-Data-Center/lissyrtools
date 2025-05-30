@@ -30,10 +30,10 @@ Must also be listed in the allowed categorical variables.}
 If \code{FALSE}, it returns simple category counts.}
 }
 \value{
-A list of named vectors:
+A named list.
 \itemize{
-\item If \code{by} is not specified, returns a named vector of counts or percentages per dataset.
-\item If \code{by} is specified, returns a nested list, where the outer list is by dataset and the inner list is by \code{by} category.
+\item If \code{by} is \code{NULL}: each list element is named by country and contains a named numeric vector, where the names are years and the values are counts or percentages.
+\item If \code{by} is not \code{NULL}: each list element is named by \code{ccyy} (country-year) identifiers and contains a named numeric vector, where the names represent the \code{by}-categories (e.g., gender, region) and the values are the corresponding counts or percentages.
 }
 }
 \description{

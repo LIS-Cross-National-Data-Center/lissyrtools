@@ -24,7 +24,11 @@ run_weighted_mean(
 \item{by}{Optional string giving the name of a categorical variable to split the data within each data frame before computing the mean.}
 }
 \value{
-A named list of data frames.
+A named list.
+\itemize{
+\item If \code{by} is \code{NULL}: each list element is named by country and contains a named numeric vector, where the names are years and the values are the computed statistics.
+\item If \code{by} is not \code{NULL}: each list element is named by \code{ccyy} (country-year) identifiers and contains a named numeric vector, where the names represent the \code{by}-categories (e.g., gender, region) and the values are the corresponding statistics.
+}
 }
 \description{
 Compute Weighted Mean Across a List of Data Frames (with optional grouping)

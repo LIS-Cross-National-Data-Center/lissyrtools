@@ -15,9 +15,12 @@
 #' @param percent Logical; if `TRUE`, the function returns weighted (or unweighted) percentages. 
 #'        If `FALSE`, it returns simple category counts.
 #'
-#' @return A list of named vectors:
-#'   - If `by` is not specified, returns a named vector of counts or percentages per dataset.
-#'   - If `by` is specified, returns a nested list, where the outer list is by dataset and the inner list is by `by` category.
+#' @return A named list. 
+#' 
+#' - If `by` is `NULL`: each list element is named by country and contains a named numeric vector, where the names are years and the values are counts or percentages.
+#' 
+#' - If `by` is not `NULL`: each list element is named by `ccyy` (country-year) identifiers and contains a named numeric vector, where the names represent the `by`-categories (e.g., gender, region) and the values are the corresponding counts or percentages.
+
 #' 
 #' @details
 #' - Any data frame where the `by` variable contains only `NA`s is dropped, with a warning.

@@ -20,8 +20,13 @@
 #' \code{"type_2"} (used in Stata commands like collapse and _pctile, inverse of empirical distribution function with averaging at discontinuities - discontinuous sample quantile).
 #' @param by Optional string giving the name of a categorical variable to split the data within each data frame before computing statistics. 
 #' 
-#' @return A named list of data frames. If `by` is used, unless if `share = FALSE` and `length(probs) ==1`, the result will be a nested list where the outer list is by data frame and the inner list is by subgroup. 
-#' If `by` is `NULL`, the result is a simple list of numeric vectors (one per data frame).
+#' @return A named list.
+#' 
+#' - If `by == NULL`, `share == FALSE` and `length(probs) == 1`: each list element is named by country and contains a named numeric vector, where the names are years and values are the computed statistics.
+#' 
+#' - If `by == NULL`, and either `share == TRUE` or `length(probs) > 1`: each list element is named by `ccyy` (country-year) identifiers and contains a named numeric vector, where the names represent the share intervals or the percentiles defined in `probs`. 
+#' 
+#' - If `by != NULL`: the list has `ccyy` identifiers as keys. Each element is a sublist, named after the categories of the `by` variable. Each sublist contains a named numeric vector of computed statistics.
 #' 
 #' @details
 #' Percentiles are computed using weighted version of **quantile definition 4** from Hyndman and Fan (1996), by default, or **quantile definition 2** if specified. 

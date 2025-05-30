@@ -36,8 +36,12 @@ Note: This \strong{always uses} \code{definition = "type_4"} (interpolation), re
 \item{by}{Optional string giving the name of a categorical variable to split the data within each data frame before computing statistics.}
 }
 \value{
-A named list of data frames. If \code{by} is used, unless if \code{share = FALSE} and \code{length(probs) ==1}, the result will be a nested list where the outer list is by data frame and the inner list is by subgroup.
-If \code{by} is \code{NULL}, the result is a simple list of numeric vectors (one per data frame).
+A named list.
+\itemize{
+\item If \code{by == NULL}, \code{share == FALSE} and \code{length(probs) == 1}: each list element is named by country and contains a named numeric vector, where the names are years and values are the computed statistics.
+\item If \code{by == NULL}, and either \code{share == TRUE} or \code{length(probs) > 1}: each list element is named by \code{ccyy} (country-year) identifiers and contains a named numeric vector, where the names represent the share intervals or the percentiles defined in \code{probs}.
+\item If \code{by != NULL}: the list has \code{ccyy} identifiers as keys. Each element is a sublist, named after the categories of the \code{by} variable. Each sublist contains a named numeric vector of computed statistics.
+}
 }
 \description{
 Applies the \code{compute_weighted_percentiles()} function to each data frame in a named list, using a specified variable and optional weight.

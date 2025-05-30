@@ -6,7 +6,12 @@
 #' @param na.rm Logical. If `TRUE`, missing values in `var_name` or `wgt_name` are removed.
 #' @param by Optional string giving the name of a categorical variable to split the data within each data frame before computing the mean.
 #'
-#' @return A named list of data frames.
+#' @return A named list. 
+#' 
+#' - If `by` is `NULL`: each list element is named by country and contains a named numeric vector, where the names are years and the values are the computed statistics.
+#' 
+#' - If `by` is not `NULL`: each list element is named by `ccyy` (country-year) identifiers and contains a named numeric vector, where the names represent the `by`-categories (e.g., gender, region) and the values are the corresponding statistics.
+#'
 #' @export
 #'
 #' @examples
