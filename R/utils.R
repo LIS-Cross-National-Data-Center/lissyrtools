@@ -682,7 +682,7 @@ ccyy_to_cname <- function(ccyy) {
 #' @keywords internal
 convert_list_from_ccyy_to_cc_names_yyyy <- function(data_list) {
   data_list  %>%
-    imap_dfr(~{
+    purrr::imap_dfr(~{
       tibble(
         country = ccyy_to_cname(.y),
         year = ccyy_to_yyyy(.y),
@@ -690,7 +690,7 @@ convert_list_from_ccyy_to_cc_names_yyyy <- function(data_list) {
       )
     }) %>%
     split(.$country) %>%
-    map(~ setNames(.x$value, .x$year))
+    purrr::map(~ setNames(.x$value, .x$year))
 }
 
 
@@ -702,7 +702,7 @@ convert_list_from_ccyy_to_cc_names_yyyy <- function(data_list) {
 #' @return A list
 #' @keywords internal
 check_missing_share <- function(data_list, include_zeros = FALSE) {
-  map(data_list, function(df) {
+  purrr::map(data_list, function(df) {
     summarise(df, across(everything(), ~ {
       # Define missing: NA or (optional) zero
       missing_vals <- if (include_zeros) is.na(.) | . == 0 else is.na(.)
