@@ -9,17 +9,17 @@
 #'
 #' @examples
 #' # 1) Without any argument:
-#' get_vars_label()
+#' variable_labels()
 #' 
 #' \dontrun{
 #' # 2) Using with the outputed list from lissyuse:
 #' lis_datasets <- lissyuse(data = c("uk"), vars = c("hpub_i","hpub_u", "hi42", "hi421", "hi422", "hi43"), from = 2016)
-#' get_vars_label(vars = lis_datasets)
+#' variable_labels(vars = lis_datasets)
 #' }
 #' 
 #' # 3) Using a character vector with LIS/LWS variables:
-#' get_vars_label(vars = c("fyft", "basb", "hxremit", "bafi1_c", "pasodc"))
-get_vars_label <- function(vars = NULL) {
+#' variable_labels(vars = c("fyft", "basb", "hxremit", "bafi1_c", "pasodc"))
+variable_labels <- function(vars = NULL) {
   
   if(is.null(vars)) {
     output <- tibble::deframe(data_vars_labels)

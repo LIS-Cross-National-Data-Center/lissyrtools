@@ -16,18 +16,18 @@
 #' @examples
 #' # In years where no data is recorded for a given variable, it is automatically hidden from the output
 #' variable_exists(variable = "health_c", iso2 = "it")
-#' get_country_specifc_categories(variable = "health_c", iso2 = "it", from = 1995, to = 2020) 
+#' variable_country_specific_categories(variable = "health_c", iso2 = "it", from = 1995, to = 2020) 
 #' 
 #' # To retrieve information on LWS datasets
-#' get_country_specifc_categories(variable = "bus1_c", iso2 = "fi", lws = TRUE)
+#' variable_country_specific_categories(variable = "bus1_c", iso2 = "fi", lws = TRUE)
 #' 
 #' # Using the `n_categories` argument
-#' get_country_specifc_categories(variable = "region_c", iso2 = "es", n_categories = TRUE)
+#' variable_country_specific_categories(variable = "region_c", iso2 = "es", n_categories = TRUE)
 #' 
 #' # To use this function acroos multiples countries one could make use of the `purrr::map()` function 
-#' purrr::map(lissyrtools::get_countries_lws(), ~get_country_specifc_categories(variable = "bus1_c", iso2 = .x, lws = TRUE , n_categories = TRUE))
+#' purrr::map(lissyrtools::get_countries_lws(), ~variable_country_specific_categories(variable = "bus1_c", iso2 = .x, lws = TRUE , n_categories = TRUE))
 #' 
-get_country_specifc_categories <- function(variable, iso2, from = NULL, to = NULL , lws = FALSE, n_categories = FALSE) {
+variable_country_specific_categories <- function(variable, iso2, from = NULL, to = NULL , lws = FALSE, n_categories = FALSE) {
   
   # ensure that argument 'variable' and 'iso2' only accepts one character
   
