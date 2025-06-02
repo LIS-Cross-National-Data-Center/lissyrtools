@@ -1,6 +1,5 @@
 url: https://lis-cross-national-data-center.github.io/lissyrtools/
 template:
-  package: tidytemplate
   bootstrap: 5
 
 home:
