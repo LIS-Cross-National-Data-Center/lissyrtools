@@ -31,9 +31,26 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="load-data">Load data<a class="anchor" aria-label="anchor" href="#load-data"></a></h2>
+
+      <div class="section-desc"><p>This variable-driven function automatically merges household- and person-level files from the same dataset. It also allows users to load data for multiple countries over a chosen range of years.</p></div>
 
 
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="lissyuse.html">lissyuse()</a></code>
+
+        </dt>
+        <dd>Load data easily and efficiently with lissyuse</dd>
+      </dl></div><div class="section level2">
+      <h2 id="apply-functions">Apply functions<a class="anchor" aria-label="anchor" href="#apply-functions"></a></h2>
+
+      <div class="section-desc"><p>The purpose of this function is to apply a transformation to the variable under analysis.</p></div>
 
 
     </div><div class="section level2">
@@ -55,17 +72,322 @@
         <dd>Apply OECD Equivalence Scale to a Variable</dd>
       </dl><dl><dt>
 
-          <code><a href="apply_ppp_adjustment.html">apply_ppp_adjustment()</a></code>
-
-        </dt>
-        <dd>Adjust Monetary Variables for Inflation and PPP</dd>
-      </dl><dl><dt>
-
           <code><a href="apply_sqrt_equivalisation.html">apply_sqrt_equivalisation()</a></code>
 
         </dt>
         <dd>Apply Square-Root Equivalisation to a Variable</dd>
       </dl><dl><dt>
+
+          <code><a href="apply_ppp_adjustment.html">apply_ppp_adjustment()</a></code>
+
+        </dt>
+        <dd>Adjust Monetary Variables for Inflation and PPP</dd>
+      </dl></div><div class="section level2">
+      <h2 id="run-weighted-functions">Run Weighted functions<a class="anchor" aria-label="anchor" href="#run-weighted-functions"></a></h2>
+
+      <div class="section-desc"><p>Functions that take a list and compute the aggregate indicators desired across all datasets and allowing for the inclusion of survey weights.</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="run_weighted_count.html">run_weighted_count()</a></code>
+
+        </dt>
+        <dd>Compute (weighted) counts or percentages from a list of data frames</dd>
+      </dl><dl><dt>
+
+          <code><a href="run_weighted_mean.html">run_weighted_mean()</a></code>
+
+        </dt>
+        <dd>Compute Weighted Mean Across a List of Data Frames (with optional grouping)</dd>
+      </dl><dl><dt>
+
+          <code><a href="run_weighted_percentiles.html">run_weighted_percentiles()</a></code>
+
+        </dt>
+        <dd>Compute Weighted Percentiles cross a List of Data Frames (with optional grouping)</dd>
+      </dl><dl><dt>
+
+          <code><a href="run_weighted_ratios.html">run_weighted_ratios()</a></code>
+
+        </dt>
+        <dd>Compute Percentile Ratios</dd>
+      </dl><dl><dt>
+
+          <code><a href="run_weighted_gini.html">run_weighted_gini()</a></code>
+
+        </dt>
+        <dd>Compute Weighted Gini Index Across a List of Data Frames</dd>
+      </dl><dl><dt>
+
+          <code><a href="run_weighted_atkinson.html">run_weighted_atkinson()</a></code>
+
+        </dt>
+        <dd>Compute Weighted Atkinson Across a List of Data Frames</dd>
+      </dl><dl><dt>
+
+          <code><a href="run_weighted_relative_poverty.html">run_weighted_relative_poverty()</a></code>
+
+        </dt>
+        <dd>Compute Relative Poverty Rate</dd>
+      </dl><dl><dt>
+
+          <code><a href="run_weighted_poverty_shortfall.html">run_weighted_poverty_shortfall()</a></code>
+
+        </dt>
+        <dd>Compute the Weighted Poverty Gap (Shortfall)</dd>
+      </dl><dl><dt>
+
+          <code><a href="run_weighted_poverty_gap_index.html">run_weighted_poverty_gap_index()</a></code>
+
+        </dt>
+        <dd>Compute the Poverty Gap Index</dd>
+      </dl></div><div class="section level2">
+      <h2 id="restructure-data-to-plot">Restructure data to plot<a class="anchor" aria-label="anchor" href="#restructure-data-to-plot"></a></h2>
+
+      <div class="section-desc"><p>Function designed to restructure data from a list to be printed in the console to a tabular data frame allowing to plot the values</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="structure_to_plot.html">structure_to_plot()</a></code>
+
+        </dt>
+        <dd>Transform Structured Data Lists into a Tidy Data Frame for Plotting</dd>
+      </dl></div><div class="section level2">
+      <h2 id="metadata-functions">Metadata functions<a class="anchor" aria-label="anchor" href="#metadata-functions"></a></h2>
+
+
+
+
+    </div><div class="section level2">
+
+      <h3 id="get-functions">Get functions<a class="anchor" aria-label="anchor" href="#get-functions"></a></h3>
+      <div class="section-desc"><p>Allow the user a quick overview on the countries and years available in each database, together with the survey behind each dataset</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="get_countries_lis.html">get_countries_lis()</a></code>
+
+        </dt>
+        <dd>Print all the country code in LIS</dd>
+      </dl><dl><dt>
+
+          <code><a href="get_countries_lws.html">get_countries_lws()</a></code>
+
+        </dt>
+        <dd>Print all the country code in LWS</dd>
+      </dl><dl><dt>
+
+          <code><a href="get_years_lis.html">get_years_lis()</a></code>
+
+        </dt>
+        <dd>Print all the existing years in LIS for a given country.</dd>
+      </dl><dl><dt>
+
+          <code><a href="get_years_lws.html">get_years_lws()</a></code>
+
+        </dt>
+        <dd>Print all the existing years in LWS for a given country.</dd>
+      </dl><dl><dt>
+
+          <code><a href="get_surveys_lis.html">get_surveys_lis()</a></code>
+
+        </dt>
+        <dd>Print the survey used to construct the LIS datasets for a given country.</dd>
+      </dl><dl><dt>
+
+          <code><a href="get_surveys_lws.html">get_surveys_lws()</a></code>
+
+        </dt>
+        <dd>Print the survey used to construct the LWS datasets for a given country.</dd>
+      </dl></div><div class="section level2">
+
+      <h3 id="variable-functions">Variable functions<a class="anchor" aria-label="anchor" href="#variable-functions"></a></h3>
+      <div class="section-desc"><p>Allow the user a quick not only overview the existence of a variable in a dataset as well if it has some note attached to it, but also its labels and categories if it is a country-specific variable.</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="variable_labels.html">variable_labels()</a></code>
+
+        </dt>
+        <dd>Inspect the Labels of LIS and LWS variables</dd>
+      </dl><dl><dt>
+
+          <code><a href="variable_country_specific_categories.html">variable_country_specific_categories()</a></code>
+
+        </dt>
+        <dd>Retrieve the categories of a country-specific variable in LIS/LWS for a given country.</dd>
+      </dl><dl><dt>
+
+          <code><a href="variable_exists.html">variable_exists()</a></code>
+
+        </dt>
+        <dd>Inspect whether a given variable contains more than just non-missing or non-zero values for a selected group of countries in the LIS or LWS databases.</dd>
+      </dl><dl><dt>
+
+          <code><a href="variable_has_note.html">variable_has_note()</a></code>
+
+        </dt>
+        <dd>Verify if a given variable has a note, for a selected group of countries, in LIS or LWS databases.</dd>
+      </dl></div><div class="section level2">
+      <h2 id="built-in-datasets">Built in datasets<a class="anchor" aria-label="anchor" href="#built-in-datasets"></a></h2>
+
+
+
+
+    </div><div class="section level2">
+
+      <h3 id="sample-datasets">Sample datasets<a class="anchor" aria-label="anchor" href="#sample-datasets"></a></h3>
+      <div class="section-desc"><p>Datasets that simulate a real dataset in LISSY. With them, the user can have a base upon which it can run jobs locally and better control the structure of the data and of its transformations, allowing to work in an easier environment to debug, with autocompletion and ability to visualize data frames.</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="italy_14_lis_h.html">italy_14_lis_h</a></code>
+
+        </dt>
+        <dd>Sample Household-Level LIS Dataset (1,000 Rows)</dd>
+      </dl><dl><dt>
+
+          <code><a href="italy_14_lis_p.html">italy_14_lis_p</a></code>
+
+        </dt>
+        <dd>Sample Individual-Level LIS Dataset (1,000 Rows)</dd>
+      </dl><dl><dt>
+
+          <code><a href="mexico_18_lis_h.html">mexico_18_lis_h</a></code>
+
+        </dt>
+        <dd>Sample Household-Level LIS Dataset (1,000 Rows)</dd>
+      </dl><dl><dt>
+
+          <code><a href="mexico_18_lis_p.html">mexico_18_lis_p</a></code>
+
+        </dt>
+        <dd>Sample Individual-Level LIS Dataset (1,000 Rows)</dd>
+      </dl><dl><dt>
+
+          <code><a href="united_states_16_lis_h.html">united_states_16_lis_h</a></code>
+
+        </dt>
+        <dd>Sample Household-Level LIS Dataset (1,000 Rows)</dd>
+      </dl><dl><dt>
+
+          <code><a href="united_states_16_lis_p.html">united_states_16_lis_p</a></code>
+
+        </dt>
+        <dd>Sample Individual-Level LIS Dataset (1,000 Rows)</dd>
+      </dl><dl><dt>
+
+          <code><a href="italy_14_lws_h.html">italy_14_lws_h</a></code>
+
+        </dt>
+        <dd>Sample Household-Level LWS Dataset (1,000 Rows)</dd>
+      </dl><dl><dt>
+
+          <code><a href="italy_14_lws_p.html">italy_14_lws_p</a></code>
+
+        </dt>
+        <dd>Sample Individual-Level LWS Dataset (1,000 Rows)</dd>
+      </dl><dl><dt>
+
+          <code><a href="united_states_16_lws_h.html">united_states_16_lws_h</a></code>
+
+        </dt>
+        <dd>Sample Household-Level LWS Dataset (1,000 Rows)</dd>
+      </dl><dl><dt>
+
+          <code><a href="united_states_16_lws_p.html">united_states_16_lws_p</a></code>
+
+        </dt>
+        <dd>Sample Individual-Level LWS Dataset (1,000 Rows)</dd>
+      </dl></div><div class="section level2">
+
+      <h3 id="other-tables">Other tables<a class="anchor" aria-label="anchor" href="#other-tables"></a></h3>
+
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="data_vars_labels.html">data_vars_labels</a></code>
+
+        </dt>
+        <dd>Variable labels</dd>
+      </dl><dl><dt>
+
+          <code><a href="data_with_warnings.html">data_with_warnings</a></code>
+
+        </dt>
+        <dd>Variable notes</dd>
+      </dl><dl><dt>
+
+          <code><a href="datasets.html">datasets</a></code>
+
+        </dt>
+        <dd>LIS and LWS datasets</dd>
+      </dl><dl><dt>
+
+          <code><a href="deflators.html">deflators</a></code>
+
+        </dt>
+        <dd>CPI and PPP deflators.</dd>
+      </dl><dl><dt>
+
+          <code><a href="missing_or_zero_vars_all.html">missing_or_zero_vars_all</a></code>
+
+        </dt>
+        <dd>Variable Status Data Frame</dd>
+      </dl><dl><dt>
+
+          <code><a href="value_label_c_data.html">value_label_c_data</a></code>
+
+        </dt>
+        <dd>Value Labels for Country-Specific Variables in LIS and LWS Datasets</dd>
+      </dl></div><div class="section level2">
+      <h2 id="superseded">Superseded<a class="anchor" aria-label="anchor" href="#superseded"></a></h2>
+
+      <div class="section-desc"><p>Superseded functions from the initial stages upon the creation of lissyrtools.</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
 
           <code><a href="bind_lissy_files.html">bind_lissy_files()</a></code>
 
@@ -103,48 +425,6 @@
         <dd>Compute poverty rate.</dd>
       </dl><dl><dt>
 
-          <code><a href="compute_weighted_count.html">compute_weighted_count()</a></code>
-
-        </dt>
-        <dd>Compute (Weighted) Counts or Percentages for a Categorical Variable</dd>
-      </dl><dl><dt>
-
-          <code><a href="compute_weighted_mean.html">compute_weighted_mean()</a></code>
-
-        </dt>
-        <dd>Compute (Weighted) Means for a Variable</dd>
-      </dl><dl><dt>
-
-          <code><a href="compute_weighted_percentiles.html">compute_weighted_percentiles()</a></code>
-
-        </dt>
-        <dd>Compute Weighted Percentiles or Share of Distribution</dd>
-      </dl><dl><dt>
-
-          <code><a href="data_vars_labels.html">data_vars_labels</a></code>
-
-        </dt>
-        <dd>Variable labels</dd>
-      </dl><dl><dt>
-
-          <code><a href="data_with_warnings.html">data_with_warnings</a></code>
-
-        </dt>
-        <dd>Variable notes</dd>
-      </dl><dl><dt>
-
-          <code><a href="datasets.html">datasets</a></code>
-
-        </dt>
-        <dd>LIS and LWS datasets</dd>
-      </dl><dl><dt>
-
-          <code><a href="deflators.html">deflators</a></code>
-
-        </dt>
-        <dd>CPI and PPP deflators.</dd>
-      </dl><dl><dt>
-
           <code><a href="determine_file_level.html">determine_file_level()</a></code>
 
         </dt>
@@ -157,118 +437,16 @@
         <dd>Determine the name of the weight variable</dd>
       </dl><dl><dt>
 
-          <code><a href="get_countries_lis.html">get_countries_lis()</a></code>
-
-        </dt>
-        <dd>Print all the country code in LIS</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_countries_lws.html">get_countries_lws()</a></code>
-
-        </dt>
-        <dd>Print all the country code in LWS</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_file_lisppp.html">get_file_lisppp()</a></code>
-
-        </dt>
-        <dd>Retreive the 'lisppp' deflator for a given file and variable.</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_surveys_lis.html">get_surveys_lis()</a></code>
-
-        </dt>
-        <dd>Print the survey used to construct the LIS datasets for a given country.</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_surveys_lws.html">get_surveys_lws()</a></code>
-
-        </dt>
-        <dd>Print the survey used to construct the LWS datasets for a given country.</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_years_lis.html">get_years_lis()</a></code>
-
-        </dt>
-        <dd>Print all the existing years in LIS for a given country.</dd>
-      </dl><dl><dt>
-
-          <code><a href="get_years_lws.html">get_years_lws()</a></code>
-
-        </dt>
-        <dd>Print all the existing years in LWS for a given country.</dd>
-      </dl><dl><dt>
-
-          <code><a href="iqr_top_bottom_coding.html">iqr_top_bottom_coding()</a></code>
-
-        </dt>
-        <dd>IQR-Based Top/Bottom Coding for a Single Variable</dd>
-      </dl><dl><dt>
-
-          <code><a href="italy_14_lis_h.html">italy_14_lis_h</a></code>
-
-        </dt>
-        <dd>Sample Household-Level LIS Dataset (1,000 Rows)</dd>
-      </dl><dl><dt>
-
-          <code><a href="italy_14_lis_p.html">italy_14_lis_p</a></code>
-
-        </dt>
-        <dd>Sample Individual-Level LIS Dataset (1,000 Rows)</dd>
-      </dl><dl><dt>
-
-          <code><a href="italy_14_lws_h.html">italy_14_lws_h</a></code>
-
-        </dt>
-        <dd>Sample Household-Level LWS Dataset (1,000 Rows)</dd>
-      </dl><dl><dt>
-
-          <code><a href="italy_14_lws_p.html">italy_14_lws_p</a></code>
-
-        </dt>
-        <dd>Sample Individual-Level LWS Dataset (1,000 Rows)</dd>
-      </dl><dl><dt>
-
           <code><a href="lissy_map.html">lissy_map()</a></code>
 
         </dt>
         <dd>Wrap over 'purrr::imap()' for lissy files</dd>
       </dl><dl><dt>
 
-          <code><a href="lissyrtools.html">lissyrtools-package</a></code> <code><a href="lissyrtools.html">lissyrtools</a></code>
-
-        </dt>
-        <dd>lissyrtools: Functions that can be used within LISSY</dd>
-      </dl><dl><dt>
-
-          <code><a href="lissyuse.html">lissyuse()</a></code>
-
-        </dt>
-        <dd>Load data easily and efficiently with lissyuse</dd>
-      </dl><dl><dt>
-
           <code><a href="merge_dataset_levels.html">merge_dataset_levels()</a></code>
           <span class="badge lifecycle lifecycle-deprecated">deprecated</span>
         </dt>
         <dd>Merge household and person-level files</dd>
-      </dl><dl><dt>
-
-          <code><a href="mexico_18_lis_h.html">mexico_18_lis_h</a></code>
-
-        </dt>
-        <dd>Sample Household-Level LIS Dataset (1,000 Rows)</dd>
-      </dl><dl><dt>
-
-          <code><a href="mexico_18_lis_p.html">mexico_18_lis_p</a></code>
-
-        </dt>
-        <dd>Sample Individual-Level LIS Dataset (1,000 Rows)</dd>
-      </dl><dl><dt>
-
-          <code><a href="missing_or_zero_vars_all.html">missing_or_zero_vars_all</a></code>
-
-        </dt>
-        <dd>Variable Status Data Frame</dd>
       </dl><dl><dt>
 
           <code><a href="plot_indicator.html">plot_indicator()</a></code>
@@ -331,66 +509,6 @@
         <dd>Rename read files</dd>
       </dl><dl><dt>
 
-          <code><a href="run_weighted_atkinson.html">run_weighted_atkinson()</a></code>
-
-        </dt>
-        <dd>Compute Weighted Atkinson Across a List of Data Frames</dd>
-      </dl><dl><dt>
-
-          <code><a href="run_weighted_count.html">run_weighted_count()</a></code>
-
-        </dt>
-        <dd>Compute (weighted) counts or percentages from a list of data frames</dd>
-      </dl><dl><dt>
-
-          <code><a href="run_weighted_gini.html">run_weighted_gini()</a></code>
-
-        </dt>
-        <dd>Compute Weighted Gini Index Across a List of Data Frames</dd>
-      </dl><dl><dt>
-
-          <code><a href="run_weighted_mean.html">run_weighted_mean()</a></code>
-
-        </dt>
-        <dd>Compute Weighted Mean Across a List of Data Frames (with optional grouping)</dd>
-      </dl><dl><dt>
-
-          <code><a href="run_weighted_percentiles.html">run_weighted_percentiles()</a></code>
-
-        </dt>
-        <dd>Compute Weighted Percentiles cross a List of Data Frames (with optional grouping)</dd>
-      </dl><dl><dt>
-
-          <code><a href="run_weighted_poverty_gap_index.html">run_weighted_poverty_gap_index()</a></code>
-
-        </dt>
-        <dd>Compute the Poverty Gap Index</dd>
-      </dl><dl><dt>
-
-          <code><a href="run_weighted_poverty_shortfall.html">run_weighted_poverty_shortfall()</a></code>
-
-        </dt>
-        <dd>Compute the Weighted Poverty Gap (Shortfall)</dd>
-      </dl><dl><dt>
-
-          <code><a href="run_weighted_ratios.html">run_weighted_ratios()</a></code>
-
-        </dt>
-        <dd>Compute Percentile Ratios</dd>
-      </dl><dl><dt>
-
-          <code><a href="run_weighted_relative_poverty.html">run_weighted_relative_poverty()</a></code>
-
-        </dt>
-        <dd>Compute Relative Poverty Rate</dd>
-      </dl><dl><dt>
-
-          <code><a href="structure_to_plot.html">structure_to_plot()</a></code>
-
-        </dt>
-        <dd>Transform Structured Data Lists into a Tidy Data Frame for Plotting</dd>
-      </dl><dl><dt>
-
           <code><a href="transform_adjust_by_lisppp.html">transform_adjust_by_lisppp()</a></code>
 
         </dt>
@@ -409,22 +527,28 @@
         <dd>Equivalise with the OECD scale</dd>
       </dl><dl><dt>
 
+          <code><a href="transform_zeros_to_na.html">transform_zeros_to_na()</a></code>
+
+        </dt>
+        <dd>Recodes zeros into missing values</dd>
+      </dl><dl><dt>
+
           <code><a href="transform_false_zeros_to_na.html">transform_false_zeros_to_na()</a></code>
 
         </dt>
         <dd>Recode zeros into missing values if all values are zero</dd>
       </dl><dl><dt>
 
-          <code><a href="transform_filter_age.html">transform_filter_age()</a></code>
-
-        </dt>
-        <dd>Filter a sample by age</dd>
-      </dl><dl><dt>
-
           <code><a href="transform_negative_values_to_zero.html">transform_negative_values_to_zero()</a></code>
 
         </dt>
         <dd>Recode negative values to zero</dd>
+      </dl><dl><dt>
+
+          <code><a href="transform_filter_age.html">transform_filter_age()</a></code>
+
+        </dt>
+        <dd>Filter a sample by age</dd>
       </dl><dl><dt>
 
           <code><a href="transform_restrict_age.html">transform_restrict_age()</a></code>
@@ -449,68 +573,9 @@
 
         </dt>
         <dd>Multiply by household size</dd>
-      </dl><dl><dt>
-
-          <code><a href="transform_zeros_to_na.html">transform_zeros_to_na()</a></code>
-
-        </dt>
-        <dd>Recodes zeros into missing values</dd>
-      </dl><dl><dt>
-
-          <code><a href="united_states_16_lis_h.html">united_states_16_lis_h</a></code>
-
-        </dt>
-        <dd>Sample Household-Level LIS Dataset (1,000 Rows)</dd>
-      </dl><dl><dt>
-
-          <code><a href="united_states_16_lis_p.html">united_states_16_lis_p</a></code>
-
-        </dt>
-        <dd>Sample Individual-Level LIS Dataset (1,000 Rows)</dd>
-      </dl><dl><dt>
-
-          <code><a href="united_states_16_lws_h.html">united_states_16_lws_h</a></code>
-
-        </dt>
-        <dd>Sample Household-Level LWS Dataset (1,000 Rows)</dd>
-      </dl><dl><dt>
-
-          <code><a href="united_states_16_lws_p.html">united_states_16_lws_p</a></code>
-
-        </dt>
-        <dd>Sample Individual-Level LWS Dataset (1,000 Rows)</dd>
-      </dl><dl><dt>
-
-          <code><a href="value_label_c_data.html">value_label_c_data</a></code>
-
-        </dt>
-        <dd>Value Labels for Country-Specific Variables in LIS and LWS Datasets</dd>
-      </dl><dl><dt>
-
-          <code><a href="variable_country_specific_categories.html">variable_country_specific_categories()</a></code>
-
-        </dt>
-        <dd>Retrieve the categories of a country-specific variable in LIS/LWS for a given country.</dd>
-      </dl><dl><dt>
-
-          <code><a href="variable_exists.html">variable_exists()</a></code>
-
-        </dt>
-        <dd>Inspect whether a given variable contains more than just non-missing or non-zero values for a selected group of countries in the LIS or LWS databases.</dd>
-      </dl><dl><dt>
-
-          <code><a href="variable_has_note.html">variable_has_note()</a></code>
-
-        </dt>
-        <dd>Verify if a given variable has a note, for a selected group of countries, in LIS or LWS databases.</dd>
-      </dl><dl><dt>
-
-          <code><a href="variable_labels.html">variable_labels()</a></code>
-
-        </dt>
-        <dd>Inspect the Labels of LIS and LWS variables</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
