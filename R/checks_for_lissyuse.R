@@ -2,7 +2,7 @@
 
 check_empty_data <- function(data, lws = FALSE) {
  
-  all_iso2 <- if (lws) "lissyrtools::show_countries_lws()" else "lissyrtools::show_countries_lis()"
+  all_iso2 <- if (lws) "lissyrtools::get_countries_lws()" else "lissyrtools::get_countries_lis()"
   
   if (is.null(data)) {
     stop(
@@ -32,9 +32,9 @@ check_length_iso2 <- function(data) {
 check_iso2 <- function(data, lws = FALSE) {
   
   valid_iso2 <- if (lws) {
-    lissyrtools::show_countries_lws()
+    lissyrtools::get_countries_lws()
   } else {
-    lissyrtools::show_countries_lis()
+    lissyrtools::get_countries_lis()
   }
   
   data_iso2 <- stringr::str_sub(data, 1, 2)
@@ -46,7 +46,7 @@ check_iso2 <- function(data, lws = FALSE) {
     stop(
       glue::glue(
         "None of the provided iso2 codes in 'data' are valid: {toString(data_iso2)}. ",
-        "Valid codes are stored in lissyrtools::show_countries_{ifelse(lws, 'lws', 'lis')}()."
+        "Valid codes are stored in lissyrtools::get_countries_{ifelse(lws, 'lws', 'lis')}()."
       )
     )
   } else if (length(invalid_iso2) > 0) {
@@ -54,7 +54,7 @@ check_iso2 <- function(data, lws = FALSE) {
     warning(
       glue::glue(
         "The argument 'data' contains invalid iso2 codes: {toString(invalid_iso2)}. ",
-        "These iso2 codes are not in the valid list for the selected database. See: lissyrtools::show_countries_{ifelse(lws, 'lws', 'lis')}()."
+        "These iso2 codes are not in the valid list for the selected database. See: lissyrtools::get_countries_{ifelse(lws, 'lws', 'lis')}()."
       )
     )
   }

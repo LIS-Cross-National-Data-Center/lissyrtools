@@ -45,9 +45,9 @@
   # ensure the validity of the iso2 codes
   
   valid_iso2 <- if (lws) {
-    lissyrtools::show_countries_lws()
+    lissyrtools::get_countries_lws()
   } else {
-    lissyrtools::show_countries_lis()
+    lissyrtools::get_countries_lis()
   }
   
   invalid_iso2 <- iso2[!iso2 %in% valid_iso2]
@@ -57,7 +57,7 @@
     stop(
       glue::glue(
         "None of the provided iso2 codes in argument 'iso2' are valid: {toString(iso2)}. ",
-        "Valid codes are stored in lissyrtools::show_countries_{ifelse(lws, 'lws', 'lis')}()."
+        "Valid codes are stored in lissyrtools::get_countries_{ifelse(lws, 'lws', 'lis')}()."
       )
     )
   } else if (length(invalid_iso2) > 0) {
@@ -65,7 +65,7 @@
     warning(
       glue::glue(
         "The argument 'iso2' contains invalid iso2 codes: {toString(invalid_iso2)}. ",
-        "These iso2 codes are not in the valid list for the selected database. See: lissyrtools::show_countries_{ifelse(lws, 'lws', 'lis')}()."
+        "These iso2 codes are not in the valid list for the selected database. See: lissyrtools::get_countries_{ifelse(lws, 'lws', 'lis')}()."
       )
     )
   }

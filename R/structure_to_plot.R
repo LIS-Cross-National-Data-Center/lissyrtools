@@ -9,7 +9,7 @@
 #'   conventions of this list determine how the data is processed.
 #'   
 #'   - **1st structure:** List with country names as keys and named vectors of year-values.
-#'     Expected when `names(data_list)` are country codes matching `show_countries_lis()` or `show_countries_lws()`.
+#'     Expected when `names(data_list)` are country codes matching `get_countries_lis()` or `get_countries_lws()`.
 #'     
 #'   - **2nd structure:** List with `ccyy` abbreviations as keys, and named numeric/integer vectors, where names represent categories.
 #'     Typically output from functions grouped by a categorical variable, e.g. `"educ"`.
@@ -130,13 +130,13 @@ structure_to_plot <- function(data_list) {
 
   
   # 1st structure
-  if (all(names(data_list) %in% c(names(show_countries_lis()), names(show_countries_lws())))) {
+  if (all(names(data_list) %in% c(names(get_countries_lis()), names(get_countries_lws())))) {
     
     result_df <- list_rbind(purrr::imap(
       data_list ,
       ~ tibble::enframe(.x, name = "year", value = "value") %>% mutate(cname = .y)
     )) %>%
-      mutate(cc = show_countries_lis()[cname],
+      mutate(cc = get_countries_lis()[cname],
              yy = stringr::str_sub(year, 3, 4),
              dname = paste0(cc, yy),
              year = as.integer(year)) %>% 

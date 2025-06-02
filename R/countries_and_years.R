@@ -6,8 +6,8 @@
 #' @returns A data frame.
 #'
 #' @examples
-#' show_countries_lis()
-show_countries_lis <- function() {
+#' get_countries_lis()
+get_countries_lis <- function() {
 
   output <- lissyrtools::datasets %>% 
     dplyr::filter(database == "LIS") %>% 
@@ -29,8 +29,8 @@ show_countries_lis <- function() {
 #' @returns A data frame.
 #'
 #' @examples
-#' show_countries_lws()
-show_countries_lws <- function() {
+#' get_countries_lws()
+get_countries_lws <- function() {
   
   output <- lissyrtools::datasets %>% 
     dplyr::filter(database == "LWS") %>% 
@@ -62,7 +62,7 @@ get_years_lis <- function(iso2) {
   
   # ensure the validity of the iso2 codes
   
-  valid_iso2 <- lissyrtools::show_countries_lis()
+  valid_iso2 <- lissyrtools::get_countries_lis()
   invalid_iso2 <- iso2[!iso2 %in% valid_iso2]
   
   if (length(invalid_iso2) == length(iso2)) {
@@ -70,7 +70,7 @@ get_years_lis <- function(iso2) {
     stop(
       glue::glue(
         "None of the provided iso2 codes in argument 'iso2' are valid: {toString(iso2)}. ",
-        "Valid codes are stored in lissyrtools::show_countries_lis()."
+        "Valid codes are stored in lissyrtools::get_countries_lis()."
       )
     )
   } else if (length(invalid_iso2) > 0) {
@@ -78,7 +78,7 @@ get_years_lis <- function(iso2) {
     warning(
       glue::glue(
         "The argument 'iso2' contains invalid iso2 codes: {toString(invalid_iso2)}. ",
-        "These iso2 codes are not in the valid list for the selected database. See: lissyrtools::show_countries_lis()."
+        "These iso2 codes are not in the valid list for the selected database. See: lissyrtools::get_countries_lis()."
       )
     )
   }
@@ -122,7 +122,7 @@ get_years_lws <- function(iso2) {
   
   # ensure the validity of the iso2 codes
   
-  valid_iso2 <- lissyrtools::show_countries_lws()
+  valid_iso2 <- lissyrtools::get_countries_lws()
   invalid_iso2 <- iso2[!iso2 %in% valid_iso2]
   
   if (length(invalid_iso2) == length(iso2)) {
@@ -130,7 +130,7 @@ get_years_lws <- function(iso2) {
     stop(
       glue::glue(
         "None of the provided iso2 codes in argument 'iso2' are valid: {toString(iso2)}. ",
-        "Valid codes are stored in lissyrtools::show_countries_lws()."
+        "Valid codes are stored in lissyrtools::get_countries_lws()."
       )
     )
   } else if (length(invalid_iso2) > 0) {
@@ -138,7 +138,7 @@ get_years_lws <- function(iso2) {
     warning(
       glue::glue(
         "The argument 'iso2' contains invalid iso2 codes: {toString(invalid_iso2)}. ",
-        "These iso2 codes are not in the valid list for the selected database. See: lissyrtools::show_countries_lws()."
+        "These iso2 codes are not in the valid list for the selected database. See: lissyrtools::get_countries_lws()."
       )
     )
   }

@@ -11,7 +11,7 @@ structure_to_plot(data_list)
 conventions of this list determine how the data is processed.
 \itemize{
 \item \strong{1st structure:} List with country names as keys and named vectors of year-values.
-Expected when \code{names(data_list)} are country codes matching \code{show_countries_lis()} or \code{show_countries_lws()}.
+Expected when \code{names(data_list)} are country codes matching \code{get_countries_lis()} or \code{get_countries_lws()}.
 \item \strong{2nd structure:} List with \code{ccyy} abbreviations as keys, and named numeric/integer vectors, where names represent categories.
 Typically output from functions grouped by a categorical variable, e.g. \code{"educ"}.
 \item \strong{3rd structure:} List with \code{ccyy} abbreviations as keys, each containing sublists of named vectors.

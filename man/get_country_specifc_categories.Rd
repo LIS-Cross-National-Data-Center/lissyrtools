@@ -44,6 +44,6 @@ get_country_specifc_categories(variable = "bus1_c", iso2 = "fi", lws = TRUE)
 get_country_specifc_categories(variable = "region_c", iso2 = "es", n_categories = TRUE)
 
 # To use this function acroos multiples countries one could make use of the `purrr::map()` function 
-purrr::map(lissyrtools::show_countries_lws(), ~get_country_specifc_categories(variable = "bus1_c", iso2 = .x, lws = TRUE , n_categories = TRUE))
+purrr::map(lissyrtools::get_countries_lws(), ~get_country_specifc_categories(variable = "bus1_c", iso2 = .x, lws = TRUE , n_categories = TRUE))
 
 }

@@ -25,7 +25,7 @@
 #' get_country_specifc_categories(variable = "region_c", iso2 = "es", n_categories = TRUE)
 #' 
 #' # To use this function acroos multiples countries one could make use of the `purrr::map()` function 
-#' purrr::map(lissyrtools::show_countries_lws(), ~get_country_specifc_categories(variable = "bus1_c", iso2 = .x, lws = TRUE , n_categories = TRUE))
+#' purrr::map(lissyrtools::get_countries_lws(), ~get_country_specifc_categories(variable = "bus1_c", iso2 = .x, lws = TRUE , n_categories = TRUE))
 #' 
 get_country_specifc_categories <- function(variable, iso2, from = NULL, to = NULL , lws = FALSE, n_categories = FALSE) {
   
@@ -76,9 +76,9 @@ get_country_specifc_categories <- function(variable, iso2, from = NULL, to = NUL
   # ensure the validity of the iso2 codes
   
   valid_iso2 <- if (lws) {
-    lissyrtools::show_countries_lws()
+    lissyrtools::get_countries_lws()
   } else {
-    lissyrtools::show_countries_lis()
+    lissyrtools::get_countries_lis()
   }
   
   invalid_iso2 <- iso2[!iso2 %in% valid_iso2]
@@ -89,7 +89,7 @@ get_country_specifc_categories <- function(variable, iso2, from = NULL, to = NUL
     stop(
       glue::glue(
         "None of the provided iso2 codes in argument 'iso2' are valid: {toString(iso2)}. ",
-        "Valid codes are stored in lissyrtools::show_countries_{ifelse(lws, 'lws', 'lis')}()."
+        "Valid codes are stored in lissyrtools::get_countries_{ifelse(lws, 'lws', 'lis')}()."
       )
     )
   } 
