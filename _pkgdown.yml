@@ -8,24 +8,24 @@ home:
       href: https://github.com/LIS-Cross-National-Data-Center/lissyrtools
 
 reference:
-  - title: Load data
+  - title: Load Data
     desc: >
-      This variable-driven function automatically merges household- and person-level files from the same dataset. It also allows users to load data for multiple countries over a chosen range of years.
+      This variable-driven function automatically merges household- and person-level files from the same dataset. It also supports loading data across multiple countries and a selected range of years.
     contents:
       - lissyuse
 
-  - title: Apply functions
+  - title: Apply Functions
     desc: >
-      The purpose of this function is to apply a transformation to the variable under analysis.
+      Applies a transformation to the variable under analysis across datasets.
     contents:
       - apply_iqr_top_bottom_coding
       - apply_oecd_equivalisation
       - apply_sqrt_equivalisation
       - apply_ppp_adjustment
 
-  - title: Run Weighted functions
+  - title: Run Weighted Functions
     desc: >
-      Functions that take a list and compute the aggregate indicators desired across all datasets and allowing for the inclusion of survey weights.
+      Computes aggregate indicators across datasets using a list structure. These functions also allow the inclusion of survey weights in the calculations.
     contents:
       - run_weighted_count
       - run_weighted_mean
@@ -37,17 +37,17 @@ reference:
       - run_weighted_poverty_shortfall
       - run_weighted_poverty_gap_index
 
-  - title: Restructure data to plot
+  - title: Restructure Data for Plotting
     desc: >
       Function designed to restructure data from a list to be printed in the console to a tabular data frame allowing to plot the values
     contents:
       - structure_to_plot
 
-  - title: Metadata functions
+  - title: Metadata Functions
   
-  - subtitle: Get functions
+  - subtitle: Get Functions
     desc: >
-      Allow the user a quick overview on the countries and years available in each database, together with the survey behind each dataset
+     Provide a quick overview of available countries and years in LIS and LWS, including the surveys behind each dataset.
     contents:
     - get_countries_lis
     - get_countries_lws
@@ -56,20 +56,20 @@ reference:
     - get_surveys_lis
     - get_surveys_lws
     
-  - subtitle: Variable functions
+  - subtitle: Variable Functions
     desc: >
-      Allow the user a quick not only overview the existence of a variable in a dataset as well if it has some note attached to it, but also its labels and categories if it is a country-specific variable.
+      Helps users check if a variable exists in a dataset and reveals extra information such as notes, labels, and categories—especially important for variables that vary by country.
     contents:
     - variable_labels
     - variable_country_specific_categories
     - variable_exists
     - variable_has_note
 
-  - title: Built in datasets
+  - title: Built in Datasets
 
-  - subtitle: Sample datasets
+  - subtitle: Sample Datasets
     desc: >
-      Datasets that simulate a real dataset in LISSY. With them, the user can have a base upon which it can run jobs locally and better control the structure of the data and of its transformations, allowing to work in an easier environment to debug, with autocompletion and ability to visualize data frames.
+      Simulated datasets that mirror the structure of real LIS datasets. These allow users to test and debug code locally, with the benefit of autocompletion and the ability to inspect data frames interactively.
     contents:
     - italy_14_lis_h
     - italy_14_lis_p
@@ -93,7 +93,7 @@ reference:
 
   - title: Superseded
     desc: >
-      Superseded functions from the initial stages upon the creation of lissyrtools.
+      Deprecated functions from the early stages of the lissyrtools package. Maintained for reference and backward compatibility.
     contents:
     - bind_lissy_files
     - compute_atkinson
