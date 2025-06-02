@@ -31,3 +31,4 @@ compute_weighted_count(data$de20$educ, data$de20$ppopwgt, na.rm = TRUE, percent 
 compute_weighted_count(data$de20$educ, data$de20$ppopwgt, percent = TRUE)
 }
 }
+\keyword{internal}

@@ -213,7 +213,7 @@ run_weighted_count <- function(
 
 #' @return A numeric vector, with category labels as names.
 #'
-#' @export
+#' @keywords internal
 #' 
 #' @examples
 #' \dontrun{

@@ -178,7 +178,7 @@ apply_iqr_top_bottom_coding <- function(data_list, var_name, wgt_name = NULL, ti
 #' @param one_sided Character. \code{"top"}, \code{"bottom"}, or \code{NULL} (default) for two-sided coding.
 #' 
 #' @return A numeric vector with values above or below the threshold replaced (on the original scale). 
-#' @export
+#' @keywords internal
 #' 
 #' @examples
 #' \dontrun{

@@ -39,3 +39,4 @@ A numeric value with the'lisppp' deflator for the file
 Retrieves the 'lisppp' deflator for a file. It takes into account that the reference year
 of income variables for LWS files might differ from the year of the file.
 }
+\keyword{internal}

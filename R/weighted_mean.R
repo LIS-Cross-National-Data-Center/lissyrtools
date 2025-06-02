@@ -153,7 +153,7 @@ run_weighted_mean <- function(
 
 #' @return A numeric vector.
 #'
-#' @export
+#' @keywords internal
 #' 
 #' @examples
 #' \dontrun{

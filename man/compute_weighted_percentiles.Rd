@@ -42,3 +42,4 @@ compute_weighted_percentiles(data$es22$dhi, data$es22$ppopwgt, probs = c(0.03, 0
 compute_weighted_percentiles(data$es22$dhi, data$es22$ppopwgt, probs = c(0.03, 0.72, 0.48, .01), share = TRUE)
 }
 }
+\keyword{internal}

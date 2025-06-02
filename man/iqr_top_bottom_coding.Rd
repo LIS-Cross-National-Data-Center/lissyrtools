@@ -37,3 +37,4 @@ iqr_top_bottom_coding(data$it16h$dhi)
 iqr_top_bottom_coding(data$it16h$dhi, data$it16h$hwgt, one_sided = "top")
 }
 }
+\keyword{internal}

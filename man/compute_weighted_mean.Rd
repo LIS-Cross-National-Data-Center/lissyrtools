@@ -26,3 +26,4 @@ compute_weighted_mean(data$de20$age, na.rm = TRUE)
 compute_weighted_mean(data$de20$dhi, data$de20$hwgt)
 }
 }
+\keyword{internal}

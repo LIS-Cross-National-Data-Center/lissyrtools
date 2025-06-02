@@ -201,7 +201,7 @@ run_weighted_percentiles <- function(data_list, var_name, wgt_name = NULL, probs
 #' 
 #' @return A named numeric vector. If \code{share = FALSE}, returns weighted percentiles with names corresponding to the percentiles (e.g., "25%"). If \code{share = TRUE}, returns the share of the total value in each percentile range (e.g., "0-25%").  
 #'
-#' @export
+#' @keywords internal
 #' 
 #' @examples
 #' \dontrun{

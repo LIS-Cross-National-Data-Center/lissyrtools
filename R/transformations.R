@@ -1286,6 +1286,9 @@ get_lws_file_income_reference_year <- function(file_name){
 #'   format as the tibble in 'lissyrtools::deflators'. If "lissyrtools" (default) the deflators
 #'   are imported from the package internal data.
 #' @return A numeric value with the'lisppp' deflator for the file
+#' @keywords internal
+#' 
+#' 
 get_file_lisppp <- function(file_name, database, variable = NULL, income_variable = NULL, ppp_data = "lissyrtools"){
 
   assertthat::assert_that(stringr::str_detect(file_name, pattern = "^\\w{2}\\d{2}$"),
