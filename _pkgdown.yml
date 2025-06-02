@@ -1,26 +1,131 @@
 url: https://lis-cross-national-data-center.github.io/lissyrtools/
 template:
-    bootstrap: 5
-
+  bootstrap: 5
 
 home:
   links:
-  - text: Browse source code
-    href: https://github.com/LIS-Cross-National-Data-Center/lissyrtools
-    
-    
-reference:
-- title: Load data
-  desc: >
-    This variable-driven function automatically merges household- and person-level files from the same dataset. It also allows users to load data for multiple countries over a chosen range of years.  
+    - text: Browse source code
+      href: https://github.com/LIS-Cross-National-Data-Center/lissyrtools
 
-  contents:
-  - lissyuse   
+reference:
+  - title: Load data
+    desc: >
+      This variable-driven function automatically merges household- and person-level files from the same dataset. It also allows users to load data for multiple countries over a chosen range of years.
+    contents:
+      - lissyuse
+
+  - title: Apply functions
+    desc: >
+      The purpose of this function is to apply a transformation to the variable under analysis.
+    contents:
+      - apply_iqr_top_bottom_coding
+      - apply_oecd_equivalisation
+      - apply_sqrt_equivalisation
+      - apply_ppp_adjustment
+
+  - title: Run Weighted functions
+    desc: >
+      Functions that take a list and compute the aggregate indicators desired across all datasets and allowing for the inclusion of survey weights.
+    contents:
+      - run_weighted_count
+      - run_weighted_mean
+      - run_weighted_percentiles
+      - run_weighted_ratios
+      - run_weighted_gini
+      - run_weighted_atkinson
+      - run_weighted_relative_poverty
+      - run_weighted_poverty_shortfall
+      - run_weighted_poverty_gap_index
+
+  - title: Restructure data to plot
+    desc: >
+      Function designed to restructure data from a list to be printed in the console to a tabular data frame allowing to plot the values
+    contents:
+      - structure_to_plot
+
+  - title: Metadata functions
   
-- title: Apply functions   
-  desc: >
-    The purpose of this function is to apply a transformation to the variable under analysis.
- 
-  contents:
-  - apply_iqr_top_bottom_coding
-  - apply_ppp_adjustment
+  - subtitle: Get functions
+    desc: >
+      Allow the user a quick overview on the countries and years available in each database, together with the survey behind each dataset
+    contents:
+    - get_countries_lis
+    - get_countries_lws
+    - get_years_lis
+    - get_years_lws
+    - get_surveys_lis
+    - get_surveys_lws
+    
+  - subtitle: Variable functions
+    desc: >
+      Allow the user a quick not only overview the existence of a variable in a dataset as well if it has some note attached to it, but also its labels and categories if it is a country-specific variable.
+    contents:
+    - variable_labels
+    - variable_country_specific_categories
+    - variable_exists
+    - variable_has_note
+
+  - title: Built in datasets
+
+  - subtitle: Sample datasets
+    desc: >
+      Datasets that simulate a real dataset in LISSY. With them, the user can have a base upon which it can run jobs locally and better control the structure of the data and of its transformations, allowing to work in an easier environment to debug, with autocompletion and ability to visualize data frames.
+    contents:
+    - italy_14_lis_h
+    - italy_14_lis_p
+    - mexico_18_lis_h
+    - mexico_18_lis_p
+    - united_states_16_lis_h
+    - united_states_16_lis_p
+    - italy_14_lws_h
+    - italy_14_lws_p
+    - united_states_16_lws_h
+    - united_states_16_lws_p
+
+  - subtitle: Other tables
+    contents:
+    - data_vars_labels
+    - data_with_warnings
+    - datasets
+    - deflators
+    - missing_or_zero_vars_all
+    - value_label_c_data
+
+  - title: Superseded
+    desc: >
+      Superseded functions from the initial stages upon the creation of lissyrtools.
+    contents:
+    - bind_lissy_files
+    - compute_atkinson
+    - compute_gini
+    - compute_mean
+    - compute_median
+    - compute_ratio
+    - compute_percentiles
+    - compute_poverty_rate
+    - determine_file_level
+    - determine_weight
+    - lissy_map
+    - merge_dataset_levels
+    - plot_indicator
+    - print_all_lissy_files
+    - print_atkinson
+    - print_gini
+    - print_indicator
+    - print_percentiles
+    - print_ratio
+    - read_lissy_files
+    - read_lissy_files_locally
+    - read_rename_files
+    - transform_adjust_by_lisppp
+    - transform_equivalise
+    - transform_equivalise_oecd
+    - transform_zeros_to_na
+    - transform_false_zeros_to_na
+    - transform_negative_values_to_zero
+    - transform_filter_age
+    - transform_restrict_age
+    - transform_restrict_to_household_heads
+    - transform_top_code_with_iqr
+    - transform_bottom_code_with_iqr
+    - transform_weight_by_hh_size

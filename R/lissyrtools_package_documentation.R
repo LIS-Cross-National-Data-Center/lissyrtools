@@ -6,6 +6,7 @@
 #'* Read LIS data within the LISSY environment, or to use LIS sample files locally.
 #'* Carry out commonly performed data cleaning tasks.
 #'* Compute estimates from microdata.
+#' @keywords internal
 #' @name lissyrtools
 "_PACKAGE"
 
