@@ -1,3 +1,26 @@
 url: https://lis-cross-national-data-center.github.io/lissyrtools/
 template:
     bootstrap: 5
+
+
+home:
+  links:
+  - text: Browse source code
+    href: https://github.com/LIS-Cross-National-Data-Center/lissyrtools
+    
+    
+reference:
+- title: Load data
+  desc: >
+    This variable-driven function automatically merges household- and person-level files from the same dataset. It also allows users to load data for multiple countries over a chosen range of years.  
+
+  contents:
+  - lissyuse   
+  
+- title: Apply functions   
+  desc: >
+    The purpose of this function is to apply a transformation to the variable under analysis.
+ 
+  contents:
+  - apply_iqr_top_bottom_coding
+  - apply_ppp_adjustment
