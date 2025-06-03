@@ -1,4 +1,4 @@
-# lissyrtools <a href="https://lis-cross-national-data-center.github.io/lissyrtools/"><img src="man/figures/lissyrtools_badge_classic.png" align="right" height="195" style="float:right; height:195px;"/></a>
+# lissyrtools <a href="https://lis-cross-national-data-center.github.io/lissyrtools/"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
 <!-- badges: start -->
 
