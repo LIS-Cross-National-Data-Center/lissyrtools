@@ -2,11 +2,6 @@ url: https://lis-cross-national-data-center.github.io/lissyrtools/
 template:
   bootstrap: 5
 
-home:
-  links:
-    - text: Browse source code
-      href: https://github.com/LIS-Cross-National-Data-Center/lissyrtools
-
 reference:
   - title: Load Data
     desc: >
