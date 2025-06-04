@@ -51,185 +51,234 @@
 
 #' Sample Household-Level LIS Dataset (1,000 Rows)
 #'
-#' This dataset provides household-level data from the LIS database with 1,000 rows, 
-#' designed for exploration and user interaction. It is automatically loaded with 
-#' `lissyuse_locally()` whenever Italy is selected along with at least one household-level 
-#' variable (e.g., "region_c").
-#'
-#' The primary purpose of this dataset, and the `lissyuse_locally()` function, is to allow 
-#' users to build and test code locally, simulating its execution before running it on LISSY 
-#' (the LIS user interface) using the `lissyuse()` function.  
-#'
 #' @format Data frame with 1,000 rows and 112 columns.
 #' @examples
 #' \dontrun{
-#' italy_14_lis_h
+#' it14_h_lis
 #' }
-"italy_14_lis_h"
-
+"it14_h_lis"
 
 #' Sample Individual-Level LIS Dataset (1,000 Rows)
-#'
-#' This dataset provides individual-level data from the LIS database with 1,000 rows, 
-#' designed for exploration and user interaction. It is automatically loaded with 
-#' `lissyuse_locally()` whenever Italy is selected along with at least one individual-level 
-#' variable (e.g., "age").
-#'
-#' The primary purpose of this dataset, and the `lissyuse_locally()` function, is to allow 
-#' users to build and test code locally, simulating its execution before running it on LISSY 
-#' (the LIS user interface) using the `lissyuse()` function.  
-#'
+
 #' @format Data frame with 1,000 rows and 97 columns.
 #' @examples
-#'  \dontrun{
-#' italy_14_lis_p
+#' \dontrun{
+#' it14_p_lis
 #' }
-"italy_14_lis_p"
-
+"it14_p_lis"
 
 #' Sample Household-Level LIS Dataset (1,000 Rows)
 #'
-#' This dataset provides household-level data from the LIS database with 1,000 rows, 
-#' designed for exploration and user interaction. It is automatically loaded with 
-#' `lissyuse_locally()` whenever United States is selected along with at least one household-level 
-#' variable (e.g., "region_c").
-#'
-#' The primary purpose of this dataset, and the `lissyuse_locally()` function, is to allow 
-#' users to build and test code locally, simulating its execution before running it on LISSY 
-#' (the LIS user interface) using the `lissyuse()` function.  
-#'
 #' @format Data frame with 1,000 rows and 112 columns.
 #' @examples
 #' \dontrun{
-#' united_states_16_lis_h
+#' it16_h_lis
 #' }
-"united_states_16_lis_h"
+"it16_h_lis"
 
 #' Sample Individual-Level LIS Dataset (1,000 Rows)
-#'
-#' This dataset provides individual-level data from the LIS database with 1,000 rows, 
-#' designed for exploration and user interaction. It is automatically loaded with 
-#' `lissyuse_locally()` whenever United States is selected along with at least one individual-level 
-#' variable (e.g., "age").
-#'
-#' The primary purpose of this dataset, and the `lissyuse_locally()` function, is to allow 
-#' users to build and test code locally, simulating its execution before running it on LISSY 
-#' (the LIS user interface) using the `lissyuse()` function.  
 #'
 #' @format Data frame with 1,000 rows and 97 columns.
 #' @examples
 #' \dontrun{
-#' united_states_16_lis_p
+#' it16_p_lis
 #' }
-"united_states_16_lis_p"
+"it16_p_lis"
 
 #' Sample Household-Level LIS Dataset (1,000 Rows)
 #'
-#' This dataset provides household-level data from the LIS database with 1,000 rows, 
-#' designed for exploration and user interaction. It is automatically loaded with 
-#' `lissyuse_locally()` whenever Mexico is selected along with at least one household-level 
-#' variable (e.g., "region_c").
-#'
-#' The primary purpose of this dataset, and the `lissyuse_locally()` function, is to allow 
-#' users to build and test code locally, simulating its execution before running it on LISSY 
-#' (the LIS user interface) using the `lissyuse()` function.  
-#'
 #' @format Data frame with 1,000 rows and 112 columns.
 #' @examples
 #' \dontrun{
-#' mexico_18_lis_h
+#' it20_h_lis
 #' }
-"mexico_18_lis_h"
+"it20_h_lis"
 
 #' Sample Individual-Level LIS Dataset (1,000 Rows)
-#'
-#' This dataset provides individual-level data from the LIS database with 1,000 rows, 
-#' designed for exploration and user interaction. It is automatically loaded with 
-#' `lissyuse_locally()` whenever Mexico is selected along with at least one individual-level 
-#' variable (e.g., "age").
-#'
-#' The primary purpose of this dataset, and the `lissyuse_locally()` function, is to allow 
-#' users to build and test code locally, simulating its execution before running it on LISSY 
-#' (the LIS user interface) using the `lissyuse()` function.  
 #'
 #' @format Data frame with 1,000 rows and 97 columns.
 #' @examples
 #' \dontrun{
-#' mexico_18_lis_p
+#' it20_p_lis
 #' }
-"mexico_18_lis_p"
+"it20_p_lis"
 
+#' Sample Household-Level LIS Dataset (1,000 Rows)
+#'
+#' @format Data frame with 1,000 rows and 112 columns.
+#' @examples
+#' \dontrun{
+#' mx14_h_lis
+#' }
+"mx14_h_lis"
+
+#' Sample Individual-Level LIS Dataset (1,000 Rows)
+#'
+#' @format Data frame with 1,000 rows and 97 columns.
+#' @examples
+#' \dontrun{
+#' mx14_p_lis
+#' }
+"mx14_p_lis"
+
+#' Sample Household-Level LIS Dataset (1,000 Rows)
+#'
+#' @format Data frame with 1,000 rows and 112 columns.
+#' @examples
+#' \dontrun{
+#' mx16_h_lis
+#' }
+"mx16_h_lis"
+
+#' Sample Individual-Level LIS Dataset (1,000 Rows)
+#'
+#' @format Data frame with 1,000 rows and 97 columns.
+#' @examples
+#' \dontrun{
+#' mx16_p_lis
+#' }
+"mx16_p_lis"
+
+#' Sample Household-Level LIS Dataset (1,000 Rows)
+#'
+#' @format Data frame with 1,000 rows and 112 columns.
+#' @examples
+#' \dontrun{
+#' mx18_h_lis
+#' }
+"mx18_h_lis"
+
+#' Sample Individual-Level LIS Dataset (1,000 Rows)
+#'
+#' @format Data frame with 1,000 rows and 97 columns.
+#' @examples
+#' \dontrun{
+#' mx18_p_lis
+#' }
+"mx18_p_lis"
+
+#' Sample Household-Level LIS Dataset (1,000 Rows)
+#'
+#' @format Data frame with 1,000 rows and 112 columns.
+#' @examples
+#' \dontrun{
+#' us14_h_lis
+#' }
+"us14_h_lis"
+
+#' Sample Individual-Level LIS Dataset (1,000 Rows)
+#'
+#' @format Data frame with 1,000 rows and 97 columns.
+#' @examples
+#' \dontrun{
+#' us14_p_lis
+#' }
+"us14_p_lis"
+
+#' Sample Household-Level LIS Dataset (1,000 Rows)
+#'
+#' @format Data frame with 1,000 rows and 112 columns.
+#' @examples
+#' \dontrun{
+#' us16_h_lis
+#' }
+"us16_h_lis"
+
+#' Sample Individual-Level LIS Dataset (1,000 Rows)
+#'
+#' @format Data frame with 1,000 rows and 97 columns.
+#' @examples
+#' \dontrun{
+#' us16_p_lis
+#' }
+"us16_p_lis"
+
+#' Sample Household-Level LIS Dataset (1,000 Rows)
+#'
+#' @format Data frame with 1,000 rows and 112 columns.
+#' @examples
+#' \dontrun{
+#' us18_h_lis
+#' }
+"us18_h_lis"
+
+#' Sample Individual-Level LIS Dataset (1,000 Rows)
+#'
+#' @format Data frame with 1,000 rows and 97 columns.
+#' @examples
+#' \dontrun{
+#' us18_p_lis
+#' }
+"us18_p_lis"
 
 #' Sample Household-Level LWS Dataset (1,000 Rows)
-#'
-#' This dataset provides household-level data from the LWS database with 1,000 rows, 
-#' designed for exploration and user interaction. It is automatically loaded with 
-#' `lissyuse_locally()` whenever Italy is selected along with at least one household-level 
-#' variable (e.g., "region_c") and the `lws` argument is set to `TRUE`.
-#'
-#' The primary purpose of this dataset, and the `lissyuse_locally()` function, is to allow 
-#' users to build and test code locally, simulating its execution before running it on LISSY 
-#' (the LIS user interface) using the `lissyuse()` function.  
 #'
 #' @format Data frame with 1,000 rows and 214 columns.
 #' @examples
 #' \dontrun{
-#' italy_14_lws_h
+#' it14_h_lws
 #' }
-"italy_14_lws_h"
+"it14_h_lws"
 
 #' Sample Individual-Level LWS Dataset (1,000 Rows)
 #'
-#' This dataset provides individual-level data from the LWS database with 1,000 rows, 
-#' designed for exploration and user interaction. It is automatically loaded with 
-#' `lissyuse_locally()` whenever Italy is selected along with at least one individual-level 
-#' variable (e.g., "age") and the `lws` argument is set to `TRUE`.
-#'
-#' The primary purpose of this dataset, and the `lissyuse_locally()` function, is to allow 
-#' users to build and test code locally, simulating its execution before running it on LISSY 
-#' (the LIS user interface) using the `lissyuse()` function.  
-#'
-#' @format Data frame with 1,000 rows and 133 columns.
+#' @format Data frame with 2,328 rows and 133 columns.
 #' @examples
 #' \dontrun{
-#' italy_14_lws_p
+#' it14_p_lws
 #' }
-"italy_14_lws_p"
-
+"it14_p_lws"
 
 #' Sample Household-Level LWS Dataset (1,000 Rows)
-#'
-#' This dataset provides household-level data from the LWS database with 1,000 rows, 
-#' designed for exploration and user interaction. It is automatically loaded with 
-#' `lissyuse_locally()` whenever United States is selected along with at least one household-level 
-#' variable (e.g., "region_c") and the `lws` argument is set to `TRUE`.
-#'
-#' The primary purpose of this dataset, and the `lissyuse_locally()` function, is to allow 
-#' users to build and test code locally, simulating its execution before running it on LISSY 
-#' (the LIS user interface) using the `lissyuse()` function.  
 #'
 #' @format Data frame with 1,000 rows and 214 columns.
 #' @examples
 #' \dontrun{
-#' united_states_16_lws_h
+#' it16_h_lws
 #' }
-"united_states_16_lws_h"
-
+"it16_h_lws"
 
 #' Sample Individual-Level LWS Dataset (1,000 Rows)
 #'
-#' This dataset provides individual-level data from the LWS database with 1,000 rows, 
-#' designed for exploration and user interaction. It is automatically loaded with 
-#' `lissyuse_locally()` whenever United States is selected along with at least one individual-level 
-#' variable (e.g., "age") and the `lws` argument is set to `TRUE`.
-#'
-#' The primary purpose of this dataset, and the `lissyuse_locally()` function, is to allow 
-#' users to build and test code locally, simulating its execution before running it on LISSY 
-#' (the LIS user interface) using the `lissyuse()` function.  
-#'
-#' @format Data frame with 1,000 rows and 133 columns.
+#' @format Data frame with 2,215 rows and 133 columns.
 #' @examples
 #' \dontrun{
-#' united_states_16_lws_p
+#' it16_p_lws
 #' }
-"united_states_16_lws_p"
+"it16_p_lws"
+
+#' Sample Household-Level LWS Dataset (1,000 Rows)
+#'
+#' @format Data frame with 1,000 rows and 214 columns.
+#' @examples
+#' \dontrun{
+#' us16_h_lws
+#' }
+"us16_h_lws"
+
+#' Sample Individual-Level LWS Dataset (1,000 Rows)
+#'
+#' @format Data frame with 2,396 rows and 133 columns.
+#' @examples
+#' \dontrun{
+#' us16_p_lws
+#' }
+"us16_p_lws"
+
+#' Sample Household-Level LWS Dataset (1,000 Rows)
+#'
+#' @format Data frame with 1,000 rows and 214 columns.
+#' @examples
+#' \dontrun{
+#' us19_h_lws
+#' }
+"us19_h_lws"
+
+#' Sample Individual-Level LWS Dataset (1,000 Rows)
+#'
+#' @format Data frame with 2,273 rows and 133 columns.
+#' @examples
+#' \dontrun{
+#' us19_p_lws
+#' }
+"us19_p_lws"

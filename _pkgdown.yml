@@ -38,9 +38,7 @@ reference:
     contents:
       - structure_to_plot
 
-  - title: Metadata Functions
-  
-  - subtitle: Get Functions
+  - title: Data Availability Functions
     desc: >
      Provide a quick overview of available countries and years in LIS and LWS, including the surveys behind each dataset.
     contents:
@@ -51,7 +49,7 @@ reference:
     - get_surveys_lis
     - get_surveys_lws
     
-  - subtitle: Variable Functions
+  - title: Variable Information Functions
     desc: >
       Helps users check if a variable exists in a dataset and reveals extra information such as notes, labels, and categories—especially important for variables that vary by country.
     contents:
@@ -66,18 +64,34 @@ reference:
     desc: >
       Simulated datasets that mirror the structure of real LIS datasets. These allow users to test and debug code locally, with the benefit of autocompletion and the ability to inspect data frames interactively.
     contents:
-    - italy_14_lis_h
-    - italy_14_lis_p
-    - mexico_18_lis_h
-    - mexico_18_lis_p
-    - united_states_16_lis_h
-    - united_states_16_lis_p
-    - italy_14_lws_h
-    - italy_14_lws_p
-    - united_states_16_lws_h
-    - united_states_16_lws_p
+    - it14_h_lis
+    - it14_p_lis
+    - it16_h_lis
+    - it16_p_lis
+    - it20_h_lis
+    - it20_p_lis
+    - mx14_h_lis
+    - mx14_p_lis
+    - mx16_h_lis
+    - mx16_p_lis
+    - mx18_h_lis
+    - mx18_p_lis
+    - us14_h_lis
+    - us14_p_lis
+    - us16_h_lis
+    - us16_p_lis
+    - us18_h_lis
+    - us18_p_lis
+    - it14_h_lws
+    - it14_p_lws
+    - it16_h_lws
+    - it16_p_lws
+    - us16_h_lws
+    - us16_p_lws
+    - us19_h_lws
+    - us19_p_lws
 
-  - subtitle: Other tables
+  - subtitle: Complementary Tables
     contents:
     - data_vars_labels
     - data_with_warnings
