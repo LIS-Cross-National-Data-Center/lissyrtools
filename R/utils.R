@@ -599,7 +599,7 @@ remove_dname_with_missings_in_weights <- function(list, wgt_name) {
   # p-level data from Canada/LWS have missing weights on those whose relation is not 1000 reference person
   # be aware of other datasets that might entail these missings in weights.
 
-  if ( (all(c("relation", "inum") %in% names(list[[1]])) & !is.null(wgt_name)) &&  (sum(str_detect(names(list), "ca")) > 0)) {
+  if ( (all(c("relation", "inum") %in% names(list[[1]])) & !is.null(wgt_name)) &&  (sum(stringr::str_detect(names(list), "ca")) > 0)) {
     clean_list <- purrr::discard(list, stringr::str_detect(names(list), "ca"))
     message(
       "Note: Canadian LWS datasets contain missing weights for individuals not identified as the reference person. These datasets were excluded to ensure valid weighted calculations."
