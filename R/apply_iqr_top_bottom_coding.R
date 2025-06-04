@@ -113,7 +113,8 @@ apply_iqr_top_bottom_coding <- function(data_list, var_name, wgt_name = NULL, ti
           lissyrtools::lis_household_variables,
           lissyrtools::lws_household_variables
         )) &&
-        ("pid" %in% names(data_list[[1]])))
+        (nrow(data_list[[1]]) > length(unique(data_list[[1]]$hid))
+))
     ) {
       warning(glue::glue( # once a individual level variable is loaded in lissyuse, dataset automatically becomes p-level too. 
         "Level mismatch: the variable '{var_name}' is household-level, ",
