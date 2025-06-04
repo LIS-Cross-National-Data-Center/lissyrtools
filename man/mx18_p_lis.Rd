@@ -3,7 +3,7 @@
 \docType{data}
 \name{mx18_p_lis}
 \alias{mx18_p_lis}
-\title{Sample Individual-Level LIS Dataset (1,000 Rows)}
+\title{Sample Individual-Level LIS Dataset - Mexico 2018}
 \format{
 Data frame with 1,000 rows and 97 columns.
 }
@@ -11,7 +11,7 @@ Data frame with 1,000 rows and 97 columns.
 mx18_p_lis
 }
 \description{
-Sample Individual-Level LIS Dataset (1,000 Rows)
+Sample Individual-Level LIS Dataset - Mexico 2018
 }
 \examples{
 \dontrun{

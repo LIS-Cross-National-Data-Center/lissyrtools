@@ -3,7 +3,7 @@
 \docType{data}
 \name{it14_p_lws}
 \alias{it14_p_lws}
-\title{Sample Individual-Level LWS Dataset (1,000 Rows)}
+\title{Sample Individual-Level LWS Dataset - Italy 2014}
 \format{
 Data frame with 2,328 rows and 133 columns.
 }
@@ -11,7 +11,7 @@ Data frame with 2,328 rows and 133 columns.
 it14_p_lws
 }
 \description{
-Sample Individual-Level LWS Dataset (1,000 Rows)
+Sample Individual-Level LWS Dataset - Italy 2014
 }
 \examples{
 \dontrun{

@@ -3,7 +3,7 @@
 \docType{data}
 \name{mx14_h_lis}
 \alias{mx14_h_lis}
-\title{Sample Household-Level LIS Dataset (1,000 Rows)}
+\title{Sample Household-Level LIS Dataset - Mexico 2014}
 \format{
 Data frame with 1,000 rows and 112 columns.
 }
@@ -11,7 +11,7 @@ Data frame with 1,000 rows and 112 columns.
 mx14_h_lis
 }
 \description{
-Sample Household-Level LIS Dataset (1,000 Rows)
+Sample Household-Level LIS Dataset - Mexico 2014
 }
 \examples{
 \dontrun{

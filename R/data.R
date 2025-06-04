@@ -49,7 +49,7 @@
 "value_label_c_data"
 
 
-#' Sample Household-Level LIS Dataset (1,000 Rows)
+#' Sample Household-Level LIS Dataset - Italy 2014
 #'
 #' @format Data frame with 1,000 rows and 112 columns.
 #' @examples
@@ -58,7 +58,7 @@
 #' }
 "it14_h_lis"
 
-#' Sample Individual-Level LIS Dataset (1,000 Rows)
+#' Sample Individual-Level LIS Dataset - Italy 2014
 
 #' @format Data frame with 1,000 rows and 97 columns.
 #' @examples
@@ -67,7 +67,7 @@
 #' }
 "it14_p_lis"
 
-#' Sample Household-Level LIS Dataset (1,000 Rows)
+#' Sample Household-Level LIS Dataset - Italy 2016
 #'
 #' @format Data frame with 1,000 rows and 112 columns.
 #' @examples
@@ -76,7 +76,7 @@
 #' }
 "it16_h_lis"
 
-#' Sample Individual-Level LIS Dataset (1,000 Rows)
+#' Sample Individual-Level LIS Dataset - Italy 2016
 #'
 #' @format Data frame with 1,000 rows and 97 columns.
 #' @examples
@@ -85,7 +85,7 @@
 #' }
 "it16_p_lis"
 
-#' Sample Household-Level LIS Dataset (1,000 Rows)
+#' Sample Household-Level LIS Dataset - Italy 2020
 #'
 #' @format Data frame with 1,000 rows and 112 columns.
 #' @examples
@@ -94,7 +94,7 @@
 #' }
 "it20_h_lis"
 
-#' Sample Individual-Level LIS Dataset (1,000 Rows)
+#' Sample Individual-Level LIS Dataset - Italy 2020
 #'
 #' @format Data frame with 1,000 rows and 97 columns.
 #' @examples
@@ -103,7 +103,7 @@
 #' }
 "it20_p_lis"
 
-#' Sample Household-Level LIS Dataset (1,000 Rows)
+#' Sample Household-Level LIS Dataset - Mexico 2014
 #'
 #' @format Data frame with 1,000 rows and 112 columns.
 #' @examples
@@ -112,7 +112,7 @@
 #' }
 "mx14_h_lis"
 
-#' Sample Individual-Level LIS Dataset (1,000 Rows)
+#' Sample Individual-Level LIS Dataset - Mexico 2014
 #'
 #' @format Data frame with 1,000 rows and 97 columns.
 #' @examples
@@ -121,7 +121,7 @@
 #' }
 "mx14_p_lis"
 
-#' Sample Household-Level LIS Dataset (1,000 Rows)
+#' Sample Household-Level LIS Dataset - Mexico 2016
 #'
 #' @format Data frame with 1,000 rows and 112 columns.
 #' @examples
@@ -130,7 +130,7 @@
 #' }
 "mx16_h_lis"
 
-#' Sample Individual-Level LIS Dataset (1,000 Rows)
+#' Sample Individual-Level LIS Dataset - Mexico 2016
 #'
 #' @format Data frame with 1,000 rows and 97 columns.
 #' @examples
@@ -139,7 +139,7 @@
 #' }
 "mx16_p_lis"
 
-#' Sample Household-Level LIS Dataset (1,000 Rows)
+#' Sample Household-Level LIS Dataset - Mexico 2018
 #'
 #' @format Data frame with 1,000 rows and 112 columns.
 #' @examples
@@ -148,7 +148,7 @@
 #' }
 "mx18_h_lis"
 
-#' Sample Individual-Level LIS Dataset (1,000 Rows)
+#' Sample Individual-Level LIS Dataset - Mexico 2018
 #'
 #' @format Data frame with 1,000 rows and 97 columns.
 #' @examples
@@ -157,7 +157,7 @@
 #' }
 "mx18_p_lis"
 
-#' Sample Household-Level LIS Dataset (1,000 Rows)
+#' Sample Household-Level LIS Dataset - US 2014
 #'
 #' @format Data frame with 1,000 rows and 112 columns.
 #' @examples
@@ -166,7 +166,7 @@
 #' }
 "us14_h_lis"
 
-#' Sample Individual-Level LIS Dataset (1,000 Rows)
+#' Sample Individual-Level LIS Dataset - US 2014
 #'
 #' @format Data frame with 1,000 rows and 97 columns.
 #' @examples
@@ -175,7 +175,7 @@
 #' }
 "us14_p_lis"
 
-#' Sample Household-Level LIS Dataset (1,000 Rows)
+#' Sample Household-Level LIS Dataset - US 2016
 #'
 #' @format Data frame with 1,000 rows and 112 columns.
 #' @examples
@@ -184,7 +184,7 @@
 #' }
 "us16_h_lis"
 
-#' Sample Individual-Level LIS Dataset (1,000 Rows)
+#' Sample Individual-Level LIS Dataset - US 2016
 #'
 #' @format Data frame with 1,000 rows and 97 columns.
 #' @examples
@@ -193,7 +193,7 @@
 #' }
 "us16_p_lis"
 
-#' Sample Household-Level LIS Dataset (1,000 Rows)
+#' Sample Household-Level LIS Dataset - US 2018
 #'
 #' @format Data frame with 1,000 rows and 112 columns.
 #' @examples
@@ -202,7 +202,7 @@
 #' }
 "us18_h_lis"
 
-#' Sample Individual-Level LIS Dataset (1,000 Rows)
+#' Sample Individual-Level LIS Dataset - US 2018
 #'
 #' @format Data frame with 1,000 rows and 97 columns.
 #' @examples
@@ -211,7 +211,7 @@
 #' }
 "us18_p_lis"
 
-#' Sample Household-Level LWS Dataset (1,000 Rows)
+#' Sample Household-Level LWS Dataset - Italy 2014
 #'
 #' @format Data frame with 1,000 rows and 214 columns.
 #' @examples
@@ -220,7 +220,7 @@
 #' }
 "it14_h_lws"
 
-#' Sample Individual-Level LWS Dataset (1,000 Rows)
+#' Sample Individual-Level LWS Dataset - Italy 2014
 #'
 #' @format Data frame with 2,328 rows and 133 columns.
 #' @examples
@@ -229,7 +229,7 @@
 #' }
 "it14_p_lws"
 
-#' Sample Household-Level LWS Dataset (1,000 Rows)
+#' Sample Household-Level LWS Dataset - Italy 2016
 #'
 #' @format Data frame with 1,000 rows and 214 columns.
 #' @examples
@@ -238,7 +238,7 @@
 #' }
 "it16_h_lws"
 
-#' Sample Individual-Level LWS Dataset (1,000 Rows)
+#' Sample Individual-Level LWS Dataset - Italy 2016
 #'
 #' @format Data frame with 2,215 rows and 133 columns.
 #' @examples
@@ -247,7 +247,7 @@
 #' }
 "it16_p_lws"
 
-#' Sample Household-Level LWS Dataset (1,000 Rows)
+#' Sample Household-Level LWS Dataset - US 2016
 #'
 #' @format Data frame with 1,000 rows and 214 columns.
 #' @examples
@@ -256,7 +256,7 @@
 #' }
 "us16_h_lws"
 
-#' Sample Individual-Level LWS Dataset (1,000 Rows)
+#' Sample Individual-Level LWS Dataset - US 2016
 #'
 #' @format Data frame with 2,396 rows and 133 columns.
 #' @examples
@@ -265,7 +265,7 @@
 #' }
 "us16_p_lws"
 
-#' Sample Household-Level LWS Dataset (1,000 Rows)
+#' Sample Household-Level LWS Dataset - US 2019
 #'
 #' @format Data frame with 1,000 rows and 214 columns.
 #' @examples
@@ -274,7 +274,7 @@
 #' }
 "us19_h_lws"
 
-#' Sample Individual-Level LWS Dataset (1,000 Rows)
+#' Sample Individual-Level LWS Dataset - US 2019
 #'
 #' @format Data frame with 2,273 rows and 133 columns.
 #' @examples

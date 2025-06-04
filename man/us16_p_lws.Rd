@@ -3,7 +3,7 @@
 \docType{data}
 \name{us16_p_lws}
 \alias{us16_p_lws}
-\title{Sample Individual-Level LWS Dataset (1,000 Rows)}
+\title{Sample Individual-Level LWS Dataset - US 2016}
 \format{
 Data frame with 2,396 rows and 133 columns.
 }
@@ -11,7 +11,7 @@ Data frame with 2,396 rows and 133 columns.
 us16_p_lws
 }
 \description{
-Sample Individual-Level LWS Dataset (1,000 Rows)
+Sample Individual-Level LWS Dataset - US 2016
 }
 \examples{
 \dontrun{

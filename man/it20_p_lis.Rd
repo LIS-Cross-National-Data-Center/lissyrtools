@@ -3,7 +3,7 @@
 \docType{data}
 \name{it20_p_lis}
 \alias{it20_p_lis}
-\title{Sample Individual-Level LIS Dataset (1,000 Rows)}
+\title{Sample Individual-Level LIS Dataset - Italy 2020}
 \format{
 Data frame with 1,000 rows and 97 columns.
 }
@@ -11,7 +11,7 @@ Data frame with 1,000 rows and 97 columns.
 it20_p_lis
 }
 \description{
-Sample Individual-Level LIS Dataset (1,000 Rows)
+Sample Individual-Level LIS Dataset - Italy 2020
 }
 \examples{
 \dontrun{
