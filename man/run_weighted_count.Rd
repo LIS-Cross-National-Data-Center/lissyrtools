@@ -23,8 +23,7 @@ This must be listed in \code{lissyrtools::lis_categorical_variables} or \code{li
 
 \item{na.rm}{Logical; if \code{TRUE}, observations with missing values in \code{var_name} are removed before computing counts or percentages.}
 
-\item{by}{(Optional) A string naming a second categorical variable for disaggregation. Results will then be split by this variable.
-Must also be listed in the allowed categorical variables.}
+\item{by}{(Optional) Optional string giving the name of a categorical variable to split the data within each data frame before computing statistics.}
 
 \item{percent}{Logical; if \code{TRUE}, the function returns weighted (or unweighted) percentages.
 If \code{FALSE}, it returns simple category counts.}

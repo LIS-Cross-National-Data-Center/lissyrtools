@@ -10,8 +10,7 @@
 #'        This must be listed in `lissyrtools::lis_categorical_variables` or `lissyrtools::lws_wealth_categorical_variables`.
 #' @param wgt_name (Optional) A string specifying the name of the weight variable to apply. If `NULL`, unweighted counts are used.
 #' @param na.rm Logical; if `TRUE`, observations with missing values in `var_name` are removed before computing counts or percentages.
-#' @param by (Optional) A string naming a second categorical variable for disaggregation. Results will then be split by this variable.
-#'        Must also be listed in the allowed categorical variables.
+#' @param by (Optional) Optional string giving the name of a categorical variable to split the data within each data frame before computing statistics.
 #' @param percent Logical; if `TRUE`, the function returns weighted (or unweighted) percentages. 
 #'        If `FALSE`, it returns simple category counts.
 #'

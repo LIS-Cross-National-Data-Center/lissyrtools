@@ -77,7 +77,7 @@ invalid_ccyy_pairs <- function(data, lws = FALSE) {
   if (length(invalid_pairs) > 0 & length(data) == length(invalid_pairs)) {
     stop(glue::glue(
       "No country-year pairs in argument 'data' are valid. ",
-      "On your local machine, please check the table `lissyrtools::datasets`."
+      "Please double-check your input using `get_()` functions like `get_countries_lis()` or `get_years_lws()`."
     ))
   }
   

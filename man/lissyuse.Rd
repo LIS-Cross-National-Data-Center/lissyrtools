@@ -30,7 +30,7 @@ lissyuse(
 A list whose elements will be a data frame named after their respective dataset. See the naming formats in the examples below. Each data frame will contain as many columns as the selected variables, plus the default technical ones.
 }
 \description{
-\code{lissyuse()} enables the user to specify which variables to import, along with a set of default variables (IDs, weights, currency, year, relation, etc.). If both household-level and person-level variables are specified, lissyuse() will automatically merge the two types of files. For faster and more efficient processing, we strongly recommend selecting of a restricted set of variables in vars argument. Additionally, the function includes a subset argument that allows users to limit the data to a specific subgroup.
+\code{lissyuse()} enables the user to specify which variables to import, along with a set of default variables (IDs, weights, currency, year, relation, etc.). If both household-level and person-level variables are specified, lissyuse() will automatically merge the two types of files. For faster and more efficient processing, we strongly recommend selecting of a restricted set of variables in \code{vars} argument. Additionally, the function includes a subset argument that allows users to limit the data to a specific subgroup.
 }
 \examples{
 \dontrun{

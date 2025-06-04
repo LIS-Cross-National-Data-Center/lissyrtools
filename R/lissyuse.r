@@ -3,7 +3,7 @@
 #' Load data easily and efficiently with lissyuse
 #' 
 #' @description
-#' `lissyuse()` enables the user to specify which variables to import, along with a set of default variables (IDs, weights, currency, year, relation, etc.). If both household-level and person-level variables are specified, lissyuse() will automatically merge the two types of files. For faster and more efficient processing, we strongly recommend selecting of a restricted set of variables in vars argument. Additionally, the function includes a subset argument that allows users to limit the data to a specific subgroup.
+#' `lissyuse()` enables the user to specify which variables to import, along with a set of default variables (IDs, weights, currency, year, relation, etc.). If both household-level and person-level variables are specified, lissyuse() will automatically merge the two types of files. For faster and more efficient processing, we strongly recommend selecting of a restricted set of variables in `vars` argument. Additionally, the function includes a subset argument that allows users to limit the data to a specific subgroup.
 #'
 #' @param data A character vector containing ISO2 country codes, and/or the country-year specific datasets in its `ccyy` format.
 #' @param vars A character vector specifying the LIS/LWS variables to be loaded. 
