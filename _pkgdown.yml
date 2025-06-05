@@ -3,13 +3,13 @@ template:
   bootstrap: 5
 
 reference:
-  - title: Load Data
+  - title: Import Data
     desc: >
       This variable-driven function automatically merges household- and person-level files from the same dataset. It also supports loading data across multiple countries and a selected range of years.
     contents:
       - lissyuse
 
-  - title: Apply Functions
+  - title: Adjustment & Equivalisation
     desc: >
       Applies a transformation to the variable under analysis across datasets.
     contents:
@@ -18,7 +18,7 @@ reference:
       - apply_sqrt_equivalisation
       - apply_ppp_adjustment
 
-  - title: Run Weighted Functions
+  - title: Weighted Statistics
     desc: >
       Computes aggregate indicators across datasets using a list structure. These functions also allow the inclusion of survey weights in the calculations.
     contents:
@@ -32,13 +32,13 @@ reference:
       - run_weighted_poverty_shortfall
       - run_weighted_poverty_gap_index
 
-  - title: Restructure Data for Plotting
+  - title: Plotting
     desc: >
       Function designed to restructure data from a list to be printed in the console to a tabular data frame allowing to plot the values
     contents:
       - structure_to_plot
 
-  - title: Data Availability Functions
+  - title: Data Availability
     desc: >
      Provide a quick overview of available countries and years in LIS and LWS, including the surveys behind each dataset.
     contents:
@@ -49,7 +49,7 @@ reference:
     - get_surveys_lis
     - get_surveys_lws
     
-  - title: Variable Information Functions
+  - title: Variable Information
     desc: >
       Helps users check if a variable exists in a dataset and reveals extra information such as notes, labels, and categories—especially important for variables that vary by country.
     contents:
@@ -90,6 +90,14 @@ reference:
     - us16_p_lws
     - us19_h_lws
     - us19_p_lws
+    
+  - subtitle: Reference Objects
+    desc: >
+      Character vectors containing the names of the variables available in LIS and LWS.
+    contents:
+    - lis_variables
+    - lws_variables
+    
 
   - subtitle: Complementary Tables
     contents:
