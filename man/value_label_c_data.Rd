@@ -6,11 +6,17 @@
 \title{Value Labels for Country-Specific Variables in LIS and LWS Datasets}
 \format{
 A data frame with 9 variables:
+
+A data frame with 9 variables:
 }
 \usage{
 value_label_c_data
+
+value_label_c_data
 }
 \description{
+A data frame containing the categorized values of country-specific variables in the LIS and LWS datasets, organized by country and year.
+
 A data frame containing the categorized values of country-specific variables in the LIS and LWS datasets, organized by country and year.
 }
 \keyword{datasets}

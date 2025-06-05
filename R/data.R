@@ -41,13 +41,34 @@
 "missing_or_zero_vars_all"
 
 
-#'  Value Labels for Country-Specific Variables in LIS and LWS Datasets
+#' Value Labels for Country-Specific Variables in LIS and LWS Datasets
 #'
 #' A data frame containing the categorized values of country-specific variables in the LIS and LWS datasets, organized by country and year.
 #'
 #' @format A data frame with 9 variables:
 "value_label_c_data"
 
+#' LIS Variables 
+#'
+#' A character vector containing the names of the variables available in LIS.
+#'
+#' @format A character vector of length 199.
+"lis_variables"
+
+#' LWS Variables 
+#'
+#' A character vector containing the names of the variables available in LWS.
+#'
+#' @format A character vector of length 336.
+"lws_variables"
+
+
+#'  Value Labels for Country-Specific Variables in LIS and LWS Datasets
+#'
+#' A data frame containing the categorized values of country-specific variables in the LIS and LWS datasets, organized by country and year.
+#'
+#' @format A data frame with 9 variables:
+"value_label_c_data"
 
 #' Sample Household-Level LIS Dataset - Italy 2014
 #'

@@ -288,11 +288,12 @@ key_vars_person_lws <- c("hid", "inum", "pid", "relation", "pwgt", "ppopwgt", "p
 
 
 # ---- Usethis ----
-
+usethis::use_data(lis_variables,
+                  lws_variables,
+                  overwrite = TRUE) 
 
 usethis::use_data(lis_household_variables,
                   lis_person_variables,
-                  lis_variables,
                   lis_both_hp_variables,
                   lis_technical_variables,
                   lis_weight_variables,
@@ -303,7 +304,6 @@ usethis::use_data(lis_household_variables,
                   lis_income_variables,
                   lws_household_variables,
                   lws_person_variables,
-                  lws_variables,
                   lws_both_hp_variables,
                   lws_id_variables, 
                   lws_wealth_categorical_variables,
@@ -317,5 +317,7 @@ usethis::use_data(lis_household_variables,
                   key_vars_person_lws,
                   internal = TRUE, # to save on R/sysdata.rda
                   overwrite = TRUE)
+
+
 
 
