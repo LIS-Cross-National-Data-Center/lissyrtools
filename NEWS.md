@@ -4,7 +4,7 @@
 
 ## New functions
 
-### 🎯 Adjustment & Equivalisation
+### 🔧 Adjustment & Equivalisation
 
 -   `apply_iqr_top_bottom_coding()`: Applies interquartile range-based top and bottom coding.
 -   `apply_oecd_equivalisation()`: Applies the OECD equivalence scale.
@@ -36,7 +36,7 @@
 -   `get_surveys_lis()`: Prints surveys used for each country in LIS.
 -   `get_surveys_lws()`: Prints surveys used for each country in LWS.
 
-### 🧾 Variable Information
+### 🔍 Variable Information
 
 -   `variable_labels()`: Retrieves variable labels.
 -   `variable_country_specific_categories()`: Gets country-specific categories for such variables.
