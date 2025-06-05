@@ -73,9 +73,9 @@ Supports optional grouping via a categorical <code>by</code> variable, and retur
 
 
 <dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
-<dd><p>A character string indicating which percentile definition to use.
-#' Either <code>"type_4"</code> (default, linear interpolation-based of the empirical cdf - continuous sample quantile) or
-<code>"type_2"</code> (used in Stata commands like collapse and _pctile, inverse of empirical distribution function with averaging at discontinuities - discontinuous sample quantile).</p></dd>
+<dd><p>A character string indicating which percentile definition to use. Only used when <code>share = FALSE</code>.</p><ul><li><p><code>"type_4"</code>: default, linear interpolation-based of the empirical cdf - continuous sample quantile.</p></li>
+<li><p><code>"type_2"</code>: used in Stata commands like collapse and _pctile, inverse of empirical distribution function with averaging at discontinuities - discontinuous sample quantile.</p></li>
+</ul></dd>
 
 
 <dt id="arg-share">share<a class="anchor" aria-label="anchor" href="#arg-share"></a></dt>

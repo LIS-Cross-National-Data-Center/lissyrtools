@@ -31,6 +31,109 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.0" id="lissyrtools-020-2025-06-04">lissyrtools 0.2.0 (2025-06-04)<a class="anchor" aria-label="anchor" href="#lissyrtools-020-2025-06-04"></a></h2>
+<div class="section level3">
+<h3 id="new-functions-0-2-0">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-2-0"></a></h3>
+<div class="section level4">
+<h4 id="id_-adjustment--equivalisation-0-2-0">🎯 Adjustment &amp; Equivalisation<a class="anchor" aria-label="anchor" href="#id_-adjustment--equivalisation-0-2-0"></a></h4>
+<ul><li>
+<code><a href="../reference/apply_iqr_top_bottom_coding.html">apply_iqr_top_bottom_coding()</a></code>: Applies interquartile range-based top and bottom coding.</li>
+<li>
+<code><a href="../reference/apply_oecd_equivalisation.html">apply_oecd_equivalisation()</a></code>: Applies the OECD equivalence scale.</li>
+<li>
+<code><a href="../reference/apply_sqrt_equivalisation.html">apply_sqrt_equivalisation()</a></code>: Applies square-root equivalisation.</li>
+<li>
+<code><a href="../reference/apply_ppp_adjustment.html">apply_ppp_adjustment()</a></code>: Adjust monetary variables for inflation and PPP</li>
+</ul></div>
+<div class="section level4">
+<h4 id="id_-weighted-statistics-0-2-0">📊 Weighted Statistics<a class="anchor" aria-label="anchor" href="#id_-weighted-statistics-0-2-0"></a></h4>
+<ul><li>
+<code><a href="../reference/run_weighted_count.html">run_weighted_count()</a></code>: Computes weighted counts in absolute and percentage terms.</li>
+<li>
+<code><a href="../reference/run_weighted_mean.html">run_weighted_mean()</a></code>: Computes weighted means.</li>
+<li>
+<code><a href="../reference/run_weighted_percentiles.html">run_weighted_percentiles()</a></code>: Computes weighted percentiles or shares using type 2 or type 4 definitions.</li>
+<li>
+<code><a href="../reference/run_weighted_ratios.html">run_weighted_ratios()</a></code>: Computes percentile ratios (e.g. P90/P10).</li>
+<li>
+<code><a href="../reference/run_weighted_gini.html">run_weighted_gini()</a></code>: Calculates the Gini coefficient.</li>
+<li>
+<code><a href="../reference/run_weighted_atkinson.html">run_weighted_atkinson()</a></code>: Computes the Atkinson inequality index.</li>
+<li>
+<code><a href="../reference/run_weighted_relative_poverty.html">run_weighted_relative_poverty()</a></code>: Measures relative poverty based on a median threshold.</li>
+<li>
+<code><a href="../reference/run_weighted_poverty_shortfall.html">run_weighted_poverty_shortfall()</a></code>: Computes absolute and relative poverty shortfalls (poverty gap).</li>
+<li>
+<code><a href="../reference/run_weighted_poverty_gap_index.html">run_weighted_poverty_gap_index()</a></code>: Calculates the poverty gap index.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="id_-plotting-0-2-0">📈 Plotting<a class="anchor" aria-label="anchor" href="#id_-plotting-0-2-0"></a></h4>
+<ul><li>
+<code><a href="../reference/structure_to_plot.html">structure_to_plot()</a></code>: Transforms output into tidy data for plotting with <code>ggplot2</code>.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="id_-country-year-and-survey-access-0-2-0">🌍 Country, Year, and Survey Access<a class="anchor" aria-label="anchor" href="#id_-country-year-and-survey-access-0-2-0"></a></h4>
+<ul><li>
+<code><a href="../reference/get_countries_lis.html">get_countries_lis()</a></code>: Prints available countries in LIS.</li>
+<li>
+<code><a href="../reference/get_countries_lws.html">get_countries_lws()</a></code>: Prints available countries in LWS.</li>
+<li>
+<code><a href="../reference/get_years_lis.html">get_years_lis()</a></code>: Prints available years for each country in LIS.</li>
+<li>
+<code><a href="../reference/get_years_lws.html">get_years_lws()</a></code>: Prints available years for each country in LWS.</li>
+<li>
+<code><a href="../reference/get_surveys_lis.html">get_surveys_lis()</a></code>: Prints surveys used for each country in LIS.</li>
+<li>
+<code><a href="../reference/get_surveys_lws.html">get_surveys_lws()</a></code>: Prints surveys used for each country in LWS.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="id_-variable-information-0-2-0">🧾 Variable Information<a class="anchor" aria-label="anchor" href="#id_-variable-information-0-2-0"></a></h4>
+<ul><li>
+<code><a href="../reference/variable_labels.html">variable_labels()</a></code>: Retrieves variable labels.</li>
+<li>
+<code><a href="../reference/variable_country_specific_categories.html">variable_country_specific_categories()</a></code>: Gets country-specific categories for such variables.</li>
+<li>
+<code><a href="../reference/variable_exists.html">variable_exists()</a></code>: Checks the years that a variable exists for a given country series.</li>
+<li>
+<code><a href="../reference/variable_has_note.html">variable_has_note()</a></code>: Checks whether a variable has an associated note.</li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="major-changes-0-2-0">Major changes<a class="anchor" aria-label="anchor" href="#major-changes-0-2-0"></a></h3>
+<ul><li>
+<strong>Expanded Local Sample Data</strong>: Increased the number of sample datasets available for local use, supporting more flexible and practical development and testing workflows.</li>
+<li>
+<strong>New Variable and Data Availability Utilities</strong>: Introduced a set of functions for local use, to retrieve country/year/survey availability and variable-level metadata, centralizing access to crucial documentation and reducing cognitive fatigue by minimizing tab/window switching.</li>
+<li>
+<strong>Unified Percentile Computation</strong>: A new function, <code><a href="../reference/run_weighted_percentiles.html">run_weighted_percentiles()</a></code>, now centralizes the computation of weighted percentiles, supporting both Type 2 and Type 4 estimation methods as described in Hyndman &amp; Fan (1996). This ensures consistency across all functions that depend on percentile-based logic, such as <code><a href="../reference/run_weighted_ratios.html">run_weighted_ratios()</a></code>, <code><a href="../reference/apply_iqr_top_bottom_coding.html">apply_iqr_top_bottom_coding()</a></code>, and the one that compute relative poverty figures: <code><a href="../reference/run_weighted_relative_poverty.html">run_weighted_relative_poverty()</a></code>, <code><a href="../reference/run_weighted_poverty_shortfall.html">run_weighted_poverty_shortfall()</a></code> and <code><a href="../reference/run_weighted_poverty_gap_index.html">run_weighted_poverty_gap_index()</a></code>.</li>
+<li>
+<strong>Group-Level Analysis via <code>by</code> Argument</strong>: <code><a href="../reference/run_weighted_percentiles.html">run_weighted_percentiles()</a></code>, <code><a href="../reference/run_weighted_mean.html">run_weighted_mean()</a></code> and <code><a href="../reference/run_weighted_count.html">run_weighted_count()</a></code> now accept a <code>by</code> argument, allowing the disaggregation of results by categorical variables (e.g. region, gender) including <code>inum</code> variables in LWS datasets.</li>
+<li>
+<strong>Improved Output and Visualization Readiness</strong>:
+<ul><li><p><strong>Cleaner Output Structure</strong>: Results are now printed in a more compact and intuitive format, grouped by country and sorted by year, in attempt to improve readability.</p></li>
+<li><p><strong>Tidy Data for Plotting</strong>: The new <code><a href="../reference/structure_to_plot.html">structure_to_plot()</a></code> function standardizes lists to be printed in the console into tidy data frames, making it easy to feed directly into <code>ggplot2</code> for visualization.</p></li>
+</ul></li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-changes-0-2-0">Minor changes<a class="anchor" aria-label="anchor" href="#minor-changes-0-2-0"></a></h3>
+<ul><li><p><code>lis_variables</code> and <code>lws_variables</code> are now external and documented reference objects in the form of character vectors.</p></li>
+<li><p>It is no longer possible to adjust scale parameters in the <code><a href="../reference/apply_oecd_equivalisation.html">apply_oecd_equivalisation()</a></code> function.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="lifecycle-0-2-0">Lifecycle<a class="anchor" aria-label="anchor" href="#lifecycle-0-2-0"></a></h3>
+<p>Deprecated functions from the early stages of the lissyrtools package. Maintained for reference and backward compatibility.</p>
+<ul><li><p><code><a href="../reference/bind_lissy_files.html">bind_lissy_files()</a></code></p></li>
+<li><p><code>compute_*()</code></p></li>
+<li><p><code>determine_*()</code></p></li>
+<li><p><code><a href="../reference/lissy_map.html">lissy_map()</a></code></p></li>
+<li><p><code><a href="../reference/merge_dataset_levels.html">merge_dataset_levels()</a></code></p></li>
+<li><p><code><a href="../reference/plot_indicator.html">plot_indicator()</a></code></p></li>
+<li><p><code>print_*()</code></p></li>
+<li><p><code>read_*()</code></p></li>
+<li><p><code>transform_*()</code></p></li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.11" id="lissyrtools-0111">lissyrtools 0.1.11<a class="anchor" aria-label="anchor" href="#lissyrtools-0111"></a></h2>
 <div class="section level3">
 <h3 id="change-in-lissyuse-0-1-11">Change in lissyuse()<a class="anchor" aria-label="anchor" href="#change-in-lissyuse-0-1-11"></a></h3>

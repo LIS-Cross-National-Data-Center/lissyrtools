@@ -59,108 +59,257 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>A package with the tools needed to develop scripts with LIS data</p>
-<p>It allows users to:</p>
-<p>* Read LIS data within the LISSY environment, or to use LIS sample files locally.</p>
-<p>* Carry out commonly performed data cleaning tasks.</p>
-<p>* Compute estimates from microdata.</p>
+<div class="section level3">
+<h3 id="id_-welcome-to-lissyrtools">📦 Welcome to <code>lissyrtools</code>
+<a class="anchor" aria-label="anchor" href="#id_-welcome-to-lissyrtools"></a>
+</h3>
+<p><strong><code>lissyrtools</code></strong> is a user-friendly R package that simplifies and streamlines the use of LIS and LWS microdata. It provides a consistent workflow for exploring and visualizing across countries and over time, a wide range of socioeconomic indicators such as income, wealth, employment, education, housing, and demographics.</p>
+<hr>
+</div>
+<div class="section level3">
+<h3 id="id_-key-features">💡 Key Features<a class="anchor" aria-label="anchor" href="#id_-key-features"></a>
+</h3>
+<ul>
+<li>🌍 <strong>Access harmonized global data</strong> – Load over 1,000 datasets from 50+ country series worldwide in one step.</li>
+<li>🔧 <strong>Flexible data transformations</strong> – Wrangle and transform your data with ease—supporting currency conversion, equivalization, and outlier detection.</li>
+<li>🪄 <strong>Effortless use of weights</strong> – Fully integrated weight handling for all functions computing aggregated figures.</li>
+<li>📊 <strong>Instant insights</strong> – Quickly grasp variable distributions, magnitudes, and subgroup breakdowns—within countries over time and across countries, all in one place.</li>
+<li>📋 <strong>Clean and readable outputs</strong> – Results are printed in a compact, country-wise format that’s easy to interpret</li>
+<li>📈 <strong>Visual-ready data</strong> – Convert outputs to tidy data frames—fully compatible with <code>ggplot2</code>—with a single function.</li>
+<li>🔍 <strong>Smart metadata tools</strong> – Directly check dataset and variable availability, including labels, notes, and category definitions—no need to switch interfaces.</li>
+<li>🖥️ <strong>Local prototyping</strong> – Build, test, and debug your code locally using built-in sample datasets, then run it on LISSY when ready.</li>
+</ul>
+<hr>
+</div>
+<div class="section level3">
+<h3 id="id_-why-use-lissyrtools">🚀 Why Use <code>lissyrtools</code>?<a class="anchor" aria-label="anchor" href="#id_-why-use-lissyrtools"></a>
+</h3>
+<p>Because LIS/LWS data are rich—but handling them shouldn’t be complex.</p>
+<p><code>lissyrtools</code> brings <strong>clarity</strong>, <strong>structure</strong>, and <strong>speed</strong> to your LIS data workflow—whether you’re a researcher, policymaker, student, or data scientist.</p>
+<p>Focus on uncover insights—not wrangling data and debugging. Let <code>lissyrtools</code> handle the boilerplate !</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>The package is already installed in LISSY by the LIS Data Center team.</p>
-<p>You can install the package locally to work with the <a href="https://www.lisdatacenter.org/resources/self-teaching/" class="external-link">LIS Sample Datasets</a> from this GitHub repo with:</p>
+<p>The package is already installed on <a href="https://www.lisdatacenter.org/data-access/lissy/" class="external-link">LISSY</a>.</p>
+<p>To use it <strong>locally with built-in</strong> <a href="https://www.lisdatacenter.org/resources/self-teaching/" class="external-link">LIS Sample Datasets</a>, install it from GitHub:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"https://github.com/LIS-Cross-National-Data-Center/lissyrtools"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<p><strong>lissyrtools</strong> provides its users with a set of functions and embedded objects designed to help users access and manipulate data in LIS’s remote execution system: <a href="https://www.lisdatacenter.org/data-access/lissy/" class="external-link">LISSY</a>. By providing built-in sample datasets in <strong>lissyrtools</strong>, we also encourage users to develop their LISSY scripts locally, where debugging and writing R code are more efficient in IDEs like RStudio.</p>
+<p><strong>lissyrtools</strong> can be used both:</p>
+<ul>
+<li><p><strong>Remotely on LISSY</strong>, where it is already available;</p></li>
+<li><p><strong>Locally</strong>, where it supports the same syntax and offers built-in datasets for easier prototyping.</p></li>
+</ul>
+<p>This makes it possible to write, test, and debug your code locally in tools like RStudio, then run it on LISSY when ready.</p>
 <p>Data first needs to be loaded using the <a href="https://lis-cross-national-data-center.github.io/lissyrtools/reference/lissyuse.html">lissyuse()</a> function. Its output will be a list whose elements are the datasets available in the LIS database for the countries selected within the specified time frame. LWS data can be loaded by setting the `lws` argument to TRUE (e.g lws = TRUE), with the Project dropdown adjusted to “LWS” as shown in the image below:</p>
 <p><img src="reference/figures/project_lws.png"></p>
 <p>Subsequently, the list can be transformed using other functions from <strong>lissyrtools</strong> in a pipeline structure, enabling users to generate aggregated figures for the entire dataset or specific subgroups.</p>
 <div class="section level3">
 <h3 id="lissy-version">LISSY version<a class="anchor" aria-label="anchor" href="#lissy-version"></a>
 </h3>
+<div class="section level5">
+<h5 id="importing-data">Importing Data<a class="anchor" aria-label="anchor" href="#importing-data"></a>
+</h5>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lis-cross-national-data-center.github.io/lissyrtools/">lissyrtools</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Load the datasets </span></span>
-<span><span class="co"># The output is a list whose elements are the datasets available in the LIS database for the countries selected within the specified time frame. </span></span>
-<span></span>
-<span><span class="va">lis_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span></span>
-<span>  data <span class="op">=</span> <span class="st">"ca"</span>, </span>
-<span>  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dhi"</span>, <span class="st">"pi11"</span>, <span class="st">"age"</span><span class="op">)</span>, </span>
+<span><span class="va">lu_data_hhd</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="st">"lu"</span>, </span>
+<span>  vars <span class="op">=</span> <span class="st">"dhi"</span>, </span>
 <span>  from <span class="op">=</span> <span class="fl">2014</span>, </span>
 <span>  to <span class="op">=</span> <span class="fl">2019</span></span>
-<span>  <span class="op">)</span> </span>
+<span>  <span class="op">)</span></span>
 <span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lu_data_hhd</span><span class="op">)</span><span class="op">)</span> <span class="co"># elements: `ccyy` data frames at h-level </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lu_data_hhd</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="co"># Notice that some variables are loaded by default too.</span></span>
 <span></span>
-<span><span class="co"># Example of further data cleaning using `transform_` functions:</span></span>
+<span><span class="co"># Selecting both h-level and p-level variables will automatically merge both files:</span></span>
 <span></span>
-<span><span class="va">lissy_datasets_transformed_pi11</span> <span class="op">&lt;-</span> <span class="va">lis_datasets</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/transform_false_zeros_to_na.html">transform_false_zeros_to_na</a></span><span class="op">(</span><span class="st">"pi11"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/transform_negative_values_to_zero.html">transform_negative_values_to_zero</a></span><span class="op">(</span><span class="st">"pi11"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/transform_zeros_to_na.html">transform_zeros_to_na</a></span><span class="op">(</span><span class="st">"pi11"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/transform_top_code_with_iqr.html">transform_top_code_with_iqr</a></span><span class="op">(</span><span class="st">"pi11"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/transform_top_code_with_iqr.html">transform_bottom_code_with_iqr</a></span><span class="op">(</span><span class="st">"pi11"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/transform_adjust_by_lisppp.html">transform_adjust_by_lisppp</a></span><span class="op">(</span><span class="st">"pi11"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/transform_restrict_age.html">transform_restrict_age</a></span><span class="op">(</span><span class="st">"pi11"</span>, from <span class="op">=</span> <span class="fl">16</span>, to <span class="op">=</span> <span class="fl">64</span><span class="op">)</span></span>
+<span><span class="va">lu_data_hhd</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="st">"lu"</span>, </span>
+<span>  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dhi"</span>, <span class="st">"age"</span>, <span class="st">"educ"</span><span class="op">)</span>, </span>
+<span>  from <span class="op">=</span> <span class="fl">2014</span>, </span>
+<span>  to <span class="op">=</span> <span class="fl">2019</span></span>
+<span>  <span class="op">)</span></span>
 <span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lu_data_hhd</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lu_data_hhd</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level5">
+<h5 id="transform-each-data-frame">Transform each Data Frame<a class="anchor" aria-label="anchor" href="#transform-each-data-frame"></a>
+</h5>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lis-cross-national-data-center.github.io/lissyrtools/">lissyrtools</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">lissy_datasets_transformed_dhi</span> <span class="op">&lt;-</span> <span class="va">lis_datasets</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/transform_false_zeros_to_na.html">transform_false_zeros_to_na</a></span><span class="op">(</span><span class="st">"dhi"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/transform_negative_values_to_zero.html">transform_negative_values_to_zero</a></span><span class="op">(</span><span class="st">"dhi"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/transform_top_code_with_iqr.html">transform_top_code_with_iqr</a></span><span class="op">(</span><span class="st">"dhi"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/transform_top_code_with_iqr.html">transform_bottom_code_with_iqr</a></span><span class="op">(</span><span class="st">"dhi"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/transform_equivalise.html">transform_equivalise</a></span><span class="op">(</span><span class="st">"dhi"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/transform_adjust_by_lisppp.html">transform_adjust_by_lisppp</a></span><span class="op">(</span><span class="st">"dhi"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Compute indicators</span></span>
-<span><span class="fu"><a href="reference/print_indicator.html">print_indicator</a></span><span class="op">(</span><span class="va">lissy_datasets_transformed_dhi</span>,</span>
-<span>                             variable <span class="op">=</span> <span class="st">"dhi"</span>,</span>
-<span>                             indicator <span class="op">=</span> <span class="st">"gini"</span>,</span>
-<span>                             na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span>                             </span>
-<span><span class="fu"><a href="reference/print_indicator.html">print_indicator</a></span><span class="op">(</span><span class="va">lissy_datasets_transformed_pi11</span>,</span>
-<span>                             variable <span class="op">=</span> <span class="st">"pi11"</span>,</span>
-<span>                             indicator <span class="op">=</span> <span class="st">"gini"</span>,</span>
-<span>                             na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="co"># To load LWS datasets, set the argument `lws` == TRUE:</span></span>
-<span><span class="va">lws_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span></span>
-<span>  data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"us"</span>, <span class="st">"uk17"</span>, <span class="st">"uk19"</span><span class="op">)</span>, </span>
-<span>  vars <span class="op">=</span> <span class="st">"dnw"</span>, </span>
-<span>  from <span class="op">=</span> <span class="fl">2015</span>, </span>
-<span>  to <span class="op">=</span> <span class="fl">2021</span>,</span>
-<span>  lws <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="va">lis_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ca"</span>, <span class="st">"de"</span>, <span class="st">"fr"</span><span class="op">)</span>, </span>
+<span>  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dhi"</span>, <span class="st">"age"</span>, <span class="st">"rural"</span><span class="op">)</span>, </span>
+<span>  from <span class="op">=</span> <span class="fl">2014</span>, </span>
+<span>  to <span class="op">=</span> <span class="fl">2019</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lws_datasets</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># `purrr:map()` function implements the same operation to each data frame on the list  </span></span>
+<span><span class="va">lis_datasets_hhd</span> <span class="op">&lt;-</span> <span class="va">lis_datasets</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="op">~</span> <span class="va">.x</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>               <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">dhi</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>               <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">relation</span> <span class="op">==</span> <span class="fl">1000</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="co"># back to `h-level`</span></span>
+<span>               <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>new_wgt <span class="op">=</span> <span class="va">hwgt</span> <span class="op">*</span> <span class="va">nhhmem</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># `apply_*()` functions implement transformations such as currency conversion, equivalization, and outlier detection</span></span>
+<span></span>
+<span><span class="va">lis_datasets_ready</span> <span class="op">&lt;-</span> <span class="va">lis_datasets_hhd</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="reference/apply_iqr_top_bottom_coding.html">apply_iqr_top_bottom_coding</a></span><span class="op">(</span><span class="st">"dhi"</span>, <span class="st">"hwgt"</span>, times <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>  </span>
+<span>  <span class="fu"><a href="reference/apply_sqrt_equivalisation.html">apply_sqrt_equivalisation</a></span><span class="op">(</span><span class="st">"dhi"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>  </span>
+<span>  <span class="fu"><a href="reference/apply_ppp_adjustment.html">apply_ppp_adjustment</a></span><span class="op">(</span><span class="st">"dhi"</span>, </span>
+<span>                       database <span class="op">=</span> <span class="st">"lis"</span>,</span>
+<span>                       transformation <span class="op">=</span> <span class="st">"lisppp"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level5">
+<h5 id="compute-aggregate-figures">Compute Aggregate Figures<a class="anchor" aria-label="anchor" href="#compute-aggregate-figures"></a>
+</h5>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Count of rural vs. urban households (unweighted)</span></span>
+<span><span class="va">res1</span> <span class="op">&lt;-</span> <span class="va">lis_datasets_ready</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="reference/run_weighted_count.html">run_weighted_count</a></span><span class="op">(</span><span class="st">"rural"</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># Mean disposable income by country (weighted)</span></span>
+<span><span class="va">res2</span> <span class="op">&lt;-</span> <span class="va">lis_datasets_ready</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="reference/run_weighted_mean.html">run_weighted_mean</a></span><span class="op">(</span><span class="st">"dhi"</span>, <span class="st">"new_wgt"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Mean disposable income by rural/urban (weighted)</span></span>
+<span><span class="va">res3</span> <span class="op">&lt;-</span> <span class="va">lis_datasets_ready</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="reference/run_weighted_mean.html">run_weighted_mean</a></span><span class="op">(</span><span class="st">"dhi"</span>, <span class="st">"new_wgt"</span>, </span>
+<span>                                                 by <span class="op">=</span> <span class="st">"rural"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Diposable Income share across percentiles </span></span>
+<span><span class="va">res4</span> <span class="op">&lt;-</span> <span class="va">lis_datasets_ready</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="reference/run_weighted_percentiles.html">run_weighted_percentiles</a></span><span class="op">(</span><span class="st">"dhi"</span>, <span class="st">"new_wgt"</span>, </span>
+<span>                                                        probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.2</span><span class="op">)</span>, share <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res4</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level5">
+<h5 id="tidy-up-your-results-and-make-plots-instantly">Tidy Up Your Results and Make Plots Instantly<a class="anchor" aria-label="anchor" href="#tidy-up-your-results-and-make-plots-instantly"></a>
+</h5>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># `structure_to_plot()` function transforms list into a data frames   </span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lis-cross-national-data-center.github.io/lissyrtools/">lissyrtools</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Converts results to tidy format and prints a message with the new column names</span></span>
+<span><span class="va">data_to_plot</span> <span class="op">&lt;-</span> <span class="va">res2</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="reference/structure_to_plot.html">structure_to_plot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">data_to_plot</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">value</span>, color <span class="op">=</span> <span class="va">cname</span>, group <span class="op">=</span> <span class="va">cname</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"dhi trend"</span>,</span>
+<span>    caption <span class="op">=</span> <span class="st">"Source: Luxembourg Income Study"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/comma.html" class="external-link">comma</a></span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">25</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level5">
+<h5 id="lws-data">LWS Data<a class="anchor" aria-label="anchor" href="#lws-data"></a>
+</h5>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># 1) Set the argument `lws` = TRUE</span></span>
+<span><span class="co"># 2) Change the Project dropdown in LISSY accordingly. </span></span>
+<span></span>
+<span><span class="va">lws_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span></span>
+<span>   data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"us"</span><span class="op">)</span>, </span>
+<span>   vars <span class="op">=</span> <span class="st">"dnw"</span>, </span>
+<span>   from <span class="op">=</span> <span class="fl">2010</span>, </span>
+<span>   to <span class="op">=</span> <span class="fl">2020</span>,</span>
+<span>   lws <span class="op">=</span> <span class="cn">TRUE</span>  </span>
+<span> <span class="op">)</span> </span>
+<span> </span>
+<span><span class="co"># Inspect presence of implicates in each dataset (via the `inum` variable)</span></span>
+<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">lws_datasets</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">.x</span><span class="op">$</span><span class="va">inum</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Compute mean net worth by implicate, then average across implicates</span></span>
+<span><span class="va">lws_datasets</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/run_weighted_mean.html">run_weighted_mean</a></span><span class="op">(</span><span class="st">"dnw"</span>, by <span class="op">=</span> <span class="st">"inum"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span>  <span class="co"># final average by dataset across implicates</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level3">
 <h3 id="local-version">Local version<a class="anchor" aria-label="anchor" href="#local-version"></a>
 </h3>
-<p>When working with <code>lissyrtools</code> locally, use <code><a href="reference/lissyuse.html">lissyuse()</a></code>, along with the <a href="https://www.lisdatacenter.org/resources/self-teaching/" class="external-link">sample files</a> made available in the package. We equipped this package with 3 sample files (1 for h-level and 1 for p-level) for LIS, and 2 sample files for LWS:</p>
-<ul>
-<li><p><code>italy_14_lis_h</code>; <code>italy_14_lis_p</code>; <code>italy_14_lws_h</code> and <code>italy_14_lws_p</code>;</p></li>
-<li><p><code>united_states_16_lis_h</code>; <code>united_states_16_lis_p</code>; <code>united_states_16_lws_h</code> and <code>united_states_16_lws_h</code>;</p></li>
-<li><p><code>mexico_18_lis_h</code> and <code>mexico_18_lis_p.</code></p></li>
-</ul>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<p>When working with <code>lissyrtools</code> locally, use <code><a href="reference/lissyuse.html">lissyuse()</a></code>, along with the <a href="https://www.lisdatacenter.org/resources/self-teaching/" class="external-link">sample files</a> embedded in the package. These sample datasets include both household level and person level files for three LIS countries: Italy, Mexico and the United States - and two LWS countries: Italy and the United States.</p>
+<div class="section level5">
+<h5 id="importing-sample-datasets">Importing sample datasets<a class="anchor" aria-label="anchor" href="#importing-sample-datasets"></a>
+</h5>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lis-cross-national-data-center.github.io/lissyrtools/">lissyrtools</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Example where both household-level and individual-level variables are specified in `vars`</span></span>
-<span><span class="va">lis_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"it"</span>, <span class="st">"us"</span>, <span class="st">"mx"</span><span class="op">)</span>, vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"region_c"</span>, <span class="st">"dhi"</span>, <span class="st">"age"</span>, <span class="st">"pi11"</span>, <span class="st">"sex"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">lis_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"it"</span>, <span class="st">"us"</span>, <span class="st">"mx"</span><span class="op">)</span>, </span>
+<span>  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"region_c"</span>, <span class="st">"dhi"</span>, <span class="st">"age"</span>, <span class="st">"pi11"</span>, <span class="st">"sex"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lis_datasets</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Example where only household-level are specified in `vars`</span></span>
 <span></span>
-<span><span class="va">lis_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"it"</span>, <span class="st">"us"</span>, <span class="st">"mx"</span><span class="op">)</span>, vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"region_c"</span>, <span class="st">"dhi"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lis_datasets</span><span class="op">)</span></span>
-<span>                             </span></code></pre></div>
+<span><span class="va">lws_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"it"</span>, <span class="st">"us"</span><span class="op">)</span>, </span>
+<span>  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"region_c"</span>, <span class="st">"dnw"</span><span class="op">)</span>, </span>
+<span>  lws <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lws_datasets</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Afterwards, you can starting building your jobs locally, and run them in LISSY once ready !  </span></span></code></pre></div>
+</div>
+<div class="section level5">
+<h5 id="metadata-functions">
+<strong>Metadata functions</strong><a class="anchor" aria-label="anchor" href="#metadata-functions"></a>
+</h5>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Get available countries for LIS and LWS datasets</span></span>
+<span><span class="fu"><a href="reference/get_countries_lis.html">get_countries_lis</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/get_countries_lws.html">get_countries_lws</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get available years for selected countries</span></span>
+<span><span class="fu"><a href="reference/get_years_lis.html">get_years_lis</a></span><span class="op">(</span>iso2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ca"</span>, <span class="st">"de"</span>, <span class="st">"fr"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/get_years_lws.html">get_years_lws</a></span><span class="op">(</span>iso2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"jp"</span>, <span class="st">"no"</span>, <span class="st">"za"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print survey names</span></span>
+<span><span class="fu"><a href="reference/get_surveys_lis.html">get_surveys_lis</a></span><span class="op">(</span><span class="st">"ca"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/get_surveys_lws.html">get_surveys_lws</a></span><span class="op">(</span><span class="st">"jp"</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># Show the label of variable "educ"</span></span>
+<span><span class="fu"><a href="reference/variable_labels.html">variable_labels</a></span><span class="op">(</span><span class="st">"educ"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Alternatively: find all variables that have the "educ" pattern on their label</span></span>
+<span><span class="fu"><a href="reference/variable_labels.html">variable_labels</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="fu"><a href="reference/variable_labels.html">variable_labels</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"educ"</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Check if a variable exists in selected countries</span></span>
+<span><span class="fu"><a href="reference/variable_exists.html">variable_exists</a></span><span class="op">(</span><span class="st">"ethnic_c"</span>, iso2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lu"</span>, <span class="st">"uk"</span>, <span class="st">"nl"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Did categories of "ethnic_c" changed over time in the Luxembourgish series ?</span></span>
+<span><span class="fu"><a href="reference/variable_country_specific_categories.html">variable_country_specific_categories</a></span><span class="op">(</span></span>
+<span>  var <span class="op">=</span> <span class="st">"ethnic_c"</span>, </span>
+<span>  iso2 <span class="op">=</span> <span class="st">"lu"</span>, </span>
+<span>  from <span class="op">=</span> <span class="fl">2014</span>, </span>
+<span>  to <span class="op">=</span> <span class="fl">2021</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Inspect if a variable has notes in METIS for a given country</span></span>
+<span><span class="fu"><a href="reference/variable_has_note.html">variable_has_note</a></span><span class="op">(</span><span class="st">"ethnic_c"</span>, <span class="st">"lu"</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 </div>
 <div class="section level2">
@@ -168,7 +317,11 @@
 </h2>
 <p>If you encounter any bugs, typos, or experience any issue while running jobs including this packages’ tools, please email us at: <a href="mailto:usersupport@lisdatacenter.org">usersupport@lisdatacenter.org</a>.</p>
 <p>For more information about LIS, visit our <a href="https://www.lisdatacenter.org/" class="external-link">website</a>, explore <a href="https://www.lisdatacenter.org/frontend#/home" class="external-link">METIS</a> for metadata, and check out our best practices for <a href="https://www.lisdatacenter.org/data-access/lissy/syntax/" class="external-link">job submission in LISSY</a>.</p>
-<p>Recommended checks on other packages that offer tools for data manipulation and list handling: <a href="https://magrittr.tidyverse.org/" class="external-link">magrittr</a>, <a href="https://dplyr.tidyverse.org/" class="external-link">dplyr</a> and <a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></p>
+<p>Recommended checks on other packages that offer tools for data manipulation and list handling:</p>
+<ul>
+<li><p><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></p></li>
+<li><p><a href="https://dplyr.tidyverse.org/" class="external-link">dplyr</a></p></li>
+</ul>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
