@@ -16,14 +16,21 @@ An R package designed to simplify and streamline the use of LIS and LWS microdat
 
 ### 💡 Key Features
 
--   🌍 **Access harmonized global data** – Load over 1,000 datasets from 50+ country series worldwide in one step.
--   🔧 **Flexible data transformations** – Wrangle and transform your data with ease—supporting currency conversion, equivalization, and outlier detection.
--   🪄 **Effortless use of weights** – Fully integrated weight handling for all functions computing aggregated figures.
--   📊 **Instant insights** – Quickly grasp variable distributions, magnitudes, and subgroup breakdowns—within countries over time and across countries, all in one place.
--   📋 **Clean and readable outputs** – Results are printed in a compact, country-wise format that’s easy to interpret
--   📈 **Visual-ready data** – Convert outputs to tidy data frames—fully compatible with `ggplot2`—with a single function.
--   🔍 **Smart metadata tools** – Directly check dataset and variable availability, including labels, notes, and category definitions—no need to switch interfaces.
--   🖥️ **Local prototyping** – Build, test, and debug your code locally using built-in sample datasets, then run it on LISSY when ready.
+🌍 **Access harmonized global data** – Load over 1,000 datasets from 50+ country series worldwide in one step.
+
+🔧 **Flexible data transformations** – Wrangle and transform your data with ease—supporting currency conversion, equivalization, and outlier detection.
+
+🪄 **Effortless use of weights** – Fully integrated weight handling for all functions computing aggregated figures.
+
+📊 **Instant insights** – Quickly grasp variable distributions, magnitudes, and subgroup breakdowns—within countries over time and across countries, all in one place.
+
+📋 **Clean and readable outputs** – Results are printed in a compact, country-wise format that’s easy to interpret
+
+📈 **Visual-ready data** – Convert outputs to tidy data frames—fully compatible with `ggplot2`—with a single function.
+
+🔍 **Smart metadata tools** – Directly check dataset and variable availability, including labels, notes, and category definitions—no need to switch interfaces.
+
+🖥️ **Local prototyping** – Build, test, and debug your code locally using built-in sample datasets, then run it on LISSY when ready.
 
 ### 🚀 Why Use `lissyrtools`?
 
