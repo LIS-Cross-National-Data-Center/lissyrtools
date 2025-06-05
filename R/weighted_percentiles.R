@@ -15,9 +15,6 @@
 #' @param share Logical. If `TRUE`, returns income shares between percentile brackets instead of the percentile values. Default is \code{FALSE}. 
 #'   Note: This **always uses** `definition = "type_4"` (interpolation), regardless of the `definition` parameter. It cannot be combined with `definition = "type_2"`.
 #' @param na.rm Logical. If `TRUE`, missing values in `var_name` or `wgt_name` are removed.
-#' @param type A character string indicating which percentile definition to use. 
-#' #' Either \code{"type_4"} (default, linear interpolation-based of the empirical cdf - continuous sample quantile) or 
-#' \code{"type_2"} (used in Stata commands like collapse and _pctile, inverse of empirical distribution function with averaging at discontinuities - discontinuous sample quantile).
 #' @param by Optional string giving the name of a categorical variable to split the data within each data frame before computing statistics. 
 #' 
 #' @return A named list.
@@ -195,8 +192,7 @@ run_weighted_percentiles <- function(data_list, var_name, wgt_name = NULL, probs
 #' @param probs A numeric vector of probabilities between 0 and 1 indicating which percentiles to compute. Default is \code{seq(0, 1, 0.25)}.
 #' @param na.rm Logical; if \code{TRUE}, missing values in \code{x} and \code{w} are removed before computation. Default is \code{TRUE}.
 #' @param share Logical; if \code{TRUE}, computes the share of total value (e.g., .x$dhi) within each interval defined by \code{probs}. If \code{FALSE}, returns the percentile values. Default is \code{FALSE}. Note: This option always uses \code{type = "type_4"}, and can not be used toghether with \code{type = "type_2"}. 
-#' @param type A character string indicating which percentile definition to use. 
-#' #' Either \code{"type_4"} (default, linear interpolation-based of the empirical cdf - continuous sample quantile) or 
+#' @param type A character string indicating which percentile definition to use. Either \code{"type_4"} (default, linear interpolation-based of the empirical cdf - continuous sample quantile) or 
 #' \code{"type_2"} (used in Stata commands like collapse and _pctile, inverse of empirical distribution function with averaging at discontinuities - discontinuous sample quantile).
 #' 
 #' @return A named numeric vector. If \code{share = FALSE}, returns weighted percentiles with names corresponding to the percentiles (e.g., "25%"). If \code{share = TRUE}, returns the share of the total value in each percentile range (e.g., "0-25%").  

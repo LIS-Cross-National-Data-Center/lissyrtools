@@ -24,9 +24,11 @@ run_weighted_percentiles(
 
 \item{probs}{A numeric vector of probabilities with values between 0 and 1, defining percentiles (if \code{share = FALSE}) or the brackets between which shares are computed (if \code{share = TRUE}).}
 
-\item{type}{A character string indicating which percentile definition to use.
-#' Either \code{"type_4"} (default, linear interpolation-based of the empirical cdf - continuous sample quantile) or
-\code{"type_2"} (used in Stata commands like collapse and _pctile, inverse of empirical distribution function with averaging at discontinuities - discontinuous sample quantile).}
+\item{type}{A character string indicating which percentile definition to use. Only used when \code{share = FALSE}.
+\itemize{
+\item \code{"type_4"}: default, linear interpolation-based of the empirical cdf - continuous sample quantile.
+\item \code{"type_2"}: used in Stata commands like collapse and _pctile, inverse of empirical distribution function with averaging at discontinuities - discontinuous sample quantile.
+}}
 
 \item{share}{Logical. If \code{TRUE}, returns income shares between percentile brackets instead of the percentile values. Default is \code{FALSE}.
 Note: This \strong{always uses} \code{definition = "type_4"} (interpolation), regardless of the \code{definition} parameter. It cannot be combined with \code{definition = "type_2"}.}

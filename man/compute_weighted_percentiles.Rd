@@ -24,8 +24,7 @@ compute_weighted_percentiles(
 
 \item{share}{Logical; if \code{TRUE}, computes the share of total value (e.g., .x$dhi) within each interval defined by \code{probs}. If \code{FALSE}, returns the percentile values. Default is \code{FALSE}. Note: This option always uses \code{type = "type_4"}, and can not be used toghether with \code{type = "type_2"}.}
 
-\item{type}{A character string indicating which percentile definition to use.
-#' Either \code{"type_4"} (default, linear interpolation-based of the empirical cdf - continuous sample quantile) or
+\item{type}{A character string indicating which percentile definition to use. Either \code{"type_4"} (default, linear interpolation-based of the empirical cdf - continuous sample quantile) or
 \code{"type_2"} (used in Stata commands like collapse and _pctile, inverse of empirical distribution function with averaging at discontinuities - discontinuous sample quantile).}
 }
 \value{
