@@ -4,14 +4,14 @@
 
 ## New functions
 
-### 🔧 Adjustment & Equivalisation
+🔧 Adjustment & Equivalisation
 
 -   `apply_iqr_top_bottom_coding()`: Applies interquartile range-based top and bottom coding.
 -   `apply_oecd_equivalisation()`: Applies the OECD equivalence scale.
 -   `apply_sqrt_equivalisation()`: Applies square-root equivalisation.
 -   `apply_ppp_adjustment()`: Adjust monetary variables for inflation and PPP
 
-### 📊 Weighted Statistics
+📊 Weighted Statistics
 
 -   `run_weighted_count()`: Computes weighted counts in absolute and percentage terms.
 -   `run_weighted_mean()`: Computes weighted means.
@@ -23,11 +23,11 @@
 -   `run_weighted_poverty_shortfall()`: Computes absolute and relative poverty shortfalls (poverty gap).
 -   `run_weighted_poverty_gap_index()`: Calculates the poverty gap index.
 
-### 📈 Plotting
+📈 Plotting
 
 -   `structure_to_plot()`: Transforms output into tidy data for plotting with `ggplot2`.
 
-### 🌍 Country, Year, and Survey Access
+🌍 Country, Year, and Survey Access
 
 -   `get_countries_lis()`: Prints available countries in LIS.
 -   `get_countries_lws()`: Prints available countries in LWS.
@@ -36,7 +36,7 @@
 -   `get_surveys_lis()`: Prints surveys used for each country in LIS.
 -   `get_surveys_lws()`: Prints surveys used for each country in LWS.
 
-### 🔍 Variable Information
+🔍 Variable Information
 
 -   `variable_labels()`: Retrieves variable labels.
 -   `variable_country_specific_categories()`: Gets country-specific categories for such variables.

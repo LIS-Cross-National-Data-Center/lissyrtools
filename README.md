@@ -10,9 +10,9 @@
 
 📦 Welcome to `lissyrtools`
 
-An R package designed to simplify and streamline the use of LIS and LWS microdata. It provides a consistent workflow for exploring and visualizing a wide range of socioeconomic indicators—such as income, wealth, employment, education, housing, and demographics—across countries and over time.\
+An R package designed to simplify and streamline the use of LIS and LWS microdata. It provides a consistent workflow for exploring and visualizing a wide range of socioeconomic indicators—such as income, wealth, employment, education, housing, and demographics—across countries and over time.
 
-💡 Key Features
+💡 Key Features:
 
 🌍 **Access harmonized global data** – Load over 1,000 datasets from 50+ country series worldwide in one step.
 
@@ -28,7 +28,7 @@ An R package designed to simplify and streamline the use of LIS and LWS microdat
 
 🔍 **Smart metadata tools** – Directly check dataset and variable availability, including labels, notes, and category definitions—no need to switch interfaces.
 
-🖥️ **Local prototyping** – Build, test, and debug your code locally using built-in sample datasets, then run it on LISSY when ready.\
+🖥️ **Local prototyping** – Build, test, and debug your code locally using built-in sample datasets, then run it on LISSY when ready.
 
 🚀 Why Use `lissyrtools`?
 

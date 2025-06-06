@@ -1,6 +1,34 @@
 url: https://lis-cross-national-data-center.github.io/lissyrtools/
 template:
   bootstrap: 5
+  bslib:
+    base_font: {google: "Inter"}
+    heading_font: {google: "IBM Plex Sans"}
+    code_font: {google: "Fira Code"}
+    primary: "#306cc9"
+    fg: "#4a4a4a"
+    bg: "#FFFFFF"
+
+navbar:
+  structure:
+    left:  [reference, news]
+    right: [search, github]
+  components:
+    github:
+      icon: fab fa-github
+      href: https://github.com/LIS-Cross-National-Data-Center/lissyrtools
+
+home:
+  links:
+  - text: Browse source code
+    href: https://github.com/LIS-Cross-National-Data-Center/lissyrtools
+  - text: LIS Homepage
+    href: https://www.lisdatacenter.org/
+  - text: LISSY
+    href: https://www.lisdatacenter.org/data-access/lissy/
+  - text: METIS
+    href: https://www.lisdatacenter.org/frontend#/home    
+
 
 reference:
   - title: Import Data
