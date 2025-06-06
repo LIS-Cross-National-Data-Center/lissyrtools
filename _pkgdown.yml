@@ -1,6 +1,5 @@
 url: https://lis-cross-national-data-center.github.io/lissyrtools/
 template:
-  light-switch: true
   bootstrap: 5
   bslib:
     base_font: {google: "Inter"}
@@ -13,7 +12,7 @@ template:
 navbar:
   structure:
     left:  [reference, news]
-    right: [search, github, lightswitch]
+    right: [search, github]
   components:
     github:
       icon: fab fa-github
