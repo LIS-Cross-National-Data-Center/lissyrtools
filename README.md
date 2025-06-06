@@ -6,15 +6,13 @@
 
 <!-- badges: end -->
 
-<br>
-
 ## Overview
 
-### 📦 Welcome to `lissyrtools`
+📦 Welcome to `lissyrtools`
 
-An R package designed to simplify and streamline the use of LIS and LWS microdata. It provides a consistent workflow for exploring and visualizing a wide raange of socioeconomic indicators—such as income, wealth, employment, education, housing, and demographics—across countries and over time.
+An R package designed to simplify and streamline the use of LIS and LWS microdata. It provides a consistent workflow for exploring and visualizing a wide range of socioeconomic indicators—such as income, wealth, employment, education, housing, and demographics—across countries and over time.\
 
-### 💡 Key Features
+💡 Key Features
 
 🌍 **Access harmonized global data** – Load over 1,000 datasets from 50+ country series worldwide in one step.
 
@@ -30,9 +28,9 @@ An R package designed to simplify and streamline the use of LIS and LWS microdat
 
 🔍 **Smart metadata tools** – Directly check dataset and variable availability, including labels, notes, and category definitions—no need to switch interfaces.
 
-🖥️ **Local prototyping** – Build, test, and debug your code locally using built-in sample datasets, then run it on LISSY when ready.
+🖥️ **Local prototyping** – Build, test, and debug your code locally using built-in sample datasets, then run it on LISSY when ready.\
 
-### 🚀 Why Use `lissyrtools`?
+🚀 Why Use `lissyrtools`?
 
 Because LIS/LWS data are rich—but handling them shouldn't be complex.
 
@@ -155,7 +153,7 @@ print(res4)
 # `structure_to_plot()` function transforms list into a data frames   
 
 library(lissyrtools)
-library(purrr)
+library(ggplot2)
 
 # Converts results to tidy format and prints a message with the new column names
 data_to_plot <- res2 %>% structure_to_plot()
@@ -176,6 +174,7 @@ ggplot(data_to_plot, aes(x = year, y = value, color = cname, group = cname)) +
 ##### LWS Data
 
 ``` r
+library(lissyrtools)
 
 # 1) Set the argument `lws` = TRUE
 # 2) Change the Project dropdown in LISSY accordingly. 
