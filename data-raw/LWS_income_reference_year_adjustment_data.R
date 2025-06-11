@@ -110,6 +110,7 @@ data_inc_ref_year <- tibble::tribble(
   "es14",                  2013L,
   "es17",                  2016L,
   "es21",                  2019L,
+  "es22",                  2021L,
   "se02",                  2002L,
   "se05",                  2005L,
   "uk07",                  2007L,
