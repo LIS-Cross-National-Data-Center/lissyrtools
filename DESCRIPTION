@@ -1,7 +1,7 @@
 Type: Package
 Package: lissyrtools
 Title: Tools for LISSY Jobs
-Version: 0.1.13
+Version: 0.2.0
 Authors@R: c(
     person("Gonçalo", "Marques", , "marques@lisdatacenter.org", role = c("aut", "cre")),
     person("Josep", "Espasa Reig" , ,"jespasareig@gmail.com", role = c("aut"))
