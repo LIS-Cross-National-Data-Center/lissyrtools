@@ -30,7 +30,7 @@ An R package designed to simplify and streamline the use of LIS and LWS microdat
 
 🖥️ **Local prototyping** – Build, test, and debug your code locally using built-in sample datasets, then run it on LISSY when ready.
 
-🚀 Why Use `lissyrtools`?
+🚀 Why use`lissyrtools`?
 
 Because LIS/LWS data are rich—but handling them shouldn't be complex.
 
