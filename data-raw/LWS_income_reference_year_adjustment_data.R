@@ -80,6 +80,7 @@ data_inc_ref_year <- tibble::tribble(
   "lu14",                  2013L,
   "lu18",                  2017L,
   "lu21",                  2020L,
+  "mx19",                  2019L,
   "no10",                  2010L,
   "no13",                  2013L,
   "no16",                  2016L,
