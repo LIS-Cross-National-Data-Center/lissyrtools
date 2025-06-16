@@ -83,15 +83,15 @@ print(names(lu_data_hhd[[1]])) # Notice that some variables are loaded by defaul
 
 # Selecting both h-level and p-level variables will automatically merge both files:
 
-lu_data_hhd <- lissyuse(
+lu_data_p <- lissyuse(
   data = "lu", 
   vars = c("dhi", "age", "educ"), 
   from = 2014, 
   to = 2019
   )
 
-print(names(lu_data_hhd))
-print(names(lu_data_hhd[[1]]))
+print(names(lu_data_p))
+print(names(lu_data_p[[1]]))
 ```
 
 ##### Transform each Data Frame
@@ -252,6 +252,15 @@ variable_labels()[stringr::str_detect(variable_labels(), "educ")]
 variable_exists("ethnic_c", iso2 = c("lu", "uk", "nl"))
 
 # Did categories of "ethnic_c" changed over time in the Luxembourgish series ?
+
+# 1) We can look to the number of categories for "ethnic_c" across the series
+variable_country_specific_categories(
+  var = "ethnic_c", 
+  iso2 = "lu", 
+  n_categories = TRUE
+)
+
+# 2) Let's now inspect the categories within a defined time range
 variable_country_specific_categories(
   var = "ethnic_c", 
   iso2 = "lu", 
