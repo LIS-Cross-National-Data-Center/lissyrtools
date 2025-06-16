@@ -124,15 +124,15 @@
 <span></span>
 <span><span class="co"># Selecting both h-level and p-level variables will automatically merge both files:</span></span>
 <span></span>
-<span><span class="va">lu_data_hhd</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span></span>
+<span><span class="va">lu_data_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lissyuse.html">lissyuse</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="st">"lu"</span>, </span>
 <span>  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dhi"</span>, <span class="st">"age"</span>, <span class="st">"educ"</span><span class="op">)</span>, </span>
 <span>  from <span class="op">=</span> <span class="fl">2014</span>, </span>
 <span>  to <span class="op">=</span> <span class="fl">2019</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lu_data_hhd</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lu_data_hhd</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lu_data_p</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lu_data_p</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="transform-each-data-frame">Transform each Data Frame<a class="anchor" aria-label="anchor" href="#transform-each-data-frame"></a>
@@ -295,6 +295,15 @@
 <span><span class="fu"><a href="reference/variable_exists.html">variable_exists</a></span><span class="op">(</span><span class="st">"ethnic_c"</span>, iso2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lu"</span>, <span class="st">"uk"</span>, <span class="st">"nl"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Did categories of "ethnic_c" changed over time in the Luxembourgish series ?</span></span>
+<span></span>
+<span><span class="co"># 1) We can look to the number of categories for "ethnic_c" across the series</span></span>
+<span><span class="fu"><a href="reference/variable_country_specific_categories.html">variable_country_specific_categories</a></span><span class="op">(</span></span>
+<span>  var <span class="op">=</span> <span class="st">"ethnic_c"</span>, </span>
+<span>  iso2 <span class="op">=</span> <span class="st">"lu"</span>, </span>
+<span>  n_categories <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 2) Let's now inspect the categories within a defined time range</span></span>
 <span><span class="fu"><a href="reference/variable_country_specific_categories.html">variable_country_specific_categories</a></span><span class="op">(</span></span>
 <span>  var <span class="op">=</span> <span class="st">"ethnic_c"</span>, </span>
 <span>  iso2 <span class="op">=</span> <span class="st">"lu"</span>, </span>
