@@ -1,6 +1,8 @@
 #' Bind multiple LIS or LWS datasets
 #'
 #'
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #' Converts a list of LIS or LWS datasets into a single file. Creates a new 'file' variable with the
 #'   name of the dataset and computes unique person and household
 #'   identifiers if 'create_unique_id = TRUE' (default).
