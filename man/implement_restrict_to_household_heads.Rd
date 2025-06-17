@@ -18,7 +18,7 @@ will be recoded to NA when relation is missing or not equal to 1000 (household h
 A a file with the filtered age variable.
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Applies 'transform_restrict_to_household_heads()' to a single LIS/LWS file.
 }
 \keyword{internal}

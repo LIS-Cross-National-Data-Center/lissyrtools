@@ -31,6 +31,7 @@ used as sample weights.}
 A numeric vector with the gini index.
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
 Compute the Atkinson index with  weights.
 }

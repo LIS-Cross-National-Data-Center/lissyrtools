@@ -14,7 +14,7 @@ read_LIS(LIS_DIR, file_name, col_select = NULL)
 \item{col_select}{A string vector with the names of the variables to read. If NULL (default), all variables in the file are read.}
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 A modified version of the original read.LIS function.
 
 Is used as a lower-level function to read single files in 'read_lissy_files'

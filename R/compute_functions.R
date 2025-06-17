@@ -84,7 +84,7 @@ compute_percentiles <- function(file, file_name, variable, breaks = seq(0, 1, 0.
     )
 
   
-    .Deprecated("compute_weighted_percentiles", package = "lissyrtools", msg = "The function `compute_percentiles()` is now deprecated, please use `compute_weighted_percentiles()` and `run_weighted_percentiles()` for lists instead.")
+    .Deprecated("run_weighted_percentiles()", package = "lissyrtools", msg = "The function `compute_percentiles()` is now deprecated, please use `run_weighted_percentiles()` for lists instead.")
 }
 
 
@@ -93,7 +93,9 @@ compute_percentiles <- function(file, file_name, variable, breaks = seq(0, 1, 0.
 
 #' Compute gini index.
 #'
-#' \lifecycle{experimental}
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' 
 #' Compute the gini index with  weights.
 #'
 #' @param file A LIS or LWS file.
@@ -164,10 +166,16 @@ compute_gini <- function(file, file_name, variable, weight = NULL, na.rm = FALSE
     nu <- nu/nu[n]
     res <- sum(nu[-1]*p[-n])-sum(nu[-n]*p[-1])
 
+    
+    
+    
+    
     return(res)
 
   }
 
+  .Deprecated("run_weighted_gini()", package = "lissyrtools", msg = "The function `compute_gini()` is now deprecated, please use `run_weighted_gini()` for lists instead.")
+  
 }
 
 
@@ -222,7 +230,7 @@ compute_mean <- function(file, file_name, variable, weight = NULL, na.rm = FALSE
              weights = weight_,
              na.rm = na.rm)
 
-  .Deprecated("compute_weighted_mean", package = "lissyrtools", msg = "The function `compute_mean()` is now deprecated, please use `compute_weighted_mean()` and `run_weighted_mean()` for lists instead.")
+  .Deprecated("run_weighted_mean()", package = "lissyrtools", msg = "The function `compute_mean()` is now deprecated, please use `run_weighted_mean()` for lists instead.")
 
 }
 
@@ -261,7 +269,7 @@ compute_median <- function(file, file_name, variable, weight = NULL, na.rm = FAL
                       w = weight_,
                       na.rm = na.rm))
 
-     .Deprecated("compute_weighted_percentiles", package = "lissyrtools", msg = "The function `compute_median()` is now deprecated, please use `compute_weighted_percentiles()` and `run_weighted_percentiles()` for lists instead. Argument `probs` needs to be selected and equal to 0.5")
+     .Deprecated("run_weighted_percentiles()", package = "lissyrtools", msg = "The function `compute_median()` is now deprecated, please use `run_weighted_percentiles()` for lists instead. Argument `probs` needs to be selected and equal to 0.5")
 
 }
 
@@ -326,7 +334,7 @@ compute_ratio <- function(file, file_name, variable, ratio = c(0.9, 0.1), weight
                                                                 na.rm = na.rm, normwt = TRUE))
   }
 
-  .Deprecated("compute_weighted_percentiles", package = "lissyrtools", msg = "The function `compute_ratio()` is now deprecated, please use `compute_weighted_percentiles()` and `run_weighted_percentiles()` for lists instead.")
+  .Deprecated("run_weighted_ratios()", package = "lissyrtools", msg = "The function `compute_ratio()` is now deprecated, please use `run_weighted_ratios()` for lists instead.")
 
 }
 
@@ -334,7 +342,9 @@ compute_ratio <- function(file, file_name, variable, ratio = c(0.9, 0.1), weight
 
 #' Compute Atkinson index.
 #'
-#' \lifecycle{experimental}
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' 
 #' Compute the Atkinson index with  weights.
 #'
 #' @param file A LIS or LWS file.
@@ -410,12 +420,17 @@ compute_atkinson <- function(file, file_name, variable, epsilon, weight = NULL, 
                    true = 1 - (prod(exp(weight_*log(var)))/sum(var*weight_/sum(weight_))),
                    false = 1 - (sum(((var/sum(var*weight_/sum(weight_)))^(1 - epsilon))*weight_/sum(weight_)))^(1/(1-epsilon)))
   )
+  
+  .Deprecated("run_weighted_atkinson()", package = "lissyrtools", msg = "The function `compute_atkinson()` is now deprecated, please use `run_weighted_atkinson()` for lists instead.")
+  
 }
 
 
 #' Compute poverty rate.
 #'
-#' \lifecycle{experimental}
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' 
 #' Computes the weighted poverty rate for a LIS or LWS variable.
 #'
 #' It uses 'pwgt' or 'hwgt' to weight the indicator.
@@ -464,4 +479,6 @@ compute_poverty_rate <- function(file, file_name, variable, times_median, weight
     return(sum(weight_[file[[variable]] < pov_line], na.rm = na.rm)/sum(weight_, na.rm = na.rm))
 
   }
+  
+  .Deprecated("run_weighted_relative_poverty()", package = "lissyrtools", msg = "The function `compute_poverty_rate()` is now deprecated, please use `run_weighted_relative_poverty()` for lists instead.")
 }

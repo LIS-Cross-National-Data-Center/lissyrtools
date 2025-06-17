@@ -45,12 +45,11 @@ used as sample weights.}
 A list of tibbles with the recoded variable.
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Applies an upper or lower limit on variable values using the Interquartile Range (IQR)
 of the variable transformed with the natural logarithm and a scale factor
 ('times').
-}
-\details{
+
 If the lissy files passed are at person-level and the variable is household-level,
 only household heads are used to compute the IQR of the log transformed variable.
 For person-level variables, all individuals in the file are used.

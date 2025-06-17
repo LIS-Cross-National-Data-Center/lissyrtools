@@ -3,7 +3,7 @@
 
 #' Filter a sample by age
 #'
-#' \lifecycle{experimental}
+#' `r lifecycle::badge("deprecated")`
 #' @description
 #' 'transform_filter_age()' filter the rows in a LIS/LWS file so all cases have
 #'   ages between two values (both included), returning a list with the files
@@ -38,7 +38,7 @@ transform_filter_age <- function(lissy_files, from, to){
 
 #' Filter a variable by age
 #'
-#' \lifecycle{experimental}
+#' `r lifecycle::badge("deprecated")`
 #' @description
 #' 'transform_restrict_age()' recodes the indicated variable to NA when age is
 #'   outside the boundaries. Cases where age is NA are also recoded to NA.
@@ -69,7 +69,7 @@ transform_restrict_age <- function(lissy_files, variable, from, to){
 
 #' Apply 'transform_filter_age()' to a single file
 #'
-#'\lifecycle{experimental}
+#' `r lifecycle::badge("deprecated")`
 #' Applies 'transform_filter_age()' to a single LIS/LWS file.
 #'
 #' To be used inside 'transform_filter_age()' and 'transform_restrict_age()'.
@@ -96,7 +96,7 @@ implement_filter_age <- function(file, file_name, from, to){
 
 #' Apply 'transform_restrict_age()' to a single file
 #'
-#'\lifecycle{experimental}
+#' `r lifecycle::badge("deprecated")`
 #' Applies 'transform_restrict_age()' to a single LIS/LWS file.
 #'
 #' @param file A LIS or LWS file.
@@ -152,7 +152,7 @@ transform_restrict_to_household_heads <- function(lissy_files, variable){
 
 #' Apply 'transform_restrict_to_household_heads()' to a single file
 #'
-#'\lifecycle{experimental}
+#' `r lifecycle::badge("deprecated")`
 #' Applies 'transform_restrict_to_household_heads()' to a single LIS/LWS file.
 #'
 #' @param file A LIS or LWS file.

@@ -12,9 +12,7 @@ add_unique_ids(file, file_name, file_level)
 \item{file_name}{The name of the LIS or LWS file.}
 
 \item{file_level}{A string indicating the level of the file. Valid inputs are:
-'household', 'h', 'person' or 'p'.
-
-\lifecycle{experimental}}
+'household', 'h', 'person' or 'p'.}
 }
 \description{
 Add unique ID variables when binding LIS or LWS files.

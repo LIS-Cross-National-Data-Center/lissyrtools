@@ -7,7 +7,7 @@
 read_format_names(file_name)
 }
 \description{
-\lifecycle{superseded}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 Use 'read_file_name_format' instead.
 
 Detects the format of the 'file' argument passed to 'read_lissy_files_locally()'

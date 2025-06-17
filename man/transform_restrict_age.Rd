@@ -20,5 +20,5 @@ outside the boundaries. Cases where age is NA are also recoded to NA.
 To remove rows outside of age boundaries use 'transform_filter_age()' instead.
 }
 \details{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }

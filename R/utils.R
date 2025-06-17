@@ -86,7 +86,7 @@ add_leading_0s <- function(dataset, n_0s) {
 
 
 #' All values are equal
-#' \lifecycle{experimental}
+#' `r lifecycle::badge("deprecated")`
 #'
 #' Like base::all.equal(), but ignoring attributes by default.
 #'
@@ -171,7 +171,7 @@ define_option <- function(option_name, value) {
 
 #' Change the format of a file name
 #'
-#' \lifecycle{experimental}
+#' `r lifecycle::badge("deprecated")`
 #'
 #' Converts a character vector with a file names to a different format.
 #'
@@ -481,7 +481,7 @@ zero_range <- function(x, tol = .Machine$double.eps^0.5) {
 
 #' Compute four digit year from two digit one.
 #'
-#' \lifecycle{experimental}
+#' `r lifecycle::badge("deprecated")`
 #' Computes the four digit year from a string with two digits year.
 #'
 #' To be used within 'extract_information_from_file_name()'.

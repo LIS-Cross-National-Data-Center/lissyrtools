@@ -16,7 +16,7 @@ value requires the full path specification to the deflators file.}
 A tibble with the lisppp deflators.
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Retrieves the lisppp deflators dataset.
 }
 \keyword{internal}

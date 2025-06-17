@@ -40,12 +40,10 @@ value requires the full path specification to the deflators file.}
 A list of tibbles with the adjusted variable.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Adjusts an aggregate by both the CPI and PPP.
 
 For LWS income variables, it takes into account the reference year of the dataset variables.
-}
-\details{
-\lifecycle{experimental}
 }
 \examples{
 \dontrun{

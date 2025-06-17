@@ -16,7 +16,7 @@ A list of loaded files with the new names.
 }
 \description{
 '
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Uses a character vector to manually change the names files that have been previously read.
 }
 \examples{

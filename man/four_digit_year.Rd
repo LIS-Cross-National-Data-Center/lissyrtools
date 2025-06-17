@@ -13,7 +13,7 @@ four_digit_year(two_digit_year)
 A strign with four digit year.
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Computes the four digit year from a string with two digits year.
 }
 \details{

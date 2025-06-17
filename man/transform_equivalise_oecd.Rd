@@ -26,11 +26,10 @@ in the household.}
 A list of tibbles with the transformed variable.
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Scales a variable using a weight for the adults (excluding the first one) and
 children.
-}
-\details{
+
 Throws a warning if the function is applied to a person-level variable.
 }
 \examples{

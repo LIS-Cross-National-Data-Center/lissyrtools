@@ -27,7 +27,7 @@ print_percentiles(
 A tibble with percentile absolute and cummulative values.
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Computes and displays the percentiles and cumulative percentiles of a
 variable.
 }

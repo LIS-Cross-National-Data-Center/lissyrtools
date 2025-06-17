@@ -16,13 +16,11 @@ as unique row identifiers. Defaults to TRUE.}
 A tibble with the stacked LIS or LWS files.
 }
 \description{
-\lifecycle{experimental}
-}
-\details{
 Converts a list of LIS or LWS datasets into a single file. Creates a new 'file' variable with the
 name of the dataset and computes unique person and household
 identifiers if 'create_unique_id = TRUE' (default).
-
+}
+\details{
 Adds the attribute 'binded = TRUE' to the resulting tibble.
 }
 \examples{

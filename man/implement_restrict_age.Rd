@@ -22,7 +22,7 @@ will be recoded to NA when age is outside the boundaries (both included).}
 A a file with the filtered age variable.
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Applies 'transform_restrict_age()' to a single LIS/LWS file.
 }
 \keyword{internal}

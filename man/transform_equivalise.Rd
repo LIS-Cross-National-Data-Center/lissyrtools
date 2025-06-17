@@ -17,11 +17,10 @@ transform_equivalise(lissy_files, variable, eq_scale = 0.5)
 A list of tibbles with the transformed variable.
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Scales a variable dividing it by 'nhhmem'^eq_scale. Where 'nhhmem' is the LIS
 or LWS variable measuring the number of members in the household.
-}
-\details{
+
 Throws a warning if the function is applied to a person-level variable.
 }
 \examples{

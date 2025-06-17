@@ -2,7 +2,7 @@
 
 #' Perform checks for 'compute' functions.
 #'
-#' \lifecycle{experimental}
+#' `r lifecycle::badge("deprecated")`
 #' Perform checks within 'compute_*()' functions. The checks performed are:
 #'   \itemize{
 #'   \item The file is a data.frame type of object.

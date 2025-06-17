@@ -1,6 +1,6 @@
 #' Retrieve names of key variables
 #'
-#' \lifecycle{experimental}
+#' `r lifecycle::badge("deprecated")`
 #' Retrieve the names of key variables for a given database and level. To be
 #'   used only within 'read_lissy_files()' and 'read_lissy_files_locally()'.
 #'
@@ -272,7 +272,7 @@ read_lissy_files_locally <- function(files, path_to_files, col_select = NULL, fu
 #' Read the format of files argument
 #'
 #' @description
-#'\lifecycle{superseded}
+#' `r lifecycle::badge("superseded")`   
 #'   Use 'read_file_name_format' instead.
 #'
 #'   Detects the format of the 'file' argument passed to 'read_lissy_files_locally()'
@@ -330,7 +330,7 @@ read_format_names <- function(file_name){
 #' Rename read files
 #'
 #' @description'
-#' \lifecycle{experimental}
+#' `r lifecycle::badge("deprecated")`
 #' Uses a character vector to manually change the names files that have been previously read.
 #'
 #' @param list_files A list of LIS or LWS datasets.
@@ -365,7 +365,7 @@ read_rename_files <- function(list_files, new_names){
 #' Read LIS
 #'
 #' @description
-#'\lifecycle{experimental}
+#' `r lifecycle::badge("deprecated")`
 #'   A modified version of the original read.LIS function.
 #'
 #'   Is used as a lower-level function to read single files in 'read_lissy_files'

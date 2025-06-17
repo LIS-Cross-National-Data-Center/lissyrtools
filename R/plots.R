@@ -31,7 +31,8 @@ lis_theme <- list(
 
 #' Plot an Indicator.
 #'
-#' \lifecycle{experimental}
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #' Computes an indicator and plots it for one or multiple LIS or LWS datasets.
 #'
 #' @param lissy_files A list of LIS or LWS files.
@@ -166,7 +167,8 @@ decide_plot_type <- function(results_df) {
 
 #' Plot an indicator using a line plot.
 #'
-#' \lifecycle{experimental}
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
 #' @param results_df A data frame with the results of the indicator.
 #'
@@ -184,7 +186,8 @@ plot_line <- function(results_df) {
 
 #' Plot an indicator using a bar plot.
 #'
-#' \lifecycle{experimental}
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
 #' @param results_df A data frame with the results of the indicator.
 #'

@@ -15,7 +15,7 @@ transform_negative_values_to_zero(lissy_files, variable)
 A list of tibbles with the recoded variable.
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Recodes all negative values to zero for all files in a list.
 }
 \examples{

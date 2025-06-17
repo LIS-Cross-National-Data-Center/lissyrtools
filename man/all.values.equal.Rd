@@ -3,7 +3,7 @@
 \name{all.values.equal}
 \alias{all.values.equal}
 \title{All values are equal
-\lifecycle{experimental}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 \usage{
 \method{all}{values.equal}(target, current)
 }

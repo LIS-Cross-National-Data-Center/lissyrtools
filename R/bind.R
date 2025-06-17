@@ -1,6 +1,5 @@
 #' Bind multiple LIS or LWS datasets
 #'
-#' \lifecycle{experimental}
 #'
 #' Converts a list of LIS or LWS datasets into a single file. Creates a new 'file' variable with the
 #'   name of the dataset and computes unique person and household
@@ -38,6 +37,7 @@ bind_lissy_files <- function(lissy_files, create_unique_id = TRUE){
 
   attr(binded_dataset, "binded") <- TRUE
 
+  .Deprecated("purrr::list_rbind", package = "lissyrtools")
   return(binded_dataset)
 
 }
@@ -52,7 +52,6 @@ bind_lissy_files <- function(lissy_files, create_unique_id = TRUE){
 #' @param file_level A string indicating the level of the file. Valid inputs are:
 #'   'household', 'h', 'person' or 'p'.
 #'
-#' \lifecycle{experimental}
 #'
 #' @keywords internal
 add_unique_ids  <- function(file, file_name, file_level){

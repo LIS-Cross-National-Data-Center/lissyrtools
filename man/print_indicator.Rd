@@ -52,6 +52,6 @@ This is done by comparing the value in 'variable' with pre-set lists of variable
 A numeric vector.
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Computes and displays an indicator chosen with the 'indicator' argument.
 }

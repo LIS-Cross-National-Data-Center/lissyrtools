@@ -48,7 +48,7 @@ used as sample weights.}
 A tibble containing the file with the recoded variable.
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Applies an upper or lower limit on variable values using the Interquartile Range (IQR)
 of the variable transformed with the natural logarithm and a scale factor
 ('times'). For 'household level' variables, the IQR of the log transformed variable is computed using only

@@ -85,7 +85,7 @@
 #' 
 #' # Another example: plotting weighted mean of 'dhi' over years by country
 #' data %>%
-#'   map(~ .x %>% filter(relation == 1000) %>% mutate(new_wgt = nhhmem * hwgt)) %>%
+#'   purrr::map(~ .x %>% filter(relation == 1000) %>% mutate(new_wgt = nhhmem * hwgt)) %>%
 #'   apply_ppp_adjustment("dhi", "lis", "lisppp") %>%
 #'   run_weighted_mean("dhi", "new_wgt") %>%
 #'   structure_to_plot() %>%

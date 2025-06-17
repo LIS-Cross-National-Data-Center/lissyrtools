@@ -17,7 +17,7 @@ checks_compute_functions(file, file_name, variable, weight = NULL)
 used as sample weights. If NULL (default), checks for weight variable are not performed.}
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Perform checks within 'compute_*()' functions. The checks performed are:
 \itemize{
 \item The file is a data.frame type of object.

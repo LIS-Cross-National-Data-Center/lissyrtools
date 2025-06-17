@@ -19,7 +19,7 @@ implement_filter_age(file, file_name, from, to)
 A a file with the filtered age variable.
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Applies 'transform_filter_age()' to a single LIS/LWS file.
 }
 \details{

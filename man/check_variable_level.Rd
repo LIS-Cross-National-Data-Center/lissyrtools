@@ -13,7 +13,7 @@ safely_check_variable_level(...)
 \item{variable}{A String with the name of the variable. E.g. 'pi11', 'dhi'.}
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
 \details{
 Throws an error if it couldn't be checked.

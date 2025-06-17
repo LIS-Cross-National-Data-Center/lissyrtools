@@ -2,7 +2,8 @@
 
 #' Print percentiles.
 #'
-#' \lifecycle{experimental}
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #' Computes and displays the percentiles and cumulative percentiles of a
 #'   variable.
 #'
@@ -31,6 +32,9 @@ print_percentiles <- function(lissy_files, variable, breaks = seq(0, 1, 0.1), we
 
   }) %>%
     purrr::reduce(dplyr::left_join, by = "percentile")
+  
+  .Deprecated("run_weighted_percentiles()", package = "lissyrtools", msg = "The function `print_percentiles()` is now deprecated, please use run_weighted_percentiles()` for lists instead.") 
+  
 }
 
 
@@ -38,7 +42,7 @@ print_percentiles <- function(lissy_files, variable, breaks = seq(0, 1, 0.1), we
 
 #' Print all available files
 #'
-#' \lifecycle{experimental}
+#' `r lifecycle::badge("deprecated")`
 #' Display all available LISSY files.
 #'
 #' @examples
@@ -59,7 +63,8 @@ print_all_lissy_files <- function(database){
 
 #' Print an indicator
 #'
-#' \lifecycle{experimental}
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #' Computes and displays an indicator chosen with the 'indicator' argument.
 #'
 #' @param lissy_files A list of LIS or LWS files.
@@ -191,6 +196,8 @@ print_indicator <- function(lissy_files, variable, indicator, weight = NULL, rat
                     na.rm # ..6
     )
   }
+  
+  .Deprecated("run_weighted_*()", package = "lissyrtools", msg = "The function `print_indicator()` is now deprecated, please use function from  `run_weighted_*()` family for lists instead.") 
 }
 
 
@@ -266,7 +273,8 @@ determine_file_level <- function(lissy_files, files_level){
 
 #' Print the Gini Coefficient
 #'
-#' \lifecycle{experimental}
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #' Computes and displays the Gini coefficient for a given variable across multiple files.
 #'
 #' @param lissy_files A list of LIS or LWS files.
@@ -321,13 +329,17 @@ print_gini <- function(lissy_files, variable, weight = NULL, na.rm = FALSE, file
                   weight_var, # ..4
                   na.rm # ..5
   )
+  
+  .Deprecated("run_weighted_gini()", package = "lissyrtools", msg = "The function `print_gini()` is now deprecated, please use `run_weighted_gini()` for lists instead.")
 }
 
 
 
 #' Print the Atkinson Index
 #'
-#' \lifecycle{experimental}
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' 
 #' Computes and displays the Atkinson index for a given variable across multiple files.
 #'
 #' @param lissy_files A list of LIS or LWS files.
@@ -385,11 +397,15 @@ print_atkinson <- function(lissy_files, variable, epsilon, weight = NULL, na.rm 
                   epsilon, # ..5
                   na.rm # ..6
   )
+  
+  .Deprecated("run_weighted_atkinson()", package = "lissyrtools", msg = "The function `print_atkinson()` is now deprecated, please use `run_weighted_atkinson()` for lists instead.")
+  
 }
 
 #' Print the Ratio Index
 #'
-#' \lifecycle{experimental}
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #' Computes and displays the ratio index for a given variable across multiple files.
 #'
 #' @param lissy_files A list of LIS or LWS files.
@@ -449,5 +465,8 @@ print_ratio <- function(lissy_files, variable, ratio, weight = NULL, na.rm = FAL
                   ratio, # ..5
                   na.rm # ..6
   )
+  
+  .Deprecated("run_weighted_ratios()", package = "lissyrtools", msg = "The function `print_ratio()` is now deprecated, please use `run_weighted_ratios()` for lists instead.") 
+  
 }
 
