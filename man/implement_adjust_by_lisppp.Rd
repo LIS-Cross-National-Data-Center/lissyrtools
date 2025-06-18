@@ -30,7 +30,7 @@ format as the tibble in 'lissyrtools::deflators'. If "lissyrtools" (default) the
 are imported from the package internal data.}
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 }
 \details{
 To be used inside transform_adjust_by_lisppp().

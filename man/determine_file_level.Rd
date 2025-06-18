@@ -19,3 +19,4 @@ A character vector with the level of the file
 \description{
 Determine the level of the file
 }
+\keyword{internal}

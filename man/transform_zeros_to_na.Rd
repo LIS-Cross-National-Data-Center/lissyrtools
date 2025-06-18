@@ -15,6 +15,7 @@ transform_zeros_to_na(lissy_files, variable)
 A list of tibbles with the adjusted variable.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 Recodes all zeros in the selected variable into missing valuse (NAs).
 }
+\keyword{internal}

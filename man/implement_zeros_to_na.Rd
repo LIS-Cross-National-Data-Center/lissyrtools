@@ -17,7 +17,7 @@ implement_zeros_to_na(file, file_name, variable)
 A file with the recoded variable.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 Applies the recoding of zeroes into missing values in a file for a single variable.
 }
 \details{

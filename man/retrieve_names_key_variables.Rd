@@ -18,7 +18,7 @@ A character vector with the names of key variables for a given
 database and level.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 Retrieve the names of key variables for a given database and level. To be
 used only within 'read_lissy_files()' and 'read_lissy_files_locally()'.
 }

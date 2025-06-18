@@ -7,7 +7,7 @@
 print_all_lissy_files(database)
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 Display all available LISSY files.
 }
 \examples{
@@ -15,3 +15,4 @@ Display all available LISSY files.
 print_all_lissy_files()
 }
 }
+\keyword{internal}

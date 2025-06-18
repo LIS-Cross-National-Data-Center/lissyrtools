@@ -45,7 +45,7 @@ used as sample weights.}
 A list of tibbles with the recoded variable.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 Applies an upper or lower limit on variable values using the Interquartile Range (IQR)
 of the variable transformed with the natural logarithm and a scale factor
 ('times').

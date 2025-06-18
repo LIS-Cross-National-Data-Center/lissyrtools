@@ -35,7 +35,7 @@ the label of the percentiles computed (e.g. '0.5' for median, '0.2' for first qu
 The second contains the values of these in the distribution of 'variable'.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 
 Computes the weighted poverty rate for a LIS or LWS variable.
 
@@ -47,3 +47,4 @@ lissy_datasets <- read_lissy_files(c("fr84h", "fr94h", "fr10h"))
 compute_poverty_rate(lissy_datasets[["fr1984h"]], file_name = "fr84h", variable = "dhi", times_median = 0.5, na.rm = TRUE)
 }
 }
+\keyword{internal}

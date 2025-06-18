@@ -1,6 +1,6 @@
 #' Retrieve names of key variables
 #'
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 #' Retrieve the names of key variables for a given database and level. To be
 #'   used only within 'read_lissy_files()' and 'read_lissy_files_locally()'.
 #'
@@ -49,7 +49,7 @@ retrieve_names_key_variables <- function(database, level){
 #' Read files in LISSY
 #'
 #' @description
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 #' 
 #' Reads multiple LIS, LWS or ERFLIS files in the LISSY interface.
 #'
@@ -69,6 +69,11 @@ retrieve_names_key_variables <- function(database, level){
 #' }
 read_lissy_files <- function(files, col_select = NULL, full_year_names = TRUE){
 
+  
+  .Deprecated("lissyuse", package = "lissyrtools", msg = "Both `read_lissy_files()` and `merge_dataset_level()` are deprecated, please use `lissyuse()` instead.")
+  return(output_list)
+  
+  
   files <- tolower(files)
 
   ## Check that argument 'files' is correct
@@ -155,8 +160,7 @@ read_lissy_files <- function(files, col_select = NULL, full_year_names = TRUE){
 
   }
 
-  .Deprecated("lissyuse", package = "lissyrtools", msg = "Both `read_lissy_files()` and `merge_dataset_level()` are deprecated, please use `lissyuse()` instead.")
-  return(output_list)
+
 
 }
 
@@ -167,7 +171,7 @@ read_lissy_files <- function(files, col_select = NULL, full_year_names = TRUE){
 #' Read files locally
 #'
 #' @description
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 #' 
 #' Reads multiple LIS or LWS files outside of the LISSY interface.
 #'
@@ -186,6 +190,11 @@ read_lissy_files <- function(files, col_select = NULL, full_year_names = TRUE){
 #' }
 read_lissy_files_locally <- function(files, path_to_files, col_select = NULL, full_year_names = TRUE){
 
+  
+  .Deprecated("lissyuse", package = "lissyrtools", msg = "`read_lissy_files_locally()` is deprecated, please use `lissyuse()` instead.")
+  return(output_list)
+  
+  
   files <- tolower(files)
 
 
@@ -262,8 +271,7 @@ read_lissy_files_locally <- function(files, path_to_files, col_select = NULL, fu
 
   # get level from file_names
 
-  .Deprecated("lissyuse", package = "lissyrtools", msg = "`read_lissy_files_locally()` is deprecated, please use `lissyuse()` instead.")
-  return(output_list)
+
 
 }
 
@@ -330,7 +338,7 @@ read_format_names <- function(file_name){
 #' Rename read files
 #'
 #' @description'
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 #' Uses a character vector to manually change the names files that have been previously read.
 #'
 #' @param list_files A list of LIS or LWS datasets.
@@ -365,7 +373,7 @@ read_rename_files <- function(list_files, new_names){
 #' Read LIS
 #'
 #' @description
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 #'   A modified version of the original read.LIS function.
 #'
 #'   Is used as a lower-level function to read single files in 'read_lissy_files'

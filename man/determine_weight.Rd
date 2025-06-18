@@ -26,3 +26,4 @@ A character vector with the name of the weight variable.
 Computes the name of the weight variable based on the information from the 'lissy_files'
 object, 'files_level' and 'variable_level'
 }
+\keyword{internal}

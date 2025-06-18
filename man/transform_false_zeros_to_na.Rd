@@ -19,9 +19,10 @@ Recodes all zeros in the selected variable into missing values (NAs) if (and
 only if) all values are zeros.
 }
 \details{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 
 Some LIS/LWS datasets have variables with only '0' values. These do not
 represent 0s but NAs. This function transform the 0s into NAs if it finds
 that all values are 0s and there are no other valid values.
 }
+\keyword{internal}

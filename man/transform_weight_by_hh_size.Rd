@@ -13,7 +13,7 @@ transform_weight_by_hh_size(lissy_files)
 A list of tibbles with the modified 'hwgt' variable.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 Multiplies the household weights ('hwgt') by the number of individuals in the
 household ('nhhmem'). It is used for computations at household level.
 }

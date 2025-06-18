@@ -6,7 +6,7 @@
 #' Equivalise by number of household members.
 #'
 #' @description
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 #' Scales a variable dividing it by 'nhhmem'^eq_scale. Where 'nhhmem' is the LIS
 #' or LWS variable measuring the number of members in the household.
 #'
@@ -23,6 +23,9 @@
 #' transform_equivalise(list_files = lissy_files, variable = "dhi")
 #' }
 transform_equivalise <- function(lissy_files, variable, eq_scale = 0.5){
+  
+  .Deprecated("apply_sqrt_equivalisation()", package = "lissyrtools", msg = "The function `transform_equivalise()` is now deprecated, please use `apply_sqrt_equivalisation()` for lists instead.") 
+  
 
   copy_attributes <- get_lissy_attributes(lissy_files)
 
@@ -39,14 +42,13 @@ transform_equivalise <- function(lissy_files, variable, eq_scale = 0.5){
 
   return(lissy_files)
 
-  .Deprecated("apply_sqrt_equivalisation()", package = "lissyrtools", msg = "The function `transform_equivalise()` is now deprecated, please use `apply_sqrt_equivalisation()` for lists instead.") 
 }
 
 
 
 #' Apply equivalise by number of household members
 #'
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 #' Applies the equivalisation by number of household members in a file for a single variable.
 #'
 #' To be used inside transform_equivalise().
@@ -90,7 +92,7 @@ implement_equivalise <- function(file, file_name, variable, eq_scale = 0.5){
 #' Equivalise with the OECD scale
 #'
 #' @description
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 #' Scales a variable using a weight for the adults (excluding the first one) and
 #'   children.
 #'
@@ -111,6 +113,8 @@ implement_equivalise <- function(file, file_name, variable, eq_scale = 0.5){
 #' }
 transform_equivalise_oecd <- function(lissy_files, variable, value_other_adults = 0.7, value_children = 0.5){
 
+  .Deprecated("apply_oecd_equivalisation()", package = "lissyrtools", msg = "The function `transform_equivalise_oecd()` is now deprecated, please use `apply_oecd_equivalisation()` for lists instead.") 
+  
   copy_attributes <- get_lissy_attributes(lissy_files)
 
 
@@ -127,7 +131,6 @@ transform_equivalise_oecd <- function(lissy_files, variable, value_other_adults 
 
   return(lissy_files)
   
-  .Deprecated("apply_oecd_equivalisation()", package = "lissyrtools", msg = "The function `transform_equivalise_oecd()` is now deprecated, please use `apply_oecd_equivalisation()` for lists instead.") 
 }
 
 
@@ -136,7 +139,7 @@ transform_equivalise_oecd <- function(lissy_files, variable, value_other_adults 
 
 #' Apply equivalise with the OECD scale
 #'
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 #' Applies the equivalisation by number of  adults and children in a household.
 #'
 #' To be used inside transform_equivalise_oecd().
@@ -187,12 +190,13 @@ implement_equivalise_oecd <- function(file, file_name, variable, value_other_adu
 
 #' Recodes zeros into missing values
 #'
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 #' Recodes all zeros in the selected variable into missing valuse (NAs).
 #'
 #' @param lissy_files A list of LIS or LWS files.
 #' @param variable A character string with the name of the variable that should be adjusted
 #' @return A list of tibbles with the adjusted variable.
+#' @keywords internal
 transform_zeros_to_na <- function(lissy_files, variable){
 
   copy_attributes <- get_lissy_attributes(lissy_files)
@@ -216,7 +220,7 @@ transform_zeros_to_na <- function(lissy_files, variable){
 
 #' Apply recoding of zeros into missing values
 #'
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 #' Applies the recoding of zeroes into missing values in a file for a single variable.
 #'
 #' To be used inside transform_zeros_to_na().
@@ -250,7 +254,7 @@ implement_zeros_to_na <- function(file, file_name, variable){
 #' Adjust aggregates by LIS PPPs
 #'
 #' @description
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 #' Adjusts an aggregate by both the CPI and PPP.
 #'
 #' For LWS income variables, it takes into account the reference year of the dataset variables.
@@ -285,6 +289,10 @@ implement_zeros_to_na <- function(file, file_name, variable){
 #'}
 transform_adjust_by_lisppp <- function(lissy_files, variable, database = NULL, income_variable = NULL, path_to_ppp_file = "lissyrtools"){
 
+  
+  .Deprecated("apply_ppp_adjustment()", package = "lissyrtools", msg = "The function `transform_adjust_by_lisppp()` is now deprecated, please use `apply_ppp_adjustment()` for lists instead.") 
+  
+  
   if(missing(database)){
 
     database_ <- get_database(lissy_files)
@@ -325,7 +333,6 @@ transform_adjust_by_lisppp <- function(lissy_files, variable, database = NULL, i
 
   return(lissy_files)
   
-  .Deprecated("apply_ppp_adjustment()", package = "lissyrtools", msg = "The function `transform_adjust_by_lisppp()` is now deprecated, please use `apply_ppp_adjustment()` for lists instead.") 
 
 }
 
@@ -333,7 +340,7 @@ transform_adjust_by_lisppp <- function(lissy_files, variable, database = NULL, i
 
 #' Applies the deflator adjustment to an aggregate
 #'
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 #'
 #' To be used inside transform_adjust_by_lisppp().
 #'
@@ -385,12 +392,13 @@ implement_adjust_by_lisppp <- function(file, file_name, database, variable, inco
 
 #' Recode negative values to zero
 #'
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 #' Recodes all negative values to zero for all files in a list.
 #'
 #' @param lissy_files A list of LIS or LWS files.
 #' @param variable A character string with the name of the variable that should be transformed.
 #' @return A list of tibbles with the recoded variable.
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -429,7 +437,7 @@ transform_negative_values_to_zero <- function(lissy_files, variable){
 
 #' Apply recoding negative values to zero
 #'
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 #' Applies the recoding of negative values into zeroes in a variable of a single file.
 #'
 #' To be used inside transform_negative_values_to_zero().
@@ -460,7 +468,7 @@ implement_negative_values_to_zero <- function(file, file_name, variable){
 #' Apply top or bottom coding with log IQR
 #'
 #' @description
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 
 #' Applies an upper or lower limit on variable values using the Interquartile Range (IQR)
 #'   of the variable transformed with the natural logarithm and a scale factor
@@ -483,6 +491,8 @@ implement_negative_values_to_zero <- function(file, file_name, variable){
 #'   used as sample weights.
 #' @return A list of tibbles with the recoded variable.
 transform_top_code_with_iqr <- function(lissy_files, variable, times = 3, files_level = NULL, variable_level = NULL, weight = NULL){
+  
+  .Deprecated("apply_iqr_top_bottom_coding()", package = "lissyrtools", msg = "The function `transform_top_code_with_iqr()` is now deprecated, please use `apply_iqr_top_bottom_coding()` for lists instead.") 
 
   copy_attributes <- get_lissy_attributes(lissy_files)
 
@@ -511,7 +521,7 @@ transform_top_code_with_iqr <- function(lissy_files, variable, times = 3, files_
   lissy_files <- paste_lissy_attributes(lissy_files, copy_attributes)
 
   return(lissy_files)
-  .Deprecated("apply_iqr_top_bottom_coding()", package = "lissyrtools", msg = "The function `transform_top_code_with_iqr()` is now deprecated, please use `apply_iqr_top_bottom_coding()` for lists instead.") 
+  
 }
 
 
@@ -519,7 +529,7 @@ transform_top_code_with_iqr <- function(lissy_files, variable, times = 3, files_
 
 #' Apply top or bottom coding with log IQR to a single file
 #'
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 #' Applies an upper or lower limit on variable values using the Interquartile Range (IQR)
 #' of the variable transformed with the natural logarithm and a scale factor
 #' ('times'). For 'household level' variables, the IQR of the log transformed variable is computed using only
@@ -1074,7 +1084,7 @@ implement_bottom_code_with_iqr_hfile <- function(file, file_name, variable, time
 
 #' Recode zeros into missing values if all values are zero
 #'
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 #' @description
 #' Recodes all zeros in the selected variable into missing values (NAs) if (and
 #'   only if) all values are zeros.
@@ -1087,6 +1097,7 @@ implement_bottom_code_with_iqr_hfile <- function(file, file_name, variable, time
 #' @param lissy_files A list of LIS or LWS files.
 #' @param variable A character string with the name of the variable that should be adjusted.
 #' @return A list of tibbles with the adjusted variable.
+#' @keywords internal
 transform_false_zeros_to_na <- function(lissy_files, variable){
 
   copy_attributes <- get_lissy_attributes(lissy_files)
@@ -1133,7 +1144,7 @@ implement_false_zeros_to_na <- function(file, file_name, variable){
 
 #' Multiply by household size
 #'
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("superseded")`
 #' Multiplies the household weights ('hwgt') by the number of individuals in the
 #'   household ('nhhmem'). It is used for computations at household level.
 #'

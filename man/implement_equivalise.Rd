@@ -19,7 +19,7 @@ implement_equivalise(file, file_name, variable, eq_scale = 0.5)
 A a file with the equivalised variable.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 Applies the equivalisation by number of household members in a file for a single variable.
 }
 \details{

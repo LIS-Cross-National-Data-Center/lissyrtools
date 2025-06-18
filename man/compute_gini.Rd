@@ -22,7 +22,7 @@ used as sample weights.}
 A numeric vector with the gini index.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 
 Compute the gini index with  weights.
 }
@@ -32,3 +32,4 @@ lissy_datasets <- read_lissy_files(c("fr84h", "fr94h", "fr10h"))
 compute_gini(lissy_datasets[["fr1984h"]], "dhi", na.rm = TRUE)
 }
 }
+\keyword{internal}
