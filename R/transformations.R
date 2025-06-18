@@ -1073,19 +1073,11 @@ implement_bottom_code_with_iqr_hfile <- function(file, file_name, variable, time
 
 
 
-
-#'
-#'
-#'
-# tranform_recode_into_percentiles
-
-
-
-
 #' Recode zeros into missing values if all values are zero
 #'
-#' `r lifecycle::badge("superseded")`
+#' 
 #' @description
+#' `r lifecycle::badge("superseded")`
 #' Recodes all zeros in the selected variable into missing values (NAs) if (and
 #'   only if) all values are zeros.
 #'

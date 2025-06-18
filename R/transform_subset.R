@@ -3,8 +3,8 @@
 
 #' Filter a sample by age
 #'
-#' `r lifecycle::badge("deprecated")`
 #' @description
+#' `r lifecycle::badge("deprecated")`
 #' 'transform_filter_age()' filter the rows in a LIS/LWS file so all cases have
 #'   ages between two values (both included), returning a list with the files
 #'   containing only rows where the age is between those values. I.e. a subset
@@ -38,8 +38,9 @@ transform_filter_age <- function(lissy_files, from, to){
 
 #' Filter a variable by age
 #'
-#' `r lifecycle::badge("deprecated")`
+#'
 #' @description
+#' `r lifecycle::badge("deprecated")`
 #' 'transform_restrict_age()' recodes the indicated variable to NA when age is
 #'   outside the boundaries. Cases where age is NA are also recoded to NA.
 #' To remove rows outside of age boundaries use 'transform_filter_age()' instead.
@@ -69,6 +70,7 @@ transform_restrict_age <- function(lissy_files, variable, from, to){
 
 #' Apply 'transform_filter_age()' to a single file
 #'
+#' @description
 #' `r lifecycle::badge("deprecated")`
 #' Applies 'transform_filter_age()' to a single LIS/LWS file.
 #'
@@ -126,6 +128,7 @@ implement_restrict_age <- function(file, file_name, variable, from, to){
 #' Filter a variable for household heads
 #'
 #' @description
+#' `r lifecycle::badge("deprecated")`
 #' Recodes the specified variable to NA for non-household heads.
 #'
 #' @param lissy_files A list of LIS or LWS p-level files.

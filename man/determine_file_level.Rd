@@ -17,6 +17,6 @@ be retrived from the 'lissy_files' attributes.}
 A character vector with the level of the file
 }
 \description{
-Determine the level of the file
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
 \keyword{internal}

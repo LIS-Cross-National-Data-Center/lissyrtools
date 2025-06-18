@@ -208,7 +208,9 @@ print_indicator <- function(lissy_files, variable, indicator, weight = NULL, rat
 
 
 #' Determine the name of the weight variable
-#'
+
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #' Computes the name of the weight variable based on the information from the 'lissy_files'
 #'   object, 'files_level' and 'variable_level'
 #'
@@ -255,6 +257,8 @@ determine_weight <- function(lissy_files, variable, files_level, variable_level)
 
 #' Determine the level of the file
 #'
+#' `r lifecycle::badge("deprecated")`
+#' 
 #' @param lissy_files A list of LIS or LWS files.
 #' @param files_level  A string indicating the level of the file. Valid inputs are:
 #'   'household', 'h', 'person' or 'p'. If NULL (default), the file level will

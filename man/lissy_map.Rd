@@ -16,6 +16,7 @@ the argument from purrr::map with the same name.}
 A list like lissy_files
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 A wrap over 'purrr::imap()' that keeps the lissy attributes on the output
 list.
 }

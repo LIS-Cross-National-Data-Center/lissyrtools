@@ -15,10 +15,8 @@ transform_restrict_age(lissy_files, variable, from, to)
 A list of tibbles with the adjusted variable.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 'transform_restrict_age()' recodes the indicated variable to NA when age is
 outside the boundaries. Cases where age is NA are also recoded to NA.
 To remove rows outside of age boundaries use 'transform_filter_age()' instead.
-}
-\details{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }

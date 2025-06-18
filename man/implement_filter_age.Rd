@@ -21,8 +21,7 @@ A a file with the filtered age variable.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Applies 'transform_filter_age()' to a single LIS/LWS file.
-}
-\details{
+
 To be used inside 'transform_filter_age()' and 'transform_restrict_age()'.
 }
 \keyword{internal}

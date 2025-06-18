@@ -3,6 +3,7 @@
 #' Wrap over 'purrr::imap()' for lissy files
 #'
 #' @description
+#' `r lifecycle::badge("deprecated")`
 #' A wrap over 'purrr::imap()' that keeps the lissy attributes on the output
 #'   list.
 #'

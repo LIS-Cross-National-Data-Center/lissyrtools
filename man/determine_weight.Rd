@@ -23,6 +23,7 @@ This is done by comparing the value in 'variable' with pre-set lists of variable
 A character vector with the name of the weight variable.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Computes the name of the weight variable based on the information from the 'lissy_files'
 object, 'files_level' and 'variable_level'
 }

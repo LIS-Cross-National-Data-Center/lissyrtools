@@ -17,11 +17,9 @@ transform_filter_age(lissy_files, from, to)
 A list of tibbles with the subset of rows.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 'transform_filter_age()' filter the rows in a LIS/LWS file so all cases have
 ages between two values (both included), returning a list with the files
 containing only rows where the age is between those values. I.e. a subset
 of rows.
-}
-\details{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
