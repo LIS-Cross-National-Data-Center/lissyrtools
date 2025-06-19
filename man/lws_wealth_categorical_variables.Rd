@@ -13,4 +13,4 @@ lws_wealth_categorical_variables
 \description{
 A character vector of categorical wealth-related variables in LWS datasets.
 }
-\keyword{datasets}
+\keyword{internal}

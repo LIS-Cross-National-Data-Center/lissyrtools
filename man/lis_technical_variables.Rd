@@ -13,4 +13,4 @@ lis_technical_variables
 \description{
 A character vector of technical variables used in LIS datasets.
 }
-\keyword{datasets}
+\keyword{internal}

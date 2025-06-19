@@ -13,4 +13,4 @@ key_vars_person_lis
 \description{
 A character vector of key person variables specific to LIS datasets.
 }
-\keyword{datasets}
+\keyword{internal}

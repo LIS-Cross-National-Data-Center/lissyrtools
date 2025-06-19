@@ -13,4 +13,4 @@ lws_both_hp_variables
 \description{
 A character vector combining household and person variables in LWS datasets.
 }
-\keyword{datasets}
+\keyword{internal}

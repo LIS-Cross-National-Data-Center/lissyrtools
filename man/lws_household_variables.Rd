@@ -13,4 +13,4 @@ lws_household_variables
 \description{
 A character vector containing household-level variables in LWS datasets.
 }
-\keyword{datasets}
+\keyword{internal}

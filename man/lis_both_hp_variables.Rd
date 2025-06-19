@@ -13,4 +13,4 @@ lis_both_hp_variables
 \description{
 A character vector combining both household and person variables in LIS datasets.
 }
-\keyword{datasets}
+\keyword{internal}

@@ -13,4 +13,4 @@ key_vars_household_lis
 \description{
 A character vector of key household variables specific to LIS datasets.
 }
-\keyword{datasets}
+\keyword{internal}

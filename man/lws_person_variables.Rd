@@ -13,4 +13,4 @@ lws_person_variables
 \description{
 A character vector containing person-level variables in LWS datasets.
 }
-\keyword{datasets}
+\keyword{internal}

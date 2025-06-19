@@ -317,6 +317,7 @@
 #'
 #' A character vector containing the names of household-level variables used in ERFLIS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "erflis_household_variables"
 
@@ -324,6 +325,7 @@
 #'
 #' A character vector containing the names of person-level variables used in ERFLIS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "erflis_person_variables"
 
@@ -331,6 +333,7 @@
 #'
 #' A character vector of key household variables specific to LIS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "key_vars_household_lis"
 
@@ -338,6 +341,7 @@
 #'
 #' A character vector of key household variables specific to LWS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "key_vars_household_lws"
 
@@ -345,6 +349,7 @@
 #'
 #' A character vector of key person variables specific to LIS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "key_vars_person_lis"
 
@@ -352,6 +357,7 @@
 #'
 #' A character vector of key person variables specific to LWS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "key_vars_person_lws"
 
@@ -359,6 +365,7 @@
 #'
 #' A character vector combining both household and person variables in LIS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "lis_both_hp_variables"
 
@@ -366,6 +373,7 @@
 #'
 #' A character vector containing the names of categorical variables in LIS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "lis_categorical_variables"
 
@@ -373,6 +381,7 @@
 #'
 #' A character vector containing the names of continuous variables in LIS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "lis_continuous_variables"
 
@@ -380,6 +389,7 @@
 #'
 #' A character vector of variables specific to certain countries in LIS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "lis_country_specific_variables"
 
@@ -387,6 +397,7 @@
 #'
 #' A character vector containing the names of household-level variables in LIS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "lis_household_variables"
 
@@ -394,6 +405,7 @@
 #'
 #' A character vector containing the ID variables in LIS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "lis_id_variables"
 
@@ -401,6 +413,7 @@
 #'
 #' A character vector containing income-related variables in LIS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "lis_income_variables"
 
@@ -408,6 +421,7 @@
 #'
 #' A character vector containing the names of person-level variables in LIS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "lis_person_variables"
 
@@ -415,6 +429,7 @@
 #'
 #' A character vector of technical variables used in LIS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "lis_technical_variables"
 
@@ -422,6 +437,7 @@
 #'
 #' A character vector of weight variables in LIS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "lis_weight_variables"
 
@@ -429,6 +445,7 @@
 #'
 #' A character vector combining household and person variables in LWS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "lws_both_hp_variables"
 
@@ -436,6 +453,7 @@
 #'
 #' A character vector containing household-level variables in LWS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "lws_household_variables"
 
@@ -443,6 +461,7 @@
 #'
 #' A character vector containing ID variables in LWS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "lws_id_variables"
 
@@ -450,6 +469,7 @@
 #'
 #' A character vector containing person-level variables in LWS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "lws_person_variables"
 
@@ -457,6 +477,7 @@
 #'
 #' A character vector of categorical wealth-related variables in LWS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "lws_wealth_categorical_variables"
 
@@ -464,6 +485,7 @@
 #'
 #' A character vector of continuous wealth-related variables in LWS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "lws_wealth_continuous_variables"
 
@@ -471,5 +493,6 @@
 #'
 #' A character vector of country-specific wealth variables in LWS datasets.
 #'
+#' @keywords internal
 #' @format Character vector
 "lws_wealth_country_specific_variables"

@@ -13,4 +13,4 @@ lws_wealth_continuous_variables
 \description{
 A character vector of continuous wealth-related variables in LWS datasets.
 }
-\keyword{datasets}
+\keyword{internal}

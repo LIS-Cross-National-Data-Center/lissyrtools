@@ -362,7 +362,7 @@ variable_selection_for_lissyuse <- function(
           files_h,
           files_p,
           ~ dplyr::inner_join(.x, .y, by = c("hid", "inum")) %>%
-            dplyr::select(-edplyr::nds_with(".y")) %>%
+            dplyr::select(-dplyr::ends_with(".y")) %>%
             dplyr::rename_with(~ sub("\\.x$", "", .), dplyr::ends_with(".x"))
         )
 

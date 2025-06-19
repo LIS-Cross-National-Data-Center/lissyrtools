@@ -13,4 +13,4 @@ lis_id_variables
 \description{
 A character vector containing the ID variables in LIS datasets.
 }
-\keyword{datasets}
+\keyword{internal}

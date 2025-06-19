@@ -13,4 +13,4 @@ lis_income_variables
 \description{
 A character vector containing income-related variables in LIS datasets.
 }
-\keyword{datasets}
+\keyword{internal}

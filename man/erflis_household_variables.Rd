@@ -13,4 +13,4 @@ erflis_household_variables
 \description{
 A character vector containing the names of household-level variables used in ERFLIS datasets.
 }
-\keyword{datasets}
+\keyword{internal}

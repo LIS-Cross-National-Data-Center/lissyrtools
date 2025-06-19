@@ -13,4 +13,4 @@ lws_id_variables
 \description{
 A character vector containing ID variables in LWS datasets.
 }
-\keyword{datasets}
+\keyword{internal}

@@ -13,4 +13,4 @@ lws_wealth_country_specific_variables
 \description{
 A character vector of country-specific wealth variables in LWS datasets.
 }
-\keyword{datasets}
+\keyword{internal}

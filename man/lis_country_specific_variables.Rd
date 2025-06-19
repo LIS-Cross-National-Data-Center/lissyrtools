@@ -13,4 +13,4 @@ lis_country_specific_variables
 \description{
 A character vector of variables specific to certain countries in LIS datasets.
 }
-\keyword{datasets}
+\keyword{internal}

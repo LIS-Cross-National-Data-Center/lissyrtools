@@ -13,4 +13,4 @@ lis_weight_variables
 \description{
 A character vector of weight variables in LIS datasets.
 }
-\keyword{datasets}
+\keyword{internal}

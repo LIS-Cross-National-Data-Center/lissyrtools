@@ -13,4 +13,4 @@ lis_person_variables
 \description{
 A character vector containing the names of person-level variables in LIS datasets.
 }
-\keyword{datasets}
+\keyword{internal}

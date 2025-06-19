@@ -13,4 +13,4 @@ erflis_person_variables
 \description{
 A character vector containing the names of person-level variables used in ERFLIS datasets.
 }
-\keyword{datasets}
+\keyword{internal}
