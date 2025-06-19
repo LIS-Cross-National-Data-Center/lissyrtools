@@ -129,6 +129,7 @@ reference:
 
   - subtitle: Complementary Tables
     contents:
+    - data_inc_ref_year
     - data_vars_labels
     - data_with_warnings
     - datasets
