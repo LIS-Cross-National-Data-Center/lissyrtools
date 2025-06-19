@@ -7,7 +7,7 @@
 check_input_in_weight_argument(wgt_name)
 }
 \arguments{
-\item{weight_var}{A character string of length 1 indicating the name of the weight variable used.}
+\item{wgt_name}{A character string of length 1 indicating the name of the weight variable used.}
 }
 \value{
 No return value. The function is used for validation and emits a warning if the weight variable name seems unusual.

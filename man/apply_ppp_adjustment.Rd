@@ -41,6 +41,7 @@ no longer expressed in national currency units.
 \examples{
 \dontrun{ 
 library(lissyrtools)
+library(dplyr)
 
 # --- Example 1: CPI Adjustment (Domestic Inflation, Italy) ---
 

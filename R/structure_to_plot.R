@@ -42,6 +42,7 @@
 #' library(ggthemes)
 #' library(purrr)
 #' library(forcats)
+#' library(dplyr)
 #' 
 #' data <- lissyrtools::lissyuse(data = c("es", "de"), vars = c("dhi", "educ", "pi11", "rural"), from = 2016)
 #' 
@@ -102,101 +103,120 @@
 #'   theme(axis.text.x = element_text(angle = 25, hjust = 1))
 #' }
 structure_to_plot <- function(data_list) {
-  
   # data <- lissyrtools::lissyuse(data = c("es", "de"), vars = c("dhi", "educ", "pi11", "rural"),from = 2016)
   #
-  # 1st structure: 
-  #    - run_weighted_mean(data, "pi11") 
-  #    
+  # 1st structure:
+  #    - run_weighted_mean(data, "pi11")
+  #
   #    - run_weighted_percentiles(data, "dhi" , probs = 0.5)
-  # 
-  # 
-  # 2nd structure: 
-  #    - run_weighted_mean(data, "pi11", by = "educ") 
-  #    
+  #
+  #
+  # 2nd structure:
+  #    - run_weighted_mean(data, "pi11", by = "educ")
+  #
   #    - run_weighted_percentiles(data, "dhi" , probs = 0.5, share = TRUE)
   #    - run_weighted_percentiles(data, "dhi" , probs = seq(0.1, 0.9, 0.1))
-  #   
+  #
   #    - run_weighted_count(data, "educ", na.rm = TRUE)
   #    - run_weighted_count(data, "educ", na.rm = TRUE, percent = TRUE)
-  #    
-  #    
-  # 3rd structure: 
+  #
+  #
+  # 3rd structure:
   #    - run_weighted_percentiles(data, "pi11", by = "educ")
   #    - run_weighted_percentiles(data, "pi11", by = "educ", share = TRUE)
-  #     
+  #
   #    - run_weighted_count(data, "educ", by = "rural", na.rm = TRUE)
   #    - run_weighted_count(data, "educ", by = "rural", na.rm = TRUE, percent = TRUE)
 
-  
   # 1st structure
-  if (all(names(data_list) %in% c(names(get_countries_lis()), names(get_countries_lws())))) {
-    
-    result_df <- list_rbind(purrr::imap(
-      data_list ,
-      ~ tibble::enframe(.x, name = "year", value = "value") %>% mutate(cname = .y)
+  if (
+    all(
+      names(data_list) %in%
+        c(
+          names(lissyrtools::get_countries_lis()),
+          names(lissyrtools::get_countries_lws())
+        )
+    )
+  ) {
+    result_df <- purrr::list_rbind(purrr::imap(
+      data_list,
+      ~ tibble::enframe(.x, name = "year", value = "value") %>%
+        dplyr::mutate(cname = .y)
     )) %>%
-      mutate(cc = get_countries_lis()[cname],
-             yy = stringr::str_sub(year, 3, 4),
-             dname = paste0(cc, yy),
-             year = as.integer(year)) %>% 
-      select(cname, year, dname, value)
-    
-  # 2nd structure  
+      dplyr::mutate(
+        cc = lissyrtools::get_countries_lis()[cname],
+        yy = stringr::str_sub(year, 3, 4),
+        dname = paste0(cc, yy),
+        year = as.integer(year)
+      ) %>%
+      dplyr::select(cname, year, dname, value)
+
+    # 2nd structure
   } else if (
-    all(length(names(data_list) == 4)) && 
-    all(purrr::map_chr(data_list, ~ class(.x)[1]) %in% c("numeric", "integer"))
-    ) {
-    
-    result_df <- list_rbind(purrr::imap(
-      data_list ,
-      ~ tibble::enframe(.x, name = "category", value = "value") %>% mutate(dname = .y)
+    all(length(names(data_list) == 4)) &&
+      all(
+        purrr::map_chr(data_list, ~ class(.x)[1]) %in% c("numeric", "integer")
+      )
+  ) {
+    result_df <- purrr::list_rbind(purrr::imap(
+      data_list,
+      ~ tibble::enframe(.x, name = "category", value = "value") %>%
+        dplyr::mutate(dname = .y)
     )) %>%
-      mutate(cname = ccyy_to_cname(dname), year =  ccyy_to_yyyy(dname),
-             category = stringr::str_remove(category, "^\\[\\d+\\]"),
-             year = as.integer(year)) %>% 
-      select(cname, year, dname, category, value)
-   
-  # 3rd structure     
-  } else if (all(length(names(data_list) == 4) && all(purrr::map_chr(data_list, ~ class(.x)[1]) == "list"))) {
-    
-    result_df <- list_rbind(purrr::imap(data_list, ~ {
-      outer_name <- .y
-      list_rbind(purrr::imap(.x, function(sublist, subgroup) { # subgroup would be the categorical variable in run_weighted_mean or run_weighted_percentiles 
-        tibble::enframe(sublist, name = "vector_names", value = "value") %>% # vector_names: could be percentiles, shares, or the by var in run_weighted_count
-          mutate(dname = outer_name,
-                 category = stringr::str_remove(subgroup, "^\\[\\d+\\]"),
-                 name = stringr::str_remove(vector_names, "^\\[\\d+\\]"))
-      }))
-    })) %>%
-      mutate(cname = ccyy_to_cname(dname), year =  as.integer(ccyy_to_yyyy(dname))) %>% 
-      select(cname, year, dname, category, name, value)
-    
-    
+      dplyr::mutate(
+        cname = lissyrtools::ccyy_to_cname(dname),
+        year = lissyrtools::ccyy_to_yyyy(dname),
+        category = stringr::str_remove(category, "^\\[\\d+\\]"),
+        year = as.integer(year)
+      ) %>%
+      dplyr::select(cname, year, dname, category, value)
+
+    # 3rd structure
+  } else if (
+    all(
+      length(names(data_list) == 4) &&
+        all(purrr::map_chr(data_list, ~ class(.x)[1]) == "list")
+    )
+  ) {
+    result_df <- purrr::list_rbind(purrr::imap(
+      data_list,
+      ~ {
+        outer_name <- .y
+        purrr::list_rbind(purrr::imap(.x, function(sublist, subgroup) {
+          # subgroup would be the categorical variable in run_weighted_mean or run_weighted_percentiles
+          tibble::enframe(sublist, name = "vector_names", value = "value") %>% # vector_names: could be percentiles, shares, or the by var in run_weighted_count
+            dplyr::mutate(
+              dname = outer_name,
+              category = stringr::str_remove(subgroup, "^\\[\\d+\\]"),
+              name = stringr::str_remove(vector_names, "^\\[\\d+\\]")
+            )
+        }))
+      }
+    )) %>%
+      dplyr::mutate(
+        cname = lissyrtools::ccyy_to_cname(dname),
+        year = as.integer(lissyrtools::ccyy_to_yyyy(dname))
+      ) %>%
+      dplyr::select(cname, year, dname, category, name, value)
+
     # Rename the `name` column accordingly, specifically in the 3rd structure
-    first_value <- result_df$name[1] 
-    
-    if (stringr::str_detect(first_value, "%") &  stringr::str_detect(first_value, "-")) {
+    first_value <- result_df$name[1]
+
+    if (
+      stringr::str_detect(first_value, "%") &
+        stringr::str_detect(first_value, "-")
+    ) {
       names(result_df)[names(result_df) == "name"] <- "share"
     } else if (stringr::str_detect(first_value, "%")) {
-      names(result_df)[names(result_df) == "name"] <- "percentile" 
+      names(result_df)[names(result_df) == "name"] <- "percentile"
     } else {
-      names(result_df)[names(result_df) == "name"] <- "by_var" 
+      names(result_df)[names(result_df) == "name"] <- "by_var"
     }
-    
   }
-  
+
   cat("The resulting data frame's column names are:\n")
   print(names(result_df))
   return(result_df)
-
 }
-
-
-
-
-
-
-
 
 

@@ -23,6 +23,7 @@
 #' \dontrun{
 #' library(lissyrtools)
 #' library(purrr)
+#' library(dplyr)
 #' 
 #' datasets <- lissyrtools::lissyuse(data = c("de", "es", "uk"), vars = c("dhi"), from = 2016)
 #'
@@ -48,19 +49,20 @@
 #' print(p80_p20)
 #' }
 run_weighted_ratios <- function(
-    data_list, 
-    var_name, 
-    wgt_name = NULL, 
-    upper_percentile, 
-    lower_percentile, 
-    type =  c("type_4", "type_2"), 
-    na.rm = TRUE) {
+  data_list,
+  var_name,
+  wgt_name = NULL,
+  upper_percentile,
+  lower_percentile,
+  type = c("type_4", "type_2"),
+  na.rm = TRUE
+) {
   
   data_list <- lissyrtools::remove_dname_with_missings_in_weights(
     data_list,
     wgt_name
   ) # return a list cleaned
-  
+
   # Check that var_name exists
   assertthat::assert_that(
     var_name %in% names(data_list[[1]]),
@@ -68,8 +70,7 @@ run_weighted_ratios <- function(
       "Variable '{var_name}' could not be found as a column name in the datasets."
     )
   )
-  
-  
+
   # Check that wgt_name exists, if provided
   if (!is.null(wgt_name)) {
     assertthat::assert_that(
@@ -80,49 +81,50 @@ run_weighted_ratios <- function(
     )
   }
   lissyrtools::check_input_in_weight_argument(wgt_name)
-  
+
   # Check for invalid inputs in the percentiles, even if already enforced in compute_weighted_percentiles()
   stopifnot(
     upper_percentile >= 0 && upper_percentile <= 1,
     lower_percentile >= 0 && lower_percentile <= 1
   )
-  
-  
+
   # Check for length 1 in both arguments
-  assertthat::assert_that(length(upper_percentile) == 1, length(lower_percentile) == 1)
-  
-  # Check order of the percentiles 
+  assertthat::assert_that(
+    length(upper_percentile) == 1,
+    length(lower_percentile) == 1
+  )
+
+  # Check order of the percentiles
   if (upper_percentile < lower_percentile) {
-    
     # Swap the values
     temp <- upper_percentile
     upper_percentile <- lower_percentile
     lower_percentile <- temp
-    
+
     warning(glue::glue(
       "The value of 'upper_percentile' is smaller than 'lower_percentile'. The values have been automatically swapped."
     ))
   }
-  
 
-  
-  # Body of the function 
-  
-  get_percentiles <- run_weighted_percentiles(
-    data_list = data_list, 
-    var_name = var_name, 
-    wgt_name = wgt_name, 
-    probs = c(lower_percentile, upper_percentile), 
-    share = FALSE, 
+  # Body of the function
+
+  get_percentiles <- lissyrtools::run_weighted_percentiles(
+    data_list = data_list,
+    var_name = var_name,
+    wgt_name = wgt_name,
+    probs = c(lower_percentile, upper_percentile),
+    share = FALSE,
     by = NULL,
     type = type
   )
-  
-  
-  get_ratios <- purrr::map(get_percentiles, ~ {
-    if (.x[1] == 0) return(NA_real_) else .x[2] / .x[1]
-    })
 
-  result <- convert_list_from_ccyy_to_cc_names_yyyy(get_ratios)
+  get_ratios <- purrr::map(
+    get_percentiles,
+    ~ {
+      if (.x[1] == 0) return(NA_real_) else .x[2] / .x[1]
+    }
+  )
+
+  result <- lissyrtools::convert_list_from_ccyy_to_cc_names_yyyy(get_ratios)
   return(result)
 }

@@ -35,6 +35,8 @@ from files_level and variable_level.}
 inputs are 'line' and 'bar'. If NULL (default), the function tries to guess
 the appropriate plot type based on the structure of the input data frame.}
 
+\item{plot_theme}{A character vector.}
+
 \item{ratio}{A vector of two numeric values between 0 and 1.Only used in the computation of 'ratio' indicator.
 Defines the percentiles in the numerator and denominator respectively.
 E.g. (0.9, 0.1) computes the 90/10 ratio.}

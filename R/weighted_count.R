@@ -29,6 +29,8 @@
 #' @examples
 #' \dontrun{ 
 #' library(lissyrtools)
+#' library(purrr)
+#' library(dplyr)
 #' 
 #' data <- lissyrtools::lissyuse(data = c("de", "es", "uk"), vars = c("dhi", "region_c", "area_c", "educ", "emp"), from = 2016)
 #' 
@@ -92,77 +94,96 @@ run_weighted_count <- function(
   by = NULL,
   percent = FALSE
 ) {
+  
+  data_list <- lissyrtools::remove_dname_with_missings_in_weights(
+    data_list,
+    wgt_name
+  ) # return a list cleaned
 
-  data_list <- lissyrtools::remove_dname_with_missings_in_weights(data_list, wgt_name) # return a list cleaned 
-    
   # Check that var_name exists
+  assertthat::assert_that(
+    var_name %in% names(data_list[[1]]),
+    msg = glue::glue(
+      "Variable '{var_name}' could not be found as a column name in the datasets."
+    )
+  )
+
+  # Check that all variables in `by` exist, if provided
+  if (!is.null(by)) {
     assertthat::assert_that(
-      var_name %in% names(data_list[[1]]),
+      by %in% names(data_list[[1]]),
       msg = glue::glue(
-        "Variable '{var_name}' could not be found as a column name in the datasets."
+        "Grouping variable '{by}' could not be found as a column name in the datasets."
       )
     )
+  }
 
-    # Check that all variables in `by` exist, if provided
-    if (!is.null(by)) {
-      assertthat::assert_that(
-        by %in% names(data_list[[1]]),
-        msg = glue::glue(
-          "Grouping variable '{by}' could not be found as a column name in the datasets."
-        )
+  # Check that wgt_name exists, if provided
+  if (!is.null(wgt_name)) {
+    assertthat::assert_that(
+      wgt_name %in% names(data_list[[1]]),
+      msg = glue::glue(
+        "Weight variable '{wgt_name}' could not be found as a column name in the datasets."
       )
-    }
+    )
+  }
+  lissyrtools::check_input_in_weight_argument(wgt_name)
 
-    # Check that wgt_name exists, if provided
-    if (!is.null(wgt_name)) {
-      assertthat::assert_that(
-        wgt_name %in% names(data_list[[1]]),
-        msg = glue::glue(
-          "Weight variable '{wgt_name}' could not be found as a column name in the datasets."
-        )
-      )
-    }
-    lissyrtools::check_input_in_weight_argument(wgt_name)
-
-  allowed_categoricals_in_var_name <- c(lissyrtools::lis_categorical_variables, lissyrtools::lws_wealth_categorical_variables, "inum")
+  allowed_categoricals_in_var_name <- c(
+    lissyrtools::lis_categorical_variables,
+    lissyrtools::lws_wealth_categorical_variables,
+    "inum"
+  )
   if (!var_name %in% allowed_categoricals_in_var_name) {
-    stop(sprintf("The `var_name` variable must be a categorical (not continuous) variable from `lissyrtools::lis_categorical_variables`, `lws_wealth_categorical_variables`, or the variable 'inum'."))
+    stop(sprintf(
+      "The `var_name` variable must be a categorical (not continuous) variable from `lissyrtools::lis_categorical_variables`, `lws_wealth_categorical_variables`, or the variable 'inum'."
+    ))
   }
 
   if (!is.null(by)) {
-    allowed_categoricals_in_by <- c(lissyrtools::lis_categorical_variables, lissyrtools::lws_wealth_categorical_variables, "inum")
+    allowed_categoricals_in_by <- c(
+      lissyrtools::lis_categorical_variables,
+      lissyrtools::lws_wealth_categorical_variables,
+      "inum"
+    )
     if (!by %in% allowed_categoricals_in_by) {
-      stop(sprintf("The `by` variable must be a categorical variable from `lissyrtools::lis_categorical_variables`, `lws_wealth_categorical_variables`, or the variable 'inum'."))
+      stop(sprintf(
+        "The `by` variable must be a categorical variable from `lissyrtools::lis_categorical_variables`, `lws_wealth_categorical_variables`, or the variable 'inum'."
+      ))
     }
   }
 
-    df_to_keep <- purrr::map_lgl(data_list, ~{
+  df_to_keep <- purrr::map_lgl(
+    data_list,
+    ~ {
       by_ok <- if (!is.null(by)) !all(is.na(.x[[by]])) else TRUE
-      var_ok <- !all(is.na(.x[[var_name]])) 
+      var_ok <- !all(is.na(.x[[var_name]]))
       by_ok && var_ok
-    })
-    
-    if (any(!df_to_keep)) {
-      dropped <- names(data_list)[!df_to_keep]
-      reasons <- purrr::map_chr(data_list[!df_to_keep], function(df) {
-        by_na <- !is.null(by) && all(is.na(df[[by]]))
-        var_na <- all(is.na(df[[var_name]]))
-        paste0(
-          if (by_na) paste0("`by` (", by, ") is all NA") else "",
-          if (by_na && var_na) " and " else "",
-          if (var_na) paste0("`var_name` (", var_name, ") is all NA") else ""
-        )
-      })
-      warning(sprintf(
-        "The following data frames were dropped due to missing data:\n%s",
-        paste(paste0("- ", dropped, ": ", reasons), collapse = "\n")
-      ))
-      data_list <- data_list[df_to_keep]
     }
-  
+  )
 
-  if (percent == FALSE &&  !is.null(wgt_name)) {
-    warning("`wgt_name` is ignored when `percent = FALSE`; a simple (unweighted) count is used instead.")
+  if (any(!df_to_keep)) {
+    dropped <- names(data_list)[!df_to_keep]
+    reasons <- purrr::map_chr(data_list[!df_to_keep], function(df) {
+      by_na <- !is.null(by) && all(is.na(df[[by]]))
+      var_na <- all(is.na(df[[var_name]]))
+      paste0(
+        if (by_na) paste0("`by` (", by, ") is all NA") else "",
+        if (by_na && var_na) " and " else "",
+        if (var_na) paste0("`var_name` (", var_name, ") is all NA") else ""
+      )
+    })
+    warning(sprintf(
+      "The following data frames were dropped due to missing data:\n%s",
+      paste(paste0("- ", dropped, ": ", reasons), collapse = "\n")
+    ))
+    data_list <- data_list[df_to_keep]
+  }
+
+  if (percent == FALSE && !is.null(wgt_name)) {
+    warning(
+      "`wgt_name` is ignored when `percent = FALSE`; a simple (unweighted) count is used instead."
+    )
   }
 
   result <- purrr::imap(data_list, function(df, name) {
@@ -182,8 +203,7 @@ run_weighted_count <- function(
         )
       })
 
-      result  
-
+      result
     } else {
       var <- df[[var_name]]
       wgt <- if (!is.null(wgt_name)) df[[wgt_name]] else NULL
@@ -197,12 +217,11 @@ run_weighted_count <- function(
   })
 
   return(result)
+}
 
-} 
 
-
-#' Compute (Weighted) Counts or Percentages for a Categorical Variable 
-#' 
+#' Compute (Weighted) Counts or Percentages for a Categorical Variable
+#'
 #'
 #'
 #' @param var A column refering to one of the categorical variables in a LIS or LWS data frame.
@@ -213,7 +232,7 @@ run_weighted_count <- function(
 #' @return A numeric vector, with category labels as names.
 #'
 #' @keywords internal
-#' 
+#'
 #' @examples
 #' \dontrun{
 #' data <- lissyrtools::lissyuse(data = "de20", vars = c("dhi", "age", "educ"))
@@ -229,15 +248,13 @@ compute_weighted_count <- function(
   na.rm = FALSE,
   percent = FALSE
 ) {
-
-
   if (is.null(wgt) || percent == FALSE) {
     wgt <- rep(1, length(var)) # this includes the NA's as well, so basically the number of rows of each data frame.
   }
 
-  if (length(wgt) != length(var)) stop("Length of weights must match length of `var`.")
-
-
+  if (length(wgt) != length(var)) {
+    stop("Length of weights must match length of `var`.")
+  }
 
   var <- as.character(haven::as_factor(var)) # such that we can see the labels
 
@@ -254,8 +271,10 @@ compute_weighted_count <- function(
   } else {
     # Unique categories (excluding NA if na.rm = TRUE)
     categories <- sort(unique(var[!is.na(var)]))
-    result <- sapply(categories, function(cat) sum(wgt[var == cat], na.rm = TRUE))
-    
+    result <- sapply(categories, function(cat) {
+      sum(wgt[var == cat], na.rm = TRUE)
+    })
+
     # Handle NA separately if na.rm = FALSE
     if (!na.rm && any(is.na(var))) {
       result_na <- sum(wgt[is.na(var)], na.rm = TRUE)
@@ -268,6 +287,3 @@ compute_weighted_count <- function(
 
   return(result)
 }
-
-
-

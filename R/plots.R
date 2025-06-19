@@ -1,32 +1,32 @@
 # LIS colors palette
 
 
-lis_colors <- c("#3891af", "#c8cccf", "#006d91", "#5ba7c1", "#6C848C", "#d5490c")
-
-lis_theme <- list(
-  ggplot2::theme(
-    text = ggplot2::element_text(size = 16),
-    plot.background = ggplot2::element_rect(
-      fill = "#6C848C",
-      colour = "black"
-    ),
-    panel.grid.major = ggplot2::element_line(
-      size = 0.5,
-      linetype = "solid",
-      colour = "#c8cccf"
-    ),
-    panel.grid.minor = ggplot2::element_blank(),
-    panel.background = ggplot2::element_rect(
-      fill = "white",
-      colour = "black",
-      size = 2,
-      linetype = "solid"
-    ),
-    axis.text = ggplot2::element_text(colour = "black")
-  ),
-  ggplot2::scale_color_manual(values = lis_colors),
-  ggplot2::scale_fill_manual(values = lis_colors)
-)
+# lis_colors <- c("#3891af", "#c8cccf", "#006d91", "#5ba7c1", "#6C848C", "#d5490c")
+# 
+# lis_theme <- list(
+#   ggplot2::theme(
+#     text = ggplot2::element_text(size = 16),
+#     plot.background = ggplot2::element_rect(
+#       fill = "#6C848C",
+#       colour = "black"
+#     ),
+#     panel.grid.major = ggplot2::element_line(
+#       size = 0.5,
+#       linetype = "solid",
+#       colour = "#c8cccf"
+#     ),
+#     panel.grid.minor = ggplot2::element_blank(),
+#     panel.background = ggplot2::element_rect(
+#       fill = "white",
+#       colour = "black",
+#       size = 2,
+#       linetype = "solid"
+#     ),
+#     axis.text = ggplot2::element_text(colour = "black")
+#   ),
+#   ggplot2::scale_color_manual(values = lis_colors),
+#   ggplot2::scale_fill_manual(values = lis_colors)
+# )
 
 
 #' Plot an Indicator.
@@ -46,6 +46,7 @@ lis_theme <- list(
 #' @param type A character vector indicating the type of plot to be used. Valid
 #'  inputs are 'line' and 'bar'. If NULL (default), the function tries to guess
 #' the appropriate plot type based on the structure of the input data frame.
+#' @param plot_theme A character vector.    
 #' @param ratio A vector of two numeric values between 0 and 1.Only used in the computation of 'ratio' indicator.
 #'   Defines the percentiles in the numerator and denominator respectively.
 #'   E.g. (0.9, 0.1) computes the 90/10 ratio.

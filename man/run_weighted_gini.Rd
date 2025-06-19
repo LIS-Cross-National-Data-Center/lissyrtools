@@ -25,6 +25,7 @@ Compute Weighted Gini Index Across a List of Data Frames
 \dontrun{
 library(lissyrtools)
 library(purrr)
+library(dplyr)
 
 datasets <- lissyrtools::lissyuse(data = c("de", "es", "uk"), vars = c("dhi"), from = 2016)
 

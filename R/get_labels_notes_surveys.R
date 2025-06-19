@@ -1,5 +1,3 @@
-
-
 #' Inspect the Labels of LIS and LWS variables
 #'
 #' @param vars A character vector containing LIS/LWS variables or the output list from lissyuse.
@@ -21,18 +19,18 @@
 #' variable_labels(vars = c("fyft", "basb", "hxremit", "bafi1_c", "pasodc"))
 variable_labels <- function(vars = NULL) {
   
-  if(is.null(vars)) {
+  if (is.null(vars)) {
     output <- tibble::deframe(data_vars_labels)
     return(output)
-  } 
-  
-  else if(!(is.null(vars))) {
+  } else if (!(is.null(vars))) {
     if (is.character(vars)) {
-      
-      valid_vars <- union(lissyrtools::lws_variables, lissyrtools::lis_variables)
-      
+      valid_vars <- union(
+        lissyrtools::lws_variables,
+        lissyrtools::lis_variables
+      )
+
       invalid_vars <- vars[!vars %in% valid_vars]
-      
+
       if (length(invalid_vars) > 0 & length(invalid_vars) == length(vars)) {
         stop(glue::glue(
           "None of the characters provided in argument `vars` are considered valid. ",
@@ -44,31 +42,22 @@ variable_labels <- function(vars = NULL) {
           "Please check that all specified variables exist in 'lissyrtools::lis_variables' or 'lissyrtools::lws_variables'."
         ))
       }
-      
-      vars_accepted <- vars[!vars %in% invalid_vars] 
-      
-      output <- tibble::deframe(data_vars_labels)[vars_accepted] 
+
+      vars_accepted <- vars[!vars %in% invalid_vars]
+
+      output <- tibble::deframe(data_vars_labels)[vars_accepted]
       return(output)
-    }
-    
-    
-    else if (isTRUE(exists("vars"))) {
-      
-      if (!(is.list(vars))){
+    } else if (isTRUE(exists("vars"))) {
+      if (!(is.list(vars))) {
         stop(glue::glue(
           "Argument `vars` only accepts lists or character vector."
-        )) 
-      }
-      
-      else {
-        columns <- names(vars[[1]]) 
+        ))
+      } else {
+        columns <- names(vars[[1]])
         output <- tibble::deframe(data_vars_labels)[columns]
-        return(output) 
+        return(output)
       }
-      
     }
-    
-    
   }
 }
 
@@ -86,8 +75,8 @@ variable_labels <- function(vars = NULL) {
 #' variable_has_note(variable = "basb", iso2 = c("fr", "de", "us", "uk"), lws = TRUE)
 variable_has_note <- function(variable, iso2, lws = FALSE) {
   
-  # ensure that argument 'variable' only accepts one character
-  
+  # Ensure that argument 'variable' only accepts one character
+
   if (length(variable) > 1) {
     stop(
       glue::glue(
@@ -95,33 +84,35 @@ variable_has_note <- function(variable, iso2, lws = FALSE) {
       )
     )
   }
-  
-  # ensure the validity of the variable
-  
+
+  # Ensure the validity of the variable
+
   if (lws) {
     invalid_var <- variable[!variable %in% lissyrtools::lws_variables]
     if (length(invalid_var) > 0) {
-      stop(glue::glue("Invalid variable: {paste(invalid_var)} not found in 'lissyrtools::lws_variables'."))
+      stop(glue::glue(
+        "Invalid variable: {paste(invalid_var)} not found in 'lissyrtools::lws_variables'."
+      ))
     }
   } else {
     invalid_var <- variable[!variable %in% lissyrtools::lis_variables]
     if (length(invalid_var) > 0) {
-      stop(glue::glue("Invalid variable: {paste(invalid_var)} not found in 'lissyrtools::lis_variables'."))
+      stop(glue::glue(
+        "Invalid variable: {paste(invalid_var)} not found in 'lissyrtools::lis_variables'."
+      ))
     }
   }
-  
-  
-  
-  # ensure the validity of the iso2 codes
-  
+
+  # Ensure the validity of the iso2 codes
+
   valid_iso2 <- if (lws) {
     lissyrtools::get_countries_lws()
   } else {
     lissyrtools::get_countries_lis()
   }
-  
+
   invalid_iso2 <- iso2[!iso2 %in% valid_iso2]
-  
+
   if (length(invalid_iso2) == length(iso2)) {
     # If no valid iso2 codes, stop with an error
     stop(
@@ -139,30 +130,31 @@ variable_has_note <- function(variable, iso2, lws = FALSE) {
       )
     )
   }
-  
-  
-  
+
   # body of the function
   process_country <- function(i) {
-    
     db <- if (lws) "LWS" else "LIS"
-    get_years_function <- if (lws) lissyrtools::get_years_lws else lissyrtools::get_years_lis
-    
+    get_years_function <- if (lws) {
+      lissyrtools::get_years_lws
+    } else {
+      lissyrtools::get_years_lis
+    }
+
     years <- get_years_function(i)[[1]]
-    
+
     existing_years <- data_with_warnings %>%
       dplyr::filter(database == db, iso2 == i, var_name == variable) %>%
       dplyr::pull(year)
-    
+
     year_status <- ifelse(years %in% existing_years, "Yes", "No")
     names(year_status) <- years
     return(year_status)
   }
-  
+
   to_be_used_iso2 <- iso2[iso2 %in% valid_iso2]
   result <- purrr::map(to_be_used_iso2, process_country)
   names(result) <- to_be_used_iso2
-  
+
   return(result)
 }
 
@@ -184,11 +176,11 @@ variable_has_note <- function(variable, iso2, lws = FALSE) {
 #' get_surveys_lis(iso2 = c("uy", "pe"))
 get_surveys_lis <- function(iso2) {
   
-  # ensure the validity of the iso2 codes
-  
+  # Ensure the validity of the iso2 codes
+
   valid_iso2 <- lissyrtools::get_countries_lis()
   invalid_iso2 <- iso2[!iso2 %in% valid_iso2]
-  
+
   if (length(invalid_iso2) == length(iso2)) {
     # If no valid iso2 codes, stop with an error
     stop(
@@ -206,23 +198,22 @@ get_surveys_lis <- function(iso2) {
       )
     )
   }
-  
+
   # body of the function
   process_country <- function(i) {
-    
-  surveys_to_output <- lissyrtools::datasets %>% 
-    dplyr::filter(database == "LIS" & iso2 == i) %>%
-    dplyr::select(year, survey) %>% 
-    dplyr::arrange(year) %>% 
-    tibble::deframe()
-  
-  attributes(surveys_to_output)[1] <- NULL
-  
-  return(surveys_to_output)
+    surveys_to_output <- lissyrtools::datasets %>%
+      dplyr::filter(database == "LIS" & iso2 == i) %>%
+      dplyr::select(year, survey) %>%
+      dplyr::arrange(year) %>%
+      tibble::deframe()
+
+    attributes(surveys_to_output)[1] <- NULL
+
+    return(surveys_to_output)
   }
-  
+
   to_be_used_iso2 <- iso2[iso2 %in% valid_iso2]
-  result_list <- purrr::map(to_be_used_iso2,process_country)
+  result_list <- purrr::map(to_be_used_iso2, process_country)
   names(result_list) <- to_be_used_iso2
   return(result_list)
 }
@@ -239,11 +230,11 @@ get_surveys_lis <- function(iso2) {
 #' get_surveys_lws(iso2 = c("fr", "jp"))
 get_surveys_lws <- function(iso2) {
   
-  # ensure the validity of the iso2 codes
-  
+  # Ensure the validity of the iso2 codes
+
   valid_iso2 <- lissyrtools::get_countries_lws()
   invalid_iso2 <- iso2[!iso2 %in% valid_iso2]
-  
+
   if (length(invalid_iso2) == length(iso2)) {
     # If no valid iso2 codes, stop with an error
     stop(
@@ -261,27 +252,25 @@ get_surveys_lws <- function(iso2) {
       )
     )
   }
-  
+
   # body of the function
   process_country <- function(i) {
-    
-    surveys_to_output <- lissyrtools::datasets %>% 
+    surveys_to_output <- lissyrtools::datasets %>%
       dplyr::filter(database == "LWS" & iso2 == i) %>%
-      dplyr::select(year, survey) %>% 
-      dplyr::arrange(year) %>% 
+      dplyr::select(year, survey) %>%
+      dplyr::arrange(year) %>%
       tibble::deframe()
-    
+
     attributes(surveys_to_output)[1] <- NULL
-    
+
     return(surveys_to_output)
   }
-  
+
   to_be_used_iso2 <- iso2[iso2 %in% valid_iso2]
-  result_list <- purrr::map(to_be_used_iso2,process_country)
+  result_list <- purrr::map(to_be_used_iso2, process_country)
   names(result_list) <- to_be_used_iso2
   return(result_list)
 }
-
 
 
 

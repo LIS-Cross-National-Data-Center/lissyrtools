@@ -7,7 +7,7 @@
 intervals_with_single_value(x)
 }
 \arguments{
-\item{A}{string with the interval.}
+\item{x}{string with the interval.}
 }
 \value{
 A boolean indicating if the first and second element of the interval are

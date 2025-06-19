@@ -12,10 +12,10 @@ Description: A package with the tools needed to develop scripts with LIS data. I
 License: GPL-3
 URL: https://lis-cross-national-data-center.github.io/lissyrtools/
 Depends: 
-    R (>= 3.2.0),
-    haven,
-    dplyr
+    R (>= 3.2.0)
 Imports:
+    dplyr,
+    haven,
     ggplot2,
     stringr,
     rlang,
@@ -26,11 +26,11 @@ Imports:
     tibble,
     readr,
     matrixStats,
-    lifecycle, 
-    here,
-    tibble
+    tibble,
+    tidyselect
 Encoding: UTF-8
 LazyData: true
+LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Suggests: 
@@ -39,5 +39,7 @@ Suggests:
     knitr,
     rmarkdown,
     fs,
-    R.rsp
+    R.rsp,
+    lifecycle,
+    here
 RdMacros: lifecycle

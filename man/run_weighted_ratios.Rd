@@ -42,6 +42,7 @@ If \code{upper_percentile} is less than \code{lower_percentile}, the values are 
 \dontrun{
 library(lissyrtools)
 library(purrr)
+library(dplyr)
 
 datasets <- lissyrtools::lissyuse(data = c("de", "es", "uk"), vars = c("dhi"), from = 2016)
 

@@ -32,8 +32,11 @@ since equivalisation is typically applied to household-level measures.
 }
 \examples{
 \dontrun{
+library(lissyrtools)
+library(dplyr)
+
 # Import data, ideally at the level of the variable of interest.
-data_hhd <- lissyrtools::lissyuse("it", vars = c("dhi"), from = 2010)
+data_hhd <- lissyuse("it", vars = c("dhi"), from = 2010)
 
 # No equivalisation case
 data_hhd  \%>\%

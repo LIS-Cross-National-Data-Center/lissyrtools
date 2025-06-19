@@ -51,7 +51,7 @@ n_numbers_smaller <- function(x, numbers) {
 #'
 #' To be used inside 'compute_lorenz_curve()'
 #'
-#' @param A string with the interval.
+#' @param x string with the interval.
 #'
 #' @return A boolean indicating if the first and second element of the interval are
 #' the same value.
@@ -470,12 +470,16 @@ is.all.same.value <- function(x, na.rm = FALSE) {
   }
 }
 
-# copy pasted from:
-# https://stackoverflow.com/questions/4752275/test-for-equality-among-all-elements-of-a-single-numeric-vector
+
+#' Zero Range Function
+#'
+#' @keywords internal
 zero_range <- function(x, tol = .Machine$double.eps^0.5) {
   if (length(x) == 1) return(TRUE)
   x <- range(x) / mean(x)
   isTRUE(all.equal(x[1], x[2], tolerance = tol))
+  # copy pasted from:
+  # https://stackoverflow.com/questions/4752275/test-for-equality-among-all-elements-of-a-single-numeric-vector
 }
 
 
@@ -599,7 +603,10 @@ remove_dname_with_missings_in_weights <- function(list, wgt_name) {
   # p-level data from Canada/LWS have missing weights on those whose relation is not 1000 reference person
   # be aware of other datasets that might entail these missings in weights.
 
-  if ( (all(c("relation", "inum") %in% names(list[[1]])) & !is.null(wgt_name)) &&  (sum(stringr::str_detect(names(list), "ca")) > 0)) {
+  if (
+    (all(c("relation", "inum") %in% names(list[[1]])) & !is.null(wgt_name)) &&
+      (sum(stringr::str_detect(names(list), "ca")) > 0)
+  ) {
     clean_list <- purrr::discard(list, stringr::str_detect(names(list), "ca"))
     message(
       "Note: Canadian LWS datasets contain missing weights for individuals not identified as the reference person. These datasets were excluded to ensure valid weighted calculations."
@@ -611,14 +618,13 @@ remove_dname_with_missings_in_weights <- function(list, wgt_name) {
   }
 }
 
-
 #' Validate the Weight Variable Input
 #'
 #' @description
 #' This function checks the validity of the weight variable provided by the user, issuing a helpful message if the variable name
 #' does not end with "wgt", as expected by LIS conventions.
 #'
-#' @param weight_var A character string of length 1 indicating the name of the weight variable used.
+#' @param wgt_name A character string of length 1 indicating the name of the weight variable used.
 #'
 #' @return No return value. The function is used for validation and emits a warning if the weight variable name seems unusual.
 #' @keywords internal
@@ -641,12 +647,12 @@ check_input_in_weight_argument <- function(wgt_name) {
 #' @keywords internal
 ccyy_to_yyyy <- function(ccyy) {
   yy_year <- lissyrtools::datasets %>%
-    mutate(yy = stringr::str_sub(dname, 3, 4)) %>%
-    select(yy, year) %>%
+    dplyr::mutate(yy = stringr::str_sub(dname, 3, 4)) %>%
+    dplyr::select(yy, year) %>%
     unique()
 
-  converter_vector <- yy_year %>% select(year) %>% pull()
-  names(converter_vector) <- yy_year %>% select(yy) %>% pull()
+  converter_vector <- yy_year %>% dplyr::select(year) %>% dplyr::pull()
+  names(converter_vector) <- yy_year %>% dplyr::select(yy) %>% dplyr::pull()
 
   result_yyyy <- unname(converter_vector[stringr::str_sub(ccyy, 3, 4)])
 
@@ -662,12 +668,12 @@ ccyy_to_yyyy <- function(ccyy) {
 #' @keywords internal
 ccyy_to_cname <- function(ccyy) {
   cc_cname <- lissyrtools::datasets %>%
-    mutate(cc = stringr::str_sub(dname, 1, 2)) %>%
-    select(cc, cname) %>%
+    dplyr::mutate(cc = stringr::str_sub(dname, 1, 2)) %>%
+    dplyr::select(cc, cname) %>%
     unique()
 
-  converter_vector <- cc_cname %>% select(cname) %>% pull()
-  names(converter_vector) <- cc_cname %>% select(cc) %>% pull()
+  converter_vector <- cc_cname %>% dplyr::select(cname) %>% dplyr::pull()
+  names(converter_vector) <- cc_cname %>% dplyr::select(cc) %>% dplyr::pull()
 
   result_cname <- unname(converter_vector[stringr::str_sub(ccyy, 1, 2)])
 
@@ -681,14 +687,16 @@ ccyy_to_cname <- function(ccyy) {
 #' @return A list
 #' @keywords internal
 convert_list_from_ccyy_to_cc_names_yyyy <- function(data_list) {
-  data_list  %>%
-    purrr::imap_dfr(~{
-      tibble(
-        country = ccyy_to_cname(.y),
-        year = ccyy_to_yyyy(.y),
-        value = .x
-      )
-    }) %>%
+  data_list %>%
+    purrr::imap_dfr(
+      ~ {
+        tibble::tibble(
+          country = lissyrtools::ccyy_to_cname(.y),
+          year = lissyrtools::ccyy_to_yyyy(.y),
+          value = .x
+        )
+      }
+    ) %>%
     split(.$country) %>%
     purrr::map(~ setNames(.x$value, .x$year))
 }
@@ -703,13 +711,16 @@ convert_list_from_ccyy_to_cc_names_yyyy <- function(data_list) {
 #' @keywords internal
 check_missing_share <- function(data_list, include_zeros = FALSE) {
   purrr::map(data_list, function(df) {
-    summarise(df, across(everything(), ~ {
-      # Define missing: NA or (optional) zero
-      missing_vals <- if (include_zeros) is.na(.) | . == 0 else is.na(.)
-      mean(missing_vals) * 100
-    }))
+    dplyr::summarise(
+      df,
+      dplyr::across(
+        dplyr::everything(),
+        ~ {
+          # Define missing: NA or (optional) zero
+          missing_vals <- if (include_zeros) is.na(.) | . == 0 else is.na(.)
+          mean(missing_vals) * 100
+        }
+      )
+    )
   })
 }
-
-
-

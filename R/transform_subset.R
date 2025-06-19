@@ -47,6 +47,8 @@ transform_filter_age <- function(lissy_files, from, to){
 #'
 #' @param lissy_files A list of LIS or LWS files.
 #' @param variable A character string with the name of the variable that should be adjusted.
+#' @param from Low age
+#' @param to High age
 #'
 #' @return A list of tibbles with the adjusted variable.
 transform_restrict_age <- function(lissy_files, variable, from, to){

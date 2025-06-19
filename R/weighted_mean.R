@@ -18,6 +18,7 @@
 #' \dontrun{
 #' library(lissyrtools)
 #' library(purrr)
+#' library(dplyr)
 #' 
 #' data <- lissyrtools::lissyuse(data = c("de", "es", "uk"), vars = c("dhi", "age", "pi11", "region_c", "area_c", "educ", "emp"), from = 2016)
 #' 
@@ -41,38 +42,35 @@ run_weighted_mean <- function(
     data_list,
     wgt_name
   )
-  
 
-    # Check that var_name exists
+  # Check that var_name exists
+  assertthat::assert_that(
+    var_name %in% names(data_list[[1]]),
+    msg = glue::glue(
+      "Variable '{var_name}' could not be found as a column name in the datasets."
+    )
+  )
+
+  # Check that all variables in `by` exist, if provided
+  if (!is.null(by)) {
     assertthat::assert_that(
-      var_name %in% names(data_list[[1]]),
+      by %in% names(data_list[[1]]),
       msg = glue::glue(
-        "Variable '{var_name}' could not be found as a column name in the datasets."
+        "Grouping variable '{by}' could not be found as a column name in the datasets."
       )
     )
+  }
 
-    # Check that all variables in `by` exist, if provided
-    if (!is.null(by)) {
-      assertthat::assert_that(
-        by %in% names(data_list[[1]]),
-        msg = glue::glue(
-          "Grouping variable '{by}' could not be found as a column name in the datasets."
-        )
+  # Check that wgt_name exists, if provided
+  if (!is.null(wgt_name)) {
+    assertthat::assert_that(
+      wgt_name %in% names(data_list[[1]]),
+      msg = glue::glue(
+        "Weight variable '{wgt_name}' could not be found as a column name in the datasets."
       )
-    }
-
-    # Check that wgt_name exists, if provided
-    if (!is.null(wgt_name)) {
-      assertthat::assert_that(
-        wgt_name %in% names(data_list[[1]]),
-        msg = glue::glue(
-          "Weight variable '{wgt_name}' could not be found as a column name in the datasets."
-        )
-      )
-    }
-    lissyrtools::check_input_in_weight_argument(wgt_name)
-  
-  
+    )
+  }
+  lissyrtools::check_input_in_weight_argument(wgt_name)
 
   if (!is.null(by)) {
     allowed_categoricals <- c(
@@ -86,7 +84,6 @@ run_weighted_mean <- function(
       ))
     }
 
-    
     df_to_keep <- purrr::map_lgl(data_list, ~ !all(is.na(.x[[by]])))
     to_drop <- names(df_to_keep[!df_to_keep])
     if (any(!df_to_keep)) {
@@ -161,9 +158,10 @@ run_weighted_mean <- function(
 #' compute_weighted_mean(data$de20$age, na.rm = TRUE)
 #' compute_weighted_mean(data$de20$dhi, data$de20$hwgt)
 #' }
-
 compute_weighted_mean <- function(var, wgt = NULL, na.rm = TRUE) {
-  if (!length(wgt)) return(mean(var, na.rm = na.rm))
+  if (!length(wgt)) {
+    return(mean(var, na.rm = na.rm))
+  }
   if (na.rm) {
     keep <- !is.na(var) & !is.na(wgt)
     var <- var[keep]

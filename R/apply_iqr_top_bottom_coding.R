@@ -41,8 +41,11 @@
 #' 
 #' @examples
 #' \dontrun{ 
+#' library(lissyrtools)
+#' library(dplyr)
+#' 
 #' # Import data, ideally at the level of the variable of interest.
-#' data_hhd <- lissyrtools::lissyuse("au", vars = c("dhi"), from = 2016)
+#' data_hhd <- lissyuse("au", vars = c("dhi"), from = 2016)
 #' 
 #' # Default case, where top and bottom coding is performed simultaneously
 #' data_hhd[1]  %>%
@@ -66,105 +69,118 @@
 #'  apply_iqr_top_bottom_coding("pilabour", "ppopwgt") %>% 
 #'  run_weighted_percentiles("pilabour", "ppopwgt", probs = seq(0.1, 0.9,0.1))
 #' }
-apply_iqr_top_bottom_coding <- function(data_list, var_name, wgt_name = NULL, times = 3, one_sided = NULL, type = c("type_4", "type_2")) {
+apply_iqr_top_bottom_coding <- function(
+  data_list,
+  var_name,
+  wgt_name = NULL,
+  times = 3,
+  one_sided = NULL,
+  type = c("type_4", "type_2")
+) {
+  type <- match.arg(type)
 
-    type <- match.arg(type)
-    
-    # --- Clean data --- 
-    data_list <- lissyrtools::remove_dname_with_missings_in_weights(data_list, wgt_name) # return a list cleaned 
-    lissyrtools::check_input_in_weight_argument(wgt_name) 
+  # --- Clean data ---
+  data_list <- lissyrtools::remove_dname_with_missings_in_weights(
+    data_list,
+    wgt_name
+  ) # return a list cleaned
+  lissyrtools::check_input_in_weight_argument(wgt_name)
 
-  
-    # Check var_name exists
+  # Check var_name exists
+  assertthat::assert_that(
+    var_name %in% names(data_list[[1]]),
+    msg = glue::glue(
+      "Variable '{var_name}' could not be found as a column name in the datasets."
+    )
+  )
+
+  # Check wgt_name exists
+  if (!is.null(wgt_name)) {
     assertthat::assert_that(
-      var_name %in% names(data_list[[1]]),
+      wgt_name %in% names(data_list[[1]]),
       msg = glue::glue(
-        "Variable '{var_name}' could not be found as a column name in the datasets."
+        "Weight variable '{wgt_name}' could not be found as a column name in the datasets."
       )
     )
+  }
 
-    # Check wgt_name exists
-    if (!is.null(wgt_name)) {
-      assertthat::assert_that(
-        wgt_name %in% names(data_list[[1]]),
-        msg = glue::glue(
-          "Weight variable '{wgt_name}' could not be found as a column name in the datasets."
-        )
-      )
-    }
+  # --- inum stage ---
 
-    # --- inum stage --- 
- 
-    # Check if inum exists
-    inum_present <- "inum" %in% names(data_list[[1]])
+  # Check if inum exists
+  inum_present <- "inum" %in% names(data_list[[1]])
 
-    # Identify which datasets have multiple imputations
-    datasets_with_multiple_inum <- NULL
-    if (inum_present) {
-     datasets_with_multiple_inum <- names(data_list)[
+  # Identify which datasets have multiple imputations
+  datasets_with_multiple_inum <- NULL
+  if (inum_present) {
+    datasets_with_multiple_inum <- names(data_list)[
       purrr::map_lgl(data_list, ~ length(unique(.x$inum)) > 1)
-     ]
-    }
-  
-    # --- Warning on level mismatches between variable and datasets ---
+    ]
+  }
+
+  # --- Warning on level mismatches between variable and datasets ---
+  if (
+    ((var_name %in%
+      c(
+        lissyrtools::lis_household_variables,
+        lissyrtools::lws_household_variables
+      )) &&
+      (nrow(data_list[[1]]) > length(unique(data_list[[1]]$hid))))
+  ) {
+    warning(glue::glue(
+      # once a individual level variable is loaded in lissyuse, dataset automatically becomes p-level too.
+      "Level mismatch: the variable '{var_name}' is household-level, ",
+      "but the dataset appears to be at the individual level."
+    ))
+  } else if (
+    !(var_name %in% c(lissyrtools::lis_variables, lissyrtools::lws_variables))
+  ) {
+    warning(glue::glue(
+      "Variable '{var_name}' not recognized as standard LIS/LWS variable: please ensure it matches the level ",
+      "(household or individual) of the datasets being used."
+    ))
+  }
+
+  # Body
+  result <- purrr::imap(data_list, function(df, name) {
+    var <- df[[var_name]]
+    wgt <- if (!is.null(wgt_name)) df[[wgt_name]] else NULL
+
     if (
-      ((var_name %in%
-        c(
-          lissyrtools::lis_household_variables,
-          lissyrtools::lws_household_variables
-        )) &&
-        (nrow(data_list[[1]]) > length(unique(data_list[[1]]$hid))
-))
+      !is.null(datasets_with_multiple_inum) &&
+        name %in% datasets_with_multiple_inum
     ) {
-      warning(glue::glue( # once a individual level variable is loaded in lissyuse, dataset automatically becomes p-level too. 
-        "Level mismatch: the variable '{var_name}' is household-level, ",
-        "but the dataset appears to be at the individual level." 
-      ))
-    } else if (!(var_name %in% c(lissyrtools::lis_variables, lissyrtools::lws_variables))) {
-      warning(glue::glue(
-        "Variable '{var_name}' not recognized: please ensure it matches the level ",
-        "(household or individual) of the datasets being used."
-      ))
+      # Process separately for each imputation
+      processed_df <- df %>%
+        dplyr::group_split(inum) %>%
+        purrr::map_dfr(function(group_df) {
+          coded_var <- iqr_top_bottom_coding(
+            x = group_df[[var_name]],
+            w = if (!is.null(wgt_name)) group_df[[wgt_name]] else NULL,
+            times = times,
+            type = type,
+            one_sided = one_sided
+          )
+          group_df[[var_name]] <- coded_var
+          group_df
+        })
+      return(processed_df)
+    } else {
+      # Process normally
+      coded_var <- iqr_top_bottom_coding(
+        x = var,
+        w = wgt,
+        times = times,
+        type = type,
+        one_sided = one_sided
+      )
+      df[[var_name]] <- coded_var
+      return(df)
     }
+  })
 
-
-    # Body 
-    result <- purrr::imap(data_list, function(df, name) {
-      var <- df[[var_name]]
-      wgt <- if (!is.null(wgt_name)) df[[wgt_name]] else NULL
-    
-      if (!is.null(datasets_with_multiple_inum) && name %in% datasets_with_multiple_inum) {
-        # Process separately for each imputation
-        processed_df <- df %>%
-          dplyr::group_split(inum) %>%
-          purrr::map_dfr(function(group_df) {
-            coded_var <- iqr_top_bottom_coding(
-              x = group_df[[var_name]],
-              w = if (!is.null(wgt_name)) group_df[[wgt_name]] else NULL,
-              times = times,
-              type = type,
-              one_sided = one_sided
-            )
-            group_df[[var_name]] <- coded_var
-            group_df
-          })
-        return(processed_df)
-      } else {
-        # Process normally
-        coded_var <- iqr_top_bottom_coding(
-          x = var,
-          w = wgt,
-          times = times,
-          type = type,
-          one_sided = one_sided
-        )
-        df[[var_name]] <- coded_var
-        return(df)
-      }
-    })
-  
-    return(result)
+  return(result)
 }
+
 
 #' IQR-Based Top/Bottom Coding for a Single Variable
 #' 
@@ -183,38 +199,58 @@ apply_iqr_top_bottom_coding <- function(data_list, var_name, wgt_name = NULL, ti
 #' 
 #' @examples
 #' \dontrun{
+#' library(lissyrtools)
+#' library(dplyr)
+#' 
 #' data <- lissyrtools::lissyuse(data = "it16", vars = c("dhi"))
 #' iqr_top_bottom_coding(data$it16h$dhi)
 #' iqr_top_bottom_coding(data$it16h$dhi, data$it16h$hwgt, one_sided = "top")
 #' }
-iqr_top_bottom_coding <- function(x, w = NULL, times = 3, type = c("type_4", "type_2"), one_sided = NULL) {
-    
-   
-    log_x <- suppressWarnings(log(x))
-  
-    # Fix log(0) = -Inf
-    log_x[log_x == -Inf] <- 0
+iqr_top_bottom_coding <- function(
+  x,
+  w = NULL,
+  times = 3,
+  type = c("type_4", "type_2"),
+  one_sided = NULL
+) {
+  log_x <- suppressWarnings(log(x))
 
-    # Fix log(negative) = NA
-    log_x[is.na(log_x) & !is.na(x)] <- 0
-  
-    # Compute weighted percentiles
-    p_25 <- lissyrtools::compute_weighted_percentiles(log_x, w, probs = 0.25, type = type)
-    p_75 <- lissyrtools::compute_weighted_percentiles(log_x, w, probs = 0.75, type = type)
-    iqr <- p_75 - p_25
-    upper_bound <- p_75 + times * iqr
-    lower_bound <- p_25 - times * iqr
+  # Fix log(0) = -Inf
+  log_x[log_x == -Inf] <- 0
 
-    x_coded <- x
+  # Fix log(negative) = NA
+  log_x[is.na(log_x) & !is.na(x)] <- 0
 
-    # Apply logic based on `one_sided`
-    if (is.null(one_sided)) {
-      x_coded <- ifelse(x > exp(upper_bound), exp(upper_bound),
-                        ifelse(x < exp(lower_bound), exp(lower_bound), x))
-    } else if (one_sided == "top") {
-      x_coded <- ifelse(x_coded > exp(upper_bound), exp(upper_bound), x_coded)
-    } else if (one_sided == "bottom") {
-      x_coded <- ifelse(x_coded < exp(lower_bound), exp(lower_bound), x_coded)
+  # Compute weighted percentiles
+  p_25 <- lissyrtools::compute_weighted_percentiles(
+    log_x,
+    w,
+    probs = 0.25,
+    type = type
+  )
+  p_75 <- lissyrtools::compute_weighted_percentiles(
+    log_x,
+    w,
+    probs = 0.75,
+    type = type
+  )
+  iqr <- p_75 - p_25
+  upper_bound <- p_75 + times * iqr
+  lower_bound <- p_25 - times * iqr
+
+  x_coded <- x
+
+  # Apply logic based on `one_sided`
+  if (is.null(one_sided)) {
+    x_coded <- ifelse(
+      x > exp(upper_bound),
+      exp(upper_bound),
+      ifelse(x < exp(lower_bound), exp(lower_bound), x)
+    )
+  } else if (one_sided == "top") {
+    x_coded <- ifelse(x_coded > exp(upper_bound), exp(upper_bound), x_coded)
+  } else if (one_sided == "bottom") {
+    x_coded <- ifelse(x_coded < exp(lower_bound), exp(lower_bound), x_coded)
   }
   return(x_coded)
 }

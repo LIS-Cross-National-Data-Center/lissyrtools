@@ -56,6 +56,9 @@ according to the same \strong{quantile definition 4 only}.
 }
 \examples{
 \dontrun{  
+library(lissyrtools)
+library(purrr)
+library(dplyr)
 
 # Import data
 my_data_list <- lissyuse(data = "es", from  = 2016)

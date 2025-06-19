@@ -33,6 +33,9 @@ A list made of character vectors. If n_categories = TRUE, then a list with a num
 Retrieve the categories of a country-specific variable in LIS/LWS for a given country.
 }
 \examples{
+library(lissyrtools)
+library(dplyr)
+
 # In years where no data is recorded for a given variable, it is automatically hidden from the output
 variable_exists(variable = "health_c", iso2 = "it")
 variable_country_specific_categories(variable = "health_c", iso2 = "it", from = 1995, to = 2020) 

@@ -24,9 +24,12 @@
 #' 
 #' @examples
 #' \dontrun{
-#' # Import data, ideally at the level of the variable of interest.
-#' data_hhd <- lissyrtools::lissyuse("it", vars = c("dhi"), from = 2010)
+#' library(lissyrtools)
+#' library(dplyr)
 #' 
+#' # Import data, ideally at the level of the variable of interest.
+#' data_hhd <- lissyuse("it", vars = c("dhi"), from = 2010)
+#'
 #' # No equivalisation case
 #' data_hhd  %>%
 #'  purrr::map(~ .x %>% filter(!is.na(dhi))) %>%
@@ -39,24 +42,35 @@
 #'  run_weighted_mean("dhi", "hpopwgt")
 #' }
 apply_sqrt_equivalisation <- function(data_list, var_name, eq_scale = 0.5) {
- 
+  
   # Check if variable exists in datasets
   assertthat::assert_that(
     var_name %in% names(data_list[[1]]),
     msg = glue::glue("Variable '{var_name}' could not be found in the dataset.")
   )
 
-  assertthat::assert_that(is.numeric(eq_scale) && length(eq_scale) == 1 && eq_scale > 0 && eq_scale < 1,
+  assertthat::assert_that(
+    is.numeric(eq_scale) &&
+      length(eq_scale) == 1 &&
+      eq_scale > 0 &&
+      eq_scale < 1,
     msg = glue::glue("Argument `eq_scale` must be a single numeric value.")
   )
 
   if (eq_scale < 0 && eq_scale > 1) {
-    warning(glue::glue("Argument `eq_scale` should be strictly between 0 and 1. Provided: '{eq_scale}'."))
+    warning(glue::glue(
+      "Argument `eq_scale` should be strictly between 0 and 1. Provided: '{eq_scale}'."
+    ))
   }
 
   # Optional warning for likely person-level variable
-  if (var_name %in% c(lissyrtools::lis_person_variables, lissyrtools::lws_person_variables)) {
-    warning(glue::glue("'{var_name}' appears to be a person-level variable and might not require equivalisation."))
+  if (
+    var_name %in%
+      c(lissyrtools::lis_person_variables, lissyrtools::lws_person_variables)
+  ) {
+    warning(glue::glue(
+      "'{var_name}' appears to be a person-level variable and might not require equivalisation."
+    ))
   }
 
   # Apply equivalisation to each dataset
@@ -65,8 +79,9 @@ apply_sqrt_equivalisation <- function(data_list, var_name, eq_scale = 0.5) {
       stop(glue::glue("Column 'nhhmem' is missing."))
     }
 
-    valid <- !is.na(df[[var_name]])  
-    df[[var_name]][valid] <- df[[var_name]][valid] / (df[["nhhmem"]][valid] ^ eq_scale)
+    valid <- !is.na(df[[var_name]])
+    df[[var_name]][valid] <- df[[var_name]][valid] /
+      (df[["nhhmem"]][valid]^eq_scale)
 
     return(df)
   })
@@ -104,6 +119,9 @@ apply_sqrt_equivalisation <- function(data_list, var_name, eq_scale = 0.5) {
 #' 
 #' @examples
 #' \dontrun{
+#' library(lissyrtools)
+#' library(dplyr)
+#' 
 #' # Import data, ideally at the level of the variable of interest.
 #' # The variable "nhhmem13" must be imported in advance in order to apply OECD-type equivalisation methods.
 #' data_hhd_with_nhhmem13 <- lissyrtools::lissyuse("it", vars = c("dhi", "nhhmem13"), from = 2010)
@@ -126,6 +144,7 @@ apply_sqrt_equivalisation <- function(data_list, var_name, eq_scale = 0.5) {
 #'  run_weighted_mean("dhi", "hpopwgt") 
 #' } 
 apply_oecd_equivalisation <- function(data_list, var_name, modified = TRUE) {
+ 
   # Check if variable exists in datasets
   assertthat::assert_that(
     var_name %in% names(data_list[[1]]),
@@ -141,15 +160,21 @@ apply_oecd_equivalisation <- function(data_list, var_name, modified = TRUE) {
   )
 
   # Optional warning for likely person-level variable
-  if (var_name %in% c(lissyrtools::lis_person_variables, lissyrtools::lws_person_variables)) {
-    warning(glue::glue("'{var_name}' appears to be a person-level variable and might not require equivalisation."))
+  if (
+    var_name %in%
+      c(lissyrtools::lis_person_variables, lissyrtools::lws_person_variables)
+  ) {
+    warning(glue::glue(
+      "'{var_name}' appears to be a person-level variable and might not require equivalisation."
+    ))
   }
-
 
   # Apply equivalisation to each dataset
   result <- purrr::imap(data_list, function(df, name) {
     if (!all(c("nhhmem", "nhhmem13") %in% names(df))) {
-      stop(glue::glue("Columns 'nhhmem' and 'nhhmem13' must be present in the dataset."))
+      stop(glue::glue(
+        "Columns 'nhhmem' and 'nhhmem13' must be present in the dataset."
+      ))
     }
 
     n_other_adults <- df[["nhhmem"]] - 1 - df[["nhhmem13"]]
@@ -160,8 +185,7 @@ apply_oecd_equivalisation <- function(data_list, var_name, modified = TRUE) {
       1 + (0.5 * n_other_adults) + (0.3 * df[["nhhmem13"]])
     }
 
-
-    valid <- !is.na(df[[var_name]])  
+    valid <- !is.na(df[[var_name]])
     df[[var_name]][valid] <- df[[var_name]][valid] / factor
 
     return(df)

@@ -48,6 +48,8 @@ Optionally, results can be grouped by another categorical variable.
 \examples{
 \dontrun{ 
 library(lissyrtools)
+library(purrr)
+library(dplyr)
 
 data <- lissyrtools::lissyuse(data = c("de", "es", "uk"), vars = c("dhi", "region_c", "area_c", "educ", "emp"), from = 2016)
 

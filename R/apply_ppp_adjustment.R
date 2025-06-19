@@ -31,6 +31,7 @@
 #' @examples
 #' \dontrun{ 
 #' library(lissyrtools)
+#' library(dplyr)
 #' 
 #' # --- Example 1: CPI Adjustment (Domestic Inflation, Italy) ---
 #' 
@@ -66,23 +67,28 @@
 #'
 #' # Even with the same survey year (DE17), different income reference years are accounted for automatically.
 #' } 
-apply_ppp_adjustment <- function(data_list, var_name, database,  transformation = "lisppp") {
-
+apply_ppp_adjustment <- function(
+  data_list,
+  var_name,
+  database,
+  transformation = "lisppp"
+) {
+  
+  
   if (missing(database) || is.null(database) || database == "") {
     warning(
       "The `database` argument was not specified. Please define it as either \"lis\" or \"lws\" (no default is assumed)."
     )
   }
 
+  # --- Validate arguments ---
 
-   # --- Validate arguments ---
-  
   # Check if variable exists in datasets
   assertthat::assert_that(
     var_name %in% names(data_list[[1]]),
     msg = glue::glue("Variable '{var_name}' could not be found in the dataset.")
   )
-  
+
   # Check `database` argument
   assertthat::assert_that(
     database %in% c("lis", "lws"),
@@ -92,46 +98,54 @@ apply_ppp_adjustment <- function(data_list, var_name, database,  transformation 
   # Check `trasnformation` argument
   assertthat::assert_that(
     transformation %in% c("lisppp", "cpi", "ppp"),
-    msg = glue::glue("Argument '{transformation}' must be one of \"lisppp\" (default), \"cpi\", or \"ppp\".")
+    msg = glue::glue(
+      "Argument '{transformation}' must be one of \"lisppp\" (default), \"cpi\", or \"ppp\"."
+    )
   )
 
   # --- Merge deflators data ---
 
-  result_merged <- if (var_name %in% lis_income_variables & database == "lws") { 
-
+  result_merged <- if (var_name %in% lissyrtools::lis_income_variables & database == "lws") {
     message(glue::glue(
-     "Income variable: '{var_name}'. For some LWS datasets, the reference year differs from the survey year. ",
-     "Please check on METIS > Results > Dataset Information > Data Source > Income. ", 
-     "Adjustment has been automatically made."
-      ))
+      "Income variable: '{var_name}'. For some LWS datasets, the reference year differs from the survey year. ",
+      "Please check on METIS > Results > Dataset Information > Data Source > Income. ",
+      "Adjustment has been automatically made."
+    ))
 
     purrr::map(
       data_list,
-      ~ .x %>% 
+      ~ .x %>%
         dplyr::left_join(lissyrtools::data_inc_ref_year, by = "dname") %>%
         dplyr::left_join(
-          lissyrtools::deflators %>% 
-            dplyr::mutate(income_reference_year = year) %>% 
+          lissyrtools::deflators %>%
+            dplyr::mutate(income_reference_year = year) %>%
             dplyr::select(-year, -cname, -iso3),
           by = c("iso2", "income_reference_year")
         )
     )
-  } else { # lis or lws but with some wealth variable or whatever as long as it is not income. 
+  } else {
+    # lis or lws but with some wealth variable or whatever as long as it is not income.
     purrr::map(
       data_list,
       ~ .x %>%
         dplyr::left_join(
-          lissyrtools::deflators %>% dplyr::select(-cname, -iso3),  
+          lissyrtools::deflators %>% dplyr::select(-cname, -iso3),
           by = c("iso2", "year")
         )
     )
   }
 
-  # ---  mismatches bewteewn missing defaltors data for 1) Taiwan and 2) the most recent year/s in some countries ---
+  # ---  mismatches betweewn missing deflators data for 1) Taiwan and 2) the most recent year/s in some countries ---
 
-  dname_dts <- stringr::str_sub(names(data_list), 1,4) 
-  dname_dflt <- lissyrtools::deflators %>% dplyr::mutate(dname = stringr::str_c(iso2, stringr::str_sub(year, 3,4))) %>% select(dname) %>% unique() %>% pull()
-  
+  dname_dts <- stringr::str_sub(names(data_list), 1, 4)
+  dname_dflt <- lissyrtools::deflators %>%
+    dplyr::mutate(
+      dname = stringr::str_c(iso2, stringr::str_sub(year, 3, 4))
+    ) %>%
+    dplyr::select(dname) %>%
+    unique() %>%
+    dplyr::pull()
+
   missing_dnames <- setdiff(dname_dts, dname_dflt)
 
   if (length(missing_dnames) > 0) {
@@ -140,7 +154,7 @@ apply_ppp_adjustment <- function(data_list, var_name, database,  transformation 
       "For these datasets, transformed values may be incorrect or NA."
     ))
   }
-  
+
   # --- One-time message on chosen transformation ---
 
   if (transformation == "lisppp") {
@@ -160,26 +174,20 @@ apply_ppp_adjustment <- function(data_list, var_name, database,  transformation 
     ))
   }
 
-    # --- Perform adjustment ---
-  
-  result_adj <-  purrr::map(result_merged, function(df) {
+  # --- Perform adjustment ---
 
+  result_adj <- purrr::map(result_merged, function(df) {
     if (transformation == "lisppp") {
       df[[var_name]] <- df[[var_name]] / df[["lisppp"]]
-
     } else if (transformation == "cpi") {
-      df[[var_name]] <- df[[var_name]] / df[["cpi"]] * 100 
-
+      df[[var_name]] <- df[[var_name]] / df[["cpi"]] * 100
     } else if (transformation == "ppp") {
-      df[[var_name]] <- df[[var_name]] / df[["ppp"]] 
+      df[[var_name]] <- df[[var_name]] / df[["ppp"]]
     }
 
-     # could be "lisppp" "cpi" "ppp"
+    # could be "lisppp" "cpi" "ppp"
     return(df)
   })
-  
+
   return(result_adj)
-  
 }
-
-

@@ -32,6 +32,9 @@ on the \code{log()} transformation.
 }
 \examples{
 \dontrun{
+library(lissyrtools)
+library(dplyr)
+
 data <- lissyrtools::lissyuse(data = "it16", vars = c("dhi"))
 iqr_top_bottom_coding(data$it16h$dhi)
 iqr_top_bottom_coding(data$it16h$dhi, data$it16h$hwgt, one_sided = "top")

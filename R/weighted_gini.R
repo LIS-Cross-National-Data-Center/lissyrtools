@@ -14,6 +14,7 @@
 #' \dontrun{
 #' library(lissyrtools)
 #' library(purrr)
+#' library(dplyr)
 #' 
 #' datasets <- lissyrtools::lissyuse(data = c("de", "es", "uk"), vars = c("dhi"), from = 2016)
 #' 
@@ -24,18 +25,17 @@
 #'  run_weighted_gini("dhi", "new_wgt")
 #' }
 run_weighted_gini <- function(
-    data_list,
-    var_name,
-    wgt_name = NULL,
-    na.rm = TRUE
+  data_list,
+  var_name,
+  wgt_name = NULL,
+  na.rm = TRUE
 ) {
-  
   # Remove datasets with missing weights
   data_list <- lissyrtools::remove_dname_with_missings_in_weights(
     data_list,
     wgt_name
   )
-  
+
   # Check that var_name exists
   assertthat::assert_that(
     var_name %in% names(data_list[[1]]),
@@ -43,7 +43,7 @@ run_weighted_gini <- function(
       "Variable '{var_name}' could not be found as a column name in the datasets."
     )
   )
-  
+
   # Check that wgt_name exists, if provided
   if (!is.null(wgt_name)) {
     assertthat::assert_that(
@@ -53,33 +53,34 @@ run_weighted_gini <- function(
       )
     )
   }
-  
+
   lissyrtools::check_input_in_weight_argument(wgt_name)
-  
+
   output_run_weighted_gini <- purrr::imap(
-    data_list, ~ {
+    data_list,
+    ~ {
       var <- .x[[var_name]]
       wgt <- if (!is.null(wgt_name)) .x[[wgt_name]] else rep(1, length(var))
-      
+
       if (na.rm) {
         keep <- !is.na(var) & !is.na(wgt)
         var <- var[keep]
         wgt <- wgt[keep]
       }
-      
+
       ovar <- order(var)
       var <- var[ovar]
       wgt <- wgt[ovar]
-      
+
       wgt <- wgt / sum(wgt)
       p <- cumsum(wgt)
       nu <- cumsum(wgt * var)
       nu <- nu / tail(nu, 1)
-      
+
       sum(nu[-1] * p[-length(p)]) - sum(nu[-length(nu)] * p[-1])
     }
   )
-  
+
   output_run_weighted_gini <- lissyrtools::convert_list_from_ccyy_to_cc_names_yyyy(
     output_run_weighted_gini
   )

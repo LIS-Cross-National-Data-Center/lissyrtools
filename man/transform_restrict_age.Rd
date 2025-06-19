@@ -10,6 +10,10 @@ transform_restrict_age(lissy_files, variable, from, to)
 \item{lissy_files}{A list of LIS or LWS files.}
 
 \item{variable}{A character string with the name of the variable that should be adjusted.}
+
+\item{from}{Low age}
+
+\item{to}{High age}
 }
 \value{
 A list of tibbles with the adjusted variable.

@@ -15,6 +15,7 @@
 #' \dontrun{
 #' library(lissyrtools)
 #' library(purrr)
+#' library(dplyr)
 #' 
 #' datasets <- lissyrtools::lissyuse(data = c("de", "es", "uk"), vars = c("dhi"), from = 2016)
 #' 
@@ -41,20 +42,20 @@
 #' print(rel_pvt_rate_40)   
 #' }
 run_weighted_relative_poverty <- function(
-  data_list, 
-  var_name, 
-  wgt_name = NULL,  
-  times_median = 0.5, 
-  type = c("type_4", "type_2"), 
+  data_list,
+  var_name,
+  wgt_name = NULL,
+  times_median = 0.5,
+  type = c("type_4", "type_2"),
   na.rm = TRUE
-  )  {
+) {
   
   # Remove datasets with missing weights
   data_list <- lissyrtools::remove_dname_with_missings_in_weights(
     data_list,
     wgt_name
   )
-  
+
   # Check that var_name exists
   assertthat::assert_that(
     var_name %in% names(data_list[[1]]),
@@ -62,7 +63,7 @@ run_weighted_relative_poverty <- function(
       "Variable '{var_name}' could not be found as a column name in the datasets."
     )
   )
-  
+
   # Check that wgt_name exists, if provided
   if (!is.null(wgt_name)) {
     assertthat::assert_that(
@@ -72,32 +73,34 @@ run_weighted_relative_poverty <- function(
       )
     )
   }
-  
+
   lissyrtools::check_input_in_weight_argument(wgt_name)
-  
+
   output_run_relative_poverty <- purrr::imap(
-    data_list, ~ {
-      
+    data_list,
+    ~ {
       var <- .x[[var_name]]
       wgt <- if (!is.null(wgt_name)) .x[[wgt_name]] else rep(1, length(var))
-     
-      poverty_line  <- times_median * compute_weighted_percentiles(
-        var = var,
-        wgt = wgt,
-        probs = 0.5,
-        type = type,
-        na.rm = na.rm
-      ) 
-      
-      df <- .x 
+
+      poverty_line <- times_median *
+        lissyrtools::compute_weighted_percentiles(
+          var = var,
+          wgt = wgt,
+          probs = 0.5,
+          type = type,
+          na.rm = na.rm
+        )
+
+      df <- .x
       df$below_poverty <- ifelse(df[[var_name]] < poverty_line, 1, 0)
       weighted_rate <- sum(df$below_poverty * wgt) / sum(wgt) * 100
       return(weighted_rate)
-    } 
+    }
   )
-  output_run_relative_poverty <-   lissyrtools::convert_list_from_ccyy_to_cc_names_yyyy(output_run_relative_poverty)
+  output_run_relative_poverty <- lissyrtools::convert_list_from_ccyy_to_cc_names_yyyy(
+    output_run_relative_poverty
+  )
   return(output_run_relative_poverty)
-  
 }
 
 
@@ -127,6 +130,7 @@ run_weighted_relative_poverty <- function(
 #' \dontrun{
 #' library(lissyrtools)
 #' library(purrr)
+#' library(dplyr)
 #'
 #' datasets <- lissyrtools::lissyuse(data = c("de", "es", "uk"), vars = c("dhi"), from = 2016)
 #'
@@ -164,21 +168,21 @@ run_weighted_relative_poverty <- function(
 #' print(abs_gap_dollars)
 #' }
 run_weighted_poverty_shortfall <- function(
-  data_list, 
-  var_name, 
-  wgt_name = NULL, 
-  times_median = 0.5 , 
+  data_list,
+  var_name,
+  wgt_name = NULL,
+  times_median = 0.5,
   type = c("type_4", "type_2"),
   percent = FALSE,
   na.rm = TRUE
-  ) {
+) {
   
   # Remove datasets with missing weights
   data_list <- lissyrtools::remove_dname_with_missings_in_weights(
     data_list,
     wgt_name
   )
-  
+
   # Check that var_name exists
   assertthat::assert_that(
     var_name %in% names(data_list[[1]]),
@@ -186,7 +190,7 @@ run_weighted_poverty_shortfall <- function(
       "Variable '{var_name}' could not be found as a column name in the datasets."
     )
   )
-  
+
   # Check that wgt_name exists, if provided
   if (!is.null(wgt_name)) {
     assertthat::assert_that(
@@ -196,36 +200,43 @@ run_weighted_poverty_shortfall <- function(
       )
     )
   }
-  
+
   lissyrtools::check_input_in_weight_argument(wgt_name)
-  
+
   output_run_poverty_shortfall <- purrr::imap(
-    data_list, ~ {
-      
+    data_list,
+    ~ {
       var <- .x[[var_name]]
       wgt <- if (!is.null(wgt_name)) .x[[wgt_name]] else rep(1, length(var))
-      
-      poverty_line  <- times_median * compute_weighted_percentiles(
-        var = var,
-        wgt = wgt,
-        probs = 0.5,
-        type = type,
-        na.rm = na.rm
-      ) 
-      
-      df <- .x   
+
+      poverty_line <- times_median *
+        lissyrtools::compute_weighted_percentiles(
+          var = var,
+          wgt = wgt,
+          probs = 0.5,
+          type = type,
+          na.rm = na.rm
+        )
+
+      df <- .x
       df$below_poverty <- ifelse(df[[var_name]] < poverty_line, 1, 0)
-      weighted_shortfall <-  sum(df$below_poverty * wgt * (poverty_line - df[[var_name]])) / sum(wgt * df$below_poverty) / 365
-      
+      weighted_shortfall <- sum(
+        df$below_poverty * wgt * (poverty_line - df[[var_name]])
+      ) /
+        sum(wgt * df$below_poverty) /
+        365
+
       if (percent == FALSE) {
         return(weighted_shortfall)
       } else {
-        relative_shortfall <- weighted_shortfall / (poverty_line/365) * 100
+        relative_shortfall <- weighted_shortfall / (poverty_line / 365) * 100
         return(relative_shortfall)
       }
-    } 
+    }
   )
-  output_run_poverty_shortfall <-   lissyrtools::convert_list_from_ccyy_to_cc_names_yyyy(output_run_poverty_shortfall)
+  output_run_poverty_shortfall <- lissyrtools::convert_list_from_ccyy_to_cc_names_yyyy(
+    output_run_poverty_shortfall
+  )
   return(output_run_poverty_shortfall)
 }
 
@@ -252,6 +263,7 @@ run_weighted_poverty_shortfall <- function(
 #' \dontrun{
 #' library(lissyrtools)
 #' library(purrr)
+#' library(dplyr)
 #'
 #' datasets <- lissyrtools::lissyuse(data = c("de", "es", "uk"), vars = c("dhi"), from = 2016)
 #'
@@ -271,19 +283,20 @@ run_weighted_poverty_shortfall <- function(
 #' print(pgi)
 #' }
 run_weighted_poverty_gap_index <- function(
-  data_list, 
-  var_name, 
-  wgt_name, 
-  times_median = 0.5, 
+  data_list,
+  var_name,
+  wgt_name,
+  times_median = 0.5,
   type = c("type_4", "type_2"),
   na.rm = TRUE
 ) {
+  
   # Remove datasets with missing weights
   data_list <- lissyrtools::remove_dname_with_missings_in_weights(
     data_list,
     wgt_name
   )
-  
+
   # Check that var_name exists
   assertthat::assert_that(
     var_name %in% names(data_list[[1]]),
@@ -291,7 +304,7 @@ run_weighted_poverty_gap_index <- function(
       "Variable '{var_name}' could not be found as a column name in the datasets."
     )
   )
-  
+
   # Check that wgt_name exists, if provided
   if (!is.null(wgt_name)) {
     assertthat::assert_that(
@@ -301,10 +314,9 @@ run_weighted_poverty_gap_index <- function(
       )
     )
   }
-  
+
   lissyrtools::check_input_in_weight_argument(wgt_name)
-  
-  
+
   pvt_rate <- run_weighted_relative_poverty(
     data_list = data_list,
     var_name = var_name,
@@ -314,20 +326,19 @@ run_weighted_poverty_gap_index <- function(
     na.rm = na.rm
   )
 
-  
   shortfall_percent <- run_weighted_poverty_shortfall(
-    data_list = data_list ,
+    data_list = data_list,
     var_name = var_name,
     wgt_name = wgt_name,
     times_median = times_median,
     type = type,
     percent = TRUE,
     na.rm = na.rm
-  ) 
-  
+  )
+
   output_run_pgi <- purrr::map2(pvt_rate, shortfall_percent, ~ .x * .y / 100)
-  
+
   return(output_run_pgi)
-  
 }
+
 

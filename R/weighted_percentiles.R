@@ -34,6 +34,9 @@
 #'
 #' @examples
 #' \dontrun{  
+#' library(lissyrtools)
+#' library(purrr)
+#' library(dplyr)
 #' 
 #' # Import data
 #' my_data_list <- lissyuse(data = "es", from  = 2016)
@@ -73,8 +76,16 @@
 #' )
 #' print(by_result_median)
 #' }
-run_weighted_percentiles <- function(data_list, var_name, wgt_name = NULL, probs = seq(0, 1, 0.25), type = c("type_4", "type_2"), share = FALSE, na.rm = TRUE, by = NULL) {
- 
+run_weighted_percentiles <- function(
+  data_list,
+  var_name,
+  wgt_name = NULL,
+  probs = seq(0, 1, 0.25),
+  type = c("type_4", "type_2"),
+  share = FALSE,
+  na.rm = TRUE,
+  by = NULL
+) {
   
   data_list <- lissyrtools::remove_dname_with_missings_in_weights(
     data_list,
@@ -109,30 +120,36 @@ run_weighted_percentiles <- function(data_list, var_name, wgt_name = NULL, probs
     )
   }
   lissyrtools::check_input_in_weight_argument(wgt_name)
-  
-  
-  
+
   type <- match.arg(type)
   if (share && type != "type_4") {
     warning("When `share = TRUE`, `type` is ignored and set to 'type_4'.")
   }
 
-
-   if (!is.null(by)) {
-    allowed_categoricals_in_by <- c(lissyrtools::lis_categorical_variables, lissyrtools::lws_wealth_categorical_variables, "inum")
+  if (!is.null(by)) {
+    allowed_categoricals_in_by <- c(
+      lissyrtools::lis_categorical_variables,
+      lissyrtools::lws_wealth_categorical_variables,
+      "inum"
+    )
     if (!by %in% allowed_categoricals_in_by) {
-      stop(sprintf("The `by` variable must be a categorical variable from `lissyrtools::lis_categorical_variables`, `lws_wealth_categorical_variables`, or the variable 'inum'."))
+      stop(sprintf(
+        "The `by` variable must be a categorical variable from `lissyrtools::lis_categorical_variables`, `lws_wealth_categorical_variables`, or the variable 'inum'."
+      ))
     }
 
-    df_to_keep <- purrr::map_lgl(data_list, ~!all(is.na(.x[[by]])))
+    df_to_keep <- purrr::map_lgl(data_list, ~ !all(is.na(.x[[by]])))
     # change the data frames in `data_list` !
     if (any(!df_to_keep)) {
-      warning(sprintf("The `by` variable '%s' contains only NAs in the following frames, which will be dropped: %s",
-                      by, paste(names(df_to_keep)[!df_to_keep], collapse = ", ")))
+      warning(sprintf(
+        "The `by` variable '%s' contains only NAs in the following frames, which will be dropped: %s",
+        by,
+        paste(names(df_to_keep)[!df_to_keep], collapse = ", ")
+      ))
       data_list <- data_list[df_to_keep]
     }
-   }
-  
+  }
+
   result <- purrr::imap(data_list, function(df, name) {
     if (!is.null(by)) {
       df[[by]] <- as.character(haven::as_factor(df[[by]]))
@@ -153,11 +170,10 @@ run_weighted_percentiles <- function(data_list, var_name, wgt_name = NULL, probs
       })
       # Flatten if only one prob value (e.g., just median) and not share
       if (length(probs) == 1 && share == FALSE) {
-      result <- purrr::map(result, ~unname(.x)) %>%  unlist()
-      } 
+        result <- purrr::map(result, ~ unname(.x)) %>% unlist()
+      }
 
-      result  
-
+      result
     } else {
       var <- df[[var_name]]
       wgt <- if (!is.null(wgt_name)) df[[wgt_name]] else NULL
@@ -171,16 +187,13 @@ run_weighted_percentiles <- function(data_list, var_name, wgt_name = NULL, probs
       )
     }
   })
-  
+
   if (length(probs) == 1 && share == FALSE && is.null(by)) {
-    result <- convert_list_from_ccyy_to_cc_names_yyyy(result)
-  } 
+    result <- lissyrtools::convert_list_from_ccyy_to_cc_names_yyyy(result)
+  }
 
   return(result)
 }
-
-
-
 #' Compute Weighted Percentiles or Share of Distribution
 #' 
 #' @description
@@ -206,17 +219,21 @@ run_weighted_percentiles <- function(data_list, var_name, wgt_name = NULL, probs
 #' compute_weighted_percentiles(data$es22$dhi, data$es22$ppopwgt, probs = c(0.03, 0.72, 0.48, .01))
 #' compute_weighted_percentiles(data$es22$dhi, data$es22$ppopwgt, probs = c(0.03, 0.72, 0.48, .01), share = TRUE)
 #' }
-compute_weighted_percentiles <- function(var, wgt = NULL, probs = seq(0, 1, 0.25), na.rm = TRUE, share = FALSE, type = c("type_4", "type_2")) {
-  
+compute_weighted_percentiles <- function(
+  var,
+  wgt = NULL,
+  probs = seq(0, 1, 0.25),
+  na.rm = TRUE,
+  share = FALSE,
+  type = c("type_4", "type_2")
+) {
   type <- match.arg(type)
-
 
   if (is.null(wgt)) {
     wgt <- rep(1, length(var))
-  } 
+  }
   stopifnot(length(var) == length(wgt))
 
-  
   if (any(probs > 1) || any(probs < 0)) {
     stop(
       glue::glue(
@@ -224,32 +241,31 @@ compute_weighted_percentiles <- function(var, wgt = NULL, probs = seq(0, 1, 0.25
       )
     )
   }
-  
+
   # Remove NAs if needed
   if (na.rm) {
     keep <- !is.na(var) & !is.na(wgt)
     var <- var[keep]
     wgt <- wgt[keep]
   }
-  
+
   # Sort var and wgt
   ord <- order(var, wgt)
   var <- var[ord]
   wgt <- wgt[ord]
-  
+
   # Sort probs
   probs <- probs[order(probs)]
-  probs <- if (share == TRUE) unique(c(0,probs,1)) else probs
-  
+  probs <- if (share == TRUE) unique(c(0, probs, 1)) else probs
+
   w_total <- sum(wgt)
   cw <- cumsum(wgt)
   target <- probs * w_total
   # Neeeded for the shares
   cxw <- cumsum(var * wgt)
-  
+
   # --- type (Stata-like (collapse / _pctile approximation.)) implementation ---
   if (type == "type_2" && !share) {
-
     result <- numeric(length(probs))
     for (i in seq_along(probs)) {
       t <- target[i]
@@ -259,7 +275,8 @@ compute_weighted_percentiles <- function(var, wgt = NULL, probs = seq(0, 1, 0.25
         result[i] <- var[length(var)]
       } else {
         idx <- which(cw > t)[1]
-        if (any((t - cw) < .Machine$double.eps^0.5 & t >= cw)) {  #  < .Machine$double.eps^0.5 for eveb more precision
+        if (any((t - cw) < .Machine$double.eps^0.5 & t >= cw)) {
+          #  < .Machine$double.eps^0.5 for eveb more precision
           # in practise if cw[idx-1] == t
           # Interpolate between adjacent values if needed (matches boundary)
           result[i] <- (var[idx - 1] + var[idx]) / 2
@@ -271,19 +288,19 @@ compute_weighted_percentiles <- function(var, wgt = NULL, probs = seq(0, 1, 0.25
     names(result) <- paste0(probs * 100, "%")
     return(result)
   }
-      # --- END: Definition 2 ---
+  # --- END: Definition 2 ---
 
   if (type == "type_4" && !share) {
     # Definition 4 (used in percentils in STATA from Philip van Kerm)
 
     result <- numeric(length(probs))
-    
+
     for (i in seq_along(probs)) {
       t <- target[i]
-      
-      
+
       # If the target is 0 or total weight, assign the first or last value
-      if (t == 0) { # t == 0
+      if (t == 0) {
+        # t == 0
         # Min.
         result[i] <- var[1]
       } else if (t == w_total) {
@@ -291,65 +308,63 @@ compute_weighted_percentiles <- function(var, wgt = NULL, probs = seq(0, 1, 0.25
         result[i] <- var[length(var)]
       } else {
         idx <- which(cw[-1] > t & cw[-length(cw)] <= t)[1] + 1
-        result[i] <- var[idx - 1] + (var[idx] - var[idx - 1]) * ((t - cw[idx - 1]) / wgt[idx])
-      } 
+        result[i] <- var[idx - 1] +
+          (var[idx] - var[idx - 1]) * ((t - cw[idx - 1]) / wgt[idx])
+      }
     }
-    
+
     # Set the names for the result
     names(result) <- paste0(probs * 100, "%")
     return(result)
-    
-    
   } else {
     # SHARE calculation (using only type 4)
     result_for_shares <- numeric(length(probs) - 1)
     for (i in 1:(length(probs) - 1)) {
-      
       if (i == 1) {
         t <- probs[2] * sum(wgt)
         idx <- which(cw[-1] > t & cw[-length(cw)] <= t)[1] + 1
-        
-        
-        Yi_minus_1_W <- (cxw[idx - 1] / cxw[length(var)])
-        Yi_W <- (cxw[idx] / cxw[length(var)])
-        gamma <- (t - cw[idx - 1]) / (cw[idx] - cw[idx - 1])  
-        
-        result_for_shares[1] <- 100 * ((1 - gamma) * Yi_minus_1_W + gamma * Yi_W)
-        
-      } else if (i == (length(probs) - 1)) {
-        t <- probs[i] * sum(wgt)
-        idx <- which(cw[-1] > t & cw[-length(cw)] <= t)[1] + 1
-        
+
         Yi_minus_1_W <- (cxw[idx - 1] / cxw[length(var)])
         Yi_W <- (cxw[idx] / cxw[length(var)])
         gamma <- (t - cw[idx - 1]) / (cw[idx] - cw[idx - 1])
-        
-        result_for_shares[length(result_for_shares)] <- (100 - ((1 - gamma) * Yi_minus_1_W + gamma * Yi_W) * 100)
-        
+
+        result_for_shares[1] <- 100 *
+          ((1 - gamma) * Yi_minus_1_W + gamma * Yi_W)
+      } else if (i == (length(probs) - 1)) {
+        t <- probs[i] * sum(wgt)
+        idx <- which(cw[-1] > t & cw[-length(cw)] <= t)[1] + 1
+
+        Yi_minus_1_W <- (cxw[idx - 1] / cxw[length(var)])
+        Yi_W <- (cxw[idx] / cxw[length(var)])
+        gamma <- (t - cw[idx - 1]) / (cw[idx] - cw[idx - 1])
+
+        result_for_shares[length(result_for_shares)] <- (100 -
+          ((1 - gamma) * Yi_minus_1_W + gamma * Yi_W) * 100)
       } else {
         # for example probs = 0.5
         t_up <- probs[i + 1] * sum(wgt)
         idx_up <- which(cw[-1] > t_up & cw[-length(cw)] <= t_up)[1] + 1
-        
+
         Yi_minus_1_W_up <- (cxw[idx_up - 1] / cxw[length(var)])
         Yi_W_up <- (cxw[idx_up] / cxw[length(var)])
         gamma_up <- (t_up - cw[idx_up - 1]) / (cw[idx_up] - cw[idx_up - 1])
-        
-        
+
         # for example probs = 0.25
         t_low <- probs[i] * sum(wgt)
         idx_low <- which(cw[-1] > t_low & cw[-length(cw)] <= t_low)[1] + 1
-        
+
         Yi_minus_1_W_low <- (cxw[idx_low - 1] / cxw[length(var)])
         Yi_W_low <- (cxw[idx_low] / cxw[length(var)])
         gamma_low <- (t_low - cw[idx_low - 1]) / (cw[idx_low] - cw[idx_low - 1])
-        
-        
-        result_for_shares[i] <- (((1 - gamma_up) * Yi_minus_1_W_up + gamma_up * Yi_W_up) - ((1 - gamma_low) * Yi_minus_1_W_low + gamma_low * Yi_W_low)) * 100
+
+        result_for_shares[i] <- (((1 - gamma_up) *
+          Yi_minus_1_W_up +
+          gamma_up * Yi_W_up) -
+          ((1 - gamma_low) * Yi_minus_1_W_low + gamma_low * Yi_W_low)) *
+          100
       }
     }
-    
-    
+
     probs_percent <- round(probs * 100)
     interval_labels <- paste0(
       probs_percent[-length(probs_percent)],
@@ -361,6 +376,3 @@ compute_weighted_percentiles <- function(var, wgt = NULL, probs = seq(0, 1, 0.25
     return(result_for_shares)
   }
 }
-
-
-

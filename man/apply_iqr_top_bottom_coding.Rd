@@ -55,8 +55,11 @@ A warning is issued if the variable level (e.g. household vs individual) seems i
 }
 \examples{
 \dontrun{ 
+library(lissyrtools)
+library(dplyr)
+
 # Import data, ideally at the level of the variable of interest.
-data_hhd <- lissyrtools::lissyuse("au", vars = c("dhi"), from = 2016)
+data_hhd <- lissyuse("au", vars = c("dhi"), from = 2016)
 
 # Default case, where top and bottom coding is performed simultaneously
 data_hhd[1]  \%>\%

@@ -39,6 +39,9 @@ The scale is computed as:
 }
 \examples{
 \dontrun{
+library(lissyrtools)
+library(dplyr)
+
 # Import data, ideally at the level of the variable of interest.
 # The variable "nhhmem13" must be imported in advance in order to apply OECD-type equivalisation methods.
 data_hhd_with_nhhmem13 <- lissyrtools::lissyuse("it", vars = c("dhi", "nhhmem13"), from = 2010)
