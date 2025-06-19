@@ -42,4 +42,3 @@ Suggests:
     R.rsp,
     lifecycle,
     here
-RdMacros: lifecycle
