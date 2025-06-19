@@ -45,6 +45,15 @@ The package is already installed on [LISSY](https://www.lisdatacenter.org/data-a
 To use it **locally with built-in** [LIS Sample Datasets](https://www.lisdatacenter.org/resources/self-teaching/), install it from GitHub:
 
 ``` r
+# Pre-install dependencies 
+required_packages <- c(
+  "haven", "dplyr", "ggplot2", "stringr", "rlang", "glue", "magrittr", "purrr",
+  "assertthat", "tibble", "readr", "matrixStats"
+)
+
+install.packages(required_packages, repos = "https://cran.r-project.org")
+
+# Install lissyrtools from its online repository 
 devtools::install_github("https://github.com/LIS-Cross-National-Data-Center/lissyrtools")
 ```
 
