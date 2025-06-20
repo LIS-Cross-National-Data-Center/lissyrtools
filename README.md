@@ -108,6 +108,7 @@ print(names(lu_data_p[[1]]))
 ``` r
 library(lissyrtools)
 library(purrr)
+library(dplyr)
 
 lis_datasets <- lissyuse(
   data = c("ca", "de", "fr"), 
@@ -163,6 +164,7 @@ print(res4)
 
 library(lissyrtools)
 library(ggplot2)
+library(dplyr)
 
 # Converts results to tidy format and prints a message with the new column names
 data_to_plot <- res2 %>% structure_to_plot()
@@ -184,6 +186,7 @@ ggplot(data_to_plot, aes(x = year, y = value, color = cname, group = cname)) +
 
 ``` r
 library(lissyrtools)
+library(dplyr)
 
 # 1) Set the argument `lws` = TRUE
 # 2) Change the Project dropdown in LISSY accordingly. 
@@ -213,6 +216,7 @@ When working with `lissyrtools` locally, use `lissyuse()`, along with the [sampl
 
 ``` r
 library(lissyrtools)
+library(dplyr)
 
 
 lis_datasets <- lissyuse(
