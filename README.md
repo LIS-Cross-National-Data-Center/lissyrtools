@@ -48,7 +48,7 @@ To use it **locally with built-in** [LIS Sample Datasets](https://www.lisdatacen
 # Pre-install dependencies 
 required_packages <- c(
   "haven", "dplyr", "ggplot2", "stringr", "rlang", "glue", "magrittr", "purrr",
-  "assertthat", "tibble", "readr", "matrixStats"
+  "assertthat", "tibble", "readr", "matrixStats", "devtools"
 )
 
 install.packages(required_packages, repos = "https://cran.r-project.org")
