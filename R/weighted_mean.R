@@ -73,14 +73,14 @@ run_weighted_mean <- function(
   lissyrtools::check_input_in_weight_argument(wgt_name)
 
   if (!is.null(by)) {
-    allowed_categoricals <- c(
+    recommended_categoricals <- c(
       lissyrtools::lis_categorical_variables,
       lissyrtools::lws_wealth_categorical_variables,
       "inum"
     )
-    if (!by %in% allowed_categoricals) {
-      stop(sprintf(
-        "The `by` variable must be a categorical variable in `lissyrtools::lis_categorical_variables`, `lissyrtools::lws_wealth_categorical_variables`, or the variable 'inum'."
+    if (!by %in% recommended_categoricals) {
+      warning(sprintf(
+        "The `by` variable is not recognized as a categorical variable in `lissyrtools::lis_categorical_variables`, `lissyrtools::lws_wealth_categorical_variables`, or as the variable 'inum'."
       ))
     }
 

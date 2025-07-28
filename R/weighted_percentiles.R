@@ -13,7 +13,7 @@
 #' - `"type_4"`: default, linear interpolation-based of the empirical cdf - continuous sample quantile.
 #' - `"type_2"`: used in Stata commands like collapse and _pctile, inverse of empirical distribution function with averaging at discontinuities - discontinuous sample quantile.
 #' @param share Logical. If `TRUE`, returns income shares between percentile brackets instead of the percentile values. Default is \code{FALSE}. 
-#'   Note: This **always uses** `definition = "type_4"` (interpolation), regardless of the `definition` parameter. It cannot be combined with `definition = "type_2"`.
+#'   Note: This **always uses** `type = "type_4"` (interpolation), regardless of the `type` parameter. It cannot be combined with `type = "type_2"`.
 #' @param na.rm Logical. If `TRUE`, missing values in `var_name` or `wgt_name` are removed.
 #' @param by Optional string giving the name of a categorical variable to split the data within each data frame before computing statistics. 
 #' 
@@ -127,14 +127,14 @@ run_weighted_percentiles <- function(
   }
 
   if (!is.null(by)) {
-    allowed_categoricals_in_by <- c(
+    recommended_categoricals <- c(
       lissyrtools::lis_categorical_variables,
       lissyrtools::lws_wealth_categorical_variables,
       "inum"
     )
-    if (!by %in% allowed_categoricals_in_by) {
-      stop(sprintf(
-        "The `by` variable must be a categorical variable from `lissyrtools::lis_categorical_variables`, `lws_wealth_categorical_variables`, or the variable 'inum'."
+    if (!by %in% recommended_categoricals) {
+      warning(sprintf(
+        "The `by` variable is not recognized as a categorical variable in `lissyrtools::lis_categorical_variables`, `lissyrtools::lws_wealth_categorical_variables`, or as the variable 'inum'."
       ))
     }
 
