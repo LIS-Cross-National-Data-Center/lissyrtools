@@ -137,9 +137,9 @@ reference:
     - missing_or_zero_vars_all
     - value_label_c_data
     
-  - title: Variable Information
+  - title: Check Version
     contents:
-    - check_github_version()
+    - check_github_version
 
   - title: Superseded
     desc: >
