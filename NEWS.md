@@ -1,5 +1,23 @@
 # lissyrtools
 
+# lissyrtools 0.2.1 (2025-09-15)
+
+## New functions
+
+- `check_github_version()`
+
+## Major changes
+
+
+
+## Minor changes
+
+- The `by` argument in `run_weighted_count()`, `run_weighted_mean()` and `run_weighted_percentiles()` is now less restrictive. It accepts additional named variables beyond those defined in `lis_categorical_variables`, `lws_wealth_categorical_variables`, or `inum`.
+- Applied corrections in `structure_to_plot()`, standardized `dname` column values across structures, and renamed a column to `distribution_group` in the third structure.
+## Lifecycle
+
+
+
 # lissyrtools 0.2.0 (2025-06-04)
 
 ## New functions
