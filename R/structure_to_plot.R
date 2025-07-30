@@ -161,7 +161,7 @@ structure_to_plot <- function(data_list) {
     result_df <- purrr::list_rbind(purrr::imap(
       data_list,
       ~ tibble::enframe(.x, name = "category", value = "value") %>%
-        dplyr::mutate(dname = .y)
+        dplyr::mutate(dname = stringr::str_sub(.y,1,4))
     )) %>%
       dplyr::mutate(
         cname = lissyrtools::ccyy_to_cname(dname),
@@ -181,7 +181,7 @@ structure_to_plot <- function(data_list) {
     result_df <- purrr::list_rbind(purrr::imap(
       data_list,
       ~ {
-        outer_name <- .y
+        outer_name <- stringr::str_sub(.y,1,4)
         purrr::list_rbind(purrr::imap(.x, function(sublist, subgroup) {
           # subgroup would be the categorical variable in run_weighted_mean or run_weighted_percentiles
           tibble::enframe(sublist, name = "vector_names", value = "value") %>% # vector_names: could be percentiles, shares, or the by var in run_weighted_count
@@ -206,7 +206,7 @@ structure_to_plot <- function(data_list) {
       stringr::str_detect(first_value, "%") &
         stringr::str_detect(first_value, "-")
     ) {
-      names(result_df)[names(result_df) == "name"] <- "share"
+      names(result_df)[names(result_df) == "name"] <- "distribution_group"
     } else if (stringr::str_detect(first_value, "%")) {
       names(result_df)[names(result_df) == "name"] <- "percentile"
     } else {
