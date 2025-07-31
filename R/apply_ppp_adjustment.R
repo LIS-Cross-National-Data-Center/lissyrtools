@@ -184,10 +184,14 @@ apply_ppp_adjustment <- function(
     } else if (transformation == "ppp") {
       df[[var_name]] <- df[[var_name]] / df[["ppp"]]
     }
+    
+    df <- df %>% select(-c(lisppp, cpi, ppp))
 
     # could be "lisppp" "cpi" "ppp"
     return(df)
   })
+  
+  
 
   return(result_adj)
 }
