@@ -15,7 +15,7 @@ Expected when \code{names(data_list)} are country codes matching \code{get_count
 \item \strong{2nd structure:} List with \code{ccyy} abbreviations as keys, and named numeric/integer vectors, where names represent categories.
 Typically output from functions grouped by a categorical variable, e.g. \code{"educ"}.
 \item \strong{3rd structure:} List with \code{ccyy} abbreviations as keys, each containing sublists of named vectors.
-Represents more complex summaries with multiple grouping variables, percentiles, or shares.
+Represents more complex summaries with multiple grouping variables, percentiles, and shares or averages across the distribution.
 }}
 }
 \value{
@@ -25,7 +25,7 @@ A tidy \code{data.frame} with the following columns (depending on input structur
 \item \code{year}: Year.
 \item \code{dname}: Dataset country-year code in the \code{ccyy} form.
 \item \code{category}: (2nd and 3rd structure) Grouping variable categories.
-\item \code{share} / \code{percentile} / \code{by_var}: (3rd structure) Variable describing the vector names.
+\item \code{distribution_group} / \code{percentile} / \code{by_var}: (3rd structure) Variable describing the vector names.
 \item \code{value}: Numeric values from the input list.
 }
 }
@@ -38,7 +38,7 @@ It supports three structures, typically outputs by weighted summary functions in
 \details{
 Depending on the summary statistics computed before, the function renames one of the columns in the 3rd structure based on pattern matching:
 \itemize{
-\item If the values contains "\%" and "-", the column is renamed to \code{share}.
+\item If the values contains "\%" and "-", the column is renamed to \code{distribution_group}.
 \item If the values contains "\%", renamed to \code{percentile}.
 \item Otherwise, renamed to \code{by_var}.
 }
@@ -68,7 +68,7 @@ df2 <- structure_to_plot(weighted_means_educ)
 weighted_percentiles <- run_weighted_percentiles(data, "pi11", by = "educ")
 df3 <- structure_to_plot(weighted_percentiles)
 
-# Example usage for 3rd structure but with shares
+# Example usage for 3rd structure but with shares or averages 
 weighted_percentiles <- run_weighted_percentiles(data, "pi11", by = "educ", share = TRUE)
 df3 <- structure_to_plot(weighted_percentiles)
 

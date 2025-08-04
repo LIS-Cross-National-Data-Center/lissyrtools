@@ -114,6 +114,7 @@ run_weighted_ratios <- function(
     wgt_name = wgt_name,
     probs = c(lower_percentile, upper_percentile),
     share = FALSE,
+    average = FALSE, 
     by = NULL,
     type = type
   )

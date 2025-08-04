@@ -10,6 +10,7 @@ compute_weighted_percentiles(
   probs = seq(0, 1, 0.25),
   na.rm = TRUE,
   share = FALSE,
+  average = FALSE,
   type = c("type_4", "type_2")
 )
 }
@@ -22,7 +23,9 @@ compute_weighted_percentiles(
 
 \item{na.rm}{Logical; if \code{TRUE}, missing values in \code{x} and \code{w} are removed before computation. Default is \code{TRUE}.}
 
-\item{share}{Logical; if \code{TRUE}, computes the share of total value (e.g., .x$dhi) within each interval defined by \code{probs}. If \code{FALSE}, returns the percentile values. Default is \code{FALSE}. Note: This option always uses \code{type = "type_4"}, and can not be used toghether with \code{type = "type_2"}.}
+\item{share}{Logical; if \code{TRUE}, computes the share of total value (e.g., .x$dhi) within each interval defined by \code{probs}. If \code{FALSE}, returns the percentile values. Default is \code{FALSE}. Note: This option always uses \code{type = "type_4"}, and can not be used toghether with \code{type = "type_2"} or \code{average = "TRUE"}.}
+
+\item{average}{Logical; if \code{TRUE}, computes the weighted mean of \code{var} (e.g., .x$dhi) within each interval defined by \code{probs}. If \code{FALSE}, returns the percentile values. Default is \code{FALSE}. Note: This option always uses \code{type = "type_4"}, and can not be used toghether with \code{type = "type_2"}  or \code{share = "TRUE"}.}
 
 \item{type}{A character string indicating which percentile definition to use. Either \code{"type_4"} (default, linear interpolation-based of the empirical cdf - continuous sample quantile) or
 \code{"type_2"} (used in Stata commands like collapse and _pctile, inverse of empirical distribution function with averaging at discontinuities - discontinuous sample quantile).}
@@ -39,6 +42,7 @@ data <- lissyrtools::lissyuse(data = "es22", vars = c("dhi", "age"))
 compute_weighted_percentiles(data$es22$dhi, data$es22$ppopwgt)
 compute_weighted_percentiles(data$es22$dhi, data$es22$ppopwgt, probs = c(0.03, 0.72, 0.48, .01))
 compute_weighted_percentiles(data$es22$dhi, data$es22$ppopwgt, probs = c(0.03, 0.72, 0.48, .01), share = TRUE)
+compute_weighted_percentiles(data$es22$dhi, data$es22$ppopwgt, probs = c(0.03, 0.72, 0.48, .01), average = TRUE)
 }
 }
 \keyword{internal}

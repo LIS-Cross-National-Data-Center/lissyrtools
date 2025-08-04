@@ -15,19 +15,19 @@
 #'     Typically output from functions grouped by a categorical variable, e.g. `"educ"`.
 #'     
 #'   - **3rd structure:** List with `ccyy` abbreviations as keys, each containing sublists of named vectors.
-#'     Represents more complex summaries with multiple grouping variables, percentiles, or shares.
+#'     Represents more complex summaries with multiple grouping variables, percentiles, and shares or averages across the distribution.
 #' 
 #' @return A tidy `data.frame` with the following columns (depending on input structure):
 #'   - `cname`: Country name.
 #'   - `year`: Year.
 #'   - `dname`: Dataset country-year code in the `ccyy` form.
 #'   - `category`: (2nd and 3rd structure) Grouping variable categories.
-#'   - `share` / `percentile` / `by_var`: (3rd structure) Variable describing the vector names.
+#'   - `distribution_group` / `percentile` / `by_var`: (3rd structure) Variable describing the vector names.
 #'   - `value`: Numeric values from the input list.
 #' 
 #' @details
 #' Depending on the summary statistics computed before, the function renames one of the columns in the 3rd structure based on pattern matching:
-#'   - If the values contains "%" and "-", the column is renamed to `share`.
+#'   - If the values contains "%" and "-", the column is renamed to `distribution_group`.
 #'   - If the values contains "%", renamed to `percentile`.
 #'   - Otherwise, renamed to `by_var`.
 #' 
@@ -58,7 +58,7 @@
 #' weighted_percentiles <- run_weighted_percentiles(data, "pi11", by = "educ")
 #' df3 <- structure_to_plot(weighted_percentiles)
 #' 
-#' # Example usage for 3rd structure but with shares
+#' # Example usage for 3rd structure but with shares or averages 
 #' weighted_percentiles <- run_weighted_percentiles(data, "pi11", by = "educ", share = TRUE)
 #' df3 <- structure_to_plot(weighted_percentiles)
 #' 
@@ -124,6 +124,7 @@ structure_to_plot <- function(data_list) {
   # 3rd structure:
   #    - run_weighted_percentiles(data, "pi11", by = "educ")
   #    - run_weighted_percentiles(data, "pi11", by = "educ", share = TRUE)
+  #    - run_weighted_percentiles(data, "pi11", by = "educ", average = TRUE)
   #
   #    - run_weighted_count(data, "educ", by = "rural", na.rm = TRUE)
   #    - run_weighted_count(data, "educ", by = "rural", na.rm = TRUE, percent = TRUE)
@@ -184,7 +185,7 @@ structure_to_plot <- function(data_list) {
         outer_name <- stringr::str_sub(.y,1,4)
         purrr::list_rbind(purrr::imap(.x, function(sublist, subgroup) {
           # subgroup would be the categorical variable in run_weighted_mean or run_weighted_percentiles
-          tibble::enframe(sublist, name = "vector_names", value = "value") %>% # vector_names: could be percentiles, shares, or the by var in run_weighted_count
+          tibble::enframe(sublist, name = "vector_names", value = "value") %>% # vector_names: could be percentiles, shares, averages or the by var in run_weighted_count
             dplyr::mutate(
               dname = outer_name,
               category = stringr::str_remove(subgroup, "^\\[\\d+\\]"),

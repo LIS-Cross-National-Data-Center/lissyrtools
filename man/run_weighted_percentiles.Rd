@@ -11,6 +11,7 @@ run_weighted_percentiles(
   probs = seq(0, 1, 0.25),
   type = c("type_4", "type_2"),
   share = FALSE,
+  average = FALSE,
   na.rm = TRUE,
   by = NULL
 )
@@ -30,8 +31,13 @@ run_weighted_percentiles(
 \item \code{"type_2"}: used in Stata commands like collapse and _pctile, inverse of empirical distribution function with averaging at discontinuities - discontinuous sample quantile.
 }}
 
-\item{share}{Logical. If \code{TRUE}, returns income shares between percentile brackets instead of the percentile values. Default is \code{FALSE}.
-Note: This \strong{always uses} \code{definition = "type_4"} (interpolation), regardless of the \code{definition} parameter. It cannot be combined with \code{definition = "type_2"}.}
+\item{share}{Logical. If \code{TRUE}, returns \code{var_name}  shares between percentile brackets instead of the percentile values. Default is \code{FALSE}.
+Note: This \strong{always uses} \code{type = "type_4"} (interpolation), regardless of the \code{type} parameter. It cannot be combined with \code{type = "type_2"}.
+This cannot be set to \code{TRUE} if \code{average = TRUE}.}
+
+\item{average}{Logical. If \code{TRUE}, returns \code{var_name} averages across percentile brackets instead of the percentile values. Default is \code{FALSE}.
+Note: This \strong{always uses} \code{type = "type_4"} (interpolation), regardless of the \code{type} parameter. It cannot be combined with \code{type = "type_2"}.
+This cannot be set to \code{TRUE} if \code{share = TRUE}.}
 
 \item{na.rm}{Logical. If \code{TRUE}, missing values in \code{var_name} or \code{wgt_name} are removed.}
 
@@ -84,6 +90,17 @@ shares_result <- run_weighted_percentiles(
     na.rm = TRUE
 )
 print(shares_result)
+
+# Compute averages for each distribution group 
+averages_result <- run_weighted_percentiles(
+    data_list = my_data_list,
+    var_name = "dhi",
+    wgt_name = "hpopwgt",
+    probs = seq(0, 1, 0.1),
+    average = TRUE,
+    na.rm = TRUE
+)
+print(averages_result)
 
 # Using the by option 
 by_result_median <- run_weighted_percentiles(

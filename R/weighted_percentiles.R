@@ -12,8 +12,12 @@
 #' @param type A character string indicating which percentile definition to use. Only used when `share = FALSE`.
 #' - `"type_4"`: default, linear interpolation-based of the empirical cdf - continuous sample quantile.
 #' - `"type_2"`: used in Stata commands like collapse and _pctile, inverse of empirical distribution function with averaging at discontinuities - discontinuous sample quantile.
-#' @param share Logical. If `TRUE`, returns income shares between percentile brackets instead of the percentile values. Default is \code{FALSE}. 
+#' @param share Logical. If `TRUE`, returns `var_name`  shares between percentile brackets instead of the percentile values. Default is \code{FALSE}. 
 #'   Note: This **always uses** `type = "type_4"` (interpolation), regardless of the `type` parameter. It cannot be combined with `type = "type_2"`.
+#'   This cannot be set to `TRUE` if `average = TRUE`.
+#' @param average Logical. If `TRUE`, returns `var_name` averages across percentile brackets instead of the percentile values. Default is \code{FALSE}. 
+#'   Note: This **always uses** `type = "type_4"` (interpolation), regardless of the `type` parameter. It cannot be combined with `type = "type_2"`. 
+#'   This cannot be set to `TRUE` if `share = TRUE`.
 #' @param na.rm Logical. If `TRUE`, missing values in `var_name` or `wgt_name` are removed.
 #' @param by Optional string giving the name of a categorical variable to split the data within each data frame before computing statistics. 
 #' 
@@ -63,6 +67,17 @@
 #' )
 #' print(shares_result)
 #' 
+#' # Compute averages for each distribution group 
+#' averages_result <- run_weighted_percentiles(
+#'     data_list = my_data_list,
+#'     var_name = "dhi",
+#'     wgt_name = "hpopwgt",
+#'     probs = seq(0, 1, 0.1),
+#'     average = TRUE,
+#'     na.rm = TRUE
+#' )
+#' print(averages_result)
+#' 
 #' # Using the by option 
 #' by_result_median <- run_weighted_percentiles(
 #'     data_list = purrr::map(my_data_list[1:2], ~.x %>% filter(emp == 1)),
@@ -83,6 +98,7 @@ run_weighted_percentiles <- function(
   probs = seq(0, 1, 0.25),
   type = c("type_4", "type_2"),
   share = FALSE,
+  average = FALSE,
   na.rm = TRUE,
   by = NULL
 ) {
@@ -122,7 +138,7 @@ run_weighted_percentiles <- function(
   lissyrtools::check_input_in_weight_argument(wgt_name)
 
   type <- match.arg(type)
-  if (share && type != "type_4") {
+  if ((share || average) && type != "type_4") {
     warning("When `share = TRUE`, `type` is ignored and set to 'type_4'.")
   }
 
@@ -164,12 +180,13 @@ run_weighted_percentiles <- function(
           wgt = wgt,
           probs = probs,
           share = share,
-          type = if (share) "type_4" else type,
+          average = average,
+          type = if (share || average) "type_4" else type,
           na.rm = na.rm
         )
       })
-      # Flatten if only one prob value (e.g., just median) and not share
-      if (length(probs) == 1 && share == FALSE) {
+      # Flatten if only one prob value (e.g., just median) and not share nor average
+      if (length(probs) == 1 && share == FALSE && average == FALSE) {
         result <- purrr::map(result, ~ unname(.x)) %>% unlist()
       }
 
@@ -182,13 +199,14 @@ run_weighted_percentiles <- function(
         wgt = wgt,
         probs = probs,
         share = share,
-        type = if (share) "type_4" else type,
+        average = average,
+        type = if (share || average) "type_4" else type,
         na.rm = na.rm
       )
     }
   })
 
-  if (length(probs) == 1 && share == FALSE && is.null(by)) {
+  if (length(probs) == 1 && share == FALSE &&  average == FALSE && is.null(by)) {
     result <- lissyrtools::convert_list_from_ccyy_to_cc_names_yyyy(result)
   }
 
@@ -204,7 +222,8 @@ run_weighted_percentiles <- function(
 #' @param wgt A numeric vector of weights (e.g., .x$hpopwgt, .x$pwgt). Must be the same length as \code{x}.
 #' @param probs A numeric vector of probabilities between 0 and 1 indicating which percentiles to compute. Default is \code{seq(0, 1, 0.25)}.
 #' @param na.rm Logical; if \code{TRUE}, missing values in \code{x} and \code{w} are removed before computation. Default is \code{TRUE}.
-#' @param share Logical; if \code{TRUE}, computes the share of total value (e.g., .x$dhi) within each interval defined by \code{probs}. If \code{FALSE}, returns the percentile values. Default is \code{FALSE}. Note: This option always uses \code{type = "type_4"}, and can not be used toghether with \code{type = "type_2"}. 
+#' @param share Logical; if \code{TRUE}, computes the share of total value (e.g., .x$dhi) within each interval defined by \code{probs}. If \code{FALSE}, returns the percentile values. Default is \code{FALSE}. Note: This option always uses \code{type = "type_4"}, and can not be used toghether with \code{type = "type_2"} or \code{average = "TRUE"}.
+#' @param average Logical; if \code{TRUE}, computes the weighted mean of `var` (e.g., .x$dhi) within each interval defined by \code{probs}. If \code{FALSE}, returns the percentile values. Default is \code{FALSE}. Note: This option always uses \code{type = "type_4"}, and can not be used toghether with \code{type = "type_2"}  or \code{share = "TRUE"}.
 #' @param type A character string indicating which percentile definition to use. Either \code{"type_4"} (default, linear interpolation-based of the empirical cdf - continuous sample quantile) or 
 #' \code{"type_2"} (used in Stata commands like collapse and _pctile, inverse of empirical distribution function with averaging at discontinuities - discontinuous sample quantile).
 #' 
@@ -218,6 +237,7 @@ run_weighted_percentiles <- function(
 #' compute_weighted_percentiles(data$es22$dhi, data$es22$ppopwgt)
 #' compute_weighted_percentiles(data$es22$dhi, data$es22$ppopwgt, probs = c(0.03, 0.72, 0.48, .01))
 #' compute_weighted_percentiles(data$es22$dhi, data$es22$ppopwgt, probs = c(0.03, 0.72, 0.48, .01), share = TRUE)
+#' compute_weighted_percentiles(data$es22$dhi, data$es22$ppopwgt, probs = c(0.03, 0.72, 0.48, .01), average = TRUE)
 #' }
 compute_weighted_percentiles <- function(
   var,
@@ -225,9 +245,15 @@ compute_weighted_percentiles <- function(
   probs = seq(0, 1, 0.25),
   na.rm = TRUE,
   share = FALSE,
+  average = FALSE,
   type = c("type_4", "type_2")
 ) {
   type <- match.arg(type)
+
+  # Enforce mutual exclusivity: share and average cannot both be TRUE
+  if (share && average) {
+    stop("Only one of 'share' or 'average' can be TRUE at the same time.")
+  }
 
   if (is.null(wgt)) {
     wgt <- rep(1, length(var))
@@ -256,7 +282,11 @@ compute_weighted_percentiles <- function(
 
   # Sort probs
   probs <- probs[order(probs)]
-  probs <- if (share == TRUE) unique(c(0, probs, 1)) else probs
+  probs <- if (share == TRUE | average == TRUE) {
+    unique(c(0, probs, 1))
+  } else {
+    probs
+  }
 
   w_total <- sum(wgt)
   cw <- cumsum(wgt)
@@ -265,7 +295,7 @@ compute_weighted_percentiles <- function(
   cxw <- cumsum(var * wgt)
 
   # --- type (Stata-like (collapse / _pctile approximation.)) implementation ---
-  if (type == "type_2" && !share) {
+  if (type == "type_2" && !share && !average) {
     result <- numeric(length(probs))
     for (i in seq_along(probs)) {
       t <- target[i]
@@ -290,7 +320,7 @@ compute_weighted_percentiles <- function(
   }
   # --- END: Definition 2 ---
 
-  if (type == "type_4" && !share) {
+  if (type == "type_4" && !share && !average) {
     # Definition 4 (used in percentils in STATA from Philip van Kerm)
 
     result <- numeric(length(probs))
@@ -316,7 +346,8 @@ compute_weighted_percentiles <- function(
     # Set the names for the result
     names(result) <- paste0(probs * 100, "%")
     return(result)
-  } else {
+  } 
+  if (share == TRUE) {
     # SHARE calculation (using only type 4)
     result_for_shares <- numeric(length(probs) - 1)
     for (i in 1:(length(probs) - 1)) {
@@ -374,5 +405,50 @@ compute_weighted_percentiles <- function(
     )
     names(result_for_shares) <- interval_labels
     return(result_for_shares)
+  } 
+  if (average == TRUE) {
+    result_for_averages <- numeric(length(probs) - 1)
+    for (i in 1:(length(probs) - 1)) {
+      p_low <- probs[i] * w_total
+      p_high <- probs[i + 1] * w_total
+
+      # Find lower idx and interpolate
+      idx_low <- which(cw >= p_low)[1]
+      if (idx_low == 1) {
+        low_val <- var[1]
+        low_cum_val <- 0
+      } else {
+        gamma_low <- (p_low - cw[idx_low - 1]) / (cw[idx_low] - cw[idx_low - 1])
+        low_cum_val <- cxw[idx_low - 1] +
+          gamma_low * (cxw[idx_low] - cxw[idx_low - 1])
+      }
+
+      # Find upper idx and interpolate
+      idx_high <- which(cw >= p_high)[1]
+      if (idx_high == 1) {
+        high_val <- var[1]
+        high_cum_val <- 0
+      } else {
+        gamma_high <- (p_high - cw[idx_high - 1]) /
+          (cw[idx_high] - cw[idx_high - 1])
+        high_cum_val <- cxw[idx_high - 1] +
+          gamma_high * (cxw[idx_high] - cxw[idx_high - 1])
+      }
+
+      # Total weighted sum in percentile interval
+      total_weighted_sum <- high_cum_val - low_cum_val
+      total_weight <- p_high - p_low
+
+      # Average income in this percentile interval
+      result_for_averages[i] <- total_weighted_sum / total_weight
+    }
+
+    names(result_for_averages) <- paste0(
+      probs[-length(probs)] * 100,
+      "-",
+      probs[-1] * 100,
+      "%"
+    )
+    return(result_for_averages)
   }
 }
