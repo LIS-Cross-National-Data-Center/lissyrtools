@@ -61,7 +61,7 @@ Expected when <code>names(data_list)</code> are country codes matching <code><a 
 <li><p><strong>2nd structure:</strong> List with <code>ccyy</code> abbreviations as keys, and named numeric/integer vectors, where names represent categories.
 Typically output from functions grouped by a categorical variable, e.g. <code>"educ"</code>.</p></li>
 <li><p><strong>3rd structure:</strong> List with <code>ccyy</code> abbreviations as keys, each containing sublists of named vectors.
-Represents more complex summaries with multiple grouping variables, percentiles, or shares.</p></li>
+Represents more complex summaries with multiple grouping variables, percentiles, and shares or averages across the distribution.</p></li>
 </ul></dd>
 
 </dl></div>
@@ -71,12 +71,12 @@ Represents more complex summaries with multiple grouping variables, percentiles,
 <li><p><code>year</code>: Year.</p></li>
 <li><p><code>dname</code>: Dataset country-year code in the <code>ccyy</code> form.</p></li>
 <li><p><code>category</code>: (2nd and 3rd structure) Grouping variable categories.</p></li>
-<li><p><code>share</code> / <code>percentile</code> / <code>by_var</code>: (3rd structure) Variable describing the vector names.</p></li>
+<li><p><code>distribution_group</code> / <code>percentile</code> / <code>by_var</code>: (3rd structure) Variable describing the vector names.</p></li>
 <li><p><code>value</code>: Numeric values from the input list.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Depending on the summary statistics computed before, the function renames one of the columns in the 3rd structure based on pattern matching:</p><ul><li><p>If the values contains "%" and "-", the column is renamed to <code>share</code>.</p></li>
+    <p>Depending on the summary statistics computed before, the function renames one of the columns in the 3rd structure based on pattern matching:</p><ul><li><p>If the values contains "%" and "-", the column is renamed to <code>distribution_group</code>.</p></li>
 <li><p>If the values contains "%", renamed to <code>percentile</code>.</p></li>
 <li><p>Otherwise, renamed to <code>by_var</code>.</p></li>
 </ul></div>
@@ -107,7 +107,7 @@ Represents more complex summaries with multiple grouping variables, percentiles,
 <span class="r-in"><span><span class="va">weighted_percentiles</span> <span class="op">&lt;-</span> <span class="fu"><a href="run_weighted_percentiles.html">run_weighted_percentiles</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"pi11"</span>, by <span class="op">=</span> <span class="st">"educ"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">df3</span> <span class="op">&lt;-</span> <span class="fu">structure_to_plot</span><span class="op">(</span><span class="va">weighted_percentiles</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Example usage for 3rd structure but with shares</span></span></span>
+<span class="r-in"><span><span class="co"># Example usage for 3rd structure but with shares or averages </span></span></span>
 <span class="r-in"><span><span class="va">weighted_percentiles</span> <span class="op">&lt;-</span> <span class="fu"><a href="run_weighted_percentiles.html">run_weighted_percentiles</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"pi11"</span>, by <span class="op">=</span> <span class="st">"educ"</span>, share <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">df3</span> <span class="op">&lt;-</span> <span class="fu">structure_to_plot</span><span class="op">(</span><span class="va">weighted_percentiles</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
