@@ -56,6 +56,7 @@ reference:
       - run_weighted_ratios
       - run_weighted_gini
       - run_weighted_atkinson
+      - run_weighted_absolute_poverty
       - run_weighted_relative_poverty
       - run_weighted_poverty_shortfall
       - run_weighted_poverty_gap_index

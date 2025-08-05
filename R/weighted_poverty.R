@@ -1,3 +1,111 @@
+#' Compute Absolute Poverty Rate
+#'
+#' @param data_list A named list of data frames.
+#' @param var_name A string specifying the variable name (e.g., "dhi", "pilabour").
+#' @param wgt_name A string (optional). The name of the weight variable. If `NULL`, equal weights are assumed.
+#' @param daily_poverty_line  A numeric scalar representing the **absolute poverty threshold per day**.
+#'   **Note:** This value must be expressed in the **same monetary unit** as the target variable.
+#' @param days_in_year Integer. Number of days used to convert the daily poverty line to an annual equivalent. Default is `365`. 
+#' @param na.rm Logical. Should missing values be removed before computation? Default is `TRUE`.
+#' 
+#' @details 
+#' This function is intended to compute **absolute poverty** based on **fixed international or national thresholds**.
+#' Because the LIS dataset reports **annual income**, the function internally converts the provided daily threshold into an **annual threshold** using `days_in_year`. The default is `365` (calendar year), but can be adjusted.
+#' It is **critical** that the daily poverty threshold be expressed in the **same monetary unit** as the target income variable (`var_name`). For example, if income is reported in PPP-adjusted USD, the threshold must also be in PPP-adjusted USD. The function does not perform currency or PPP conversions.
+#' 
+#' @return A named list. Each list element is named by country and contains a named numeric vector, where the names are years and the values are the computed statistics.
+#' @export
+#' 
+#' @examples
+#' \dontrun{
+#' library(lissyrtools)
+#' library(purrr)
+#' library(dplyr)
+#' 
+#' datasets <- lissyrtools::lissyuse(data = c("de", "es", "uk"), vars = c("dhi"), from = 2016)
+#' 
+#' # Poverty line is defined at 2.15$ 2017 PPP per day, by dafault. 
+#' 
+#' abs_pvt_rate_215 <- datasets %>% 
+#'  map(~ .x %>% filter(!is.na(dhi))) %>%
+#'  map(~ .x %>% mutate(new_wgt = hwgt * nhhmem)) %>%
+#'  apply_iqr_top_bottom_coding("dhi", "hwgt", type = "type_2") %>%
+#'  apply_sqrt_equivalisation("dhi") %>% 
+#'  apply_ppp_adjustment("dhi", database = "lis", transformation = "lisppp") %>% # 
+#'  run_weighted_absolute_poverty("dhi", "new_wgt")
+#'  
+#' print(abs_pvt_rate_215)  
+#'  
+#'  # It can be defined to any other threshold. 
+#'  
+#' abs_pvt_rate_685 <- datasets %>% 
+#'  map(~ .x %>% filter(!is.na(dhi))) %>%
+#'  map(~ .x %>% mutate(new_wgt = hwgt * nhhmem)) %>%
+#'  apply_iqr_top_bottom_coding("dhi", "hwgt", type = "type_2") %>%
+#'  apply_sqrt_equivalisation("dhi") %>% 
+#'  run_weighted_absolute_poverty("dhi", "new_wgt", daily_poverty_line = 6.85)
+#'  
+#' print(abs_pvt_rate_685)   
+#' }
+run_weighted_absolute_poverty <- function(
+  data_list,
+  var_name,
+  wgt_name = NULL,
+  daily_poverty_line = 2.15,
+  days_in_year = 365,
+  na.rm = TRUE
+) {
+
+  # Remove datasets with missing weights
+  data_list <- lissyrtools::remove_dname_with_missings_in_weights(
+    data_list,
+    wgt_name
+  )
+
+  # Check that var_name exists
+  assertthat::assert_that(
+    var_name %in% names(data_list[[1]]),
+    msg = glue::glue(
+      "Variable '{var_name}' could not be found as a column name in the datasets."
+    )
+  )
+
+  # Check that wgt_name exists, if provided
+  if (!is.null(wgt_name)) {
+    assertthat::assert_that(
+      wgt_name %in% names(data_list[[1]]),
+      msg = glue::glue(
+        "Weight variable '{wgt_name}' could not be found as a column name in the datasets."
+      )
+    )
+  }
+
+  lissyrtools::check_input_in_weight_argument(wgt_name)
+
+  # Convert daily threshold to annual
+  annual_poverty_line <- daily_poverty_line * days_in_year
+
+  output_run_absolute_poverty <- purrr::imap(
+    data_list,
+    ~ {
+      var <- .x[[var_name]]
+      wgt <- if (!is.null(wgt_name)) .x[[wgt_name]] else rep(1, length(var))
+
+      df <- .x
+      df$below_poverty <- ifelse(df[[var_name]] < annual_poverty_line, 1, 0)
+      weighted_rate <- sum(df$below_poverty * wgt, na.rm = na.rm) / sum(wgt, na.rm = na.rm) * 100
+      return(weighted_rate)
+    }
+  )
+
+  output_run_absolute_poverty <- lissyrtools::convert_list_from_ccyy_to_cc_names_yyyy(
+    output_run_absolute_poverty
+  )
+
+  return(output_run_absolute_poverty)
+}
+
+
 
 #' Compute Relative Poverty Rate
 #'
