@@ -43,6 +43,7 @@
 <span>  <span class="va">var_name</span>,</span>
 <span>  wgt_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  times_median <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  daily_poverty_line <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"type_4"</span>, <span class="st">"type_2"</span><span class="op">)</span>,</span>
 <span>  percent <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -69,6 +70,10 @@
 <dd><p>A numeric scalar. The multiple of the median used to define the poverty threshold (default is <code>0.5</code>).</p></dd>
 
 
+<dt id="arg-daily-poverty-line">daily_poverty_line<a class="anchor" aria-label="anchor" href="#arg-daily-poverty-line"></a></dt>
+<dd><p>A numeric scalar representing the <strong>absolute poverty threshold per day</strong>. (default is <code>NULL</code>).</p></dd>
+
+
 <dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
 <dd><p>A character vector indicating the percentile estimation type (passed to <code>compute_weighted_percentiles</code>). Default is <code>"type_4"</code>.</p></dd>
 
@@ -86,6 +91,11 @@
     <p>A named list. Each list element is named by country and contains a named numeric vector, where the names are years and the values represent:</p><ul><li><p>The average daily shortfall in monetary units (if <code>percent = FALSE</code>), or</p></li>
 <li><p>The average relative shortfall in percentage terms (if <code>percent = TRUE</code>), among individuals or households below the poverty threshold.</p></li>
 </ul></div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>When <code>daily_poverty_line</code> is specified, the function assumes the threshold is expressed in daily units and converts it to an annual threshold by multiplying it by 365.
+It is <strong>critical</strong> that the daily poverty threshold be expressed in the <strong>same monetary unit</strong> as the target income variable (<code>var_name</code>). For example, if income is reported in PPP-adjusted USD, the threshold must also be in PPP-adjusted USD. The function does not perform currency or PPP conversions.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -102,32 +112,43 @@
 <span class="r-in"><span>  <span class="fu"><a href="apply_iqr_top_bottom_coding.html">apply_iqr_top_bottom_coding</a></span><span class="op">(</span><span class="st">"dhi"</span>, <span class="st">"hwgt"</span>, type <span class="op">=</span> <span class="st">"type_2"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="apply_sqrt_equivalisation.html">apply_sqrt_equivalisation</a></span><span class="op">(</span><span class="st">"dhi"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Compute average poverty shortfall in absolute (daily monetary) terms</span></span></span>
-<span class="r-in"><span><span class="va">abs_gap</span> <span class="op">&lt;-</span> <span class="fu">run_weighted_poverty_shortfall</span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="co"># Compute average poverty shortfall in daily monetary terms</span></span></span>
+<span class="r-in"><span><span class="va">avg_gap</span> <span class="op">&lt;-</span> <span class="fu">run_weighted_poverty_shortfall</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  data_list <span class="op">=</span> <span class="va">datasets</span>,</span></span>
 <span class="r-in"><span>  var_name <span class="op">=</span> <span class="st">"dhi"</span>,</span></span>
 <span class="r-in"><span>  wgt_name <span class="op">=</span> <span class="st">"new_wgt"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Compute average poverty shortfall in percentage of the poverty line</span></span></span>
-<span class="r-in"><span><span class="va">rel_gap</span> <span class="op">&lt;-</span> <span class="fu">run_weighted_poverty_shortfall</span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">percentage_gap</span> <span class="op">&lt;-</span> <span class="fu">run_weighted_poverty_shortfall</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  data_list <span class="op">=</span> <span class="va">datasets</span>,</span></span>
 <span class="r-in"><span>  var_name <span class="op">=</span> <span class="st">"dhi"</span>,</span></span>
 <span class="r-in"><span>  wgt_name <span class="op">=</span> <span class="st">"new_wgt"</span>,</span></span>
 <span class="r-in"><span>  percent <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Compute average poverty shortfall in absolute (daily monetary) terms, converted to international dollars at 2017 prices. </span></span></span>
-<span class="r-in"><span><span class="va">abs_gap_dollars</span> <span class="op">&lt;-</span> <span class="va">datasets</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> </span></span>
+<span class="r-in"><span><span class="co"># Compute average poverty shortfall in daily monetary terms, converted to international dollars at 2017 prices. </span></span></span>
+<span class="r-in"><span><span class="va">avg_gap_dollars</span> <span class="op">&lt;-</span> <span class="va">datasets</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> </span></span>
 <span class="r-in"><span>  <span class="fu"><a href="apply_ppp_adjustment.html">apply_ppp_adjustment</a></span><span class="op">(</span><span class="st">"dhi"</span>, <span class="st">"lis"</span>, <span class="st">"lisppp"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> </span></span>
 <span class="r-in"><span>  <span class="fu">run_weighted_poverty_shortfall</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  var_name <span class="op">=</span> <span class="st">"dhi"</span>,</span></span>
 <span class="r-in"><span>  wgt_name <span class="op">=</span> <span class="st">"new_wgt"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">abs_gap</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">rel_gap</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">abs_gap_dollars</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Compute average poverty shortfall in daily monetary terms, from a specified poverty threshold in international dollars at 2017 prices. </span></span></span>
+<span class="r-in"><span><span class="va">avg_gap_absolute_line</span> <span class="op">&lt;-</span> <span class="va">datasets</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> </span></span>
+<span class="r-in"><span>  <span class="fu"><a href="apply_ppp_adjustment.html">apply_ppp_adjustment</a></span><span class="op">(</span><span class="st">"dhi"</span>, <span class="st">"lis"</span>, <span class="st">"lisppp"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> </span></span>
+<span class="r-in"><span>  <span class="fu">run_weighted_poverty_shortfall</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  var_name <span class="op">=</span> <span class="st">"dhi"</span>,</span></span>
+<span class="r-in"><span>  wgt_name <span class="op">=</span> <span class="st">"new_wgt"</span>, </span></span>
+<span class="r-in"><span>  daily_poverty_line  <span class="op">=</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">avg_gap</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">percentage_gap</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">avg_gap_dollars</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">avg_gap_absolute_line</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

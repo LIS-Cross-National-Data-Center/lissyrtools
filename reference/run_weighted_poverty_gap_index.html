@@ -43,6 +43,7 @@
 <span>  <span class="va">var_name</span>,</span>
 <span>  <span class="va">wgt_name</span>,</span>
 <span>  times_median <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  daily_poverty_line <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"type_4"</span>, <span class="st">"type_2"</span><span class="op">)</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -68,6 +69,10 @@
 <dd><p>A numeric scalar. The multiple of the median used to define the poverty threshold (default is <code>0.5</code>).</p></dd>
 
 
+<dt id="arg-daily-poverty-line">daily_poverty_line<a class="anchor" aria-label="anchor" href="#arg-daily-poverty-line"></a></dt>
+<dd><p>A numeric scalar representing the <strong>absolute poverty threshold per day</strong>. (default is <code>NULL</code>).</p></dd>
+
+
 <dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
 <dd><p>A character vector indicating the percentile estimation type (passed to <code>compute_weighted_percentiles</code>). Default is <code>"type_4"</code>.</p></dd>
 
@@ -82,7 +87,9 @@
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>This function multiplies the relative poverty rate by the average relative poverty shortfall among the poor, resulting in the FGT1 poverty gap index. The result represents the average poverty gap across the entire population as a fraction of the poverty line.</p>
+    <p>This function multiplies the relative poverty rate by the average relative poverty shortfall among the poor, resulting in the FGT1 poverty gap index. The result represents the average poverty gap across the entire population as a fraction of the poverty line.
+When <code>daily_poverty_line </code> is specified, the function automatically assumes, the scalar is expressed in daily units.
+Because the LIS dataset reports <strong>annual income</strong>, the function internally converts the provided daily threshold into an <strong>annual threshold</strong>, multiplying it by <code>365</code> (calendar year).</p>
     </div>
 
     <div class="section level2">
@@ -98,7 +105,8 @@
 <span class="r-in"><span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="op">~</span> <span class="va">.x</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">dhi</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="op">~</span> <span class="va">.x</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>new_wgt <span class="op">=</span> <span class="va">hwgt</span> <span class="op">*</span> <span class="va">nhhmem</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="apply_iqr_top_bottom_coding.html">apply_iqr_top_bottom_coding</a></span><span class="op">(</span><span class="st">"dhi"</span>, <span class="st">"hwgt"</span>, type <span class="op">=</span> <span class="st">"type_2"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="apply_sqrt_equivalisation.html">apply_sqrt_equivalisation</a></span><span class="op">(</span><span class="st">"dhi"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="apply_sqrt_equivalisation.html">apply_sqrt_equivalisation</a></span><span class="op">(</span><span class="st">"dhi"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="apply_ppp_adjustment.html">apply_ppp_adjustment</a></span><span class="op">(</span><span class="st">"dhi"</span>, <span class="st">"lis"</span>, <span class="st">"lisppp"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Compute the FGT1 poverty gap index</span></span></span>
 <span class="r-in"><span><span class="va">pgi</span> <span class="op">&lt;-</span> <span class="fu">run_weighted_poverty_gap_index</span><span class="op">(</span></span></span>
@@ -107,7 +115,17 @@
 <span class="r-in"><span>  wgt_name <span class="op">=</span> <span class="st">"new_wgt"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Compute the FGT1 poverty gap index, using an absolut threshold expressed in daily terms. </span></span></span>
+<span class="r-in"><span><span class="va">pgi_daily_threshold</span> <span class="op">&lt;-</span> <span class="fu">run_weighted_poverty_gap_index</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data_list <span class="op">=</span> <span class="va">datasets</span>,</span></span>
+<span class="r-in"><span>  var_name <span class="op">=</span> <span class="st">"dhi"</span>,</span></span>
+<span class="r-in"><span>  wgt_name <span class="op">=</span> <span class="st">"new_wgt"</span>, </span></span>
+<span class="r-in"><span>  daily_poverty_line <span class="op">=</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">pgi</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">pgi_daily_threshold</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
