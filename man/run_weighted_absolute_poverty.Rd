@@ -53,7 +53,7 @@ abs_pvt_rate_215 <- datasets \%>\%
  map(~ .x \%>\% mutate(new_wgt = hwgt * nhhmem)) \%>\%
  apply_iqr_top_bottom_coding("dhi", "hwgt", type = "type_2") \%>\%
  apply_sqrt_equivalisation("dhi") \%>\% 
- apply_ppp_adjustment("dhi", database = "lis", transformation = "lisppp") \%>\% # 
+ apply_ppp_adjustment("dhi", database = "lis", transformation = "lisppp") \%>\%  
  run_weighted_absolute_poverty("dhi", "new_wgt")
  
 print(abs_pvt_rate_215)  
@@ -65,6 +65,7 @@ abs_pvt_rate_685 <- datasets \%>\%
  map(~ .x \%>\% mutate(new_wgt = hwgt * nhhmem)) \%>\%
  apply_iqr_top_bottom_coding("dhi", "hwgt", type = "type_2") \%>\%
  apply_sqrt_equivalisation("dhi") \%>\% 
+ apply_ppp_adjustment("dhi", database = "lis", transformation = "lisppp") \%>\%  
  run_weighted_absolute_poverty("dhi", "new_wgt", daily_poverty_line = 6.85)
  
 print(abs_pvt_rate_685)   

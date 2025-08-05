@@ -9,6 +9,7 @@ run_weighted_poverty_gap_index(
   var_name,
   wgt_name,
   times_median = 0.5,
+  daily_poverty_line = NULL,
   type = c("type_4", "type_2"),
   na.rm = TRUE
 )
@@ -22,6 +23,8 @@ run_weighted_poverty_gap_index(
 
 \item{times_median}{A numeric scalar. The multiple of the median used to define the poverty threshold (default is \code{0.5}).}
 
+\item{daily_poverty_line}{A numeric scalar representing the \strong{absolute poverty threshold per day}. (default is \code{NULL}).}
+
 \item{type}{A character vector indicating the percentile estimation type (passed to \code{compute_weighted_percentiles}). Default is \code{"type_4"}.}
 
 \item{na.rm}{Logical. Should missing values be removed before computation? Default is \code{TRUE}.}
@@ -34,6 +37,8 @@ Calculates the Foster–Greer–Thorbecke poverty gap index (FGT1) for a list of
 }
 \details{
 This function multiplies the relative poverty rate by the average relative poverty shortfall among the poor, resulting in the FGT1 poverty gap index. The result represents the average poverty gap across the entire population as a fraction of the poverty line.
+When \code{daily_poverty_line } is specified, the function automatically assumes, the scalar is expressed in daily units.
+Because the LIS dataset reports \strong{annual income}, the function internally converts the provided daily threshold into an \strong{annual threshold}, multiplying it by \code{365} (calendar year).
 }
 \examples{
 \dontrun{
@@ -47,7 +52,8 @@ datasets <- datasets \%>\%
   map(~ .x \%>\% filter(!is.na(dhi))) \%>\%
   map(~ .x \%>\% mutate(new_wgt = hwgt * nhhmem)) \%>\%
   apply_iqr_top_bottom_coding("dhi", "hwgt", type = "type_2") \%>\%
-  apply_sqrt_equivalisation("dhi")
+  apply_sqrt_equivalisation("dhi") \%>\%
+  apply_ppp_adjustment("dhi", "lis", "lisppp")
 
 # Compute the FGT1 poverty gap index
 pgi <- run_weighted_poverty_gap_index(
@@ -56,6 +62,16 @@ pgi <- run_weighted_poverty_gap_index(
   wgt_name = "new_wgt"
 )
 
+# Compute the FGT1 poverty gap index, using an absolut threshold expressed in daily terms. 
+pgi_daily_threshold <- run_weighted_poverty_gap_index(
+  data_list = datasets,
+  var_name = "dhi",
+  wgt_name = "new_wgt", 
+  daily_poverty_line = 10
+)
+
+
 print(pgi)
+print(pgi_daily_threshold)
 }
 }

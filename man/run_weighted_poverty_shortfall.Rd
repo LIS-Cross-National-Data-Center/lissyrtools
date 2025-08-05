@@ -9,6 +9,7 @@ run_weighted_poverty_shortfall(
   var_name,
   wgt_name = NULL,
   times_median = 0.5,
+  daily_poverty_line = NULL,
   type = c("type_4", "type_2"),
   percent = FALSE,
   na.rm = TRUE
@@ -22,6 +23,8 @@ run_weighted_poverty_shortfall(
 \item{wgt_name}{A string (optional). The name of the weight variable. If \code{NULL}, equal weights are assumed.}
 
 \item{times_median}{A numeric scalar. The multiple of the median used to define the poverty threshold (default is \code{0.5}).}
+
+\item{daily_poverty_line}{A numeric scalar representing the \strong{absolute poverty threshold per day}. (default is \code{NULL}).}
 
 \item{type}{A character vector indicating the percentile estimation type (passed to \code{compute_weighted_percentiles}). Default is \code{"type_4"}.}
 
@@ -39,6 +42,10 @@ A named list. Each list element is named by country and contains a named numeric
 \description{
 Calculates the average shortfall (gap) between individual/household income and the relative poverty line, weighted by the population weights and restricted to those below the poverty line.
 }
+\details{
+When \code{daily_poverty_line} is specified, the function assumes the threshold is expressed in daily units and converts it to an annual threshold by multiplying it by 365.
+It is \strong{critical} that the daily poverty threshold be expressed in the \strong{same monetary unit} as the target income variable (\code{var_name}). For example, if income is reported in PPP-adjusted USD, the threshold must also be in PPP-adjusted USD. The function does not perform currency or PPP conversions.
+}
 \examples{
 \dontrun{
 library(lissyrtools)
@@ -53,31 +60,42 @@ datasets <- datasets \%>\%
   apply_iqr_top_bottom_coding("dhi", "hwgt", type = "type_2") \%>\%
   apply_sqrt_equivalisation("dhi")
 
-# Compute average poverty shortfall in absolute (daily monetary) terms
-abs_gap <- run_weighted_poverty_shortfall(
+# Compute average poverty shortfall in daily monetary terms
+avg_gap <- run_weighted_poverty_shortfall(
   data_list = datasets,
   var_name = "dhi",
   wgt_name = "new_wgt"
 )
 
 # Compute average poverty shortfall in percentage of the poverty line
-rel_gap <- run_weighted_poverty_shortfall(
+percentage_gap <- run_weighted_poverty_shortfall(
   data_list = datasets,
   var_name = "dhi",
   wgt_name = "new_wgt",
   percent = TRUE
 )
 
-# Compute average poverty shortfall in absolute (daily monetary) terms, converted to international dollars at 2017 prices. 
-abs_gap_dollars <- datasets \%>\% 
+# Compute average poverty shortfall in daily monetary terms, converted to international dollars at 2017 prices. 
+avg_gap_dollars <- datasets \%>\% 
   apply_ppp_adjustment("dhi", "lis", "lisppp") \%>\% 
   run_weighted_poverty_shortfall(
   var_name = "dhi",
   wgt_name = "new_wgt"
 )
 
-print(abs_gap)
-print(rel_gap)
-print(abs_gap_dollars)
+# Compute average poverty shortfall in daily monetary terms, from a specified poverty threshold in international dollars at 2017 prices. 
+avg_gap_absolute_line <- datasets \%>\% 
+  apply_ppp_adjustment("dhi", "lis", "lisppp") \%>\% 
+  run_weighted_poverty_shortfall(
+  var_name = "dhi",
+  wgt_name = "new_wgt", 
+  daily_poverty_line  = 10
+)
+
+
+print(avg_gap)
+print(percentage_gap)
+print(avg_gap_dollars)
+print(avg_gap_absolute_line)
 }
 }
