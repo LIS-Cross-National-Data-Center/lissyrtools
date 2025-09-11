@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">lissyrtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,16 +35,25 @@
 <h2 class="pkg-version" data-toc-text="0.2.1" id="lissyrtools-021-2025-09-15">lissyrtools 0.2.1 (2025-09-15)<a class="anchor" aria-label="anchor" href="#lissyrtools-021-2025-09-15"></a></h2>
 <div class="section level3">
 <h3 id="new-functions-0-2-1">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-2-1"></a></h3>
-<ul><li><code><a href="../reference/check_github_version.html">check_github_version()</a></code></li>
+<ul><li>
+<code><a href="../reference/run_weighted_absolute_poverty.html">run_weighted_absolute_poverty()</a></code>: Measures absolute poverty based on a fixed monetary threshold.</li>
+<li>
+<code><a href="../reference/check_github_version.html">check_github_version()</a></code>: Retrieves the current version of <code>lissyrtools</code> in GitHub.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="major-changes-0-2-1">Major changes<a class="anchor" aria-label="anchor" href="#major-changes-0-2-1"></a></h3>
-</div>
+<ul><li>Added logical argument <code>average</code> to <code><a href="../reference/run_weighted_percentiles.html">run_weighted_percentiles()</a></code>. When set to <code>TRUE</code> it computes the weighted mean of a variable within each defined percentile group.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="minor-changes-0-2-1">Minor changes<a class="anchor" aria-label="anchor" href="#minor-changes-0-2-1"></a></h3>
 <ul><li>The <code>by</code> argument in <code><a href="../reference/run_weighted_count.html">run_weighted_count()</a></code>, <code><a href="../reference/run_weighted_mean.html">run_weighted_mean()</a></code> and <code><a href="../reference/run_weighted_percentiles.html">run_weighted_percentiles()</a></code> is now less restrictive. It accepts additional named variables beyond those defined in <code>lis_categorical_variables</code>, <code>lws_wealth_categorical_variables</code>, or <code>inum</code>.</li>
-<li>Applied corrections in <code><a href="../reference/structure_to_plot.html">structure_to_plot()</a></code>, standardized <code>dname</code> column values across structures, and renamed a column to <code>distribution_group</code> in the third structure. ## Lifecycle</li>
+<li>Applied corrections in <code><a href="../reference/structure_to_plot.html">structure_to_plot()</a></code>, standardized <code>dname</code> column values across structures, and renamed a column to <code>distribution_group</code> in the third structure.</li>
+<li>Deleted columns <code>lisppp</code>, <code>cpi</code>, and <code>ppp</code> after each use of <code><a href="../reference/apply_ppp_adjustment.html">apply_ppp_adjustment()</a></code>. This allows the function to be used immediately afterwards, with another variable.<br></li>
+<li>Added the argument <code>daily_poverty_line</code> on the following functions: <code><a href="../reference/run_weighted_poverty_shortfall.html">run_weighted_poverty_shortfall()</a></code> and <code><a href="../reference/run_weighted_poverty_shortfall.html">run_weighted_poverty_shortfall()</a></code>.</li>
 </ul></div>
+<div class="section level3">
+<h3 id="lifecycle-0-2-1">Lifecycle<a class="anchor" aria-label="anchor" href="#lifecycle-0-2-1"></a></h3>
+</div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="lissyrtools-020-2025-06-04">lissyrtools 0.2.0 (2025-06-04)<a class="anchor" aria-label="anchor" href="#lissyrtools-020-2025-06-04"></a></h2>
