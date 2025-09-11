@@ -4,16 +4,21 @@
 
 ## New functions
 
-- `check_github_version()`
+- `run_weighted_absolute_poverty()`: Measures absolute poverty based on a fixed monetary threshold.
+- `check_github_version()`: Retrieves the current version of `lissyrtools` in GitHub.
 
 ## Major changes
 
+- Added logical argument `average` to `run_weighted_percentiles()`. When set to `TRUE` it computes the weighted mean of a variable within each defined percentile group.  
 
 
 ## Minor changes
 
 - The `by` argument in `run_weighted_count()`, `run_weighted_mean()` and `run_weighted_percentiles()` is now less restrictive. It accepts additional named variables beyond those defined in `lis_categorical_variables`, `lws_wealth_categorical_variables`, or `inum`.
 - Applied corrections in `structure_to_plot()`, standardized `dname` column values across structures, and renamed a column to `distribution_group` in the third structure.
+- Deleted columns `lisppp`, `cpi`, and `ppp` after each use of `apply_ppp_adjustment()`. This allows the function to be used immediately afterwards, with another variable.  
+- Added the argument `daily_poverty_line` on the following functions: `run_weighted_poverty_shortfall()` and `run_weighted_poverty_shortfall()`.
+
 ## Lifecycle
 
 
