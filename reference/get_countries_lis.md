@@ -20,7 +20,7 @@ get_countries_lis()
 #>               "au"               "at"               "be"               "br" 
 #>           Bulgaria             Canada              Chile              China 
 #>               "bg"               "ca"               "cl"               "cn" 
-#>           Colombia     Czech Republic            Denmark Dominican Republic 
+#>           Colombia            Czechia            Denmark Dominican Republic 
 #>               "co"               "cz"               "dk"               "do" 
 #>            Estonia            Finland             France            Georgia 
 #>               "ee"               "fi"               "fr"               "ge" 
