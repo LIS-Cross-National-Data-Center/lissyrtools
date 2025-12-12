@@ -1,0 +1,45 @@
+# Read files in LISSY
+
+**\[superseded\]**
+
+Reads multiple LIS, LWS or ERFLIS files in the LISSY interface.
+
+All files need to be from the same database (e.g. LIS, LWS) and level
+(e.g. 'household', 'person') Computes the full year with four digits by
+default.
+
+## Usage
+
+``` r
+read_lissy_files(files, col_select = NULL, full_year_names = TRUE)
+```
+
+## Arguments
+
+- files:
+
+  A character vector containing file names in 'ccyyl' format. All files
+  need to be at the same level (i.e. 'household', 'person'). E.g.
+  c("it14h", "us16h")
+
+- col_select:
+
+  A character vector with the name of the variables which should be
+  selected from the files. E.g. c("hid", "dhi", "hifactor").
+
+- full_year_names:
+
+  A boolean. Should the name of the imported file be changed to
+  'ccyyyyl' format.
+
+## Value
+
+A named list with the loaded files.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+read_lissy_files(c("fr84h", "fr94h", "fr10h"))
+} # }
+```

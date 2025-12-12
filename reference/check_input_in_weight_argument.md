@@ -1,0 +1,23 @@
+# Validate the Weight Variable Input
+
+This function checks the validity of the weight variable provided by the
+user, issuing a helpful message if the variable name does not end with
+"wgt", as expected by LIS conventions.
+
+## Usage
+
+``` r
+check_input_in_weight_argument(wgt_name)
+```
+
+## Arguments
+
+- wgt_name:
+
+  A character string of length 1 indicating the name of the weight
+  variable used.
+
+## Value
+
+No return value. The function is used for validation and emits a warning
+if the weight variable name seems unusual.

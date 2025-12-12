@@ -11,7 +11,7 @@ purchasing power parity (PPP), or both (lisppp)."><meta property="og:image" cont
 
     <a class="navbar-brand me-2" href="../index.html">lissyrtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +44,13 @@ purchasing power parity (PPP), or both (<code>lisppp</code>).</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">apply_ppp_adjustment</span><span class="op">(</span><span class="va">data_list</span>, <span class="va">var_name</span>, <span class="va">database</span>, transformation <span class="op">=</span> <span class="st">"lisppp"</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">apply_ppp_adjustment</span><span class="op">(</span></span>
+<span>  <span class="va">data_list</span>,</span>
+<span>  <span class="va">var_name</span>,</span>
+<span>  <span class="va">database</span>,</span>
+<span>  transformation <span class="op">=</span> <span class="st">"lisppp"</span>,</span>
+<span>  base_year_ppp <span class="op">=</span> <span class="fl">2017</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -69,6 +75,11 @@ Required for determining how to handle the deflators and income reference years.
 <li><p><code>"cpi"</code>: Adjusts only for domestic inflation (CPI).</p></li>
 <li><p><code>"ppp"</code>: Adjusts only for purchasing power parity (PPP), for cross-country comparability.</p></li>
 </ul></dd>
+
+
+<dt id="arg-base-year-ppp">base_year_ppp<a class="anchor" aria-label="anchor" href="#arg-base-year-ppp"></a></dt>
+<dd><p>Numeric. One of the unique values in the <code>version_year</code> column of the <code>deflators</code> data frame. Default is 2017
+Indicates the reference year of the PPP series (e.g., PPPs expressed in 2017 USD prices, PPPs expressed in 2021 USD prices).</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -116,14 +127,12 @@ no longer expressed in national currency units.</p>
 <span class="r-in"><span><span class="fu"><a href="run_weighted_mean.html">run_weighted_mean</a></span><span class="op">(</span><span class="va">can_mex_lisppp</span>, var_name <span class="op">=</span> <span class="st">"dhi"</span><span class="op">)</span>  <span class="co"># Fully deflated (real + PPP)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># --- Example 4: Reference Year Differences in Same Survey Year (Germany 2017, LIS vs LWS) ---</span></span></span>
-<span class="r-in"><span><span class="va">lis_de17</span> <span class="op">&lt;-</span> <span class="fu"><a href="lissyuse.html">lissyuse</a></span><span class="op">(</span><span class="st">"de17"</span>, vars <span class="op">=</span> <span class="st">"dhi"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">lws_de17</span> <span class="op">&lt;-</span> <span class="fu"><a href="lissyuse.html">lissyuse</a></span><span class="op">(</span><span class="st">"de17"</span>, vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dhi"</span>, <span class="st">"dnw"</span><span class="op">)</span>, lws <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># --- Example 4:  --- Changing PPP Base Years (2017 vs 2021 Prices) ---</span></span></span>
+<span class="r-in"><span><span class="va">lis_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="lissyuse.html">lissyuse</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"se"</span>, <span class="st">"uk"</span><span class="op">)</span>, vars <span class="op">=</span> <span class="st">"dhi"</span>, from <span class="op">=</span> <span class="fl">2016</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">apply_ppp_adjustment</span><span class="op">(</span><span class="va">lis_de17</span>, <span class="st">"dhi"</span>, database <span class="op">=</span> <span class="st">"lis"</span>, transformation <span class="op">=</span> <span class="st">"lisppp"</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>mean_cpi_lis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cpi</span><span class="op">)</span><span class="op">)</span> </span></span>
-<span class="r-in"><span><span class="fu">apply_ppp_adjustment</span><span class="op">(</span><span class="va">lws_de17</span>, <span class="st">"dhi"</span>, database <span class="op">=</span> <span class="st">"lws"</span>, transformation <span class="op">=</span> <span class="st">"lisppp"</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>mean_cpi_lis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cpi</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">apply_ppp_adjustment</span><span class="op">(</span><span class="va">lis_data</span>, <span class="st">"dhi"</span>, database <span class="op">=</span> <span class="st">"lis"</span>, transformation <span class="op">=</span> <span class="st">"lisppp"</span>, base_year_ppp <span class="op">=</span> <span class="fl">2017</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="run_weighted_mean.html">run_weighted_mean</a></span><span class="op">(</span>var_name <span class="op">=</span> <span class="st">"dhi"</span>, wgt_name <span class="op">=</span> <span class="st">"hwgt"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">apply_ppp_adjustment</span><span class="op">(</span><span class="va">lis_data</span>, <span class="st">"dhi"</span>, database <span class="op">=</span> <span class="st">"lis"</span>, transformation <span class="op">=</span> <span class="st">"lisppp"</span>, base_year_ppp <span class="op">=</span> <span class="fl">2021</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="run_weighted_mean.html">run_weighted_mean</a></span><span class="op">(</span>var_name <span class="op">=</span> <span class="st">"dhi"</span>, wgt_name <span class="op">=</span> <span class="st">"hwgt"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Even with the same survey year (DE17), different income reference years are accounted for automatically.</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># } </span></span></span>
 </code></pre></div>
     </div>
@@ -136,7 +145,7 @@ no longer expressed in national currency units.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

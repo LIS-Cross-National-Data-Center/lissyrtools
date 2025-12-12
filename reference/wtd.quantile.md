@@ -1,0 +1,36 @@
+# Weighted statistical Estimates
+
+Function from: Frank E Harrell Jr, with contributions from Charles
+Dupont and many others. (2020). Hmisc: Harrell Miscellaneous. R package
+version 4.4-1. https://CRAN.R-project.org/package=Hmisc
+
+## Usage
+
+``` r
+wtd.quantile(
+  x,
+  weights = NULL,
+  probs = c(0, 0.25, 0.5, 0.75, 1),
+  type = c("quantile", "(i-1)/(n-1)", "i/(n+1)", "i/n"),
+  normwt = FALSE,
+  na.rm = TRUE
+)
+
+wtd.mean(x, weights = NULL, normwt = "ignored", na.rm = TRUE)
+
+wtd.Ecdf(
+  x,
+  weights = NULL,
+  type = c("i/n", "(i-1)/(n-1)", "i/(n+1)"),
+  normwt = FALSE,
+  na.rm = TRUE
+)
+
+wtd.table(
+  x,
+  weights = NULL,
+  type = c("list", "table"),
+  normwt = FALSE,
+  na.rm = TRUE
+)
+```
