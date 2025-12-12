@@ -17,6 +17,8 @@
 #'   - **3rd structure:** List with `ccyy` abbreviations as keys, each containing sublists of named vectors.
 #'     Represents more complex summaries with multiple grouping variables, percentiles, and shares or averages across the distribution.
 #' 
+#' @param print_columns Logical. If `TRUE`, it prints an informative message on the resulting data structure, and the names of its columns.  
+#' 
 #' @return A tidy `data.frame` with the following columns (depending on input structure):
 #'   - `cname`: Country name.
 #'   - `year`: Year.
@@ -102,7 +104,7 @@
 #'   theme_minimal() +
 #'   theme(axis.text.x = element_text(angle = 25, hjust = 1))
 #' }
-structure_to_plot <- function(data_list) {
+structure_to_plot <- function(data_list, print_columns = TRUE) {
   # data <- lissyrtools::lissyuse(data = c("es", "de"), vars = c("dhi", "educ", "pi11", "rural"),from = 2016)
   #
   # 1st structure:
@@ -215,8 +217,10 @@ structure_to_plot <- function(data_list) {
     }
   }
 
+  if (print_columns == TRUE) {
   cat("The resulting data frame's column names are:\n")
   print(names(result_df))
+  }
   return(result_df)
 }
 

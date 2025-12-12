@@ -14,6 +14,8 @@
 #'   \item `"cpi"`: Adjusts only for domestic inflation (CPI).
 #'   \item `"ppp"`: Adjusts only for purchasing power parity (PPP), for cross-country comparability.
 #' }
+#' @param base_year_ppp Numeric. One of the unique values in the `version_year` column of the `deflators` data frame. Default is 2017
+#' Indicates the reference year of the PPP series (e.g., PPPs expressed in 2017 USD prices, PPPs expressed in 2021 USD prices).
 #' 
 #' @details
 #' For LWS datasets and income variables, the function accounts for discrepancies between
@@ -57,21 +59,20 @@
 #' can_mex_lisppp <- apply_ppp_adjustment(can_mex, "dhi", database = "lis", transformation = "lisppp")
 #' run_weighted_mean(can_mex_lisppp, var_name = "dhi")  # Fully deflated (real + PPP)
 #'
-#'
-#' # --- Example 4: Reference Year Differences in Same Survey Year (Germany 2017, LIS vs LWS) ---
-#' lis_de17 <- lissyuse("de17", vars = "dhi")
-#' lws_de17 <- lissyuse("de17", vars = c("dhi", "dnw"), lws = TRUE)
-#'
-#' apply_ppp_adjustment(lis_de17, "dhi", database = "lis", transformation = "lisppp")[[1]] %>% dplyr::summarise(mean_cpi_lis = mean(cpi)) 
-#' apply_ppp_adjustment(lws_de17, "dhi", database = "lws", transformation = "lisppp")[[1]] %>% dplyr::summarise(mean_cpi_lis = mean(cpi))
-#'
-#' # Even with the same survey year (DE17), different income reference years are accounted for automatically.
+#' 
+#' # --- Example 4:  --- Changing PPP Base Years (2017 vs 2021 Prices) ---
+#' lis_data <- lissyuse(data = c("se", "uk"), vars = "dhi", from = 2016)
+#' 
+#' apply_ppp_adjustment(lis_data, "dhi", database = "lis", transformation = "lisppp", base_year_ppp = 2017) %>% run_weighted_mean(var_name = "dhi", wgt_name = "hwgt")
+#' apply_ppp_adjustment(lis_data, "dhi", database = "lis", transformation = "lisppp", base_year_ppp = 2021) %>% run_weighted_mean(var_name = "dhi", wgt_name = "hwgt")
+#' 
 #' } 
 apply_ppp_adjustment <- function(
   data_list,
   var_name,
   database,
-  transformation = "lisppp"
+  transformation = "lisppp", 
+  base_year_ppp = 2017
 ) {
   
   
@@ -102,6 +103,17 @@ apply_ppp_adjustment <- function(
       "Argument '{transformation}' must be one of \"lisppp\" (default), \"cpi\", or \"ppp\"."
     )
   )
+  
+  # Check `base_year_ppp` argument
+  valid_base_year_ppp <- lissyrtools::deflators %>% pull(version_year) %>% unique()
+  assertthat::assert_that(
+    base_year_ppp %in% valid_base_year_ppp,
+    msg = glue::glue(
+      "Invalid `base_year_ppp`: {base_year_ppp}. Must be one of {paste(sort(valid_base_year_ppp), collapse = ', ')}."
+    )
+  )
+  
+  
 
   # --- Merge deflators data ---
 
@@ -118,6 +130,7 @@ apply_ppp_adjustment <- function(
         dplyr::left_join(lissyrtools::data_inc_ref_year, by = "dname") %>%
         dplyr::left_join(
           lissyrtools::deflators %>%
+            dplyr::filter(version_year == base_year_ppp) %>% 
             dplyr::mutate(income_reference_year = year) %>%
             dplyr::select(-year, -cname, -iso3),
           by = c("iso2", "income_reference_year")
@@ -129,16 +142,17 @@ apply_ppp_adjustment <- function(
       data_list,
       ~ .x %>%
         dplyr::left_join(
-          lissyrtools::deflators %>% dplyr::select(-cname, -iso3),
+          lissyrtools::deflators %>% dplyr::filter(version_year == base_year_ppp) %>% dplyr::select(-cname, -iso3),
           by = c("iso2", "year")
         )
     )
   }
 
-  # ---  mismatches betweewn missing deflators data for 1) Taiwan and 2) the most recent year/s in some countries ---
+  # ---  mismatches between missing deflators data for 1) Taiwan and 2) the most recent year/s in some countries ---
 
   dname_dts <- stringr::str_sub(names(data_list), 1, 4)
   dname_dflt <- lissyrtools::deflators %>%
+    dplyr::filter(version_year == base_year_ppp) %>% 
     dplyr::mutate(
       dname = stringr::str_c(iso2, stringr::str_sub(year, 3, 4))
     ) %>%
@@ -160,17 +174,17 @@ apply_ppp_adjustment <- function(
   if (transformation == "lisppp") {
     message(glue::glue(
       "Variable '{var_name}' was adjusted using LIS-specific deflators: ",
-      "both for domestic inflation (CPI, base year 2017 = 100), ",
+      "both for domestic inflation (CPI, base year '{base_year_ppp}' = 100), ",
       "and for cross-country comparability using purchasing power parity (PPP) conversion factors, ",
-      "with 2017 USD as the base (USA = 1)."
+      "with '{base_year_ppp}' USD as the base (USA = 1)."
     ))
   } else if (transformation == "cpi") {
     message(glue::glue(
-      "Variable '{var_name}' was adjusted for domestic inflation using the CPI (base year 2017 = 100)."
+      "Variable '{var_name}' was adjusted for domestic inflation using the CPI (base year '{base_year_ppp}' = 100)."
     ))
   } else if (transformation == "ppp") {
     message(glue::glue(
-      "Variable '{var_name}' was adjusted for cross-country comparability using 2017 USD PPP conversion factors (USA = 1)."
+      "Variable '{var_name}' was adjusted for cross-country comparability using '{base_year_ppp}' USD PPP conversion factors (USA = 1)."
     ))
   }
 
@@ -185,7 +199,7 @@ apply_ppp_adjustment <- function(
       df[[var_name]] <- df[[var_name]] / df[["ppp"]]
     }
     
-    df <- df %>% select(-c(lisppp, cpi, ppp))
+    df <- df %>% select(-c(lisppp, cpi, ppp, version_year))
 
     # could be "lisppp" "cpi" "ppp"
     return(df)

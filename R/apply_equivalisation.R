@@ -127,7 +127,7 @@ apply_sqrt_equivalisation <- function(data_list, var_name, eq_scale = 0.5) {
 #' data_hhd_with_nhhmem13 <- lissyrtools::lissyuse("it", vars = c("dhi", "nhhmem13"), from = 2010)
 #' 
 #' # No equivalisation case
-#' data_hhd  %>%
+#' data_hhd_with_nhhmem13  %>%
 #'  purrr::map(~ .x %>% filter(!is.na(dhi))) %>%
 #'  run_weighted_mean("dhi", "hpopwgt")  
 #' 

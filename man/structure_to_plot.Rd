@@ -4,7 +4,7 @@
 \alias{structure_to_plot}
 \title{Transform Structured Data Lists into a Tidy Data Frame for Plotting}
 \usage{
-structure_to_plot(data_list)
+structure_to_plot(data_list, print_columns = TRUE)
 }
 \arguments{
 \item{data_list}{A named list containing the data to be transformed. The structure and naming
@@ -17,6 +17,8 @@ Typically output from functions grouped by a categorical variable, e.g. \code{"e
 \item \strong{3rd structure:} List with \code{ccyy} abbreviations as keys, each containing sublists of named vectors.
 Represents more complex summaries with multiple grouping variables, percentiles, and shares or averages across the distribution.
 }}
+
+\item{print_columns}{Logical. If \code{TRUE}, it prints an informative message on the resulting data structure, and the names of its columns.}
 }
 \value{
 A tidy \code{data.frame} with the following columns (depending on input structure):

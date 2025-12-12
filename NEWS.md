@@ -1,5 +1,17 @@
 # lissyrtools
 
+
+# lissyrtools 0.2.2 (2025-12-15)
+
+## New functions
+
+## Major changes
+
+## Minor changes
+
+- Added a new numeric argument `base_year_ppp` to `apply_ppp_adjustment()`. This argument specifies the PPP base year and must correspond to one of the unique values in the new `version_year` column of the `deflators` data frame.
+- Added a new logical argument `print_columns` to `structure_to_plot()`.
+
 # lissyrtools 0.2.1 (2025-09-15)
 
 ## New functions
@@ -18,8 +30,6 @@
 - Applied corrections in `structure_to_plot()`, standardized `dname` column values across structures, and renamed a column to `distribution_group` in the third structure.
 - Deleted columns `lisppp`, `cpi`, and `ppp` after each use of `apply_ppp_adjustment()`. This allows the function to be used immediately afterwards, with another variable.  
 - Added the argument `daily_poverty_line` on the following functions: `run_weighted_poverty_shortfall()` and `run_weighted_poverty_shortfall()`.
-
-## Lifecycle
 
 
 

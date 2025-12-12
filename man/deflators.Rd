@@ -5,7 +5,7 @@
 \alias{deflators}
 \title{CPI and PPP deflators.}
 \format{
-A data frame with 7 variables:
+A data frame with 8 variables:
 }
 \source{
 \url{https://www.lisdatacenter.org/resources/ppp-deflators/}

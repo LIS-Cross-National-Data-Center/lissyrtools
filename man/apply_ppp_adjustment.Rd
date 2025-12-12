@@ -4,7 +4,13 @@
 \alias{apply_ppp_adjustment}
 \title{Adjust Monetary Variables for Inflation and PPP}
 \usage{
-apply_ppp_adjustment(data_list, var_name, database, transformation = "lisppp")
+apply_ppp_adjustment(
+  data_list,
+  var_name,
+  database,
+  transformation = "lisppp",
+  base_year_ppp = 2017
+)
 }
 \arguments{
 \item{data_list}{A named list of data frames, from LIS or LWS microdata.}
@@ -20,6 +26,9 @@ Required for determining how to handle the deflators and income reference years.
 \item \code{"cpi"}: Adjusts only for domestic inflation (CPI).
 \item \code{"ppp"}: Adjusts only for purchasing power parity (PPP), for cross-country comparability.
 }}
+
+\item{base_year_ppp}{Numeric. One of the unique values in the \code{version_year} column of the \code{deflators} data frame. Default is 2017
+Indicates the reference year of the PPP series (e.g., PPPs expressed in 2017 USD prices, PPPs expressed in 2021 USD prices).}
 }
 \value{
 A list of data frames, with the specified variable adjusted based on the chosen transformation.
@@ -68,13 +77,11 @@ can_mex_lisppp <- apply_ppp_adjustment(can_mex, "dhi", database = "lis", transfo
 run_weighted_mean(can_mex_lisppp, var_name = "dhi")  # Fully deflated (real + PPP)
 
 
-# --- Example 4: Reference Year Differences in Same Survey Year (Germany 2017, LIS vs LWS) ---
-lis_de17 <- lissyuse("de17", vars = "dhi")
-lws_de17 <- lissyuse("de17", vars = c("dhi", "dnw"), lws = TRUE)
+# --- Example 4:  --- Changing PPP Base Years (2017 vs 2021 Prices) ---
+lis_data <- lissyuse(data = c("se", "uk"), vars = "dhi", from = 2016)
 
-apply_ppp_adjustment(lis_de17, "dhi", database = "lis", transformation = "lisppp")[[1]] \%>\% dplyr::summarise(mean_cpi_lis = mean(cpi)) 
-apply_ppp_adjustment(lws_de17, "dhi", database = "lws", transformation = "lisppp")[[1]] \%>\% dplyr::summarise(mean_cpi_lis = mean(cpi))
+apply_ppp_adjustment(lis_data, "dhi", database = "lis", transformation = "lisppp", base_year_ppp = 2017) \%>\% run_weighted_mean(var_name = "dhi", wgt_name = "hwgt")
+apply_ppp_adjustment(lis_data, "dhi", database = "lis", transformation = "lisppp", base_year_ppp = 2021) \%>\% run_weighted_mean(var_name = "dhi", wgt_name = "hwgt")
 
-# Even with the same survey year (DE17), different income reference years are accounted for automatically.
 } 
 }
