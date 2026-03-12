@@ -5,7 +5,7 @@ Get the country name from the \`ccyy“
 ## Usage
 
 ``` r
-ccyy_to_cname(ccyy)
+ccyy_to_cname(ccyy_code = NULL)
 ```
 
 ## Arguments

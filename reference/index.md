@@ -183,6 +183,8 @@ and LWS.
   : CPI and PPP deflators.
 - [`missing_or_zero_vars_all`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/missing_or_zero_vars_all.md)
   : Variable Status Data Frame
+- [`metis_countries_df`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/metis_countries_df.md)
+  : Countries Names and ISO Codes.
 - [`value_label_c_data`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/value_label_c_data.md)
   : Value Labels for Country-Specific Variables in LIS and LWS Datasets
 

@@ -5,7 +5,7 @@ Get the year from the \`ccyy“
 ## Usage
 
 ``` r
-ccyy_to_yyyy(ccyy)
+ccyy_to_yyyy(ccyy_code = NULL)
 ```
 
 ## Arguments
