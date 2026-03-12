@@ -5,7 +5,7 @@
 ## Usage
 
 ``` r
-import_lisppp_data(path_to_ppp_file = "lissy")
+import_lisppp_data(path_to_ppp_file = "lissy", version_ppp = version_ppp)
 ```
 
 ## Arguments

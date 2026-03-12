@@ -11,7 +11,8 @@ implement_adjust_by_lisppp(
   database,
   variable,
   income_variable = NULL,
-  ppp_data = "lissyrtools"
+  ppp_data = "lissyrtools",
+  version_ppp = 2021
 )
 ```
 
