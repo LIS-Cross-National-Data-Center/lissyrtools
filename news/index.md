@@ -1,10 +1,52 @@
 # Changelog
 
-## lissyrtools 0.2.2 (2025-12-15)
+## lissyrtools 0.2.3 (2026-03-15)
 
 ### New functions
 
+- Added new built-in dataset `metis_countries_df`.
+
 ### Major changes
+
+- Rebuilt two auxiliary functions
+  [`ccyy_to_cname()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/ccyy_to_cname.md)
+  and
+  [`ccyy_to_yyyy()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/ccyy_to_yyyy.md)
+  to account for countries that are not still in LIS or LWS databases.
+- Rebuilt
+  [`structure_to_plot()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/structure_to_plot.md)
+  to account for countries that are not still in LIS or LWS databases.
+
+### Minor changes
+
+- Replaced
+  [`purrr::list_rbind()`](https://purrr.tidyverse.org/reference/list_c.html),
+  by
+  [`dplyr::bind_rows()`](https://dplyr.tidyverse.org/reference/bind_rows.html)
+  in the body of
+  [`structure_to_plot()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/structure_to_plot.md)
+  function.
+- Bug fix in the body of
+  [`run_weighted_relative_poverty()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/run_weighted_relative_poverty.md),
+  [`run_weighted_poverty_shortfall()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/run_weighted_poverty_shortfall.md),
+  and
+  [`run_weighted_poverty_gap_index()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/run_weighted_poverty_gap_index.md),
+  related with the `na.rm` argument.
+- Wrapped the
+  [`lissyuse()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/lissyuse.md)
+  console communication on the datasets imported inside the
+  [`message()`](https://rdrr.io/r/base/message.html) function.  
+- Argument `var_name` and argument are now less restrictive in
+  [`run_weighted_count()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/run_weighted_count.md).
+  It accepts both “currency”, “ageyoch”, “age”, and “grossnet”.
+- Removed auxiliary function
+  [`check_input_in_weight_argument()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/check_input_in_weight_argument.md)and
+  inlined the validation logic.
+- Renamed auxiliary function `remove_dname_with_missings_in_weights()`
+  to
+  [`remove_canada_lws_missing_weights_in_p_file()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/remove_canada_lws_missing_weights_in_p_file.md).
+
+## lissyrtools 0.2.2 (2025-12-15)
 
 ### Minor changes
 

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">lissyrtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,13 +32,28 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.3" id="lissyrtools-023-2026-03-15">lissyrtools 0.2.3 (2026-03-15)<a class="anchor" aria-label="anchor" href="#lissyrtools-023-2026-03-15"></a></h2>
+<div class="section level3">
+<h3 id="new-functions-0-2-3">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-2-3"></a></h3>
+<ul><li>Added new built-in dataset <code>metis_countries_df</code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="major-changes-0-2-3">Major changes<a class="anchor" aria-label="anchor" href="#major-changes-0-2-3"></a></h3>
+<ul><li>Rebuilt two auxiliary functions <code><a href="../reference/ccyy_to_cname.html">ccyy_to_cname()</a></code> and <code><a href="../reference/ccyy_to_yyyy.html">ccyy_to_yyyy()</a></code> to account for countries that are not still in LIS or LWS databases.</li>
+<li>Rebuilt <code><a href="../reference/structure_to_plot.html">structure_to_plot()</a></code> to account for countries that are not still in LIS or LWS databases.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-changes-0-2-3">Minor changes<a class="anchor" aria-label="anchor" href="#minor-changes-0-2-3"></a></h3>
+<ul><li>Replaced <code><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">purrr::list_rbind()</a></code>, by <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">dplyr::bind_rows()</a></code> in the body of <code><a href="../reference/structure_to_plot.html">structure_to_plot()</a></code> function.</li>
+<li>Bug fix in the body of <code><a href="../reference/run_weighted_relative_poverty.html">run_weighted_relative_poverty()</a></code>, <code><a href="../reference/run_weighted_poverty_shortfall.html">run_weighted_poverty_shortfall()</a></code>, and <code><a href="../reference/run_weighted_poverty_gap_index.html">run_weighted_poverty_gap_index()</a></code>, related with the <code>na.rm</code> argument.</li>
+<li>Wrapped the <code><a href="../reference/lissyuse.html">lissyuse()</a></code> console communication on the datasets imported inside the <code><a href="https://rdrr.io/r/base/message.html" class="external-link">message()</a></code> function.<br></li>
+<li>Argument <code>var_name</code> and argument are now less restrictive in <code><a href="../reference/run_weighted_count.html">run_weighted_count()</a></code>. It accepts both “currency”, “ageyoch”, “age”, and “grossnet”.</li>
+<li>Removed auxiliary function <code><a href="../reference/check_input_in_weight_argument.html">check_input_in_weight_argument()</a></code>and inlined the validation logic.</li>
+<li>Renamed auxiliary function <code>remove_dname_with_missings_in_weights()</code> to <code><a href="../reference/remove_canada_lws_missing_weights_in_p_file.html">remove_canada_lws_missing_weights_in_p_file()</a></code>.</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.2" id="lissyrtools-022-2025-12-15">lissyrtools 0.2.2 (2025-12-15)<a class="anchor" aria-label="anchor" href="#lissyrtools-022-2025-12-15"></a></h2>
-<div class="section level3">
-<h3 id="new-functions-0-2-2">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-2-2"></a></h3>
-</div>
-<div class="section level3">
-<h3 id="major-changes-0-2-2">Major changes<a class="anchor" aria-label="anchor" href="#major-changes-0-2-2"></a></h3>
-</div>
 <div class="section level3">
 <h3 id="minor-changes-0-2-2">Minor changes<a class="anchor" aria-label="anchor" href="#minor-changes-0-2-2"></a></h3>
 <ul><li>Added a new numeric argument <code>base_year_ppp</code> to <code><a href="../reference/apply_ppp_adjustment.html">apply_ppp_adjustment()</a></code>. This argument specifies the PPP base year and must correspond to one of the unique values in the new <code>version_year</code> column of the <code>deflators</code> data frame.</li>
