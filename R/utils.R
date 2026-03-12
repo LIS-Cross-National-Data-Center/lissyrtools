@@ -1,5 +1,184 @@
 # utils
 
+# NEW `lissyrtools` ---------------------------------------------------
+
+#' Is Canada LWS on the loaded data ?
+#'
+#' @description
+#' Auxilliary function to remove any p-level Canadian datasets in LWS, from the list of loaded datasets, as it has no weights
+#'
+#' @return a list
+#' @keywords internal
+remove_canada_lws_missing_weights_in_p_file <- function(list, wgt_name) {
+  # p-level data from Canada/LWS have missing weights on those whose relation is not 1000 reference person
+  # be aware of other datasets that might entail these missings in weights.
+  
+  if (
+    (all(c("relation", "inum") %in% names(list[[1]])) & !is.null(wgt_name)) &&
+    (sum(stringr::str_detect(names(list), "ca")) > 0)
+  ) {
+    clean_list <- purrr::discard(list, stringr::str_detect(names(list), "ca"))
+    message(
+      "Note: Canadian LWS datasets contain missing weights for individuals not identified as the reference person. These datasets were excluded to ensure valid weighted calculations."
+    )
+    return(clean_list)
+  } else {
+    clean_list <- list
+    return(clean_list)
+  }
+}
+
+#' Validate the Weight Variable Input
+#'
+#' @description
+#' This function checks the validity of the weight variable provided by the user, issuing a helpful message if the variable name
+#' does not end with "wgt", as expected by LIS conventions.
+#'
+#' @param wgt_name A character string of length 1 indicating the name of the weight variable used.
+#'
+#' @return No return value. The function is used for validation and emits a warning if the weight variable name seems unusual.
+#' @keywords internal
+check_input_in_weight_argument <- function(wgt_name) {
+  if (!is.null(wgt_name) && !stringr::str_detect(wgt_name, "wgt")) {
+    warning(
+      "LIS advice: Please check whether you have used one of the following variables in the `wgt_name` argument:\n",
+      "  - \"hwgt\", \"hpopwgt\", \"hwgta\", \"pwgt\", \"ppopwgt\", or \"pwgta\".\n\n",
+      "If your data was loaded at the household level instead of the person level, you may want to generate a multiple of one of these variables, such as `nhhmem * hwgt`."
+    )
+  }
+}
+
+
+#' Get the year from the `ccyy``
+#'
+#' @param ccyy A character vector of ccyy's
+#'
+#' @return A numeric vector with the corresponding years.
+#' @keywords internal
+ccyy_to_yyyy <- function(ccyy_code = NULL) {
+  yy = stringr::str_sub(ccyy_code, 3, 4)
+  
+  yyyy <- if (yy >= 00 & yy < 63) {
+    yyyy = as.numeric(
+      stringr::str_c("20", yy)
+    )
+  } else {
+    yyyy = as.numeric(
+      stringr::str_c("19", yy)
+    )
+  }
+  
+  return(yyyy)
+}
+
+
+#' Get the country name from the `ccyy``
+#'
+#' @param ccyy A character vector of ccyy's
+#'
+#' @return A character vector with the corresponding country names.
+#' @keywords internal
+ccyy_to_cname <- function(ccyy_code = NULL) {
+  output_ccyy_to_name <- lissyrtools::metis_countries_df %>% 
+    dplyr::filter(
+      iso2 == stringr::str_sub(ccyy_code, 1, 2)
+    ) %>%
+    dplyr::select(name) %>%
+    dplyr::pull()
+  
+  return(output_ccyy_to_name)
+}
+
+#' Rearranges a list whose elements are ccyy's into country names with numeric vectors names after its years.
+#'
+#' @param data_list A list
+#'
+#' @return A list
+#' @keywords internal
+convert_list_from_ccyy_to_cc_names_yyyy <- function(data_list) {
+  data_list %>%
+    purrr::imap_dfr(
+      ~ {
+        tibble::tibble(
+          country = lissyrtools::ccyy_to_cname(.y),
+          year = lissyrtools::ccyy_to_yyyy(.y),
+          value = .x
+        )
+      }
+    ) %>%
+    split(.$country) %>%
+    purrr::map(~ setNames(.x$value, .x$year))
+}
+
+
+#' Checks the share of missing values for each column acroos a list of data frames.
+#'
+#' @param data_list A list
+#' @param include_zeros Logical. If `TRUE`, values equal to zero are also accounted in the percentage of missings.
+#'
+#' @return A list
+#' @keywords internal
+check_missing_share <- function(data_list, include_zeros = FALSE) {
+  purrr::map(data_list, function(df) {
+    dplyr::summarise(
+      df,
+      dplyr::across(
+        dplyr::everything(),
+        ~ {
+          # Define missing: NA or (optional) zero
+          missing_vals <- if (include_zeros) is.na(.) | . == 0 else is.na(.)
+          mean(missing_vals) * 100
+        }
+      )
+    )
+  })
+}
+
+
+#' Retrieve the current version of lissyrtools from the GitHub repository
+#'
+#' @description
+#' Fetches the latest version of the `lissyrtools` package from its DESCRIPTION file on GitHub.
+#' This allows comparison with the locally installed version. Using an outdated version may
+#' result in missing support for the most recent countries, datasets, or variable revisions,
+#' which can cause inaccurate outputs in functions that rely on up-to-date metadata.
+#'
+#' @return A character string indicating the current version on GitHub.
+#' @export
+#' @examples
+#' \dontrun{
+#' library(lissyrtools)
+#' library(utils)
+#' library(assertthat)
+#' 
+#' local_version <- as.character(utils::packageVersion("lissyrtools"))
+#' remote_github_version <- check_github_version()
+#' 
+#' assertthat::assert_that(local_version == remote_github_version)
+#' }
+check_github_version <- function() {
+  url <- "https://raw.githubusercontent.com/LIS-Cross-National-Data-Center/lissyrtools/main/DESCRIPTION"
+  desc_lines <- readLines(url, warn = FALSE)
+  version_line <- grep("^Version:", desc_lines, value = TRUE)
+  version <- sub("Version:\\s*", "", version_line)
+  return(version)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+# OLD `lissyrtools` ---------------------------------------------------
+
+
+
 #' Test if all objects are NAs or 0
 #'
 #' @keywords internal
@@ -591,167 +770,4 @@ is_lissy_machine <- function() {
   Sys.info()[["effective_user"]] == "lissy"
 }
 
-
-#' Is Canada LWS on the loaded data ?
-#'
-#' @description
-#' Auxilliary function to remove any p-level Canadian datasets in LWS, from the list of loaded datasets, as it has no weights
-#'
-#' @return a list
-#' @keywords internal
-remove_dname_with_missings_in_weights <- function(list, wgt_name) {
-  # p-level data from Canada/LWS have missing weights on those whose relation is not 1000 reference person
-  # be aware of other datasets that might entail these missings in weights.
-
-  if (
-    (all(c("relation", "inum") %in% names(list[[1]])) & !is.null(wgt_name)) &&
-      (sum(stringr::str_detect(names(list), "ca")) > 0)
-  ) {
-    clean_list <- purrr::discard(list, stringr::str_detect(names(list), "ca"))
-    message(
-      "Note: Canadian LWS datasets contain missing weights for individuals not identified as the reference person. These datasets were excluded to ensure valid weighted calculations."
-    )
-    return(clean_list)
-  } else {
-    clean_list <- list
-    return(clean_list)
-  }
-}
-
-#' Validate the Weight Variable Input
-#'
-#' @description
-#' This function checks the validity of the weight variable provided by the user, issuing a helpful message if the variable name
-#' does not end with "wgt", as expected by LIS conventions.
-#'
-#' @param wgt_name A character string of length 1 indicating the name of the weight variable used.
-#'
-#' @return No return value. The function is used for validation and emits a warning if the weight variable name seems unusual.
-#' @keywords internal
-check_input_in_weight_argument <- function(wgt_name) {
-  if (!is.null(wgt_name) && !stringr::str_detect(wgt_name, "wgt")) {
-    warning(
-      "LIS advice: Please check whether you have used one of the following variables in the `wgt_name` argument:\n",
-      "  - \"hwgt\", \"hpopwgt\", \"hwgta\", \"pwgt\", \"ppopwgt\", or \"pwgta\".\n\n",
-      "If your data was loaded at the household level instead of the person level, you may want to generate a multiple of one of these variables, such as `nhhmem * hwgt`."
-    )
-  }
-}
-
-
-#' Get the year from the `ccyy``
-#'
-#' @param ccyy A character vector of ccyy's
-#'
-#' @return A numeric vector with the corresponding years.
-#' @keywords internal
-ccyy_to_yyyy <- function(ccyy) {
-  yy_year <- lissyrtools::datasets %>%
-    dplyr::mutate(yy = stringr::str_sub(dname, 3, 4)) %>%
-    dplyr::select(yy, year) %>%
-    unique()
-
-  converter_vector <- yy_year %>% dplyr::select(year) %>% dplyr::pull()
-  names(converter_vector) <- yy_year %>% dplyr::select(yy) %>% dplyr::pull()
-
-  result_yyyy <- unname(converter_vector[stringr::str_sub(ccyy, 3, 4)])
-
-  return(result_yyyy)
-}
-
-
-#' Get the country name from the `ccyy``
-#'
-#' @param ccyy A character vector of ccyy's
-#'
-#' @return A character vector with the corresponding country names.
-#' @keywords internal
-ccyy_to_cname <- function(ccyy) {
-  cc_cname <- lissyrtools::datasets %>%
-    dplyr::mutate(cc = stringr::str_sub(dname, 1, 2)) %>%
-    dplyr::select(cc, cname) %>%
-    unique()
-
-  converter_vector <- cc_cname %>% dplyr::select(cname) %>% dplyr::pull()
-  names(converter_vector) <- cc_cname %>% dplyr::select(cc) %>% dplyr::pull()
-
-  result_cname <- unname(converter_vector[stringr::str_sub(ccyy, 1, 2)])
-
-  return(result_cname)
-}
-
-#' Rearranges a list whose elements are ccyy's into country names with numeric vectors names after its years.
-#'
-#' @param data_list A list
-#'
-#' @return A list
-#' @keywords internal
-convert_list_from_ccyy_to_cc_names_yyyy <- function(data_list) {
-  data_list %>%
-    purrr::imap_dfr(
-      ~ {
-        tibble::tibble(
-          country = lissyrtools::ccyy_to_cname(.y),
-          year = lissyrtools::ccyy_to_yyyy(.y),
-          value = .x
-        )
-      }
-    ) %>%
-    split(.$country) %>%
-    purrr::map(~ setNames(.x$value, .x$year))
-}
-
-
-#' Checks the share of missing values for each column acroos a list of data frames.
-#'
-#' @param data_list A list
-#' @param include_zeros Logical. If `TRUE`, values equal to zero are also accounted in the percentage of missings.
-#'
-#' @return A list
-#' @keywords internal
-check_missing_share <- function(data_list, include_zeros = FALSE) {
-  purrr::map(data_list, function(df) {
-    dplyr::summarise(
-      df,
-      dplyr::across(
-        dplyr::everything(),
-        ~ {
-          # Define missing: NA or (optional) zero
-          missing_vals <- if (include_zeros) is.na(.) | . == 0 else is.na(.)
-          mean(missing_vals) * 100
-        }
-      )
-    )
-  })
-}
-
-
-#' Retrieve the current version of lissyrtools from the GitHub repository
-#'
-#' @description
-#' Fetches the latest version of the `lissyrtools` package from its DESCRIPTION file on GitHub.
-#' This allows comparison with the locally installed version. Using an outdated version may
-#' result in missing support for the most recent countries, datasets, or variable revisions,
-#' which can cause inaccurate outputs in functions that rely on up-to-date metadata.
-#'
-#' @return A character string indicating the current version on GitHub.
-#' @export
-#' @examples
-#' \dontrun{
-#' library(lissyrtools)
-#' library(utils)
-#' library(assertthat)
-#' 
-#' local_version <- as.character(utils::packageVersion("lissyrtools"))
-#' remote_github_version <- check_github_version()
-#' 
-#' assertthat::assert_that(local_version == remote_github_version)
-#' }
-check_github_version <- function() {
-  url <- "https://raw.githubusercontent.com/LIS-Cross-National-Data-Center/lissyrtools/main/DESCRIPTION"
-  desc_lines <- readLines(url, warn = FALSE)
-  version_line <- grep("^Version:", desc_lines, value = TRUE)
-  version <- sub("Version:\\s*", "", version_line)
-  return(version)
-}
 

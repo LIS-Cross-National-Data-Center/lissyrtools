@@ -20,7 +20,7 @@
 variable_labels <- function(vars = NULL) {
   
   if (is.null(vars)) {
-    output <- tibble::deframe(data_vars_labels)
+    output <- tibble::deframe(lissyrtools::data_vars_labels)
     return(output)
   } else if (!(is.null(vars))) {
     if (is.character(vars)) {
@@ -45,7 +45,7 @@ variable_labels <- function(vars = NULL) {
 
       vars_accepted <- vars[!vars %in% invalid_vars]
 
-      output <- tibble::deframe(data_vars_labels)[vars_accepted]
+      output <- tibble::deframe(lissyrtools::data_vars_labels)[vars_accepted]
       return(output)
     } else if (isTRUE(exists("vars"))) {
       if (!(is.list(vars))) {
@@ -54,7 +54,7 @@ variable_labels <- function(vars = NULL) {
         ))
       } else {
         columns <- names(vars[[1]])
-        output <- tibble::deframe(data_vars_labels)[columns]
+        output <- tibble::deframe(lissyrtools::data_vars_labels)[columns]
         return(output)
       }
     }
@@ -142,7 +142,7 @@ variable_has_note <- function(variable, iso2, lws = FALSE) {
 
     years <- get_years_function(i)[[1]]
 
-    existing_years <- data_with_warnings %>%
+    existing_years <- lissyrtools::data_with_warnings %>%
       dplyr::filter(database == db, iso2 == i, var_name == variable) %>%
       dplyr::pull(year)
 

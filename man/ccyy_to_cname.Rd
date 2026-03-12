@@ -4,7 +4,7 @@
 \alias{ccyy_to_cname}
 \title{Get the country name from the `ccyy``}
 \usage{
-ccyy_to_cname(ccyy)
+ccyy_to_cname(ccyy_code = NULL)
 }
 \arguments{
 \item{ccyy}{A character vector of ccyy's}

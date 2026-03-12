@@ -63,9 +63,9 @@ check_length_iso2 <- function(data) {
 #' @return Stops if all iso2 codes in `data` are invalid, and it warns if only some are invalid. 
 check_iso2 <- function(data, lws = FALSE) {
   valid_iso2 <- if (lws) {
-    lissyrtools::get_countries_lws()
+    lissyrtools::datasets %>% dplyr::filter(database == "LWS") %>% dplyr::select(iso2) %>% unique() %>% dplyr::pull() %>% as.vector()
   } else {
-    lissyrtools::get_countries_lis()
+    lissyrtools::datasets %>% dplyr::filter(database == "LIS") %>% dplyr::select(iso2) %>% unique() %>% dplyr::pull() %>% as.vector()
   }
 
   data_iso2 <- stringr::str_sub(data, 1, 2)

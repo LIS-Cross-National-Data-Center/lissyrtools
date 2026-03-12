@@ -134,20 +134,22 @@ structure_to_plot <- function(data_list, print_columns = TRUE) {
   # 1st structure
   if (
     all(
-      names(data_list) %in%
-        c(
-          names(lissyrtools::get_countries_lis()),
-          names(lissyrtools::get_countries_lws())
-        )
-    )
+      names(data_list) %in% (lissyrtools::metis_countries_df %>% dplyr::select(name) %>% unique() %>% dplyr::pull())    
+      )
   ) {
-    result_df <- purrr::list_rbind(purrr::imap(
+    
+    list_of_cc <- lissyrtools::metis_countries_df %>% dplyr::filter(name %in% names(data_list)) %>% dplyr::select(-iso3) %>% as.vector()
+    
+    vector_of_cc <- list_of_cc[["iso2"]]
+    names(vector_of_cc) <- list_of_cc[["name"]]
+    
+    result_df <- dplyr::bind_rows(purrr::imap(
       data_list,
       ~ tibble::enframe(.x, name = "year", value = "value") %>%
         dplyr::mutate(cname = .y)
     )) %>%
       dplyr::mutate(
-        cc = lissyrtools::get_countries_lis()[cname],
+        cc = vector_of_cc[cname], 
         yy = stringr::str_sub(year, 3, 4),
         dname = paste0(cc, yy),
         year = as.integer(year)
@@ -161,14 +163,14 @@ structure_to_plot <- function(data_list, print_columns = TRUE) {
         purrr::map_chr(data_list, ~ class(.x)[1]) %in% c("numeric", "integer")
       )
   ) {
-    result_df <- purrr::list_rbind(purrr::imap(
+    result_df <- dplyr::bind_rows(purrr::imap(
       data_list,
       ~ tibble::enframe(.x, name = "category", value = "value") %>%
         dplyr::mutate(dname = stringr::str_sub(.y,1,4))
     )) %>%
       dplyr::mutate(
-        cname = lissyrtools::ccyy_to_cname(dname),
-        year = lissyrtools::ccyy_to_yyyy(dname),
+        cname = purrr::map_chr(dname, lissyrtools::ccyy_to_cname),
+        year = as.integer(purrr::map_chr(dname, lissyrtools::ccyy_to_yyyy)),
         category = stringr::str_remove(category, "^\\[\\d+\\]"),
         year = as.integer(year)
       ) %>%
@@ -181,11 +183,11 @@ structure_to_plot <- function(data_list, print_columns = TRUE) {
         all(purrr::map_chr(data_list, ~ class(.x)[1]) == "list")
     )
   ) {
-    result_df <- purrr::list_rbind(purrr::imap(
+    result_df <- dplyr::bind_rows(purrr::imap(
       data_list,
       ~ {
         outer_name <- stringr::str_sub(.y,1,4)
-        purrr::list_rbind(purrr::imap(.x, function(sublist, subgroup) {
+        dplyr::bind_rows(purrr::imap(.x, function(sublist, subgroup) {
           # subgroup would be the categorical variable in run_weighted_mean or run_weighted_percentiles
           tibble::enframe(sublist, name = "vector_names", value = "value") %>% # vector_names: could be percentiles, shares, averages or the by var in run_weighted_count
             dplyr::mutate(
@@ -197,8 +199,8 @@ structure_to_plot <- function(data_list, print_columns = TRUE) {
       }
     )) %>%
       dplyr::mutate(
-        cname = lissyrtools::ccyy_to_cname(dname),
-        year = as.integer(lissyrtools::ccyy_to_yyyy(dname))
+        cname = purrr::map_chr(dname, lissyrtools::ccyy_to_cname),
+        year = as.integer(purrr::map_chr(dname, lissyrtools::ccyy_to_yyyy))
       ) %>%
       dplyr::select(cname, year, dname, category, name, value)
 

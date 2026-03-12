@@ -55,6 +55,16 @@
 #' @format A data frame with 9 variables:
 "value_label_c_data"
 
+
+#' Countries Names and ISO Codes.
+#'
+#' A data frame containing the country names, and its respective iso2 and iso3 codes. 
+#'
+#' @format A data frame with 3 variables:
+"metis_countries_df"
+
+
+
 #' LIS Variables 
 #'
 #' A character vector containing the names of the variables available in LIS.

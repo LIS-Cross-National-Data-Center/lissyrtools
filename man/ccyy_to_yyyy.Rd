@@ -4,7 +4,7 @@
 \alias{ccyy_to_yyyy}
 \title{Get the year from the `ccyy``}
 \usage{
-ccyy_to_yyyy(ccyy)
+ccyy_to_yyyy(ccyy_code = NULL)
 }
 \arguments{
 \item{ccyy}{A character vector of ccyy's}
