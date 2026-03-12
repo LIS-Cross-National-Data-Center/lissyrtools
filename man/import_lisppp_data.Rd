@@ -4,7 +4,7 @@
 \alias{import_lisppp_data}
 \title{Import lisppp dataset}
 \usage{
-import_lisppp_data(path_to_ppp_file = "lissy")
+import_lisppp_data(path_to_ppp_file = "lissy", version_ppp = version_ppp)
 }
 \arguments{
 \item{path_to_ppp_file}{A character string indicating where the deflator values
