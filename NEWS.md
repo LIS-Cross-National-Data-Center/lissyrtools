@@ -1,11 +1,26 @@
 # lissyrtools
 
-
-# lissyrtools 0.2.2 (2025-12-15)
+# lissyrtools 0.2.3 (2026-03-15)
 
 ## New functions
 
+- Added new built-in dataset `metis_countries_df`.
+
 ## Major changes
+
+- Rebuilt two auxiliary functions `ccyy_to_cname()` and `ccyy_to_yyyy()` to account for countries that are not still in LIS or LWS databases. 
+- Rebuilt `structure_to_plot()` to account for countries that are not still in LIS or LWS databases.
+
+## Minor changes
+
+- Replaced `purrr::list_rbind()`, by `dplyr::bind_rows()` in the body of `structure_to_plot()` function.
+- Bug fix in the body of  `run_weighted_relative_poverty()`, `run_weighted_poverty_shortfall()`, and `run_weighted_poverty_gap_index()`, related with the `na.rm` argument.
+- Wrapped the `lissyuse()` console communication on the datasets imported inside the `message()` function.   
+- Argument `var_name` and argument are now less restrictive in `run_weighted_count()`. It accepts both "currency", "ageyoch", "age", and "grossnet".
+- Removed auxiliary function `check_input_in_weight_argument()`and inlined the validation logic. 
+- Renamed auxiliary function `remove_dname_with_missings_in_weights()` to `remove_canada_lws_missing_weights_in_p_file()`.
+
+# lissyrtools 0.2.2 (2025-12-15)
 
 ## Minor changes
 
