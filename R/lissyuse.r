@@ -274,12 +274,12 @@ variable_selection_for_lissyuse <- function(
         )
         names(list_with_data) <- data_to_load
 
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following `person-level` data frames: ",
           paste(names(list_with_data), collapse = ", "),
           ".\n", # Proper period and paragraph space
           "All variables were imported! We recommend specifying a character vector with the desired variables in the argument `vars`."
-        )
+        ))
       } else if (
         sum(vars %in% setdiff(lissyrtools::lws_household_variables, lissyrtools::lws_person_variables)) >
           0 &
@@ -300,11 +300,11 @@ variable_selection_for_lissyuse <- function(
         )
         names(list_with_data) <- paste0(data_to_load, "h")
 
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following `household-level` data frames: ",
           paste(names(list_with_data), collapse = ", "),
           "."
-        )
+        ))
       } else if (
         sum(vars %in% setdiff(lissyrtools::lws_household_variables, lissyrtools::lws_person_variables)) ==
           0 &
@@ -325,11 +325,11 @@ variable_selection_for_lissyuse <- function(
         )
         names(list_with_data) <- paste0(data_to_load, "p")
 
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following `person-level` data frames: ",
           paste(names(list_with_data), collapse = ", "),
           "."
-        )
+        ))
       } else if (
         sum(vars %in% setdiff(lissyrtools::lws_household_variables, lissyrtools::lws_person_variables)) >
           0 &
@@ -368,11 +368,11 @@ variable_selection_for_lissyuse <- function(
 
         names(list_with_data) <- data_to_load
 
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following `person-level` data frames: ",
           paste(names(list_with_data), collapse = ", "),
           "."
-        )
+        ))
       } else if (sum(vars %in% lissyrtools::lws_variables) == 0) {
         # 1.1.5 No valid lws variables supplied # ----------------
 
@@ -392,12 +392,12 @@ variable_selection_for_lissyuse <- function(
         )
         names(list_with_data) <- paste0(data_to_load, "h")
 
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following data frames: ",
           paste(names(list_with_data), collapse = ", "),
           ".\n",
           "NOTE: The selected variables are not exclusive to either household or individual-level datasets. The imported datasets have been defaulted to `household-level`."
-        )
+        ))
       }
 
       return(list(data = list_with_data, message = message_to_print_in_the_end))
@@ -425,12 +425,12 @@ variable_selection_for_lissyuse <- function(
         )
         names(list_with_data) <- data_to_load
 
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following `person-level` data frames: ",
           paste(names(list_with_data), collapse = ", "),
           ".\n", # Proper period and paragraph space
           "All variables were imported! We recommend specifying a character vector with the desired variables in the argument `vars`."
-        )
+        ))
       } else if (
         sum(vars %in% setdiff(lissyrtools::lis_household_variables, lissyrtools::lis_person_variables)) >
           0 &
@@ -451,11 +451,11 @@ variable_selection_for_lissyuse <- function(
         )
         names(list_with_data) <- paste0(data_to_load, "h")
 
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following `household-level` data frames: ",
           paste(names(list_with_data), collapse = ", "),
           "."
-        )
+        ))
       } else if (
         sum(vars %in% setdiff(lissyrtools::lis_household_variables, lissyrtools::lis_person_variables)) ==
           0 &
@@ -476,11 +476,11 @@ variable_selection_for_lissyuse <- function(
         )
         names(list_with_data) <- paste0(data_to_load, "p")
 
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following `person-level` data frames: ",
           paste(names(list_with_data), collapse = ", "),
           "."
-        )
+        ))
       } else if (
         sum(vars %in% setdiff(lissyrtools::lis_household_variables, lissyrtools::lis_person_variables)) >
           0 &
@@ -519,11 +519,11 @@ variable_selection_for_lissyuse <- function(
 
         names(list_with_data) <- data_to_load
 
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following `person-level` data frames: ",
           paste(names(list_with_data), collapse = ", "),
           "."
-        )
+        ))
       } else if (sum(vars %in% lissyrtools::lis_variables) == 0) {
         # 1.2.5 No valid LIS variables supplied # ----------------------------------
 
@@ -543,12 +543,12 @@ variable_selection_for_lissyuse <- function(
         )
         names(list_with_data) <- paste0(data_to_load, "h")
 
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following data frames: ",
           paste(names(list_with_data), collapse = ", "),
           ".\n",
           "NOTE: The selected variables are not exclusive to either household or individual-level datasets. The imported datasets have been defaulted to `household-level`."
-        )
+        ))
       }
 
       return(list(data = list_with_data, message = message_to_print_in_the_end))
@@ -560,12 +560,12 @@ variable_selection_for_lissyuse <- function(
       # 2.1.1 Select all variables, if none is specified #	 ----------------------
       if (is.null(vars)) {
         list_with_data <- data_to_load
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following `person-level sample` data frames: ",
           paste(names(list_with_data), collapse = ", "),
           ".\n", # Proper period and paragraph space
           "All variables were imported! We recommend specifying a character vector with the desired variables in the argument `vars`."
-        )
+        ))
       } else if (
         sum(vars %in% setdiff(lissyrtools::lws_household_variables, lissyrtools::lws_person_variables)) >
           0 &
@@ -585,11 +585,11 @@ variable_selection_for_lissyuse <- function(
         )
         names(list_with_data) <- paste0(names(list_with_data), "h")
 
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following `household-level sample` data frames: ",
           paste(names(list_with_data), collapse = ", "),
           "."
-        )
+        ))
       } else if (
         sum(vars %in% setdiff(lissyrtools::lws_household_variables, lissyrtools::lws_person_variables)) ==
           0 &
@@ -607,11 +607,11 @@ variable_selection_for_lissyuse <- function(
         )
         names(list_with_data) <- paste0(names(list_with_data), "p")
 
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following `person-level sample` data frames: ",
           paste(names(list_with_data), collapse = ", "),
           "."
-        )
+        ))
       } else if (
         sum(vars %in% setdiff(lissyrtools::lws_household_variables, lissyrtools::lws_person_variables)) >
           0 &
@@ -635,11 +635,11 @@ variable_selection_for_lissyuse <- function(
             )))
         )
 
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following `person-level sample` data frames: ",
           paste(names(list_with_data), collapse = ", "),
           "."
-        )
+        ))
       } else if (sum(vars %in% lissyrtools::lws_variables) == 0) {
         # 2.1.5 No valid lws variables supplied # ----------------------
         stop("No valid LWS variable names specified.") # already ensured by check_invalid_vars(vars, lws)
@@ -656,12 +656,12 @@ variable_selection_for_lissyuse <- function(
         )
         names(list_with_data) <- paste0(names(list_with_data), "h")
 
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following `sample` data frames: ",
           paste(names(list_with_data), collapse = ", "),
           ".\n",
           "NOTE: The selected variables are not exclusive to either household or individual-level datasets. The imported datasets have been defaulted to `household-level`."
-        )
+        ))
       }
 
       return(list(data = list_with_data, message = message_to_print_in_the_end))
@@ -669,12 +669,12 @@ variable_selection_for_lissyuse <- function(
       # 2.2.1 Select all variables, if none is specified # ----------------------
       if (is.null(vars)) {
         list_with_data <- data_to_load
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following `person-level sample` data frames: ",
           paste(names(list_with_data), collapse = ", "),
           ".\n", # Proper period and paragraph space
           "All variables were imported! We recommend specifying a character vector with the desired variables in the argument `vars`."
-        )
+        ))
       } else if (
         sum(vars %in% setdiff(lissyrtools::lis_household_variables, lissyrtools::lis_person_variables)) >
           0 &
@@ -694,11 +694,11 @@ variable_selection_for_lissyuse <- function(
         )
         names(list_with_data) <- paste0(names(list_with_data), "h")
 
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following `household-level sample` data frames: ",
           paste(names(list_with_data), collapse = ", "),
           "."
-        )
+        ))
       } else if (
         sum(vars %in% setdiff(lissyrtools::lis_household_variables, lissyrtools::lis_person_variables)) ==
           0 &
@@ -716,11 +716,11 @@ variable_selection_for_lissyuse <- function(
         )
         names(list_with_data) <- paste0(names(list_with_data), "p")
 
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following `person-level sample` data frames: ",
           paste(names(list_with_data), collapse = ", "),
           "."
-        )
+        ))
       } else if (
         sum(vars %in% setdiff(lissyrtools::lis_household_variables, lissyrtools::lis_person_variables)) >
           0 &
@@ -744,11 +744,11 @@ variable_selection_for_lissyuse <- function(
             )))
         )
 
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following `person-level sample` data frames: ",
           paste(names(list_with_data), collapse = ", "),
           "."
-        )
+        ))
       } else if (sum(vars %in% lissyrtools::lis_variables) == 0) {
         # 2.2.5 No valid LIS variables supplied # ----------------------
         stop("No valid LIS variable names specified.") # already ensured by check_invalid_vars(vars, lws)
@@ -765,12 +765,12 @@ variable_selection_for_lissyuse <- function(
         )
         names(list_with_data) <- paste0(names(list_with_data), "h")
 
-        message_to_print_in_the_end <- paste0(
+        message_to_print_in_the_end <- message(paste0(
           "The list contains the following `sample` data frames: ",
           paste(names(list_with_data), collapse = ", "),
           ".\n",
           "NOTE: The selected variables are not exclusive to either household or individual-level datasets. The imported datasets have been defaulted to `household-level`."
-        )
+        ))
       }
 
       return(list(data = list_with_data, message = message_to_print_in_the_end))
