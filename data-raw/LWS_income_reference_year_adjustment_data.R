@@ -68,6 +68,7 @@ data_inc_ref_year <- tibble::tribble(
   "it14",                  2014L,
   "it16",                  2016L,
   "it20",                  2020L,
+  "it22",                  2022L,
   "jp04",                  2003L,
   "jp09",                  2008L,
   "jp10",                  2009L,
