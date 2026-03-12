@@ -58,7 +58,7 @@ run_weighted_absolute_poverty <- function(
 ) {
 
   # Remove datasets with missing weights
-  data_list <- lissyrtools::remove_dname_with_missings_in_weights(
+  data_list <- lissyrtools::remove_canada_lws_missing_weights_in_p_file(
     data_list,
     wgt_name
   )
@@ -81,7 +81,13 @@ run_weighted_absolute_poverty <- function(
     )
   }
 
-  lissyrtools::check_input_in_weight_argument(wgt_name)
+  if (!is.null(wgt_name) && !stringr::str_detect(wgt_name, "wgt")) {
+    warning(
+      "LIS advice: Please check whether you have used one of the following variables in the `wgt_name` argument:\n",
+      "  - \"hwgt\", \"hpopwgt\", \"hwgta\", \"pwgt\", \"ppopwgt\", or \"pwgta\".\n\n",
+      "If your data was loaded at the household level instead of the person level, you may want to generate a multiple of one of these variables, such as `nhhmem * hwgt`."
+    )
+  }
 
   # Convert daily threshold to annual
   annual_poverty_line <- daily_poverty_line * days_in_year
@@ -160,7 +166,7 @@ run_weighted_relative_poverty <- function(
 ) {
   
   # Remove datasets with missing weights
-  data_list <- lissyrtools::remove_dname_with_missings_in_weights(
+  data_list <- lissyrtools::remove_canada_lws_missing_weights_in_p_file(
     data_list,
     wgt_name
   )
@@ -183,7 +189,13 @@ run_weighted_relative_poverty <- function(
     )
   }
 
-  lissyrtools::check_input_in_weight_argument(wgt_name)
+  if (!is.null(wgt_name) && !stringr::str_detect(wgt_name, "wgt")) {
+    warning(
+      "LIS advice: Please check whether you have used one of the following variables in the `wgt_name` argument:\n",
+      "  - \"hwgt\", \"hpopwgt\", \"hwgta\", \"pwgt\", \"ppopwgt\", or \"pwgta\".\n\n",
+      "If your data was loaded at the household level instead of the person level, you may want to generate a multiple of one of these variables, such as `nhhmem * hwgt`."
+    )
+  }
 
   output_run_relative_poverty <- purrr::imap(
     data_list,
@@ -202,7 +214,7 @@ run_weighted_relative_poverty <- function(
 
       df <- .x
       df$below_poverty <- ifelse(df[[var_name]] < poverty_line, 1, 0)
-      weighted_rate <- sum(df$below_poverty * wgt) / sum(wgt) * 100
+      weighted_rate <- sum(df$below_poverty * wgt, na.rm = na.rm) / sum(wgt, na.rm = na.rm) * 100
       return(weighted_rate)
     }
   )
@@ -305,7 +317,7 @@ run_weighted_poverty_shortfall <- function(
 ) {
   
   # Remove datasets with missing weights
-  data_list <- lissyrtools::remove_dname_with_missings_in_weights(
+  data_list <- lissyrtools::remove_canada_lws_missing_weights_in_p_file(
     data_list,
     wgt_name
   )
@@ -328,7 +340,13 @@ run_weighted_poverty_shortfall <- function(
     )
   }
 
-  lissyrtools::check_input_in_weight_argument(wgt_name)
+  if (!is.null(wgt_name) && !stringr::str_detect(wgt_name, "wgt")) {
+    warning(
+      "LIS advice: Please check whether you have used one of the following variables in the `wgt_name` argument:\n",
+      "  - \"hwgt\", \"hpopwgt\", \"hwgta\", \"pwgt\", \"ppopwgt\", or \"pwgta\".\n\n",
+      "If your data was loaded at the household level instead of the person level, you may want to generate a multiple of one of these variables, such as `nhhmem * hwgt`."
+    )
+  }
 
   # Warning when both `daily_poverty_line ` and `times_median` are specified. 
   if (!is.null(daily_poverty_line ) && times_median != 0.5) {
@@ -358,9 +376,12 @@ run_weighted_poverty_shortfall <- function(
       df <- .x
       df$below_poverty <- ifelse(df[[var_name]] < poverty_line, 1, 0)
       weighted_shortfall <- sum(
-        df$below_poverty * wgt * (poverty_line - df[[var_name]])
+        df$below_poverty * wgt * (poverty_line - df[[var_name]]), 
+        na.rm = na.rm
       ) /
-        sum(wgt * df$below_poverty) /
+        sum(
+          wgt * df$below_poverty, na.rm = na.rm
+          ) /
         365
 
       if (percent == FALSE) {
@@ -446,7 +467,7 @@ run_weighted_poverty_gap_index <- function(
 ) {
   
   # Remove datasets with missing weights
-  data_list <- lissyrtools::remove_dname_with_missings_in_weights(
+  data_list <- lissyrtools::remove_canada_lws_missing_weights_in_p_file(
     data_list,
     wgt_name
   )
@@ -469,7 +490,13 @@ run_weighted_poverty_gap_index <- function(
     )
   }
 
-  lissyrtools::check_input_in_weight_argument(wgt_name)
+  if (!is.null(wgt_name) && !stringr::str_detect(wgt_name, "wgt")) {
+    warning(
+      "LIS advice: Please check whether you have used one of the following variables in the `wgt_name` argument:\n",
+      "  - \"hwgt\", \"hpopwgt\", \"hwgta\", \"pwgt\", \"ppopwgt\", or \"pwgta\".\n\n",
+      "If your data was loaded at the household level instead of the person level, you may want to generate a multiple of one of these variables, such as `nhhmem * hwgt`."
+    )
+  }
 
   # Warning when both `daily_poverty_line ` and `times_median` are specified. 
   if (!is.null(daily_poverty_line) && times_median != 0.5) {

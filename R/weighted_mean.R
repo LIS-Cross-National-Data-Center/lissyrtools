@@ -38,7 +38,7 @@ run_weighted_mean <- function(
   na.rm = TRUE,
   by = NULL
 ) {
-  data_list <- lissyrtools::remove_dname_with_missings_in_weights(
+  data_list <- lissyrtools::remove_canada_lws_missing_weights_in_p_file(
     data_list,
     wgt_name
   )
@@ -70,7 +70,14 @@ run_weighted_mean <- function(
       )
     )
   }
-  lissyrtools::check_input_in_weight_argument(wgt_name)
+  
+  if (!is.null(wgt_name) && !stringr::str_detect(wgt_name, "wgt")) {
+    warning(
+      "LIS advice: Please check whether you have used one of the following variables in the `wgt_name` argument:\n",
+      "  - \"hwgt\", \"hpopwgt\", \"hwgta\", \"pwgt\", \"ppopwgt\", or \"pwgta\".\n\n",
+      "If your data was loaded at the household level instead of the person level, you may want to generate a multiple of one of these variables, such as `nhhmem * hwgt`."
+    )
+  }
 
   if (!is.null(by)) {
     recommended_categoricals <- c(
