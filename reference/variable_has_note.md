@@ -54,10 +54,10 @@ variable_has_note(variable = "basb", iso2 = c("fr", "de", "us", "uk"), lws = TRU
 #> 
 #> $us
 #>  1995  1998  2001  2004  2007  2010  2013  2016  2019  2022 
-#> "Yes" "Yes"  "No"  "No"  "No" "Yes" "Yes" "Yes" "Yes" "Yes" 
+#> "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" 
 #> 
 #> $uk
 #>  2007  2009  2011  2013  2015  2017  2019  2021 
-#>  "No"  "No" "Yes" "Yes" "Yes" "Yes" "Yes"  "No" 
+#> "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes"  "No" 
 #> 
 ```

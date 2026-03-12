@@ -74,8 +74,8 @@ variable_exists(variable = "health_c", iso2 = "it")
 #> $it
 #>  1977  1978  1979  1980  1981  1982  1983  1984  1986  1987  1989  1991  1993 
 #>  "No"  "No"  "No"  "No"  "No"  "No"  "No"  "No"  "No"  "No"  "No"  "No"  "No" 
-#>  1995  1998  2000  2002  2004  2006  2008  2010  2012  2014  2016  2020 
-#> "Yes"  "No"  "No"  "No"  "No" "Yes" "Yes" "Yes"  "No"  "No"  "No"  "No" 
+#>  1995  1998  2000  2002  2004  2006  2008  2010  2012  2014  2016  2020  2022 
+#> "Yes"  "No"  "No"  "No"  "No" "Yes" "Yes" "Yes"  "No"  "No"  "No"  "No"  "No" 
 #> 
 variable_country_specific_categories(variable = "health_c", iso2 = "it", from = 1995, to = 2020) 
 #> $`it10 - health status as described by the respondent`
@@ -168,8 +168,8 @@ purrr::map(lissyrtools::get_countries_lws(), ~variable_country_specific_categori
 #> 
 #> $Canada
 #> $Canada$`LWS database. Number of distinct categories in variable: bus1_c.`
-#> ca19 ca16 ca12 ca05 ca99 
-#>    2    2    2    2    2 
+#> ca23 ca19 ca16 ca12 ca05 ca99 
+#>    2    2    2    2    2    2 
 #> 
 #> 
 #> $Chile
@@ -218,8 +218,8 @@ purrr::map(lissyrtools::get_countries_lws(), ~variable_country_specific_categori
 #> 
 #> $Italy
 #> $Italy$`LWS database. Number of distinct categories in variable: bus1_c.`
-#> it20 it16 it14 it12 it10 it08 it06 it04 it02 it00 it98 it95 
-#>    2    7    6    7    6    7    7    7    2    2    2    2 
+#> it22 it20 it16 it14 it12 it10 it08 it06 it04 it02 it00 it98 it95 
+#>    2    2    7    6    7    6    7    7    7    2    2    2    2 
 #> 
 #> 
 #> $Japan

@@ -48,6 +48,8 @@ get_surveys_lws("it")
 #> "Survey of Household Income and Wealth (SHIW)" 
 #>                                           2020 
 #> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2022 
+#> "Survey of Household Income and Wealth (SHIW)" 
 #> 
 get_surveys_lws(iso2 = c("fr", "jp"))
 #> $fr
