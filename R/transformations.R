@@ -357,14 +357,24 @@ transform_adjust_by_lisppp <- function(lissy_files, variable, database = NULL, i
 #'
 #'
 #' @keywords internal
-implement_adjust_by_lisppp <- function(file, file_name, database, variable, income_variable = NULL, ppp_data = "lissyrtools"){
+implement_adjust_by_lisppp <- function(file, file_name, database, variable, income_variable = NULL, ppp_data = "lissyrtools", version_ppp = 2021){
 
   assertthat::assert_that(database %in% c('lis', 'lws', 'erflis', 'i', 'w', 'e'),
                           msg = "Incorrect value in 'database' argument.")
 
   assertthat::assert_that(variable %in% names(file),
                           msg = glue::glue("Variable '{variable}' could not be found in '{file_name}'."))
-
+  
+  version_ppp_options <- unique(lissyrtools::deflators$version_year)
+    
+  assertthat::assert_that(
+    version_ppp %in% version_ppp_options,
+    msg = glue::glue(
+      "Argument `version_ppp` must be one of: {paste(version_ppp_options, collapse = ', ')}"
+    )
+  )
+  
+  
   if(!is.all.na.or.zero(file[[variable]])){
 
     ccyy_format_bool <- stringr::str_detect(file_name, pattern = "^\\w{2}\\d{2}$")
@@ -376,7 +386,7 @@ implement_adjust_by_lisppp <- function(file, file_name, database, variable, inco
     }
 
 
-    lisppp <- get_file_lisppp(file_name = file_name, database, variable, income_variable = income_variable, ppp_data = ppp_data)
+    lisppp <- get_file_lisppp(file_name = file_name, database, variable, income_variable = income_variable, ppp_data = ppp_data, version_ppp = version_ppp)
 
 
     file[[variable]] <- file[[variable]] / lisppp
@@ -1184,11 +1194,13 @@ transform_weight_by_hh_size <- function(lissy_files){
 #' @return A tibble with the lisppp deflators.
 #'
 #' @keywords internal
-import_lisppp_data <- function(path_to_ppp_file = "lissy"){
+import_lisppp_data <- function(path_to_ppp_file = "lissy", version_ppp = version_ppp){
 
   if(path_to_ppp_file == "lissyrtools"){
 
-    ppp_data <- lissyrtools::deflators
+    ppp_data <- lissyrtools::deflators %>% 
+      dplyr::filter(version_year == version_ppp) %>% 
+      dplyr::select(-version_year)
 
   }else if(path_to_ppp_file == "lissy"){
 
@@ -1302,7 +1314,7 @@ get_lws_file_income_reference_year <- function(file_name){
 #' @keywords internal
 #' 
 #' 
-get_file_lisppp <- function(file_name, database, variable = NULL, income_variable = NULL, ppp_data = "lissyrtools"){
+get_file_lisppp <- function(file_name, database, variable = NULL, income_variable = NULL, ppp_data = "lissyrtools", version_ppp = version_ppp){
 
   assertthat::assert_that(stringr::str_detect(file_name, pattern = "^\\w{2}\\d{2}$"),
                           msg = "File name {file_name} is not in 'ccyy' format.")
@@ -1312,7 +1324,7 @@ get_file_lisppp <- function(file_name, database, variable = NULL, income_variabl
 
 
   if(is.character(ppp_data) && ppp_data == "lissyrtools"){
-    ppp_data <- import_lisppp_data(path_to_ppp_file = "lissyrtools")
+    ppp_data <- import_lisppp_data(path_to_ppp_file = "lissyrtools", version_ppp = version_ppp)
   }else{
     assertthat::assert_that(all(c("file", "lisppp") %in% names(ppp_data)),
                             msg = "The dataset with deflators passed to argument 'ppp_data' must have columns named 'file' and 'lisppp' from which the function will retreive the deflator.")
