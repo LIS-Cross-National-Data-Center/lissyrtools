@@ -170,7 +170,7 @@ structure_to_plot <- function(data_list, print_columns = TRUE) {
     )) %>%
       dplyr::mutate(
         cname = purrr::map_chr(dname, lissyrtools::ccyy_to_cname),
-        year = as.integer(purrr::map_chr(dname, lissyrtools::ccyy_to_yyyy)),
+        year = purrr::map_int(dname, ~ as.integer(lissyrtools::ccyy_to_yyyy(.x))),
         category = stringr::str_remove(category, "^\\[\\d+\\]"),
         year = as.integer(year)
       ) %>%
@@ -200,7 +200,7 @@ structure_to_plot <- function(data_list, print_columns = TRUE) {
     )) %>%
       dplyr::mutate(
         cname = purrr::map_chr(dname, lissyrtools::ccyy_to_cname),
-        year = as.integer(purrr::map_chr(dname, lissyrtools::ccyy_to_yyyy))
+        year = purrr::map_int(dname, ~ as.integer(lissyrtools::ccyy_to_yyyy(.x)))
       ) %>%
       dplyr::select(cname, year, dname, category, name, value)
 
