@@ -16,14 +16,14 @@ A data frame.
 
 ``` r
 get_countries_lws()
-#>      Australia        Austria         Canada          Chile        Denmark 
-#>           "au"           "at"           "ca"           "cl"           "dk" 
-#>        Estonia        Finland         France        Germany         Greece 
-#>           "ee"           "fi"           "fr"           "de"           "gr" 
-#>          India          Italy          Japan     Luxembourg         Mexico 
-#>           "in"           "it"           "jp"           "lu"           "mx" 
-#>         Norway       Slovakia       Slovenia   South Africa    South Korea 
-#>           "no"           "sk"           "si"           "za"           "kr" 
-#>          Spain         Sweden United Kingdom  United States 
-#>           "es"           "se"           "uk"           "us" 
+#>      Australia        Austria         Canada          Chile        Czechia 
+#>           "au"           "at"           "ca"           "cl"           "cz" 
+#>        Denmark        Estonia        Finland         France        Germany 
+#>           "dk"           "ee"           "fi"           "fr"           "de" 
+#>         Greece          India          Italy          Japan     Luxembourg 
+#>           "gr"           "in"           "it"           "jp"           "lu" 
+#>         Mexico         Norway       Slovakia       Slovenia   South Africa 
+#>           "mx"           "no"           "sk"           "si"           "za" 
+#>    South Korea          Spain         Sweden United Kingdom  United States 
+#>           "kr"           "es"           "se"           "uk"           "us" 
 ```

@@ -1,5 +1,27 @@
 # Changelog
 
+## lissyrtools 0.2.4 (2026-06-15)
+
+### New functions
+
+### Major changes
+
+- Added a new character argument `pattern` to
+  [`variable_labels()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/variable_labels.md).
+
+### Minor changes
+
+- Bug fix in the body of
+  [`structure_to_plot()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/structure_to_plot.md).
+- The complementary table
+  [`lissyrtools::missing_or_zero_vars_all`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/missing_or_zero_vars_all.md)
+  is now created in a more efficient way and includes a `cname` column.
+- Output of
+  [`variable_has_note()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/variable_has_note.md)
+  and
+  [`variable_exists()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/variable_exists.md)
+  now displays country names and not their iso2 codes.
+
 ## lissyrtools 0.2.3 (2026-03-15)
 
 ### New functions

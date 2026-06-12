@@ -71,7 +71,7 @@ library(dplyr)
 
 # In years where no data is recorded for a given variable, it is automatically hidden from the output
 variable_exists(variable = "health_c", iso2 = "it")
-#> $it
+#> $Italy
 #>  1977  1978  1979  1980  1981  1982  1983  1984  1986  1987  1989  1991  1993 
 #>  "No"  "No"  "No"  "No"  "No"  "No"  "No"  "No"  "No"  "No"  "No"  "No"  "No" 
 #>  1995  1998  2000  2002  2004  2006  2008  2010  2012  2014  2016  2020  2022 
@@ -175,6 +175,12 @@ purrr::map(lissyrtools::get_countries_lws(), ~variable_country_specific_categori
 #> $Chile
 #> $Chile$`LWS database. Number of distinct categories in variable: bus1_c.`
 #> named integer(0)
+#> 
+#> 
+#> $Czechia
+#> $Czechia$`LWS database. Number of distinct categories in variable: bus1_c.`
+#> cz21 
+#>    2 
 #> 
 #> 
 #> $Denmark

@@ -11,4 +11,4 @@ missing_or_zero_vars_all
 
 ## Format
 
-A data frame with 6 variables:
+A data frame with 7 variables:

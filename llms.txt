@@ -60,6 +60,7 @@ Datasets](https://www.lisdatacenter.org/resources/self-teaching/),
 install it from GitHub:
 
 ``` r
+
 # Pre-install dependencies 
 required_packages <- c(
   "haven", "dplyr", "ggplot2", "stringr", "rlang", "glue", "magrittr", "purrr",
@@ -103,6 +104,7 @@ aggregated figures for the entire dataset or specific subgroups.
 ##### Importing Data
 
 ``` r
+
 library(lissyrtools)
 
 lu_data_hhd <- lissyuse(
@@ -131,6 +133,7 @@ print(names(lu_data_p[[1]]))
 ##### Transform each Data Frame
 
 ``` r
+
 library(lissyrtools)
 library(purrr)
 library(dplyr)
@@ -162,6 +165,7 @@ lis_datasets_ready <- lis_datasets_hhd %>%
 ##### Compute Aggregate Figures
 
 ``` r
+
 # Count of rural vs. urban households (unweighted)
 res1 <- lis_datasets_ready %>% run_weighted_count("rural") 
 
@@ -185,6 +189,7 @@ print(res4)
 ##### Tidy Up Your Results and Make Plots Instantly
 
 ``` r
+
 # `structure_to_plot()` function transforms list into a data frames   
 
 library(lissyrtools)
@@ -210,6 +215,7 @@ ggplot(data_to_plot, aes(x = year, y = value, color = cname, group = cname)) +
 ##### LWS Data
 
 ``` r
+
 library(lissyrtools)
 library(dplyr)
 
@@ -246,6 +252,7 @@ States - and two LWS countries: Italy and the United States.
 ##### Importing sample datasets
 
 ``` r
+
 library(lissyrtools)
 library(dplyr)
 
@@ -272,6 +279,7 @@ names(lws_datasets)
 ##### **Metadata functions**
 
 ``` r
+
 
 # Get available countries for LIS and LWS datasets
 get_countries_lis()

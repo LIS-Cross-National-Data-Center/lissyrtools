@@ -34,14 +34,14 @@ get_countries_lis()
 #>               "lu"               "ml"               "mx"               "nl" 
 #>             Norway          Palestine             Panama           Paraguay 
 #>               "no"               "ps"               "pa"               "py" 
-#>               Peru             Poland            Romania             Russia 
-#>               "pe"               "pl"               "ro"               "ru" 
-#>             Serbia           Slovakia           Slovenia       South Africa 
-#>               "rs"               "sk"               "si"               "za" 
-#>        South Korea              Spain             Sweden        Switzerland 
-#>               "kr"               "es"               "se"               "ch" 
-#>             Taiwan     United Kingdom      United States            Uruguay 
-#>               "tw"               "uk"               "us"               "uy" 
-#>            Vietnam 
-#>               "vn" 
+#>               Peru        Philippines             Poland            Romania 
+#>               "pe"               "ph"               "pl"               "ro" 
+#>             Russia             Serbia           Slovakia           Slovenia 
+#>               "ru"               "rs"               "sk"               "si" 
+#>       South Africa        South Korea              Spain             Sweden 
+#>               "za"               "kr"               "es"               "se" 
+#>        Switzerland             Taiwan     United Kingdom      United States 
+#>               "ch"               "tw"               "uk"               "us" 
+#>            Uruguay            Vietnam 
+#>               "uy"               "vn" 
 ```

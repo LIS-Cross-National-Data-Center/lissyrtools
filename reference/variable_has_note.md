@@ -35,7 +35,7 @@ country in LIS or LWS databases.
 
 ``` r
 variable_has_note(variable = "area_c", iso2 = "br")
-#> $br
+#> $Brazil
 #> 1981 1982 1983 1984 1985 1986 1987 1988 1989 1990 1992 1993 1995 1996 1997 1998 
 #> "No" "No" "No" "No" "No" "No" "No" "No" "No" "No" "No" "No" "No" "No" "No" "No" 
 #> 1999 2001 2002 2003 2004 2005 2006 2007 2008 2009 2011 2012 2013 2014 2015 2016 
@@ -44,19 +44,19 @@ variable_has_note(variable = "area_c", iso2 = "br")
 #> "No" "No" "No" "No" "No" "No" 
 #> 
 variable_has_note(variable = "basb", iso2 = c("fr", "de", "us", "uk"), lws = TRUE)
-#> $fr
+#> $France
 #>  2009  2014  2017  2020 
 #>  "No" "Yes" "Yes" "Yes" 
 #> 
-#> $de
+#> $Germany
 #> 2002 2007 2012 2017 
 #> "No" "No" "No" "No" 
 #> 
-#> $us
+#> $`United States`
 #>  1995  1998  2001  2004  2007  2010  2013  2016  2019  2022 
 #> "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" 
 #> 
-#> $uk
+#> $`United Kingdom`
 #>  2007  2009  2011  2013  2015  2017  2019  2021 
 #> "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes"  "No" 
 #> 
