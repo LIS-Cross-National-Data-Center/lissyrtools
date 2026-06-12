@@ -5,7 +5,7 @@
 \alias{missing_or_zero_vars_all}
 \title{Variable Status Data Frame}
 \format{
-A data frame with 6 variables:
+A data frame with 7 variables:
 }
 \usage{
 missing_or_zero_vars_all

@@ -17,7 +17,7 @@
 variable_exists <- function(variable, iso2, lws = FALSE, share = FALSE) {
   
   # Ensure that argument 'variable' only accepts one character
-
+  
   if (length(variable) > 1) {
     stop(
       glue::glue(
@@ -25,9 +25,9 @@ variable_exists <- function(variable, iso2, lws = FALSE, share = FALSE) {
       )
     )
   }
-
+  
   # ensure the validity of the variable
-
+  
   if (lws) {
     invalid_var <- variable[!variable %in% lissyrtools::lws_variables]
     if (length(invalid_var) > 0) {
@@ -43,17 +43,17 @@ variable_exists <- function(variable, iso2, lws = FALSE, share = FALSE) {
       ))
     }
   }
-
+  
   # ensure the validity of the iso2 codes
-
+  
   valid_iso2 <- if (lws) {
     lissyrtools::get_countries_lws()
   } else {
     lissyrtools::get_countries_lis()
   }
-
+  
   invalid_iso2 <- iso2[!iso2 %in% valid_iso2]
-
+  
   if (length(invalid_iso2) == length(iso2)) {
     # If no valid iso2 codes, stop with an error
     stop(
@@ -71,7 +71,7 @@ variable_exists <- function(variable, iso2, lws = FALSE, share = FALSE) {
       )
     )
   }
-
+  
   # body of the function
   if (share == FALSE) {
     process_country <- function(i) {
@@ -81,49 +81,69 @@ variable_exists <- function(variable, iso2, lws = FALSE, share = FALSE) {
       } else {
         lissyrtools::get_years_lis
       }
-
+      
       years <- get_years_function(i)[[1]]
-
+      
       existing_var_years <- lissyrtools::missing_or_zero_vars_all %>%
         dplyr::filter(
           database == db &
             iso2 == i &
             variable == {{ variable }} &
-            status == FALSE
+            missing_status == FALSE
         ) %>%
         dplyr::pull(year)
-
+      
       year_status <- ifelse(years %in% existing_var_years, "Yes", "No")
       names(year_status) <- years
       return(year_status)
     }
-
+    
     to_be_used_iso2 <- iso2[iso2 %in% valid_iso2]
     result <- purrr::map(to_be_used_iso2, process_country)
-    names(result) <- to_be_used_iso2
-
+    
+    # Naming the list 
+    naming_funct <- function(x) {
+      
+      vector_out <- c()
+      
+      for (i  in to_be_used_iso2) {
+        country_idx <- lissyrtools::metis_countries_df %>% dplyr::filter(iso2 == i)  %>% dplyr::select(name)  %>% dplyr::pull()
+        vector_out[i] <- country_idx
+      }
+      vector_out <- unname(vector_out)
+      
+      return(vector_out)
+    }
+    
+    names(result) <- naming_funct(to_be_used_iso2)
+    
     return(result)
+    
   } else if (share == TRUE) {
+    
     db <- if (lws) "LWS" else "LIS"
+    
     to_be_used_iso2 <- iso2[iso2 %in% valid_iso2]
-
+    
     share_to_output <- lissyrtools::missing_or_zero_vars_all %>%
       dplyr::filter(
         database == db,
         iso2 %in% to_be_used_iso2,
         variable == {{ variable }}
       ) %>%
-      dplyr::group_by(iso2, {{ variable }}) %>%
+      dplyr::group_by(cname, {{ variable }}) %>%
       dplyr::summarise(
-        share = 100 - (sum(status) / dplyr::n() * 100),
+        share = 100 - (sum(missing_status) / dplyr::n() * 100),
         .groups = "drop"
       ) %>%
-      dplyr::select(iso2, share) %>%
+      dplyr::select(cname, share) %>%
       dplyr::mutate(share = round(share, digits = 1)) %>%
       tibble::deframe()
-
+    
     result <- list()
+    
     result[[1]] <- share_to_output
+    
     names(result) <- paste0(
       "Share of years across the series in ",
       dplyr::if_else(lws, "LWS", "LIS"),
@@ -132,5 +152,6 @@ variable_exists <- function(variable, iso2, lws = FALSE, share = FALSE) {
       " has values other than zeros and missings."
     )
     return(result)
+    
   }
 }

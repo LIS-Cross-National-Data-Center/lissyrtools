@@ -13,7 +13,7 @@ get_countries_lis <- function() {
     dplyr::select(cname, iso2) %>%
     tibble::deframe()
 
-  attributes(output)[1] <- NULL
+  #attributes(output)[1] <- NULL
 
   return(output)
 }
@@ -34,7 +34,7 @@ get_countries_lws <- function() {
     dplyr::select(cname, iso2) %>%
     tibble::deframe()
 
-  attributes(output)[1] <- NULL
+  #attributes(output)[1] <- NULL
 
   return(output)
 }
@@ -81,7 +81,7 @@ get_years_lis <- function(iso2) {
       dplyr::arrange(year) %>%
       dplyr::pull()
 
-    attributes(years_to_output)[1] <- NULL
+    #attributes(years_to_output)[1] <- NULL
 
     return(years_to_output)
   }
@@ -134,7 +134,7 @@ get_years_lws <- function(iso2) {
       dplyr::arrange(year) %>%
       dplyr::pull()
 
-    attributes(years_to_output)[1] <- NULL
+    #attributes(years_to_output)[1] <- NULL
 
     return(years_to_output)
   }

@@ -1,25 +1,31 @@
 #' Inspect the Labels of LIS and LWS variables
 #'
 #' @param vars A character vector containing LIS/LWS variables or the output list from lissyuse.
+#' @param pattern A character.  
 #'
-#' @return A character vector with the corresponding labels for the selected variables.
+#' @return A character vector with the corresponding labels for the selected variables, or where the pattern was detected in its label. 
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # 1) Without any argument:
 #' variable_labels()
 #' 
-#' \dontrun{
+
 #' # 2) Using with the outputed list from lissyuse:
 #' lis_datasets <- lissyuse(data = c("uk"), vars = c("hpub_i","hpub_u", "hi42", "hi421", "hi422", "hi43"), from = 2016)
 #' variable_labels(vars = lis_datasets)
-#' }
+
 #' 
 #' # 3) Using a character vector with LIS/LWS variables:
 #' variable_labels(vars = c("fyft", "basb", "hxremit", "bafi1_c", "pasodc"))
-variable_labels <- function(vars = NULL) {
-  
-  if (is.null(vars)) {
+#' 
+#' # 4) Using pattern argument: 
+#' variable_labels(pattern = "occupa")
+#' variable_labels(pattern = "capital")
+#' }
+variable_labels <- function(vars = NULL, pattern = NULL) {
+  if (is.null(vars) & is.null(pattern)) {
     output <- tibble::deframe(lissyrtools::data_vars_labels)
     return(output)
   } else if (!(is.null(vars))) {
@@ -58,6 +64,22 @@ variable_labels <- function(vars = NULL) {
         return(output)
       }
     }
+  } else if (!(is.null(pattern))) {
+    if (!is.character(pattern)) {
+      stop(glue::glue(
+        "Argument `pattern` only accepts characters."
+      ))
+    } else {
+      output <- lissyrtools::data_vars_labels[
+        stringr::str_detect(
+          lissyrtools::data_vars_labels$label,
+          pattern = pattern
+        ),
+      ] %>%
+        tibble::deframe()
+
+      return(output)
+    }
   }
 }
 
@@ -73,10 +95,13 @@ variable_labels <- function(vars = NULL) {
 #' @examples
 #' variable_has_note(variable = "area_c", iso2 = "br")
 #' variable_has_note(variable = "basb", iso2 = c("fr", "de", "us", "uk"), lws = TRUE)
+#' 
+#' To check the notes on METIS go to: https://www.lisdatacenter.org/frontend#/home, and select a database and a given country:.
+#' Afterwards, head to 'RESULTS' > 'Dataset information' > 'Code Books'.
 variable_has_note <- function(variable, iso2, lws = FALSE) {
   
   # Ensure that argument 'variable' only accepts one character
-
+  
   if (length(variable) > 1) {
     stop(
       glue::glue(
@@ -84,9 +109,9 @@ variable_has_note <- function(variable, iso2, lws = FALSE) {
       )
     )
   }
-
+  
   # Ensure the validity of the variable
-
+  
   if (lws) {
     invalid_var <- variable[!variable %in% lissyrtools::lws_variables]
     if (length(invalid_var) > 0) {
@@ -102,17 +127,17 @@ variable_has_note <- function(variable, iso2, lws = FALSE) {
       ))
     }
   }
-
+  
   # Ensure the validity of the iso2 codes
-
+  
   valid_iso2 <- if (lws) {
     lissyrtools::get_countries_lws()
   } else {
     lissyrtools::get_countries_lis()
   }
-
+  
   invalid_iso2 <- iso2[!iso2 %in% valid_iso2]
-
+  
   if (length(invalid_iso2) == length(iso2)) {
     # If no valid iso2 codes, stop with an error
     stop(
@@ -130,7 +155,7 @@ variable_has_note <- function(variable, iso2, lws = FALSE) {
       )
     )
   }
-
+  
   # body of the function
   process_country <- function(i) {
     db <- if (lws) "LWS" else "LIS"
@@ -139,23 +164,40 @@ variable_has_note <- function(variable, iso2, lws = FALSE) {
     } else {
       lissyrtools::get_years_lis
     }
-
+    
     years <- get_years_function(i)[[1]]
-
+    
     existing_years <- lissyrtools::data_with_warnings %>%
       dplyr::filter(database == db, iso2 == i, var_name == variable) %>%
       dplyr::pull(year)
-
+    
     year_status <- ifelse(years %in% existing_years, "Yes", "No")
     names(year_status) <- years
     return(year_status)
   }
-
+  
   to_be_used_iso2 <- iso2[iso2 %in% valid_iso2]
   result <- purrr::map(to_be_used_iso2, process_country)
-  names(result) <- to_be_used_iso2
-
+  
+  
+  # Naming the list 
+  naming_funct <- function(x) {
+    
+    vector_out <- c()
+    
+    for (i  in to_be_used_iso2) {
+      country_idx <- lissyrtools::metis_countries_df %>% dplyr::filter(iso2 == i)  %>% dplyr::select(name)  %>% dplyr::pull()
+      vector_out[i] <- country_idx
+    }
+    vector_out <- unname(vector_out)
+    
+    return(vector_out)
+  }
+  
+  names(result) <- naming_funct(to_be_used_iso2) 
+  
   return(result)
+  
 }
 
 

@@ -1,5 +1,19 @@
 # lissyrtools
 
+# lissyrtools 0.2.4 (2026-06-15)
+
+## New functions
+## Major changes
+
+- Added a new character argument `pattern` to `variable_labels()`.
+
+## Minor changes
+
+- Bug fix in the body of  `structure_to_plot()`.
+- The complementary table `lissyrtools::missing_or_zero_vars_all` is now created in a more efficient way and includes a `cname` column.
+- Output of `variable_has_note()` and `variable_exists()` now displays country names and not their iso2 codes. 
+
+
 # lissyrtools 0.2.3 (2026-03-15)
 
 ## New functions

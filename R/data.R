@@ -44,7 +44,7 @@
 #'
 #' A data frame that identifies whether a variable consists only of zeros or missing values for a given country and year.
 #'
-#' @format A data frame with 6 variables:
+#' @format A data frame with 7 variables:
 "missing_or_zero_vars_all"
 
 
