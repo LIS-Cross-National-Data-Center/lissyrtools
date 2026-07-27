@@ -24,55 +24,100 @@ country in LIS.
 ``` r
 get_surveys_lis("it")
 #> $it
-#>  [1] "Survey of Household Income and Wealth (SHIW)"
-#>  [2] "Survey of Household Income and Wealth (SHIW)"
-#>  [3] "Survey of Household Income and Wealth (SHIW)"
-#>  [4] "Survey of Household Income and Wealth (SHIW)"
-#>  [5] "Survey of Household Income and Wealth (SHIW)"
-#>  [6] "Survey of Household Income and Wealth (SHIW)"
-#>  [7] "Survey of Household Income and Wealth (SHIW)"
-#>  [8] "Survey of Household Income and Wealth (SHIW)"
-#>  [9] "Survey of Household Income and Wealth (SHIW)"
-#> [10] "Survey of Household Income and Wealth (SHIW)"
-#> [11] "Survey of Household Income and Wealth (SHIW)"
-#> [12] "Survey of Household Income and Wealth (SHIW)"
-#> [13] "Survey of Household Income and Wealth (SHIW)"
-#> [14] "Survey of Household Income and Wealth (SHIW)"
-#> [15] "Survey of Household Income and Wealth (SHIW)"
-#> [16] "Survey of Household Income and Wealth (SHIW)"
-#> [17] "Survey of Household Income and Wealth (SHIW)"
-#> [18] "Survey of Household Income and Wealth (SHIW)"
-#> [19] "Survey of Household Income and Wealth (SHIW)"
-#> [20] "Survey of Household Income and Wealth (SHIW)"
-#> [21] "Survey of Household Income and Wealth (SHIW)"
-#> [22] "Survey of Household Income and Wealth (SHIW)"
-#> [23] "Survey of Household Income and Wealth (SHIW)"
-#> [24] "Survey of Household Income and Wealth (SHIW)"
-#> [25] "Survey of Household Income and Wealth (SHIW)"
-#> [26] "Survey of Household Income and Wealth (SHIW)"
+#>                                           1977 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           1978 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           1979 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           1980 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           1981 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           1982 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           1983 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           1984 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           1986 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           1987 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           1989 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           1991 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           1993 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           1995 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           1998 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2000 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2002 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2004 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2006 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2008 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2010 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2012 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2014 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2016 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2020 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2022 
+#> "Survey of Household Income and Wealth (SHIW)" 
 #> 
 get_surveys_lis(iso2 = c("uy", "pe"))
 #> $uy
-#>  [1] "Continuous Household Survey (ECH)" "Continuous Household Survey (ECH)"
-#>  [3] "Continuous Household Survey (ECH)" "Continuous Household Survey (ECH)"
-#>  [5] "Continuous Household Survey (ECH)" "Continuous Household Survey (ECH)"
-#>  [7] "Continuous Household Survey (ECH)" "Continuous Household Survey (ECH)"
-#>  [9] "Continuous Household Survey (ECH)" "Continuous Household Survey (ECH)"
-#> [11] "Continuous Household Survey (ECH)" "Continuous Household Survey (ECH)"
-#> [13] "Continuous Household Survey (ECH)" "Continuous Household Survey (ECH)"
-#> [15] "Continuous Household Survey (ECH)" "Continuous Household Survey (ECH)"
-#> [17] "Continuous Household Survey (ECH)" "Continuous Household Survey (ECH)"
-#> [19] "Continuous Household Survey (ECH)"
+#>                                2004                                2005 
+#> "Continuous Household Survey (ECH)" "Continuous Household Survey (ECH)" 
+#>                                2006                                2007 
+#> "Continuous Household Survey (ECH)" "Continuous Household Survey (ECH)" 
+#>                                2008                                2009 
+#> "Continuous Household Survey (ECH)" "Continuous Household Survey (ECH)" 
+#>                                2010                                2011 
+#> "Continuous Household Survey (ECH)" "Continuous Household Survey (ECH)" 
+#>                                2012                                2013 
+#> "Continuous Household Survey (ECH)" "Continuous Household Survey (ECH)" 
+#>                                2014                                2015 
+#> "Continuous Household Survey (ECH)" "Continuous Household Survey (ECH)" 
+#>                                2016                                2017 
+#> "Continuous Household Survey (ECH)" "Continuous Household Survey (ECH)" 
+#>                                2018                                2019 
+#> "Continuous Household Survey (ECH)" "Continuous Household Survey (ECH)" 
+#>                                2022                                2023 
+#> "Continuous Household Survey (ECH)" "Continuous Household Survey (ECH)" 
+#>                                2024 
+#> "Continuous Household Survey (ECH)" 
 #> 
 #> $pe
-#>  [1] "National Household Survey (ENAHO)" "National Household Survey (ENAHO)"
-#>  [3] "National Household Survey (ENAHO)" "National Household Survey (ENAHO)"
-#>  [5] "National Household Survey (ENAHO)" "National Household Survey (ENAHO)"
-#>  [7] "National Household Survey (ENAHO)" "National Household Survey (ENAHO)"
-#>  [9] "National Household Survey (ENAHO)" "National Household Survey (ENAHO)"
-#> [11] "National Household Survey (ENAHO)" "National Household Survey (ENAHO)"
-#> [13] "National Household Survey (ENAHO)" "National Household Survey (ENAHO)"
-#> [15] "National Household Survey (ENAHO)" "National Household Survey (ENAHO)"
-#> [17] "National Household Survey (ENAHO)"
+#>                                2004                                2005 
+#> "National Household Survey (ENAHO)" "National Household Survey (ENAHO)" 
+#>                                2006                                2007 
+#> "National Household Survey (ENAHO)" "National Household Survey (ENAHO)" 
+#>                                2008                                2009 
+#> "National Household Survey (ENAHO)" "National Household Survey (ENAHO)" 
+#>                                2010                                2011 
+#> "National Household Survey (ENAHO)" "National Household Survey (ENAHO)" 
+#>                                2012                                2013 
+#> "National Household Survey (ENAHO)" "National Household Survey (ENAHO)" 
+#>                                2014                                2015 
+#> "National Household Survey (ENAHO)" "National Household Survey (ENAHO)" 
+#>                                2016                                2017 
+#> "National Household Survey (ENAHO)" "National Household Survey (ENAHO)" 
+#>                                2018                                2019 
+#> "National Household Survey (ENAHO)" "National Household Survey (ENAHO)" 
+#>                                2021 
+#> "National Household Survey (ENAHO)" 
 #> 
 ```

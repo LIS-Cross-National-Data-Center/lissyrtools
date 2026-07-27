@@ -24,41 +24,68 @@ country in LWS.
 ``` r
 get_surveys_lws("it")
 #> $it
-#>  [1] "Survey of Household Income and Wealth (SHIW)"
-#>  [2] "Survey of Household Income and Wealth (SHIW)"
-#>  [3] "Survey of Household Income and Wealth (SHIW)"
-#>  [4] "Survey of Household Income and Wealth (SHIW)"
-#>  [5] "Survey of Household Income and Wealth (SHIW)"
-#>  [6] "Survey of Household Income and Wealth (SHIW)"
-#>  [7] "Survey of Household Income and Wealth (SHIW)"
-#>  [8] "Survey of Household Income and Wealth (SHIW)"
-#>  [9] "Survey of Household Income and Wealth (SHIW)"
-#> [10] "Survey of Household Income and Wealth (SHIW)"
-#> [11] "Survey of Household Income and Wealth (SHIW)"
-#> [12] "Survey of Household Income and Wealth (SHIW)"
-#> [13] "Survey of Household Income and Wealth (SHIW)"
+#>                                           1995 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           1998 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2000 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2002 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2004 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2006 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2008 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2010 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2012 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2014 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2016 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2020 
+#> "Survey of Household Income and Wealth (SHIW)" 
+#>                                           2022 
+#> "Survey of Household Income and Wealth (SHIW)" 
 #> 
 get_surveys_lws(iso2 = c("fr", "jp"))
 #> $fr
-#> [1] "Household Wealth Survey (Patrimoine)"
-#> [2] "Household Wealth Survey (Patrimoine)"
-#> [3] "Household Wealth Survey (HVP)"       
-#> [4] "Household Wealth Survey (HVP)"       
+#>                                   2009                                   2014 
+#> "Household Wealth Survey (Patrimoine)" "Household Wealth Survey (Patrimoine)" 
+#>                                   2017                                   2020 
+#>        "Household Wealth Survey (HVP)"        "Household Wealth Survey (HVP)" 
 #> 
 #> $jp
-#>  [1] "Keio Household Panel Survey (KHPS)"      
-#>  [2] "Japan Household Panel Survey (JHPS/KHPS)"
-#>  [3] "Japan Household Panel Survey (JHPS/KHPS)"
-#>  [4] "Japan Household Panel Survey (JHPS/KHPS)"
-#>  [5] "Japan Household Panel Survey (JHPS/KHPS)"
-#>  [6] "Japan Household Panel Survey (JHPS/KHPS)"
-#>  [7] "Japan Household Panel Survey (JHPS/KHPS)"
-#>  [8] "Japan Household Panel Survey (JHPS/KHPS)"
-#>  [9] "Japan Household Panel Survey (JHPS/KHPS)"
-#> [10] "Japan Household Panel Survey (JHPS/KHPS)"
-#> [11] "Japan Household Panel Survey (JHPS/KHPS)"
-#> [12] "Japan Household Panel Survey (JHPS/KHPS)"
-#> [13] "Japan Household Panel Survey (JHPS/KHPS)"
-#> [14] "Japan Household Panel Survey (JHPS/KHPS)"
+#>                                       2004 
+#>       "Keio Household Panel Survey (KHPS)" 
+#>                                       2009 
+#> "Japan Household Panel Survey (JHPS/KHPS)" 
+#>                                       2010 
+#> "Japan Household Panel Survey (JHPS/KHPS)" 
+#>                                       2011 
+#> "Japan Household Panel Survey (JHPS/KHPS)" 
+#>                                       2012 
+#> "Japan Household Panel Survey (JHPS/KHPS)" 
+#>                                       2013 
+#> "Japan Household Panel Survey (JHPS/KHPS)" 
+#>                                       2014 
+#> "Japan Household Panel Survey (JHPS/KHPS)" 
+#>                                       2015 
+#> "Japan Household Panel Survey (JHPS/KHPS)" 
+#>                                       2016 
+#> "Japan Household Panel Survey (JHPS/KHPS)" 
+#>                                       2017 
+#> "Japan Household Panel Survey (JHPS/KHPS)" 
+#>                                       2018 
+#> "Japan Household Panel Survey (JHPS/KHPS)" 
+#>                                       2019 
+#> "Japan Household Panel Survey (JHPS/KHPS)" 
+#>                                       2020 
+#> "Japan Household Panel Survey (JHPS/KHPS)" 
+#>                                       2021 
+#> "Japan Household Panel Survey (JHPS/KHPS)" 
 #> 
 ```
