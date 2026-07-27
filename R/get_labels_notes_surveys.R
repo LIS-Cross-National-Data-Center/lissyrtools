@@ -249,7 +249,7 @@ get_surveys_lis <- function(iso2) {
       dplyr::arrange(year) %>%
       tibble::deframe()
 
-    attributes(surveys_to_output)[1] <- NULL
+    #attributes(surveys_to_output)[1] <- NULL
 
     return(surveys_to_output)
   }
@@ -303,7 +303,7 @@ get_surveys_lws <- function(iso2) {
       dplyr::arrange(year) %>%
       tibble::deframe()
 
-    attributes(surveys_to_output)[1] <- NULL
+    #attributes(surveys_to_output)[1] <- NULL
 
     return(surveys_to_output)
   }
