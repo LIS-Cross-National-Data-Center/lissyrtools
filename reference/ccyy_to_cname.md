@@ -10,7 +10,7 @@ ccyy_to_cname(ccyy_code = NULL)
 
 ## Arguments
 
-- ccyy:
+- ccyy_code:
 
   A character vector of ccyy's
 
