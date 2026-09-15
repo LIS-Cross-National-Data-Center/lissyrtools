@@ -74,7 +74,7 @@ ccyy_to_yyyy <- function(ccyy_code = NULL) {
 
 #' Get the country name from the `ccyy``
 #'
-#' @param ccyy A character vector of ccyy's
+#' @param ccyy_code A character vector of ccyy's
 #'
 #' @return A character vector with the corresponding country names.
 #' @keywords internal

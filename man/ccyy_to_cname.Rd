@@ -7,7 +7,7 @@
 ccyy_to_cname(ccyy_code = NULL)
 }
 \arguments{
-\item{ccyy}{A character vector of ccyy's}
+\item{ccyy_code}{A character vector of ccyy's}
 }
 \value{
 A character vector with the corresponding country names.
