@@ -1,7 +1,7 @@
-# LIS and LWS datasets
+# LIS, LWS and LCS datasets
 
-A data frame containing all the LIS and LWS datasets that can be used
-through LISSY, including some of their characteristics.
+A data frame containing all the LIS, LWS and LCS datasets that can be
+used through LISSY, including some of their characteristics.
 
 ## Usage
 

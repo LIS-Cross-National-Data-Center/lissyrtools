@@ -12,8 +12,8 @@ compute_weighted_count(var, wgt = NULL, na.rm = FALSE, percent = FALSE)
 
 - var:
 
-  A column refering to one of the categorical variables in a LIS or LWS
-  data frame.
+  A column refering to one of the categorical variables in a LIS, LWS or
+  LCS data frame.
 
 - wgt:
 

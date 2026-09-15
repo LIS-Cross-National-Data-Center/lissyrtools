@@ -1,5 +1,37 @@
 # Changelog
 
+## lissyrtools 0.2.5 (2026-09-15)
+
+### New functions
+
+- Added new functions:
+  [`get_countries_lcs()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_countries_lcs.md),
+  [`get_years_lcs()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_years_lcs.md)and
+  [`get_surveys_lcs()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_surveys_lcs.md).
+
+### Major changes
+
+- The logical argument `lws` in
+  [`lissyuse()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/lissyuse.md)
+  (and its internal helper functions) has been replaced by the character
+  argument `database`, which accepts `"lis"` (default), `"lws"`, or
+  `"lcs"`.
+- The logical argument `lws` in
+  [`variable_has_note()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/variable_has_note.md)
+  has been replaced by the character argument `database`.
+- The logical argument `lws` in
+  [`variable_exists()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/variable_exists.md)
+  has been replaced by the character argument `database`.
+- The logical argument `lws` in
+  [`variable_country_specific_categories()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/variable_country_specific_categories.md)
+  has been replaced by the character argument `database`.
+- New internal function
+  [`get_database_config()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_database_config.md),
+  an internal helper of
+  [`lissyuse()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/lissyuse.md).
+
+variable_exists
+
 ## lissyrtools 0.2.4 (2026-06-15)
 
 ### New functions

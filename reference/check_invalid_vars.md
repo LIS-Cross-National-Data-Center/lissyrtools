@@ -6,7 +6,7 @@ names.
 ## Usage
 
 ``` r
-check_invalid_vars(vars, lws = FALSE)
+check_invalid_vars(vars, database = "lis")
 ```
 
 ## Arguments
@@ -15,9 +15,9 @@ check_invalid_vars(vars, lws = FALSE)
 
   A character vector.
 
-- lws:
+- database:
 
-  Logical.
+  A character value. One of "lis" (default), "lws", or "lcs".
 
 ## Value
 

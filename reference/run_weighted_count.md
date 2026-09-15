@@ -28,9 +28,10 @@ run_weighted_count(
 
   A string specifying the name of the categorical variable for which
   counts or percentages are to be computed. This must be listed in
-  [`lissyrtools::lis_categorical_variables`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/lis_categorical_variables.md)
+  [`lissyrtools::lis_categorical_variables`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/lis_categorical_variables.md),
+  [`lissyrtools::lws_wealth_categorical_variables`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/lws_wealth_categorical_variables.md)
   or
-  [`lissyrtools::lws_wealth_categorical_variables`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/lws_wealth_categorical_variables.md).
+  [`lissyrtools::lcs_categorical_variables`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/lcs_categorical_variables.md).
 
 - wgt_name:
 

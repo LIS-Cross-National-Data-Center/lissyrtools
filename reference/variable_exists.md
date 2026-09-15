@@ -7,7 +7,7 @@ databases.
 ## Usage
 
 ``` r
-variable_exists(variable, iso2, lws = FALSE, share = FALSE)
+variable_exists(variable, iso2, database = "lis", share = FALSE, ...)
 ```
 
 ## Arguments
@@ -21,11 +21,9 @@ variable_exists(variable, iso2, lws = FALSE, share = FALSE)
   A character vector with valid iso2 codes of countries present in
   LIS/LWS.
 
-- lws:
+- database:
 
-  A logical value, that guides the tool to search in the LIS or LWS
-  database. The argument is FALSE by default, taking LIS as the database
-  to be investigated if nothing is specified.
+  A character value. One of "lis" (default), "lws", or "lcs".
 
 - share:
 
@@ -52,6 +50,7 @@ variable_exists(variable = "area_c", iso2 = "br")
 #> "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" 
 #> 
 variable_exists(variable = "basb", iso2 = c("fr", "de", "us", "uk"), lws = TRUE)
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
 #> $France
 #>  2009  2014  2017  2020 
 #>  "No" "Yes" "Yes" "Yes" 
@@ -69,6 +68,7 @@ variable_exists(variable = "basb", iso2 = c("fr", "de", "us", "uk"), lws = TRUE)
 #> "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes"  "No" 
 #> 
 variable_exists(variable = "basb", iso2 = c("fr", "de", "us", "uk"), lws = TRUE, share = TRUE)
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
 #> $`Share of years across the series in LWS where: basb has values other than zeros and missings.`
 #>         France        Germany United Kingdom  United States 
 #>           75.0            0.0           87.5          100.0 

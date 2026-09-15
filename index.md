@@ -41,7 +41,8 @@ using built-in sample datasets, then run it on LISSY when ready.
 
 🚀 Why use`lissyrtools`?
 
-Because LIS/LWS data are rich—but handling them shouldn’t be complex.
+Because LIS/LWS/LCS data are rich—but handling them shouldn’t be
+complex.
 
 `lissyrtools` brings **clarity**, **structure**, and **speed** to your
 LIS data workflow—whether you’re a researcher, policymaker, student, or
@@ -89,9 +90,10 @@ Data first needs to be loaded using the
 [lissyuse()](https://lis-cross-national-data-center.github.io/lissyrtools/reference/lissyuse.html)
 function. Its output will be a list whose elements are the datasets
 available in the LIS database for the countries selected within the
-specified time frame. LWS data can be loaded by setting the \`lws\`
-argument to TRUE (e.g lws = TRUE), with the Project dropdown adjusted to
-“LWS” as shown in the image below:
+specified time frame. LWS and LCS data can be loaded by setting the
+\`database\` argument to ‘lws’ or ‘lcs’ (e.g database = ‘lws’), with the
+Project dropdown adjusted to “LWS” or “LCS” respectively, as shown in
+the image below:
 
 ![](reference/figures/project_lws.png)
 
@@ -212,14 +214,17 @@ ggplot(data_to_plot, aes(x = year, y = value, color = cname, group = cname)) +
   theme(axis.text.x = element_text(angle = 25, hjust = 1))
 ```
 
-##### LWS Data
+##### LWS and LCS Data
 
 ``` r
 
 library(lissyrtools)
 library(dplyr)
 
-# 1) Set the argument `lws` = TRUE
+
+# LWS Data -------------
+
+# 1) Set the argument `database` = 'lws'
 # 2) Change the Project dropdown in LISSY accordingly. 
 
 lws_datasets <- lissyuse(
@@ -227,7 +232,7 @@ lws_datasets <- lissyuse(
    vars = "dnw", 
    from = 2010, 
    to = 2020,
-   lws = TRUE  
+   database = 'lws'
  ) 
  
 # Inspect presence of implicates in each dataset (via the `inum` variable)
@@ -237,6 +242,25 @@ purrr::map(lws_datasets, ~unique(.x$inum)) %>% print()
 lws_datasets %>%
   run_weighted_mean("dnw", by = "inum") %>%
   purrr::map(~mean(.x))  # final average by dataset across implicates
+
+
+# LCS Data -------------
+
+# 1) Set the argument `database` = 'lcs'
+# 2) Change the Project dropdown in LISSY accordingly. 
+
+lcs_datasets <- lissyuse(
+   data = c("lu"), 
+   vars = "hc_lcs",
+   from = 2010, 
+   to = 2020,
+   database = 'lcs'  
+ ) 
+ 
+
+# Compute mean net worth by implicate, then average across implicates
+lcs_datasets %>%
+  run_weighted_mean("hc_lcs")
 ```
 
 ### Local version
@@ -268,7 +292,7 @@ names(lis_datasets)
 lws_datasets <- lissyuse(
   data = c("it", "us"), 
   vars = c("region_c", "dnw"), 
-  lws = TRUE
+  database = 'lws'
   )
 
 names(lws_datasets)
@@ -284,14 +308,17 @@ names(lws_datasets)
 # Get available countries for LIS and LWS datasets
 get_countries_lis()
 get_countries_lws()
+get_countries_lcs()
 
 # Get available years for selected countries
 get_years_lis(iso2 = c("ca", "de", "fr"))
 get_years_lws(iso2 = c("jp", "no", "za"))
+get_years_lcs(iso2 = c("uk", "lu"))
 
 # Print survey names
 get_surveys_lis("ca")
 get_surveys_lws("jp")
+get_surveys_lcs("lu")
 
 
 # Show the label of variable "educ"

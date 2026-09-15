@@ -6,7 +6,7 @@ expression. Supports both LWS and LIS datasets.
 ## Usage
 
 ``` r
-subset_datasets(intermediate_data_to_filter, lws = FALSE, subset_expr)
+subset_datasets(intermediate_data_to_filter, database = "lis", subset_expr)
 ```
 
 ## Arguments
@@ -15,9 +15,9 @@ subset_datasets(intermediate_data_to_filter, lws = FALSE, subset_expr)
 
   List of data frames to subset.
 
-- lws:
+- database:
 
-  Logical.
+  A character value. One of "lis" (default), "lws", or "lcs".
 
 - subset_expr:
 

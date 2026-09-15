@@ -6,7 +6,7 @@ required. Suggests loading all countries if input is missing.
 ## Usage
 
 ``` r
-check_empty_data(data, lws = FALSE)
+check_empty_data(data, database = "lis")
 ```
 
 ## Arguments
@@ -15,10 +15,9 @@ check_empty_data(data, lws = FALSE)
 
   A character vector.
 
-- lws:
+- database:
 
-  Logical. If `TRUE`, suggests loading all LWS countries; otherwise,
-  suggests LIS countries.
+  A character value. One of "lis" (default), "lws", or "lcs".
 
 ## Value
 

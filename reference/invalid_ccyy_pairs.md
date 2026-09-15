@@ -5,7 +5,7 @@ Internal helper to ensure the ccyy pairs in argument `data` are valid.
 ## Usage
 
 ``` r
-invalid_ccyy_pairs(data, lws = FALSE)
+invalid_ccyy_pairs(data, database = "lis")
 ```
 
 ## Arguments
@@ -14,9 +14,9 @@ invalid_ccyy_pairs(data, lws = FALSE)
 
   A character vector.
 
-- lws:
+- database:
 
-  Logical.
+  A character value. One of "lis" (default), "lws", or "lcs".
 
 ## Value
 

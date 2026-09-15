@@ -16,7 +16,7 @@ apply_sqrt_equivalisation(data_list, var_name, eq_scale = 0.5)
 
 - data_list:
 
-  A named list of data frames, from LIS or LWS microdata.
+  A named list of data frames, from LIS, LWS or LCS microdata.
 
 - var_name:
 

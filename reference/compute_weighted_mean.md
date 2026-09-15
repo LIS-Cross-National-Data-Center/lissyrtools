@@ -12,7 +12,8 @@ compute_weighted_mean(var, wgt = NULL, na.rm = TRUE)
 
 - var:
 
-  A column refering to one of the variables in a LIS or LWS data frame.
+  A column refering to one of the variables in a LIS, LWS, LCS data
+  frame.
 
 - wgt:
 

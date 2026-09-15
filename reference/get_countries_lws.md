@@ -20,10 +20,12 @@ get_countries_lws()
 #>           "au"           "at"           "ca"           "cl"           "cz" 
 #>        Denmark        Estonia        Finland         France        Germany 
 #>           "dk"           "ee"           "fi"           "fr"           "de" 
-#>         Greece          India          Italy          Japan     Luxembourg 
-#>           "gr"           "in"           "it"           "jp"           "lu" 
-#>         Mexico         Norway       Slovakia       Slovenia   South Africa 
-#>           "mx"           "no"           "sk"           "si"           "za" 
-#>    South Korea          Spain         Sweden United Kingdom  United States 
-#>           "kr"           "es"           "se"           "uk"           "us" 
+#>         Greece          India        Ireland          Italy          Japan 
+#>           "gr"           "in"           "ie"           "it"           "jp" 
+#>     Luxembourg         Mexico         Norway       Slovakia       Slovenia 
+#>           "lu"           "mx"           "no"           "sk"           "si" 
+#>   South Africa    South Korea          Spain         Sweden United Kingdom 
+#>           "za"           "kr"           "es"           "se"           "uk" 
+#>  United States 
+#>           "us" 
 ```

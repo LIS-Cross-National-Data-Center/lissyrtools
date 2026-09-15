@@ -11,8 +11,9 @@ variable_country_specific_categories(
   iso2,
   from = NULL,
   to = NULL,
-  lws = FALSE,
-  n_categories = FALSE
+  database = "lis",
+  n_categories = FALSE,
+  ...
 )
 ```
 
@@ -38,11 +39,9 @@ variable_country_specific_categories(
   A numeric value representing the year (inclusive) up to which the
   LIS/LWS datasets should be considered.
 
-- lws:
+- database:
 
-  A logical value, that guides the tool to search in the LIS or LWS
-  database. The argument is FALSE by default, taking LIS as the databse
-  to be investigated if nothing is specified.
+  A character value. One of "lis" (default), "lws", or "lcs".
 
 - n_categories:
 
@@ -97,6 +96,7 @@ variable_country_specific_categories(variable = "health_c", iso2 = "it", from = 
 
 # To retrieve information on LWS datasets
 variable_country_specific_categories(variable = "bus1_c", iso2 = "fi", lws = TRUE)
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
 #> $`fi19 - legal form of non-traded self-employment businesses with an active role, main bu`
 #>                                                                       0 
 #> "does not own a business or has no active role in running the business" 
@@ -145,16 +145,42 @@ variable_country_specific_categories(variable = "region_c", iso2 = "es", n_categ
 
 # To use this function acroos multiples countries one could make use of the `purrr::map()` function 
 purrr::map(lissyrtools::get_countries_lws(), ~variable_country_specific_categories(variable = "bus1_c", iso2 = .x, lws = TRUE , n_categories = TRUE))
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
 #> Warning: The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
 #> Warning: The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
 #> Warning: The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
 #> Warning: The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
 #> Warning: The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
 #> Warning: The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
 #> Warning: The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
 #> Warning: The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
 #> Warning: The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
 #> Warning: The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
+#> Warning: The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".
 #> $Australia
 #> $Australia$`LWS database. Number of distinct categories in variable: bus1_c.`
 #> named integer(0)
@@ -220,6 +246,12 @@ purrr::map(lissyrtools::get_countries_lws(), ~variable_country_specific_categori
 #> $India
 #> $India$`LWS database. Number of distinct categories in variable: bus1_c.`
 #> named integer(0)
+#> 
+#> 
+#> $Ireland
+#> $Ireland$`LWS database. Number of distinct categories in variable: bus1_c.`
+#> ie20 ie13 
+#>    5    6 
 #> 
 #> 
 #> $Italy

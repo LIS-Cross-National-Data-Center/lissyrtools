@@ -1,13 +1,13 @@
 # Load Dataset Names Based on Criteria
 
 Internal function to filter and return dataset names based on input
-criteria such as specified iso2 codes or ccyy pairs, database type (LWS
-or LIS), and optional year range.
+criteria such as specified iso2 codes or ccyy pairs, database type (LIS,
+LWS or LCS), and optional year range.
 
 ## Usage
 
 ``` r
-load_datasets(data = NULL, lws = FALSE, from = NULL, to = NULL)
+load_datasets(data = NULL, database = "lis", from = NULL, to = NULL)
 ```
 
 ## Arguments
@@ -16,9 +16,9 @@ load_datasets(data = NULL, lws = FALSE, from = NULL, to = NULL)
 
   Optional character vector specifying ccyy pairs or iso2 codes.
 
-- lws:
+- database:
 
-  Logical indicating whether to use the LWS or LIS database.
+  A character value. One of "lis" (default), "lws", or "lcs".
 
 - from:
 

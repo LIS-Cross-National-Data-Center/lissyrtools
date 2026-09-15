@@ -1,7 +1,7 @@
-# Apply IQR-Based Top and Bottom Coding to LIS/LWS Variables
+# Apply IQR-Based Top and Bottom Coding to LIS/LWS/LCS Variables
 
 This function performs top and/or bottom coding on a specified variable
-across a list of LIS/LWS datasets. It applies an interquartile range
+across a list of LIS/LWS/LCS datasets. It applies an interquartile range
 (IQR)-based rule on the [`log()`](https://rdrr.io/r/base/Log.html)
 transformation of the variable. Optionally, weights can be supplied, and
 the transformation can be one- or two-sided.
@@ -23,7 +23,7 @@ apply_iqr_top_bottom_coding(
 
 - data_list:
 
-  A named list of data frames, from LIS or LWS microdata.
+  A named list of data frames, from LIS, LWS or LCS microdata.
 
 - var_name:
 

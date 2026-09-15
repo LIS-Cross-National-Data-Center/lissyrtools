@@ -1,7 +1,7 @@
-# Value Labels for Country-Specific Variables in LIS and LWS Datasets
+# Value Labels for Country-Specific Variables in LIS, LWS, LCS Datasets
 
 A data frame containing the categorized values of country-specific
-variables in the LIS and LWS datasets, organized by country and year.
+variables in the LIS, LWS, LCS datasets, organized by country and year.
 
 A data frame containing the categorized values of country-specific
 variables in the LIS and LWS datasets, organized by country and year.

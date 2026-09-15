@@ -14,7 +14,7 @@ across multiple countries and a selected range of years.
 Applies a transformation to the variable under analysis across datasets.
 
 - [`apply_iqr_top_bottom_coding()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/apply_iqr_top_bottom_coding.md)
-  : Apply IQR-Based Top and Bottom Coding to LIS/LWS Variables
+  : Apply IQR-Based Top and Bottom Coding to LIS/LWS/LCS Variables
 - [`apply_oecd_equivalisation()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/apply_oecd_equivalisation.md)
   : Apply OECD Equivalence Scale to a Variable
 - [`apply_sqrt_equivalisation()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/apply_sqrt_equivalisation.md)
@@ -68,15 +68,22 @@ LWS, including the surveys behind each dataset.
   : Print all the country code in LIS
 - [`get_countries_lws()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_countries_lws.md)
   : Print all the country code in LWS
+- [`get_countries_lcs()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_countries_lcs.md)
+  : Print all the country code in LCS
 - [`get_years_lis()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_years_lis.md)
   : Print all the existing years in LIS for a given country.
 - [`get_years_lws()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_years_lws.md)
   : Print all the existing years in LWS for a given country.
+- [`get_years_lcs()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_years_lcs.md)
+  : Print all the existing years in LCS for a given country.
 - [`get_surveys_lis()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_surveys_lis.md)
   : Print the survey used to construct the LIS datasets for a given
   country.
 - [`get_surveys_lws()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_surveys_lws.md)
   : Print the survey used to construct the LWS datasets for a given
+  country.
+- [`get_surveys_lcs()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/get_surveys_lcs.md)
+  : Print the survey used to construct the LCS datasets for a given
   country.
 
 ## Variable Information
@@ -158,6 +165,22 @@ autocompletion and the ability to inspect data frames interactively.
   : Sample Household-Level LWS Dataset - US 2019
 - [`us19_p_lws`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/us19_p_lws.md)
   : Sample Individual-Level LWS Dataset - US 2019
+- [`es16_h_lcs`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/es16_h_lcs.md)
+  : Sample Household-Level LCS Dataset - ES 2016
+- [`es16_p_lcs`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/es16_p_lcs.md)
+  : Sample Individual-Level LCS Dataset - ES 2016
+- [`es24_h_lcs`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/es24_h_lcs.md)
+  : Sample Household-Level LCS Dataset - ES 2024
+- [`es24_p_lcs`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/es24_p_lcs.md)
+  : Sample Individual-Level LCS Dataset - ES 2024
+- [`mx16_h_lcs`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/mx16_h_lcs.md)
+  : Sample Household-Level LCS Dataset - MX 2016
+- [`mx16_p_lcs`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/mx16_p_lcs.md)
+  : Sample Individual-Level LCS Dataset - MX 2016
+- [`mx20_h_lcs`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/mx20_h_lcs.md)
+  : Sample Household-Level LCS Dataset - MX 2020
+- [`mx20_p_lcs`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/mx20_p_lcs.md)
+  : Sample Individual-Level LCS Dataset - MX 2020
 
 ### Reference Objects
 
@@ -168,6 +191,8 @@ and LWS.
   : LIS Variables
 - [`lws_variables`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/lws_variables.md)
   : LWS Variables
+- [`lcs_variables`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/lcs_variables.md)
+  : LCS Variables
 
 ### Complementary Tables
 
@@ -178,7 +203,7 @@ and LWS.
 - [`data_with_warnings`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/data_with_warnings.md)
   : Variable notes
 - [`datasets`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/datasets.md)
-  : LIS and LWS datasets
+  : LIS, LWS and LCS datasets
 - [`deflators`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/deflators.md)
   : CPI and PPP deflators.
 - [`missing_or_zero_vars_all`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/missing_or_zero_vars_all.md)
@@ -186,7 +211,8 @@ and LWS.
 - [`metis_countries_df`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/metis_countries_df.md)
   : Countries Names and ISO Codes.
 - [`value_label_c_data`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/value_label_c_data.md)
-  : Value Labels for Country-Specific Variables in LIS and LWS Datasets
+  : Value Labels for Country-Specific Variables in LIS, LWS, LCS
+  Datasets
 
 ## Check Version
 

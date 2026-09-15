@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">lissyrtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">variable_exists</span><span class="op">(</span><span class="va">variable</span>, <span class="va">iso2</span>, lws <span class="op">=</span> <span class="cn">FALSE</span>, share <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">variable_exists</span><span class="op">(</span><span class="va">variable</span>, <span class="va">iso2</span>, database <span class="op">=</span> <span class="st">"lis"</span>, share <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -53,8 +53,8 @@
 <dd><p>A character vector with valid iso2 codes of countries present in LIS/LWS.</p></dd>
 
 
-<dt id="arg-lws">lws<a class="anchor" aria-label="anchor" href="#arg-lws"></a></dt>
-<dd><p>A logical value, that guides the tool to search in the LIS or LWS database. The argument is FALSE by default, taking LIS as the database to be investigated if nothing is specified.</p></dd>
+<dt id="arg-database">database<a class="anchor" aria-label="anchor" href="#arg-database"></a></dt>
+<dd><p>A character value. One of "lis" (default), "lws", or "lcs".</p></dd>
 
 
 <dt id="arg-share">share<a class="anchor" aria-label="anchor" href="#arg-share"></a></dt>
@@ -78,6 +78,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">variable_exists</span><span class="op">(</span>variable <span class="op">=</span> <span class="st">"basb"</span>, iso2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fr"</span>, <span class="st">"de"</span>, <span class="st">"us"</span>, <span class="st">"uk"</span><span class="op">)</span>, lws <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $France</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2009  2014  2017  2020 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  "No" "Yes" "Yes" "Yes" </span>
@@ -95,6 +96,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "Yes"  "No" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">variable_exists</span><span class="op">(</span>variable <span class="op">=</span> <span class="st">"basb"</span>, iso2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fr"</span>, <span class="st">"de"</span>, <span class="st">"us"</span>, <span class="st">"uk"</span><span class="op">)</span>, lws <span class="op">=</span> <span class="cn">TRUE</span>, share <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`Share of years across the series in LWS where: basb has values other than zeros and missings.`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         France        Germany United Kingdom  United States </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           75.0            0.0           87.5          100.0 </span>

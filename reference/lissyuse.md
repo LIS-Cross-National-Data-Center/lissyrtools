@@ -18,7 +18,8 @@ lissyuse(
   subset = NULL,
   from = NULL,
   to = NULL,
-  lws = FALSE
+  database = "lis",
+  ...
 )
 ```
 
@@ -49,11 +50,10 @@ lissyuse(
   A numeric value representing the year (inclusive) up to which the
   LIS/LWS datasets should be loaded.
 
-- lws:
+- database:
 
-  A logical value indicating whether to load LWS data. If TRUE, LWS data
-  is loaded; otherwise (default: FALSE), LIS data is loaded instead.
-  Note that this does not eliminate the need to set the ‘Project’ field
+  A character value. One of "lis" (default), "lws", or "lcs". Note that
+  this does not eliminate the need to set the ‘Project’ field
   accordingly in the LISSY remote system.
 
 ## Value
@@ -92,7 +92,7 @@ names(lis_datasets)
 
 # ------------ LWS ------------------ 
 
-lws_datasets <- lissyuse(data = c("us", "uk17", "uk19"), vars = "dnw", from = 2015, to = 2021, lws = TRUE)
+lws_datasets <- lissyuse(data = c("us", "uk17", "uk19"), vars = "dnw", from = 2015, to = 2021, database = 'lws')
 
 names(lws_datasets)
 } # }

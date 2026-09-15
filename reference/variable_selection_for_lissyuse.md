@@ -13,7 +13,7 @@ variable_selection_for_lissyuse(
   data_to_load,
   path_to_files,
   vars = NULL,
-  lws = FALSE
+  database = "lis"
 )
 ```
 
@@ -32,9 +32,9 @@ variable_selection_for_lissyuse(
   Optional character vector of variable names to select. If `NULL`, all
   variables are considered.
 
-- lws:
+- database:
 
-  Logical.
+  A character value. One of "lis" (default), "lws", or "lcs".
 
 ## Value
 

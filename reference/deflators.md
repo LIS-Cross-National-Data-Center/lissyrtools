@@ -2,7 +2,7 @@
 
 A dataset containing the Consumer Price Index (CPI) and Purchasing Power
 Parity (PPP) deflators that can be used to directly compare absolute
-monetary values across different LIS and LWS datasets.
+monetary values across different LIS, LWS and LCS datasets.
 
 ## Usage
 

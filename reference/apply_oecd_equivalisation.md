@@ -15,7 +15,7 @@ apply_oecd_equivalisation(data_list, var_name, modified = TRUE)
 
 - data_list:
 
-  A named list of data frames, from LIS or LWS microdata.
+  A named list of data frames, from LIS, LWS or LCS microdata.
 
 - var_name:
 

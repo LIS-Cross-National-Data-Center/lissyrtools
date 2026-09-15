@@ -1,9 +1,9 @@
 # Adjust Monetary Variables for Inflation and PPP
 
-Applies price adjustments to a monetary variable in a list of LIS/LWS
-datasets using LIS-provided deflators. Adjustments can be made for
-domestic inflation (CPI), purchasing power parity (PPP), or both
-(`lisppp`).
+Applies price adjustments to a monetary variable in a list of
+LIS/LWS/LCS datasets using LIS-provided deflators. Adjustments can be
+made for domestic inflation (CPI), purchasing power parity (PPP), or
+both (`lisppp`).
 
 ## Usage
 
@@ -21,7 +21,7 @@ apply_ppp_adjustment(
 
 - data_list:
 
-  A named list of data frames, from LIS or LWS microdata.
+  A named list of data frames, from LIS, LWS, LCS microdata.
 
 - var_name:
 
@@ -29,9 +29,9 @@ apply_ppp_adjustment(
 
 - database:
 
-  A string, either `"lis"` or `"lws"`, indicating the source database.
-  Required for determining how to handle the deflators and income
-  reference years.
+  A string, either `"lis"`, `"lws"` or `"lcs"`, indicating the source
+  database. Required for determining how to handle the deflators and
+  income reference years.
 
 - transformation:
 

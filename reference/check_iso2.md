@@ -6,7 +6,7 @@ to valid iso2 codes.
 ## Usage
 
 ``` r
-check_iso2(data, lws = FALSE)
+check_iso2(data, database = "lis")
 ```
 
 ## Arguments
@@ -15,9 +15,9 @@ check_iso2(data, lws = FALSE)
 
   A character vector.
 
-- lws:
+- database:
 
-  Logical.
+  A character value. One of "lis" (default), "lws", or "lcs".
 
 ## Value
 

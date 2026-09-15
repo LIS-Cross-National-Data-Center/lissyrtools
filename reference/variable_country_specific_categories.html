@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">lissyrtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,8 +43,9 @@
 <span>  <span class="va">iso2</span>,</span>
 <span>  from <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  to <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  lws <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  n_categories <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  database <span class="op">=</span> <span class="st">"lis"</span>,</span>
+<span>  n_categories <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -68,8 +69,8 @@
 <dd><p>A numeric value representing the year (inclusive) up to which the LIS/LWS datasets should be considered.</p></dd>
 
 
-<dt id="arg-lws">lws<a class="anchor" aria-label="anchor" href="#arg-lws"></a></dt>
-<dd><p>A logical value, that guides the tool to search in the LIS or LWS database. The argument is FALSE by default, taking LIS as the databse to be investigated if nothing is specified.</p></dd>
+<dt id="arg-database">database<a class="anchor" aria-label="anchor" href="#arg-database"></a></dt>
+<dd><p>A character value. One of "lis" (default), "lws", or "lcs".</p></dd>
 
 
 <dt id="arg-n-categories">n_categories<a class="anchor" aria-label="anchor" href="#arg-n-categories"></a></dt>
@@ -122,6 +123,7 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># To retrieve information on LWS datasets</span></span></span>
 <span class="r-in"><span><span class="fu">variable_country_specific_categories</span><span class="op">(</span>variable <span class="op">=</span> <span class="st">"bus1_c"</span>, iso2 <span class="op">=</span> <span class="st">"fi"</span>, lws <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`fi19 - legal form of non-traded self-employment businesses with an active role, main bu`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                                       0 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> "does not own a business or has no active role in running the business" </span>
@@ -170,16 +172,42 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># To use this function acroos multiples countries one could make use of the `purrr::map()` function </span></span></span>
 <span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="fu">lissyrtools</span><span class="fu">::</span><span class="fu"><a href="get_countries_lws.html">get_countries_lws</a></span><span class="op">(</span><span class="op">)</span>, <span class="op">~</span><span class="fu">variable_country_specific_categories</span><span class="op">(</span>variable <span class="op">=</span> <span class="st">"bus1_c"</span>, iso2 <span class="op">=</span> <span class="va">.x</span>, lws <span class="op">=</span> <span class="cn">TRUE</span> , n_categories <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The selected variable: bus1_c, does not have values other than zeros or missings for the selectd years.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The argument 'lws' is deprecated and no longer used. Please use 'database' instead, which accepts "lis" (default), "lws", or "lcs".</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $Australia</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $Australia$`LWS database. Number of distinct categories in variable: bus1_c.`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> named integer(0)</span>
@@ -245,6 +273,12 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> $India</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $India$`LWS database. Number of distinct categories in variable: bus1_c.`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> named integer(0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Ireland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Ireland$`LWS database. Number of distinct categories in variable: bus1_c.`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ie20 ie13 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5    6 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $Italy</span>
