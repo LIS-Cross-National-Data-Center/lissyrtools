@@ -73,10 +73,13 @@ reference:
     contents:
     - get_countries_lis
     - get_countries_lws
+    - get_countries_lcs
     - get_years_lis
     - get_years_lws
+    - get_years_lcs
     - get_surveys_lis
     - get_surveys_lws
+    - get_surveys_lcs
     
   - title: Variable Information
     desc: >
@@ -119,6 +122,14 @@ reference:
     - us16_p_lws
     - us19_h_lws
     - us19_p_lws
+    - es16_h_lcs
+    - es16_p_lcs
+    - es24_h_lcs
+    - es24_p_lcs
+    - mx16_h_lcs
+    - mx16_p_lcs
+    - mx20_h_lcs
+    - mx20_p_lcs
     
   - subtitle: Reference Objects
     desc: >
@@ -126,6 +137,7 @@ reference:
     contents:
     - lis_variables
     - lws_variables
+    - lcs_variables
     
 
   - subtitle: Complementary Tables

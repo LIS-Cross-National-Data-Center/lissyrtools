@@ -93,11 +93,13 @@ variable_labels <- function(vars = NULL, pattern = NULL) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' variable_has_note(variable = "area_c", iso2 = "br")
-#' variable_has_note(variable = "basb", iso2 = c("fr", "de", "us", "uk"), lws = TRUE)
+#' variable_has_note(variable = "basb", iso2 = c("fr", "de", "us", "uk"), database = "lws")
 #' 
 #' To check the notes on METIS go to: https://www.lisdatacenter.org/frontend#/home, and select a database and a given country:.
 #' Afterwards, head to 'RESULTS' > 'Dataset information' > 'Code Books'.
+#' }
 variable_has_note <- function(variable, iso2, database = "lis", ...) {
   
   dots <- list(...)

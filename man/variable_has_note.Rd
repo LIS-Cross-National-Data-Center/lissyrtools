@@ -20,9 +20,11 @@ A list, made of character vectors. Each elements corresponds to a country in LIS
 Verify if a given variable has a note, for a selected group of countries, in LIS or LWS databases.
 }
 \examples{
+\dontrun{
 variable_has_note(variable = "area_c", iso2 = "br")
-variable_has_note(variable = "basb", iso2 = c("fr", "de", "us", "uk"), lws = TRUE)
+variable_has_note(variable = "basb", iso2 = c("fr", "de", "us", "uk"), database = "lws")
 
 To check the notes on METIS go to: https://www.lisdatacenter.org/frontend#/home, and select a database and a given country:.
 Afterwards, head to 'RESULTS' > 'Dataset information' > 'Code Books'.
+}
 }
