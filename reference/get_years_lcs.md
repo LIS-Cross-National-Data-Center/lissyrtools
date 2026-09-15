@@ -26,6 +26,12 @@ get_years_lcs("it")
 #> $it
 #>  [1] 2012 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024
 #> 
-get_years_lcs(iso2 = c("de", "jp"))
-#> Error in get_years_lcs(iso2 = c("de", "jp")): None of the provided iso2 codes in argument 'iso2' are valid: de, jp. Valid codes are stored in lissyrtools::get_countries_lcs().
+get_years_lcs(iso2 = c("lu", "es"))
+#> $lu
+#> [1] 2019 2024
+#> 
+#> $es
+#>  [1] 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020
+#> [16] 2021 2022 2023 2024
+#> 
 ```
