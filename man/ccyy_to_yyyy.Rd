@@ -7,7 +7,7 @@
 ccyy_to_yyyy(ccyy_code = NULL)
 }
 \arguments{
-\item{ccyy}{A character vector of ccyy's}
+\item{ccyy_code}{A character vector of ccyy's}
 }
 \value{
 A numeric vector with the corresponding years.

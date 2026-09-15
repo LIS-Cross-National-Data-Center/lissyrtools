@@ -51,7 +51,7 @@ check_input_in_weight_argument <- function(wgt_name) {
 
 #' Get the year from the `ccyy``
 #'
-#' @param ccyy A character vector of ccyy's
+#' @param ccyy_code A character vector of ccyy's
 #'
 #' @return A numeric vector with the corresponding years.
 #' @keywords internal
