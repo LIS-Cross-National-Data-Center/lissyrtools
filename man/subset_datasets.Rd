@@ -4,12 +4,12 @@
 \alias{subset_datasets}
 \title{Subset Datasets Based on Expression}
 \usage{
-subset_datasets(intermediate_data_to_filter, lws = FALSE, subset_expr)
+subset_datasets(intermediate_data_to_filter, database = "lis", subset_expr)
 }
 \arguments{
 \item{intermediate_data_to_filter}{List of data frames to subset.}
 
-\item{lws}{Logical.}
+\item{database}{A character value. One of "lis" (default), "lws", or "lcs".}
 
 \item{subset_expr}{An expression used to filter the datasets.}
 }

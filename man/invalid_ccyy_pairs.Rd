@@ -4,12 +4,12 @@
 \alias{invalid_ccyy_pairs}
 \title{Checks for Invalid ccyy.}
 \usage{
-invalid_ccyy_pairs(data, lws = FALSE)
+invalid_ccyy_pairs(data, database = "lis")
 }
 \arguments{
 \item{data}{A character vector.}
 
-\item{lws}{Logical.}
+\item{database}{A character value. One of "lis" (default), "lws", or "lcs".}
 }
 \value{
 Stops if all ccyy codes in \code{data} are invalid, and it warns if only some are invalid.

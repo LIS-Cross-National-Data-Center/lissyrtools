@@ -2,7 +2,7 @@
 #'
 #' A dataset containing the Consumer Price Index (CPI) and Purchasing Power Parity (PPP)
 #' deflators that can be used to directly compare absolute monetary values across different
-#' LIS and LWS datasets.
+#' LIS, LWS and LCS datasets.
 #'
 #' @format A data frame with 8 variables:
 #'
@@ -10,9 +10,9 @@
 "deflators"
 
 
-#' LIS and LWS datasets
+#' LIS, LWS and LCS datasets
 #'
-#' A data frame containing all the LIS and LWS datasets 
+#' A data frame containing all the LIS, LWS and LCS datasets 
 #' that can be used through LISSY, including some of their characteristics.
 #'
 #' @format A data frame with 7 variables:
@@ -35,7 +35,7 @@
 
 #' Variable notes
 #'
-#' A data frame indicating whether a given variable in one of the LIS/LWS datasets has a note or not for a specific year.
+#' A data frame indicating whether a given variable in one of the LIS/LWS/LCS datasets has a note or not for a specific year.
 #'
 #' @format A data frame with 6 variables:
 "data_with_warnings"
@@ -48,9 +48,9 @@
 "missing_or_zero_vars_all"
 
 
-#' Value Labels for Country-Specific Variables in LIS and LWS Datasets
+#' Value Labels for Country-Specific Variables in LIS, LWS, LCS Datasets
 #'
-#' A data frame containing the categorized values of country-specific variables in the LIS and LWS datasets, organized by country and year.
+#' A data frame containing the categorized values of country-specific variables in the LIS, LWS, LCS datasets, organized by country and year.
 #'
 #' @format A data frame with 9 variables:
 "value_label_c_data"
@@ -78,6 +78,13 @@
 #'
 #' @format A character vector of length 336.
 "lws_variables"
+
+#' LCS Variables 
+#'
+#' A character vector containing the names of the variables available in LCS.
+#'
+#' @format A character vector of length 578.
+"lcs_variables"
 
 
 #'  Value Labels for Country-Specific Variables in LIS and LWS Datasets
@@ -321,6 +328,78 @@
 #' }
 "us19_p_lws"
 
+#' Sample Household-Level LCS Dataset - ES 2024
+#'
+#' @format Data frame with 1,000 rows and 552 columns.
+#' @examples
+#' \dontrun{
+#' es24_h_lcs
+#' }
+"es24_h_lcs"
+
+#' Sample Individual-Level LCS Dataset - ES 2024
+#'
+#' @format Data frame with 2,533 rows and 105 columns.
+#' @examples
+#' \dontrun{
+#' es24_p_lcs
+#' }
+"es24_p_lcs"
+
+#' Sample Household-Level LCS Dataset - ES 2016
+#'
+#' @format Data frame with 1,000 rows and 552 columns.
+#' @examples
+#' \dontrun{
+#' es16_h_lcs
+#' }
+"es16_h_lcs"
+
+#' Sample Individual-Level LCS Dataset - ES 2016
+#'
+#' @format Data frame with 2,641 rows and 105 columns.
+#' @examples
+#' \dontrun{
+#' es16_p_lcs
+#' }
+"es16_p_lcs"
+
+#' Sample Household-Level LCS Dataset - MX 2020
+#'
+#' @format Data frame with 1,000 rows and 552 columns.
+#' @examples
+#' \dontrun{
+#' mx20_h_lcs
+#' }
+"mx20_h_lcs"
+
+#' Sample Individual-Level LCS Dataset - MX 2020
+#'
+#' @format Data frame with 3,447 rows and 105 columns.
+#' @examples
+#' \dontrun{
+#' mx20_p_lcs
+#' }
+"mx20_p_lcs"
+
+#' Sample Household-Level LCS Dataset - MX 2016
+#'
+#' @format Data frame with 1,000 rows and 552 columns.
+#' @examples
+#' \dontrun{
+#' mx16_h_lcs
+#' }
+"mx16_h_lcs"
+
+#' Sample Individual-Level LCS Dataset - MX 2016
+#'
+#' @format Data frame with 3,648 rows and 105 columns.
+#' @examples
+#' \dontrun{
+#' mx16_p_lcs
+#' }
+"mx16_p_lcs"
+
 
 
 #' ERFLIS Household Variables
@@ -506,3 +585,101 @@
 #' @keywords internal
 #' @format Character vector
 "lws_wealth_country_specific_variables"
+
+
+#' LCS Household Variables
+#'
+#' A character vector containing the names of household-level variables in LCS datasets.
+#'
+#' @keywords internal
+#' @format Character vector
+"lcs_household_variables"
+
+
+#' LCS Person Variables
+#'
+#' A character vector containing the names of person-level variables in LCS datasets.
+#'
+#' @keywords internal
+#' @format Character vector
+"lcs_person_variables"
+
+
+#' LCS Both Household and Person Variables
+#'
+#' A character vector combining household and person variables in LCS datasets.
+#'
+#' @keywords internal
+#' @format Character vector
+"lcs_both_hp_variables"
+
+
+#' LCS Technical Variables
+#'
+#' A character vector of technical variables used in LCS datasets.
+#'
+#' @keywords internal
+#' @format Character vector
+"lcs_technical_variables"
+
+#' LCS Weight Variables
+#'
+#' A character vector of weight variables in LCS datasets.
+#'
+#' @keywords internal
+#' @format Character vector
+"lcs_weight_variables"
+
+#' LCS ID Variables
+#'
+#' A character vector containing the ID variables in LCS datasets.
+#'
+#' @keywords internal
+#' @format Character vector
+"lcs_id_variables"
+
+#' LCS Categorical Variables
+#'
+#' A character vector containing the names of categorical variables in LCS datasets.
+#'
+#' @keywords internal
+#' @format Character vector
+"lcs_categorical_variables"
+
+
+#' LCS Continuous Variables
+#'
+#' A character vector containing the names of continuous variables in LCS datasets.
+#'
+#' @keywords internal
+#' @format Character vector
+"lcs_continuous_variables"
+
+
+#' LCS Country-Specific Variables
+#'
+#' A character vector of variables specific to certain countries in LCS datasets.
+#'
+#' @keywords internal
+#' @format Character vector
+"lcs_country_specific_variables"
+
+
+#' Key Household Variables in LCS
+#'
+#' A character vector of key household variables specific to LCS datasets.
+#'
+#' @keywords internal
+#' @format Character vector
+"key_vars_household_lcs"
+
+
+
+#' Key Person Variables in LCS
+#'
+#' A character vector of key person variables specific to LCS datasets.
+#'
+#' @keywords internal
+#' @format Character vector
+"key_vars_person_lcs"
+

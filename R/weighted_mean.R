@@ -83,11 +83,12 @@ run_weighted_mean <- function(
     recommended_categoricals <- c(
       lissyrtools::lis_categorical_variables,
       lissyrtools::lws_wealth_categorical_variables,
+      setdiff(lissyrtools::lcs_categorical_variables, lissyrtools::lis_categorical_variables),
       "inum"
     )
     if (!by %in% recommended_categoricals) {
       warning(sprintf(
-        "The `by` variable is not recognized as a categorical variable in `lissyrtools::lis_categorical_variables`, `lissyrtools::lws_wealth_categorical_variables`, or as the variable 'inum'."
+        "The `by` variable is not recognized as a categorical variable in `lissyrtools::lis_categorical_variables`, `lissyrtools::lws_wealth_categorical_variables`, `lissyrtools::lcs_categorical_variables`, or the variable 'inum'."
       ))
     }
 
@@ -151,7 +152,7 @@ run_weighted_mean <- function(
 #' 
 #'
 #'
-#' @param var A column refering to one of the variables in a LIS or LWS data frame.
+#' @param var A column refering to one of the variables in a LIS, LWS, LCS data frame.
 #' @param wgt A numeric vector of weights (e.g., .x$hpopwgt, .x$pwgt). Must be the same length as \code{x}.
 #' @param na.rm Logical; if \code{TRUE}, missing values in \code{x} and \code{w} are removed before computation. Default is \code{TRUE}.
 

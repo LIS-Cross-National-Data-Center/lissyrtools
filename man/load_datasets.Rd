@@ -4,12 +4,12 @@
 \alias{load_datasets}
 \title{Load Dataset Names Based on Criteria}
 \usage{
-load_datasets(data = NULL, lws = FALSE, from = NULL, to = NULL)
+load_datasets(data = NULL, database = "lis", from = NULL, to = NULL)
 }
 \arguments{
 \item{data}{Optional character vector specifying ccyy pairs or iso2 codes.}
 
-\item{lws}{Logical indicating whether to use the LWS or LIS database.}
+\item{database}{A character value. One of "lis" (default), "lws", or "lcs".}
 
 \item{from}{Optional numeric lower bound for dataset years.}
 
@@ -20,6 +20,6 @@ A character vector of dataset names matching the criteria.
 }
 \description{
 Internal function to filter and return dataset names based on input criteria such as
-specified iso2 codes or ccyy pairs, database type (LWS or LIS), and optional year range.
+specified iso2 codes or ccyy pairs, database type (LIS, LWS or LCS), and optional year range.
 }
 \keyword{internal}

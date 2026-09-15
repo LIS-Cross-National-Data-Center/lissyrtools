@@ -7,7 +7,7 @@
 apply_sqrt_equivalisation(data_list, var_name, eq_scale = 0.5)
 }
 \arguments{
-\item{data_list}{A named list of data frames, from LIS or LWS microdata.}
+\item{data_list}{A named list of data frames, from LIS, LWS or LCS microdata.}
 
 \item{var_name}{A string. The name of the variable to be equivalised.}
 

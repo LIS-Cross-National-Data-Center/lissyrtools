@@ -2,23 +2,27 @@
 
 
 
+
 #' Checks for Empty Data Input
 #'
 #' @description
 #' Internal helper to ensure the `data` argument is not `NULL` when required. Suggests loading all countries if input is missing.
 #'
 #' @param data A character vector.
-#' @param lws Logical. If `TRUE`, suggests loading all LWS countries; otherwise, suggests LIS countries.
+#' @param database A character value. One of "lis" (default), "lws", or "lcs".
 #'
 #' @keywords internal
 #' @return Stops with an informative error message if `data` is `NULL`.
-check_empty_data <- function(data, lws = FALSE) {
-  all_iso2 <- if (lws) {
-    "lissyrtools::get_countries_lws()"
-  } else {
-    "lissyrtools::get_countries_lis()"
-  }
-
+check_empty_data <- function(data, database = "lis") {
+  
+  assertthat::assert_that(database %in% c("lis", "lws", "lcs"),
+                          msg = glue::glue("'database' must be one of 'lis', 'lws', or 'lcs'. Got '{database}' instead."))
+  
+  all_iso2 <- switch(database,
+                     lis = lissyrtools::get_countries_lis(),
+                     lws = lissyrtools::get_countries_lws(),
+                     lcs = lissyrtools::get_countries_lcs())
+  
   if (is.null(data)) {
     stop(
       glue::glue(
@@ -28,6 +32,10 @@ check_empty_data <- function(data, lws = FALSE) {
     )
   }
 }
+
+
+
+
 
 #' Checks for the length of the characters in the argument `data`.
 #'
@@ -51,33 +59,40 @@ check_length_iso2 <- function(data) {
   }
 }
 
+
+
+
 #' Checks for Invalid iso2 codes.
 #'
 #' @description
 #' Internal helper to ensure the iso2 codes in argument `data` correspond to valid iso2 codes.
 #'
 #' @param data A character vector.
-#' @param lws Logical.
+#' @param database A character value. One of "lis" (default), "lws", or "lcs".
 #'
 #' @keywords internal
 #' @return Stops if all iso2 codes in `data` are invalid, and it warns if only some are invalid. 
-check_iso2 <- function(data, lws = FALSE) {
-  valid_iso2 <- if (lws) {
-    lissyrtools::datasets %>% dplyr::filter(database == "LWS") %>% dplyr::select(iso2) %>% unique() %>% dplyr::pull() %>% as.vector()
-  } else {
-    lissyrtools::datasets %>% dplyr::filter(database == "LIS") %>% dplyr::select(iso2) %>% unique() %>% dplyr::pull() %>% as.vector()
-  }
-
+check_iso2 <- function(data, database = "lis") {
+  
+  assertthat::assert_that(database %in% c("lis", "lws", "lcs"),
+                          msg = glue::glue("'database' must be one of 'lis', 'lws', or 'lcs'. Got '{database}' instead."))
+  
+  valid_iso2 <- lissyrtools::datasets %>% 
+    dplyr::filter(database == toupper(!!database)) %>% 
+    dplyr::select(iso2) %>% 
+    unique() %>% 
+    dplyr::pull() %>% 
+    as.vector()
+  
   data_iso2 <- stringr::str_sub(data, 1, 2)
-
   invalid_iso2 <- data_iso2[!data_iso2 %in% valid_iso2]
-
+  
   if (length(invalid_iso2) == length(data_iso2)) {
     # If no valid iso2 codes, stop with an error
     stop(
       glue::glue(
         "None of the provided iso2 codes in 'data' are valid: {toString(data_iso2)}. ",
-        "Valid codes are stored in lissyrtools::get_countries_{ifelse(lws, 'lws', 'lis')}()."
+        "Valid codes are stored in lissyrtools::get_countries_{database}()."
       )
     )
   } else if (length(invalid_iso2) > 0) {
@@ -85,15 +100,11 @@ check_iso2 <- function(data, lws = FALSE) {
     warning(
       glue::glue(
         "The argument 'data' contains invalid iso2 codes: {toString(invalid_iso2)}. ",
-        "These iso2 codes are not in the valid list for the selected database. See: lissyrtools::get_countries_{ifelse(lws, 'lws', 'lis')}()."
+        "These iso2 codes are not in the valid list for the selected database. See: lissyrtools::get_countries_{database}()."
       )
     )
   }
 }
-
-
-
-
 
 
 #' Checks for Invalid ccyy. 
@@ -102,35 +113,41 @@ check_iso2 <- function(data, lws = FALSE) {
 #' Internal helper to ensure the ccyy pairs in argument `data` are valid.
 #'
 #' @param data A character vector.
-#' @param lws Logical.
+#' @param database A character value. One of "lis" (default), "lws", or "lcs".
 #'
 #' @keywords internal
 #' @return Stops if all ccyy codes in `data` are invalid, and it warns if only some are invalid. 
-invalid_ccyy_pairs <- function(data, lws = FALSE) {
-  database <- if (lws) "LWS" else "LIS"
-
+invalid_ccyy_pairs <- function(data, database = "lis") {
+  
+  assertthat::assert_that(database %in% c("lis", "lws", "lcs"),
+                          msg = glue::glue("'database' must be one of 'lis', 'lws', or 'lcs'. Got '{database}' instead."))
+  
+  database_upper <- toupper(database)
+  
   valid_pairs <- lissyrtools::datasets %>%
-    dplyr::filter(database == !!database) %>%
+    dplyr::filter(database == !!database_upper) %>%
     dplyr::pull(dname) %>%
     unique()
-
+  
   invalid_pairs <- data[stringr::str_length(data) == 4][
     !data[stringr::str_length(data) == 4] %in% valid_pairs
   ]
-
+  
   if (length(invalid_pairs) > 0 & length(data) == length(invalid_pairs)) {
     stop(glue::glue(
       "No country-year pairs in argument 'data' are valid. ",
-      "Please double-check your input using `get_()` functions like `get_countries_lis()` or `get_years_lws()`."
+      "Please double-check your input using `get_()` functions like `get_countries_{database}()` or `get_years_{database}()`."
     ))
   }
-
   if (length(invalid_pairs) > 0) {
     warning(glue::glue(
-      "The following country-year pairs in argument 'data' are not found in the {database} database: {toString(invalid_pairs)}."
+      "The following country-year pairs in argument 'data' are not found in the {database_upper} database: {toString(invalid_pairs)}."
     ))
   }
 }
+
+
+
 
 #' Checks for Invalid Vars
 #'
@@ -138,25 +155,23 @@ invalid_ccyy_pairs <- function(data, lws = FALSE) {
 #' Internal helper to ensure the `vars` argument has no invalid variable names.
 #'
 #' @param vars A character vector.
-#' @param lws Logical.
+#' @param database A character value. One of "lis" (default), "lws", or "lcs".
 #'
 #' @keywords internal
 #' @return Stops if all characters in `vars` are invalid, and it warns if only some are invalid. 
-check_invalid_vars <- function(vars, lws = FALSE) {
-  valid_vars <- if (lws) {
-    lissyrtools::lws_variables
-  } else {
-    lissyrtools::lis_variables
-  }
-
+check_invalid_vars <- function(vars, database = "lis") {
+  
+  assertthat::assert_that(database %in% c("lis", "lws", "lcs"),
+                          msg = glue::glue("'database' must be one of 'lis', 'lws', or 'lcs'. Got '{database}' instead."))
+  
+  valid_vars <- switch(database,
+                       lis = lissyrtools::lis_variables,
+                       lws = lissyrtools::lws_variables,
+                       lcs = lissyrtools::lcs_variables)
+  
   invalid_vars <- vars[!vars %in% valid_vars]
-
-  var_source <- if (lws) {
-    "lissyrtools::lws_variables"
-  } else {
-    "lissyrtools::lis_variables"
-  }
-
+  var_source <- glue::glue("lissyrtools::{database}_variables")
+  
   if (length(invalid_vars) > 0 & length(invalid_vars) == length(vars)) {
     stop(glue::glue(
       "None of the characters provided in argument `vars` are considered valid. ",
@@ -169,3 +184,7 @@ check_invalid_vars <- function(vars, lws = FALSE) {
     ))
   }
 }
+
+
+
+

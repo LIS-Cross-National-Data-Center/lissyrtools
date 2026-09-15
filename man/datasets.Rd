@@ -3,7 +3,7 @@
 \docType{data}
 \name{datasets}
 \alias{datasets}
-\title{LIS and LWS datasets}
+\title{LIS, LWS and LCS datasets}
 \format{
 A data frame with 7 variables:
 }
@@ -11,7 +11,7 @@ A data frame with 7 variables:
 datasets
 }
 \description{
-A data frame containing all the LIS and LWS datasets
+A data frame containing all the LIS, LWS and LCS datasets
 that can be used through LISSY, including some of their characteristics.
 }
 \keyword{datasets}

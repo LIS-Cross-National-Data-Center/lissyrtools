@@ -2,7 +2,7 @@
 % Please edit documentation in R/apply_iqr_top_bottom_coding.R
 \name{apply_iqr_top_bottom_coding}
 \alias{apply_iqr_top_bottom_coding}
-\title{Apply IQR-Based Top and Bottom Coding to LIS/LWS Variables}
+\title{Apply IQR-Based Top and Bottom Coding to LIS/LWS/LCS Variables}
 \usage{
 apply_iqr_top_bottom_coding(
   data_list,
@@ -14,7 +14,7 @@ apply_iqr_top_bottom_coding(
 )
 }
 \arguments{
-\item{data_list}{A named list of data frames, from LIS or LWS microdata.}
+\item{data_list}{A named list of data frames, from LIS, LWS or LCS microdata.}
 
 \item{var_name}{Character string. Name of the variable to code (e.g., "dhi").}
 
@@ -31,7 +31,7 @@ A list of data frames with the same structure as \code{data_list}, where \code{v
 has been adjusted by bounding extreme values according to an IQR rule.
 }
 \description{
-This function performs top and/or bottom coding on a specified variable across a list of LIS/LWS datasets.
+This function performs top and/or bottom coding on a specified variable across a list of LIS/LWS/LCS datasets.
 It applies an interquartile range (IQR)-based rule on the \code{log()} transformation of the variable.
 Optionally, weights can be supplied, and the transformation can be one- or two-sided.
 }

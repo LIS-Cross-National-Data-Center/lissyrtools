@@ -4,12 +4,12 @@
 \alias{check_iso2}
 \title{Checks for Invalid iso2 codes.}
 \usage{
-check_iso2(data, lws = FALSE)
+check_iso2(data, database = "lis")
 }
 \arguments{
 \item{data}{A character vector.}
 
-\item{lws}{Logical.}
+\item{database}{A character value. One of "lis" (default), "lws", or "lcs".}
 }
 \value{
 Stops if all iso2 codes in \code{data} are invalid, and it warns if only some are invalid.

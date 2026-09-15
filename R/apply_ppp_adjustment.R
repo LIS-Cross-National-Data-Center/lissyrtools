@@ -1,12 +1,12 @@
 #' Adjust Monetary Variables for Inflation and PPP
 #'
-#' Applies price adjustments to a monetary variable in a list of LIS/LWS datasets using
+#' Applies price adjustments to a monetary variable in a list of LIS/LWS/LCS datasets using
 #' LIS-provided deflators. Adjustments can be made for domestic inflation (CPI),
 #' purchasing power parity (PPP), or both (`lisppp`).
 #'
-#' @param data_list A named list of data frames, from LIS or LWS microdata.
+#' @param data_list A named list of data frames, from LIS, LWS, LCS microdata.
 #' @param var_name A string. The name of the monetary variable to be adjusted.
-#' @param database A string, either `"lis"` or `"lws"`, indicating the source database.
+#' @param database A string, either `"lis"`, `"lws"` or `"lcs"`, indicating the source database.
 #' Required for determining how to handle the deflators and income reference years.
 #' @param transformation A string specifying the type of adjustment:
 #' \itemize{
@@ -78,9 +78,9 @@ apply_ppp_adjustment <- function(
   
   if (missing(database) || is.null(database) || database == "") {
     warning(
-      "The `database` argument was not specified. Please define it as either \"lis\" or \"lws\" (no default is assumed)."
+      "The `database` argument was not specified. Please define it as either \"lis\", \"lws\", or \"lcs\" (no default is assumed)."
     )
-  }
+  } 
 
   # --- Validate arguments ---
 
@@ -92,8 +92,8 @@ apply_ppp_adjustment <- function(
 
   # Check `database` argument
   assertthat::assert_that(
-    database %in% c("lis", "lws"),
-    msg = glue::glue("Argument '{database}' must be either \"lis\" or \"lws\".")
+    database %in% c("lis", "lws", "lcs"),
+    msg = glue::glue(msg = "Argument 'database' must be either \"lis\", \"lws\", or \"lcs\".")
   )
 
   # Check `trasnformation` argument

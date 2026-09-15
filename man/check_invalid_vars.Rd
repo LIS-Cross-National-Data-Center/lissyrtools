@@ -4,12 +4,12 @@
 \alias{check_invalid_vars}
 \title{Checks for Invalid Vars}
 \usage{
-check_invalid_vars(vars, lws = FALSE)
+check_invalid_vars(vars, database = "lis")
 }
 \arguments{
 \item{vars}{A character vector.}
 
-\item{lws}{Logical.}
+\item{database}{A character value. One of "lis" (default), "lws", or "lcs".}
 }
 \value{
 Stops if all characters in \code{vars} are invalid, and it warns if only some are invalid.

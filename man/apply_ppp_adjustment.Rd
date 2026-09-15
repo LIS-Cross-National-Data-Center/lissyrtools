@@ -13,11 +13,11 @@ apply_ppp_adjustment(
 )
 }
 \arguments{
-\item{data_list}{A named list of data frames, from LIS or LWS microdata.}
+\item{data_list}{A named list of data frames, from LIS, LWS, LCS microdata.}
 
 \item{var_name}{A string. The name of the monetary variable to be adjusted.}
 
-\item{database}{A string, either \code{"lis"} or \code{"lws"}, indicating the source database.
+\item{database}{A string, either \code{"lis"}, \code{"lws"} or \code{"lcs"}, indicating the source database.
 Required for determining how to handle the deflators and income reference years.}
 
 \item{transformation}{A string specifying the type of adjustment:
@@ -34,7 +34,7 @@ Indicates the reference year of the PPP series (e.g., PPPs expressed in 2017 USD
 A list of data frames, with the specified variable adjusted based on the chosen transformation.
 }
 \description{
-Applies price adjustments to a monetary variable in a list of LIS/LWS datasets using
+Applies price adjustments to a monetary variable in a list of LIS/LWS/LCS datasets using
 LIS-provided deflators. Adjustments can be made for domestic inflation (CPI),
 purchasing power parity (PPP), or both (\code{lisppp}).
 }

@@ -7,7 +7,7 @@
 compute_weighted_count(var, wgt = NULL, na.rm = FALSE, percent = FALSE)
 }
 \arguments{
-\item{var}{A column refering to one of the categorical variables in a LIS or LWS data frame.}
+\item{var}{A column refering to one of the categorical variables in a LIS, LWS or LCS data frame.}
 
 \item{wgt}{A numeric vector of weights (e.g., .x$hpopwgt, .x$pwgt). Must be the same length as \code{x}.}
 

@@ -11,6 +11,6 @@ A data frame with 6 variables:
 data_with_warnings
 }
 \description{
-A data frame indicating whether a given variable in one of the LIS/LWS datasets has a note or not for a specific year.
+A data frame indicating whether a given variable in one of the LIS/LWS/LCS datasets has a note or not for a specific year.
 }
 \keyword{datasets}

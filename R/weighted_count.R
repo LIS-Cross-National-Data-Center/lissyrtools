@@ -7,7 +7,7 @@
 #'
 #' @param data_list A named list of data frames, (e.g., across countries or years).
 #' @param var_name A string specifying the name of the categorical variable for which counts or percentages are to be computed.
-#'        This must be listed in `lissyrtools::lis_categorical_variables` or `lissyrtools::lws_wealth_categorical_variables`.
+#'        This must be listed in `lissyrtools::lis_categorical_variables`, `lissyrtools::lws_wealth_categorical_variables` or `lissyrtools::lcs_categorical_variables`.
 #' @param wgt_name (Optional) A string specifying the name of the weight variable to apply. If `NULL`, unweighted counts are used.
 #' @param na.rm Logical; if `TRUE`, observations with missing values in `var_name` are removed before computing counts or percentages.
 #' @param by (Optional) Optional string giving the name of a categorical variable to split the data within each data frame before computing statistics.
@@ -139,6 +139,7 @@ run_weighted_count <- function(
   allowed_categoricals_in_var_name <- c(
     lissyrtools::lis_categorical_variables,
     lissyrtools::lws_wealth_categorical_variables,
+    setdiff(lissyrtools::lcs_categorical_variables, lissyrtools::lis_categorical_variables),
     "inum", 
     "grossnet",  
     "currency", 
@@ -147,7 +148,7 @@ run_weighted_count <- function(
   )
   if (!var_name %in% allowed_categoricals_in_var_name) {
     stop(sprintf(
-      "The `var_name` variable must be a categorical (not continuous) variable from `lissyrtools::lis_categorical_variables`, `lws_wealth_categorical_variables`, or the variable 'inum'."
+      "The `var_name` variable must be a categorical (not continuous) variable from `lissyrtools::lis_categorical_variables`, `lws_wealth_categorical_variables`, `lissyrtools::lcs_categorical_variables`, or the variable 'inum'."
     ))
   }
 
@@ -155,11 +156,12 @@ run_weighted_count <- function(
     recommended_categoricals <- c(
       lissyrtools::lis_categorical_variables,
       lissyrtools::lws_wealth_categorical_variables,
+      setdiff(lissyrtools::lcs_categorical_variables, lissyrtools::lis_categorical_variables),
       "inum"
     )
     if (!by %in% recommended_categoricals) {
       warning(sprintf(
-        "The `by` variable is not recognized as a categorical variable in `lissyrtools::lis_categorical_variables`, `lissyrtools::lws_wealth_categorical_variables`, or as the variable 'inum'."
+        "The `by` variable is not recognized as a categorical variable in `lissyrtools::lis_categorical_variables`, `lissyrtools::lws_wealth_categorical_variables`, `lissyrtools::lcs_categorical_variables`, or as the variable 'inum'."
       ))
     }
   }
@@ -235,7 +237,7 @@ run_weighted_count <- function(
 #'
 #'
 #'
-#' @param var A column refering to one of the categorical variables in a LIS or LWS data frame.
+#' @param var A column refering to one of the categorical variables in a LIS, LWS or LCS data frame.
 #' @param wgt A numeric vector of weights (e.g., .x$hpopwgt, .x$pwgt). Must be the same length as \code{x}.
 #' @param na.rm Logical; if \code{TRUE}, missing values in \code{x} and \code{w} are removed before computation. Default is \code{FALSE}.
 #' @param percent Logical; if \code{TRUE}, computes weighted (or non-weighted) percentages.

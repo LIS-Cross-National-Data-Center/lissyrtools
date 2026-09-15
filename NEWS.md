@@ -1,5 +1,23 @@
 # lissyrtools
 
+
+# lissyrtools 0.2.5 (2026-09-15)
+
+## New functions
+
+- Added new functions: `get_countries_lcs()`, `get_years_lcs()`and `get_surveys_lcs()`. 
+
+## Major changes
+
+- The logical argument `lws` in `lissyuse()` (and its internal helper functions) has been replaced by the character argument `database`, which accepts `"lis"` (default), `"lws"`, or `"lcs"`.
+- The logical argument `lws` in `variable_has_note()` has been replaced by the character argument `database`. 
+- The logical argument `lws` in `variable_exists()` has been replaced by the character argument `database`. 
+- The logical argument `lws` in `variable_country_specific_categories()` has been replaced by the character argument `database`.
+- New internal function `get_database_config()`, an internal helper of `lissyuse()`.
+
+variable_exists
+
+
 # lissyrtools 0.2.4 (2026-06-15)
 
 ## New functions

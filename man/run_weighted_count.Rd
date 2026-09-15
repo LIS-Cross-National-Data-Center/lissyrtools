@@ -17,7 +17,7 @@ run_weighted_count(
 \item{data_list}{A named list of data frames, (e.g., across countries or years).}
 
 \item{var_name}{A string specifying the name of the categorical variable for which counts or percentages are to be computed.
-This must be listed in \code{lissyrtools::lis_categorical_variables} or \code{lissyrtools::lws_wealth_categorical_variables}.}
+This must be listed in \code{lissyrtools::lis_categorical_variables}, \code{lissyrtools::lws_wealth_categorical_variables} or \code{lissyrtools::lcs_categorical_variables}.}
 
 \item{wgt_name}{(Optional) A string specifying the name of the weight variable to apply. If \code{NULL}, unweighted counts are used.}
 

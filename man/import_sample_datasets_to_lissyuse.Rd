@@ -4,12 +4,12 @@
 \alias{import_sample_datasets_to_lissyuse}
 \title{Import Sample Datasets to lissyuse}
 \usage{
-import_sample_datasets_to_lissyuse(data = NULL, lws = FALSE)
+import_sample_datasets_to_lissyuse(data = NULL, database = "lis")
 }
 \arguments{
 \item{data}{Optional. A named list of datasets to import. If \code{NULL}, all the default set is used.}
 
-\item{lws}{Logical. If \code{TRUE}, use LWS sample datasets; otherwise, use LIS samples.}
+\item{database}{A character value. One of "lis" (default), "lws", or "lcs".}
 }
 \value{
 A list.

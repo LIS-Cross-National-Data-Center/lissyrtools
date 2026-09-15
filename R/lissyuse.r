@@ -1,5 +1,5 @@
 
- 
+
 #' Load data easily and efficiently with lissyuse
 #' 
 #' @description
@@ -10,7 +10,7 @@
 #' @param subset A logical expression defining the criteria for subsetting the data. Observations for which the expression evaluates to TRUE are included in the subset.
 #' @param from A numeric value representing the year (inclusive) after which the LIS/LWS datasets should be loaded.
 #' @param to 	A numeric value representing the year (inclusive) up to which the LIS/LWS datasets should be loaded.
-#' @param lws A logical value indicating whether to load LWS data. If TRUE, LWS data is loaded; otherwise (default: FALSE), LIS data is loaded instead. Note that this does not eliminate the need to set the ‘Project’ field accordingly in the LISSY remote system.
+#' @param database A character value. One of "lis" (default), "lws", or "lcs". Note that this does not eliminate the need to set the ‘Project’ field accordingly in the LISSY remote system.
 #'
 #' @return A list whose elements will be a data frame named after their respective dataset. See the naming formats in the examples below. Each data frame will contain as many columns as the selected variables, plus the default technical ones.
 #' @export
@@ -42,79 +42,115 @@
 #'
 #' # ------------ LWS ------------------ 
 #'
-#'lws_datasets <- lissyuse(data = c("us", "uk17", "uk19"), vars = "dnw", from = 2015, to = 2021, lws = TRUE)
+#'lws_datasets <- lissyuse(data = c("us", "uk17", "uk19"), vars = "dnw", from = 2015, to = 2021, database = 'lws')
 #'
 #'names(lws_datasets)
 #'}
 lissyuse <- function(
-  data = NULL,
-  vars = NULL,
-  subset = NULL,
-  from = NULL,
-  to = NULL,
-  lws = FALSE
+    data = NULL,
+    vars = NULL,
+    subset = NULL,
+    from = NULL,
+    to = NULL,
+    database = "lis",
+    ...
 ) {
-  # 0) Define paths and location  ---------------------------------------------------------
 
-  if (!exists("define_path")) {
-    data_to_load <- import_sample_datasets_to_lissyuse(data, lws) # local machine ----> only access to sample datasets
-  } else {
-    path_to_files <- define_path(lws)[[1]]
-    location <- define_path(lws)[[2]]
+  dots <- list(...)
 
-    # 1) Argument {data}  -------------------------------------
+  if ("lws" %in% names(dots)) {
 
-    check_empty_data(data, lws)
+    if (!is.logical(dots$lws) || length(dots$lws) != 1) {
+      stop("'lws' must be TRUE or FALSE.", call. = FALSE)
+    }
 
-    check_length_iso2(data)
+    # Was `database` explicitly supplied?
+    database_supplied <- "database" %in% names(as.list(match.call()))
 
-    check_iso2(data, lws)
+    # What database does the old `lws` argument imply?
+    old_database <- if (isTRUE(dots$lws)) "lws" else "lis"
 
-    invalid_ccyy_pairs(data, lws)
+    # If database was explicitly supplied, check for a conflict
+    if (database_supplied && database != old_database) {
+      stop(
+        "The deprecated argument 'lws' conflicts with ",
+        "database = \"", database, "\". ",
+        "Please use 'database' instead.",
+        call. = FALSE
+      )
+    }
 
-    # Define data to be loaded -----------------------------------
+    # Backwards compatibility: lws determines database
+    database <- old_database
 
-    data_to_load <- load_datasets(data, lws, from, to)
+    warning(
+      "The argument 'lws' is deprecated and no longer used. ",
+      "Please use 'database' instead, which accepts ",
+      "\"lis\" (default), \"lws\", or \"lcs\".",
+      call. = FALSE
+    )
   }
 
-  # 2)  Variable-driven selection of files bases on argument {vars}  -------------------------------------
-
-  check_invalid_vars(vars, lws)
-
-  # Main function to select columns based on argument {vars}
+  database <- match.arg(database, c("lis", "lws", "lcs"))
+  assertthat::assert_that(database %in% c("lis", "lws", "lcs"),
+                          msg = glue::glue("'database' must be one of 'lis', 'lws', or 'lcs'. Got '{database}' instead."))
+  
+  # 0) Define paths and location  ---------------------------------------------------------
+  
+  if (!exists("define_path")) {
+    data_to_load <- import_sample_datasets_to_lissyuse(data, database) # local machine ----> only access to sample datasets
+  } else {
+    path_to_files <- define_path(database)[[1]]
+    location <- define_path(database)[[2]]
+    
+    # 1) Argument {data}  -------------------------------------
+    
+    check_empty_data(data, database)
+    check_length_iso2(data)
+    check_iso2(data, database)
+    invalid_ccyy_pairs(data, database)
+    
+    # Define data to be loaded -----------------------------------
+    
+    data_to_load <- load_datasets(data, database, from, to)
+  }
+  
+  # 2)  Variable-driven selection of files based on argument {vars}  -------------------------------------
+  
+  check_invalid_vars(vars, database)
+  
   intermediate_data_and_message <- variable_selection_for_lissyuse(
     data_to_load,
     path_to_files,
     vars,
-    lws
+    database
   )
-
-  # allocation of its outputs
+  
   intermediate_data_to_filter <- intermediate_data_and_message$data
   message <- intermediate_data_and_message$message
-
+  
   # 3)  Filtering of rows based on the condition imposed in argument {subset}  -------------------------------------
-
+  
   datasets_final <- if (!is.null(subset)) {
     subset_expr <- rlang::parse_expr(subset)
-    subset_datasets(intermediate_data_to_filter, lws, subset_expr)
+    subset_datasets(intermediate_data_to_filter, database, subset_expr)
   } else {
     intermediate_data_to_filter
   }
-
+  
   # 4)  LISSY adjustment  -------------------------------------
-
+  
   if (exists("define_path")) {
     if (location == "L") {
       datasets_final <- lapply(datasets_final, as.data.frame)
     }
   }
-
+  
   # 5) Attributes -------------------------
-
-  # To delete in the future perhaps
-  # Needed to accomodate the earliest developments in lissyrtools package
-
+  # NOTE: previously inferred "lws" vs "lis" by checking for an 'inum' column,
+  # which can't distinguish a 3rd database. Since we already know which
+  # database was requested, just record it directly instead of re-guessing.
+  
   if (exists("relation", datasets_final[[1]])) {
     attr(datasets_final, "level") <- "p"
     attr(datasets_final, "merged_levels") <- TRUE
@@ -122,66 +158,51 @@ lissyuse <- function(
     attr(datasets_final, "level") <- "h"
     attr(datasets_final, "merged_levels") <- FALSE
   }
-
-  if (exists("inum", datasets_final[[1]])) {
-    attr(datasets_final, "database") <- "lws"
-  } else {
-    attr(datasets_final, "database") <- "lis"
-  }
-
+  
+  attr(datasets_final, "database") <- database
+  
   # 6) Print message on the availability of the list with the datasets and its names ----------
   cat(message, "\n")
-
-  # 7) Return (instead of assigning it to the Global environment as in the past)
+  
+  # 7) Return
   return(datasets_final)
 }
-
 
 
 #' Load Dataset Names Based on Criteria
 #'
 #' @description
 #' Internal function to filter and return dataset names based on input criteria such as
-#' specified iso2 codes or ccyy pairs, database type (LWS or LIS), and optional year range.
+#' specified iso2 codes or ccyy pairs, database type (LIS, LWS or LCS), and optional year range.
 #'
 #' @param data Optional character vector specifying ccyy pairs or iso2 codes.
-#' @param lws Logical indicating whether to use the LWS or LIS database.
+#' @param database A character value. One of "lis" (default), "lws", or "lcs".
 #' @param from Optional numeric lower bound for dataset years.
 #' @param to Optional numeric upper bound for dataset years.
 #'
 #' @return A character vector of dataset names matching the criteria.
 #'
 #' @keywords internal
-load_datasets <- function(data = NULL, lws = FALSE, from = NULL, to = NULL) {
+load_datasets <- function(data = NULL, database = "lis", from = NULL, to = NULL) {
+  
+  database_upper <- toupper(database)
+  
   # Step 1: Split the `data` into series for country and dataset pairs
   entire_series_for_a_country <- data[stringr::str_length(data) == 2]
   ccyy_datasets <- data[stringr::str_length(data) == 4]
-
-  # Step 2: Extract dnames for entire series based on LWS or LIS
+  
+  # Step 2: Extract dnames for entire series
   entire_series_extract_dname <- lissyrtools::datasets %>%
-    dplyr::filter(
-      if (lws) {
-        database == "LWS" & iso2 %in% entire_series_for_a_country
-      } else {
-        database == "LIS" & iso2 %in% entire_series_for_a_country
-      }
-    ) %>%
+    dplyr::filter(database == database_upper & iso2 %in% entire_series_for_a_country) %>%
     dplyr::select(dname) %>%
     unique() %>%
     dplyr::pull()
-
-  # Combine datasets for the entire series and cc/yy datasets
+  
   all_dnames <- c(entire_series_extract_dname, ccyy_datasets)
-
+  
   # Step 3: Filter datasets based on the combined list and the year range
   data_to_load <- lissyrtools::datasets %>%
-    dplyr::filter(
-      if (lws) {
-        database == "LWS"
-      } else {
-        database == "LIS"
-      }
-    ) %>%
+    dplyr::filter(database == database_upper) %>%
     dplyr::filter(
       if (!is.null(data)) {
         dname %in% all_dnames
@@ -203,23 +224,17 @@ load_datasets <- function(data = NULL, lws = FALSE, from = NULL, to = NULL) {
     dplyr::select(dname) %>%
     unique() %>%
     dplyr::pull()
-
-  # Clean attributes of the final result
+  
   attributes(data_to_load) <- NULL
-
-  # Step 4: Check if the result is empty and stop if no data is found
-  # (probably already caught on previous checks)
+  
   if (length(data_to_load) == 0) {
-    stop(
-      glue::glue(
-        "No datasets matched the provided criteria. Please check the arguments provided, especially 'data'."
-      )
-    )
+    stop(glue::glue(
+      "No datasets matched the provided criteria. Please check the arguments provided, especially 'data'."
+    ))
   }
-
+  
   return(data_to_load)
 }
-
 
 
 
@@ -237,547 +252,159 @@ load_datasets <- function(data = NULL, lws = FALSE, from = NULL, to = NULL) {
 #' @param data_to_load Character vector of dataset names to load.
 #' @param path_to_files File path where datasets are stored.
 #' @param vars Optional character vector of variable names to select. If `NULL`, all variables are considered.
-#' @param lws Logical.
+#' @param database A character value. One of "lis" (default), "lws", or "lcs".
 #'
 #' @return A list containing the data frames selected.
 #'
 #' @keywords internal
 variable_selection_for_lissyuse <- function(
-  data_to_load,
-  path_to_files,
-  vars = NULL,
-  lws = FALSE
+    data_to_load,
+    path_to_files,
+    vars = NULL,
+    database = "lis"
 ) {
   
-  if (exists("define_path")) {
-    if (lws) {
-      # 1.1 LWS #
+  cfg <- get_database_config(database)
 
-      # 1.1.1 Select all variables, if none is specified # ---------------------------
-      if (is.null(vars)) {
-        files_h <- purrr::map(
-          data_to_load,
-          ~ haven::read_dta(file = paste0(path_to_files, .x, "wh", ".dta"))
-        )
-
-        files_p <- purrr::map(
-          data_to_load,
-          ~ haven::read_dta(file = paste0(path_to_files, .x, "wp", ".dta"))
-        )
-
-        list_with_data <- purrr::map2(
-          files_h,
-          files_p,
-          ~ dplyr::inner_join(.x, .y, c("hid", "inum")) %>%
-            dplyr::select(-dplyr::ends_with(".y")) %>%
-            dplyr::rename_with(~ sub("\\.x$", "", .), dplyr::ends_with(".x"))
-        )
-        names(list_with_data) <- data_to_load
-
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following `person-level` data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          ".\n", # Proper period and paragraph space
-          "All variables were imported! We recommend specifying a character vector with the desired variables in the argument `vars`."
-        ))
-      } else if (
-        sum(vars %in% setdiff(lissyrtools::lws_household_variables, lissyrtools::lws_person_variables)) >
-          0 &
-          sum(
-            vars %in% setdiff(lissyrtools::lws_person_variables, lissyrtools::lws_household_variables)
-          ) ==
-            0
-      ) {
-        # 1.1.2 Only household-level variables were selected: load only h-level file # -----------------------
-        vars <- vars[vars %in% lissyrtools::lws_household_variables] # remove any invalid variables
-
-        list_with_data <- purrr::map(
-          data_to_load,
-          ~ haven::read_dta(
-            file = paste0(path_to_files, .x, "wh", ".dta"),
-            col_select = unique(c(vars, lissyrtools::key_vars_household_lws))
-          )
-        )
-        names(list_with_data) <- paste0(data_to_load, "h")
-
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following `household-level` data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          "."
-        ))
-      } else if (
-        sum(vars %in% setdiff(lissyrtools::lws_household_variables, lissyrtools::lws_person_variables)) ==
-          0 &
-          sum(
-            vars %in% setdiff(lissyrtools::lws_person_variables, lissyrtools::lws_household_variables)
-          ) >
-            0
-      ) {
-        # 1.1.3 Only person-level variables were selected: load only p-level file # -----------------------------------
-        vars <- vars[vars %in% lissyrtools::lws_person_variables]
-
-        list_with_data <- purrr::map(
-          data_to_load,
-          ~ haven::read_dta(
-            file = paste0(path_to_files, .x, "wp", ".dta"),
-            col_select = unique(c(vars, lissyrtools::key_vars_person_lws))
-          )
-        )
-        names(list_with_data) <- paste0(data_to_load, "p")
-
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following `person-level` data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          "."
-        ))
-      } else if (
-        sum(vars %in% setdiff(lissyrtools::lws_household_variables, lissyrtools::lws_person_variables)) >
-          0 &
-          sum(
-            vars %in% setdiff(lissyrtools::lws_person_variables, lissyrtools::lws_household_variables)
-          ) >
-            0
-      ) {
-        # 1.1.4 Both household and person level varaibles were selected: load both filed and merge them # --------------------
-        hvars <- vars[vars %in% lissyrtools::lws_household_variables]
-        pvars <- vars[vars %in% lissyrtools::lws_person_variables]
-
-        files_h <- purrr::map(
-          data_to_load,
-          ~ haven::read_dta(
-            file = paste0(path_to_files, .x, "wh", ".dta"),
-            col_select = unique(c(hvars, lissyrtools::key_vars_household_lws))
-          )
-        )
-
-        files_p <- purrr::map(
-          data_to_load,
-          ~ haven::read_dta(
-            file = paste0(path_to_files, .x, "wp", ".dta"),
-            col_select = unique(c(pvars, lissyrtools::key_vars_person_lws))
-          )
-        )
-
-        list_with_data <- purrr::map2(
-          files_h,
-          files_p,
-          ~ dplyr::inner_join(.x, .y, by = c("hid", "inum")) %>%
-            dplyr::select(-dplyr::ends_with(".y")) %>%
-            dplyr::rename_with(~ sub("\\.x$", "", .), dplyr::ends_with(".x"))
-        )
-
-        names(list_with_data) <- data_to_load
-
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following `person-level` data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          "."
-        ))
-      } else if (sum(vars %in% lissyrtools::lws_variables) == 0) {
-        # 1.1.5 No valid lws variables supplied # ----------------
-
-        stop("No valid LWS variable names specified.") # already ensured by check_invalid_vars(vars, lws)
-      } else if (sum(vars %in% lissyrtools::lws_variables) > 0) {
-        # 1.1.6 # Mix between invalid variables and lws_both_hp_variables # --------------------------------
-
-        vars <- vars[vars %in% lissyrtools::lws_variables]
-        assertthat::assert_that(all(vars %in% lissyrtools::lws_both_hp_variables))
-
-        list_with_data <- purrr::map(
-          data_to_load,
-          ~ haven::read_dta(
-            file = paste0(path_to_files, .x, "wh", ".dta"),
-            col_select = unique(c(vars, lissyrtools::key_vars_household_lws))
-          )
-        )
-        names(list_with_data) <- paste0(data_to_load, "h")
-
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          ".\n",
-          "NOTE: The selected variables are not exclusive to either household or individual-level datasets. The imported datasets have been defaulted to `household-level`."
-        ))
-      }
-
-      return(list(data = list_with_data, message = message_to_print_in_the_end))
+  is_remote <- exists("define_path")
+  
+  h_suffix <- paste0(cfg$letter, "h")
+  p_suffix <- paste0(cfg$letter, "p")
+  
+  read_file <- function(dataset_name, suffix, col_select = NULL) {
+    if (is_remote) {
+      haven::read_dta(file = paste0(path_to_files, dataset_name, suffix, ".dta"), col_select = col_select)
     } else {
-      # LIS #
-
-      # 1.2.1 Select all variables, if none is specified # ------------------------------------
-      if (is.null(vars)) {
-        files_h <- purrr::map(
-          data_to_load,
-          ~ haven::read_dta(file = paste0(path_to_files, .x, "ih", ".dta"))
-        )
-
-        files_p <- purrr::map(
-          data_to_load,
-          ~ haven::read_dta(file = paste0(path_to_files, .x, "ip", ".dta"))
-        )
-
-        list_with_data <- purrr::map2(
-          files_h,
-          files_p,
-          ~ dplyr::inner_join(.x, .y, by = c("hid")) %>%
-            dplyr::select(-dplyr::ends_with(".y")) %>%
-            dplyr::rename_with(~ sub("\\.x$", "", .), dplyr::ends_with(".x"))
-        )
-        names(list_with_data) <- data_to_load
-
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following `person-level` data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          ".\n", # Proper period and paragraph space
-          "All variables were imported! We recommend specifying a character vector with the desired variables in the argument `vars`."
-        ))
-      } else if (
-        sum(vars %in% setdiff(lissyrtools::lis_household_variables, lissyrtools::lis_person_variables)) >
-          0 &
-          sum(
-            vars %in% setdiff(lissyrtools::lis_person_variables, lissyrtools::lis_household_variables)
-          ) ==
-            0
-      ) {
-        # 1.2.2 Only household-level variables were selected: load only h-level file # --------------------
-        vars <- vars[vars %in% lissyrtools::lis_household_variables] # remove any invalid variables
-
-        list_with_data <- purrr::map(
-          data_to_load,
-          ~ haven::read_dta(
-            file = paste0(path_to_files, .x, "ih", ".dta"),
-            col_select = unique(c(vars, lissyrtools::key_vars_household_lis))
-          )
-        )
-        names(list_with_data) <- paste0(data_to_load, "h")
-
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following `household-level` data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          "."
-        ))
-      } else if (
-        sum(vars %in% setdiff(lissyrtools::lis_household_variables, lissyrtools::lis_person_variables)) ==
-          0 &
-          sum(
-            vars %in% setdiff(lissyrtools::lis_person_variables, lissyrtools::lis_household_variables)
-          ) >
-            0
-      ) {
-        # 1.2.3 Only person-level variables were selected: load only p-level file #    ------------------------
-        vars <- vars[vars %in% lissyrtools::lis_person_variables] # remove any invalid variables
-
-        list_with_data <- purrr::map(
-          data_to_load,
-          ~ haven::read_dta(
-            file = paste0(path_to_files, .x, "ip", ".dta"),
-            col_select = unique(c(vars, lissyrtools::key_vars_person_lis))
-          )
-        )
-        names(list_with_data) <- paste0(data_to_load, "p")
-
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following `person-level` data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          "."
-        ))
-      } else if (
-        sum(vars %in% setdiff(lissyrtools::lis_household_variables, lissyrtools::lis_person_variables)) >
-          0 &
-          sum(
-            vars %in% setdiff(lissyrtools::lis_person_variables, lissyrtools::lis_household_variables)
-          ) >
-            0
-      ) {
-        # 1.2.4 Both household and person level varaibles were selected: load both filed and merge them # --------------------
-        hvars <- vars[vars %in% lissyrtools::lis_household_variables] # remove any invalid variables
-        pvars <- vars[vars %in% lissyrtools::lis_person_variables] # remove any invalid variables
-
-        files_h <- purrr::map(
-          data_to_load,
-          ~ haven::read_dta(
-            file = paste0(path_to_files, .x, "ih", ".dta"),
-            col_select = unique(c(hvars, lissyrtools::key_vars_household_lis))
-          )
-        )
-
-        files_p <- purrr::map(
-          data_to_load,
-          ~ haven::read_dta(
-            file = paste0(path_to_files, .x, "ip", ".dta"),
-            col_select = unique(c(pvars, lissyrtools::key_vars_person_lis))
-          )
-        )
-
-        list_with_data <- purrr::map2(
-          files_h,
-          files_p,
-          ~ dplyr::inner_join(.x, .y, by = c("hid")) %>%
-            dplyr::select(-dplyr::ends_with(".y")) %>%
-            dplyr::rename_with(~ sub("\\.x$", "", .), dplyr::ends_with(".x"))
-        )
-
-        names(list_with_data) <- data_to_load
-
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following `person-level` data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          "."
-        ))
-      } else if (sum(vars %in% lissyrtools::lis_variables) == 0) {
-        # 1.2.5 No valid LIS variables supplied # ----------------------------------
-
-        stop("No valid LIS variable names specified.") # already ensured by check_invalid_vars(vars, lws)
-      } else if (sum(vars %in% lissyrtools::lis_variables) > 0) {
-        # 1.2.6 Mix between invalid variables and lis_both_hp_variables # ---------------------------
-
-        vars <- vars[vars %in% lissyrtools::lis_variables]
-        assertthat::assert_that(all(vars %in% lissyrtools::lis_both_hp_variables))
-
-        list_with_data <- purrr::map(
-          data_to_load,
-          ~ haven::read_dta(
-            file = paste0(path_to_files, .x, "ih", ".dta"),
-            col_select = unique(c(vars, lissyrtools::key_vars_household_lis))
-          )
-        )
-        names(list_with_data) <- paste0(data_to_load, "h")
-
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          ".\n",
-          "NOTE: The selected variables are not exclusive to either household or individual-level datasets. The imported datasets have been defaulted to `household-level`."
-        ))
-      }
-
-      return(list(data = list_with_data, message = message_to_print_in_the_end))
-    }
-  } else if (!exists("define_path")) {
-    #  Variable selection for the sample datasets to be used in a local environemnt -------------------------------
-
-    if (lws) {
-      # 2.1.1 Select all variables, if none is specified #	 ----------------------
-      if (is.null(vars)) {
-        list_with_data <- data_to_load
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following `person-level sample` data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          ".\n", # Proper period and paragraph space
-          "All variables were imported! We recommend specifying a character vector with the desired variables in the argument `vars`."
-        ))
-      } else if (
-        sum(vars %in% setdiff(lissyrtools::lws_household_variables, lissyrtools::lws_person_variables)) >
-          0 &
-          sum(
-            vars %in% setdiff(lissyrtools::lws_person_variables, lissyrtools::lws_household_variables)
-          ) ==
-            0
-      ) {
-        # 2.1.2 Only household-level variables were selected: load only h-level file # ----------------------
-        vars <- vars[vars %in% lissyrtools::lws_household_variables]
-
-        list_with_data <- purrr::map(
-          data_to_load,
-          ~ .x %>%
-            dplyr::filter(pid == 1) %>%
-            dplyr::select(unique(c(vars, lissyrtools::key_vars_household_lws)))
-        )
-        names(list_with_data) <- paste0(names(list_with_data), "h")
-
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following `household-level sample` data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          "."
-        ))
-      } else if (
-        sum(vars %in% setdiff(lissyrtools::lws_household_variables, lissyrtools::lws_person_variables)) ==
-          0 &
-          sum(
-            vars %in% setdiff(lissyrtools::lws_person_variables, lissyrtools::lws_household_variables)
-          ) >
-            0
-      ) {
-        # 2.1.3 Only person-level variables were selected: load only p-level file #	----------------------
-        vars <- vars[vars %in% lissyrtools::lws_person_variables]
-
-        list_with_data <- purrr::map(
-          data_to_load,
-          ~ .x %>% dplyr::select(unique(c(vars, lissyrtools::key_vars_person_lws)))
-        )
-        names(list_with_data) <- paste0(names(list_with_data), "p")
-
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following `person-level sample` data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          "."
-        ))
-      } else if (
-        sum(vars %in% setdiff(lissyrtools::lws_household_variables, lissyrtools::lws_person_variables)) >
-          0 &
-          sum(
-            vars %in% setdiff(lissyrtools::lws_person_variables, lissyrtools::lws_household_variables)
-          ) >
-            0
-      ) {
-        # 2.1.4 Both household and person level varaibles were selected: load both filed and merge them # ----------------------
-        hvars <- vars[vars %in% lissyrtools::lws_household_variables]
-        pvars <- vars[vars %in% lissyrtools::lws_person_variables]
-
-        list_with_data <- purrr::map(
-          data_to_load,
-          ~ .x %>%
-            dplyr::select(unique(c(
-              hvars,
-              pvars,
-              lissyrtools::key_vars_household_lws,
-              lissyrtools::key_vars_person_lws
-            )))
-        )
-
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following `person-level sample` data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          "."
-        ))
-      } else if (sum(vars %in% lissyrtools::lws_variables) == 0) {
-        # 2.1.5 No valid lws variables supplied # ----------------------
-        stop("No valid LWS variable names specified.") # already ensured by check_invalid_vars(vars, lws)
-      } else if (sum(vars %in% lissyrtools::lws_variables) > 0) {
-        # 2.1.6 # Mix between invalid variables and lws_both_hp_variables ----------------------
-        vars <- vars[vars %in% lissyrtools::lws_variables]
-        assertthat::assert_that(all(vars %in% lissyrtools::lws_both_hp_variables))
-
-        list_with_data <- purrr::map(
-          data_to_load,
-          ~ .x %>%
-            dplyr::filter(pid == 1) %>%
-            dplyr::select(unique(c(vars, lissyrtools::key_vars_household_lws)))
-        )
-        names(list_with_data) <- paste0(names(list_with_data), "h")
-
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following `sample` data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          ".\n",
-          "NOTE: The selected variables are not exclusive to either household or individual-level datasets. The imported datasets have been defaulted to `household-level`."
-        ))
-      }
-
-      return(list(data = list_with_data, message = message_to_print_in_the_end))
-    } else {
-      # 2.2.1 Select all variables, if none is specified # ----------------------
-      if (is.null(vars)) {
-        list_with_data <- data_to_load
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following `person-level sample` data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          ".\n", # Proper period and paragraph space
-          "All variables were imported! We recommend specifying a character vector with the desired variables in the argument `vars`."
-        ))
-      } else if (
-        sum(vars %in% setdiff(lissyrtools::lis_household_variables, lissyrtools::lis_person_variables)) >
-          0 &
-          sum(
-            vars %in% setdiff(lissyrtools::lis_person_variables, lissyrtools::lis_household_variables)
-          ) ==
-            0
-      ) {
-        # 2.2.2 Only household-level variables were selected: load only h-level file # ----------------------
-        vars <- vars[vars %in% lissyrtools::lis_household_variables]
-
-        list_with_data <- purrr::map(
-          data_to_load,
-          ~ .x %>%
-            dplyr::filter(pid == 1) %>%
-            dplyr::select(unique(c(vars, lissyrtools::key_vars_household_lis)))
-        )
-        names(list_with_data) <- paste0(names(list_with_data), "h")
-
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following `household-level sample` data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          "."
-        ))
-      } else if (
-        sum(vars %in% setdiff(lissyrtools::lis_household_variables, lissyrtools::lis_person_variables)) ==
-          0 &
-          sum(
-            vars %in% setdiff(lissyrtools::lis_person_variables, lissyrtools::lis_household_variables)
-          ) >
-            0
-      ) {
-        # 2.2.3 Only person-level variables were selected: load only p-level file # ----------------------
-        vars <- vars[vars %in% lissyrtools::lis_person_variables]
-
-        list_with_data <- purrr::map(
-          data_to_load,
-          ~ .x %>% dplyr::select(unique(c(vars, lissyrtools::key_vars_person_lis)))
-        )
-        names(list_with_data) <- paste0(names(list_with_data), "p")
-
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following `person-level sample` data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          "."
-        ))
-      } else if (
-        sum(vars %in% setdiff(lissyrtools::lis_household_variables, lissyrtools::lis_person_variables)) >
-          0 &
-          sum(
-            vars %in% setdiff(lissyrtools::lis_person_variables, lissyrtools::lis_household_variables)
-          ) >
-            0
-      ) {
-        # 2.2.4 Both household and person level varaibles were selected: load both filed and merge them # ----------------------
-        hvars <- vars[vars %in% lissyrtools::lis_household_variables]
-        pvars <- vars[vars %in% lissyrtools::lis_person_variables]
-
-        list_with_data <- purrr::map(
-          data_to_load,
-          ~ .x %>%
-            dplyr::select(unique(c(
-              hvars,
-              pvars,
-              lissyrtools::key_vars_household_lis,
-              lissyrtools::key_vars_person_lis
-            )))
-        )
-
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following `person-level sample` data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          "."
-        ))
-      } else if (sum(vars %in% lissyrtools::lis_variables) == 0) {
-        # 2.2.5 No valid LIS variables supplied # ----------------------
-        stop("No valid LIS variable names specified.") # already ensured by check_invalid_vars(vars, lws)
-      } else if (sum(vars %in% lissyrtools::lis_variables) > 0) {
-        # 2.2.6 Mix between invalid variables and lis_both_hp_variables # ----------------------
-        vars <- vars[vars %in% lissyrtools::lis_variables]
-        assertthat::assert_that(all(vars %in% lissyrtools::lis_both_hp_variables))
-
-        list_with_data <- purrr::map(
-          data_to_load,
-          ~ .x %>%
-            dplyr::filter(pid == 1) %>%
-            dplyr::select(unique(c(vars, lissyrtools::key_vars_household_lis)))
-        )
-        names(list_with_data) <- paste0(names(list_with_data), "h")
-
-        message_to_print_in_the_end <- message(paste0(
-          "The list contains the following `sample` data frames: ",
-          paste(names(list_with_data), collapse = ", "),
-          ".\n",
-          "NOTE: The selected variables are not exclusive to either household or individual-level datasets. The imported datasets have been defaulted to `household-level`."
-        ))
-      }
-
-      return(list(data = list_with_data, message = message_to_print_in_the_end))
+      # local sample data: data_to_load is already a named list of data frames
+      df <- data_to_load[[dataset_name]]
+      if (!is.null(col_select)) df <- dplyr::select(df, dplyr::any_of(col_select))
+      df
     }
   }
+  
+  join_and_clean <- function(df_h, df_p) {
+    dplyr::inner_join(df_h, df_p, by = cfg$join_by) %>%
+      dplyr::select(-dplyr::ends_with(".y")) %>%
+      dplyr::rename_with(~ sub("\\.x$", "", .), dplyr::ends_with(".x"))
+  }
+  
+  dataset_names <- if (is_remote) data_to_load else names(data_to_load)
+  
+  # -- Branch dispatch (same 6 cases as before, now written once) ---------------
+  
+  if (is.null(vars)) {
+    # 1) no variables specified: load everything, merge h+p
+    
+    if (is_remote) {
+      files_h <- purrr::map(dataset_names, ~ read_file(.x, h_suffix, cfg$household_variables))
+      files_p <- purrr::map(dataset_names, ~ read_file(.x, p_suffix, cfg$person_variables))
+      list_with_data <- purrr::map2(files_h, files_p, join_and_clean)
+      names(list_with_data) <- dataset_names
+    } else {
+      list_with_data <- data_to_load
+    }
+    
+    msg_label <- if (is_remote) "person-level" else "person-level sample"
+    message_to_print_in_the_end <- message(paste0(
+      "The list contains the following `", msg_label, "` data frames: ",
+      paste(names(list_with_data), collapse = ", "), ".\n",
+      "All variables were imported! We recommend specifying a character vector with the desired variables in the argument `vars`."
+    ))
+    
+  } else if (sum(vars %in% setdiff(cfg$household_variables, cfg$person_variables)) > 0 &&
+             sum(vars %in% setdiff(cfg$person_variables, cfg$household_variables)) == 0) {
+    # 2) household-only variables
+    
+    vars_h <- vars[vars %in% cfg$household_variables]
+    col_select <- unique(c(vars_h, cfg$key_vars_household))
+    
+    if (is_remote) {
+      list_with_data <- purrr::map(dataset_names, ~ read_file(.x, h_suffix, col_select))
+      names(list_with_data) <- paste0(dataset_names, "h")
+    } else {
+      list_with_data <- purrr::map(dataset_names, ~ data_to_load[[.x]] %>%
+                                     dplyr::filter(if ("pid" %in% names(.)) pid == 1 else TRUE) %>%
+                                     dplyr::select(dplyr::any_of(col_select)))
+      names(list_with_data) <- paste0(dataset_names, "h")
+    }
+    
+    msg_label <- if (is_remote) "household-level" else "household-level sample"
+    message_to_print_in_the_end <- message(paste0(
+      "The list contains the following `", msg_label, "` data frames: ",
+      paste(names(list_with_data), collapse = ", "), "."
+    ))
+    
+  } else if (sum(vars %in% setdiff(cfg$household_variables, cfg$person_variables)) == 0 &&
+             sum(vars %in% setdiff(cfg$person_variables, cfg$household_variables)) > 0) {
+    # 3) person-only variables
+    
+    vars_p <- vars[vars %in% cfg$person_variables]
+    col_select <- unique(c(vars_p, cfg$key_vars_person))
+    
+    list_with_data <- purrr::map(dataset_names, ~ read_file(.x, p_suffix, col_select))
+    names(list_with_data) <- paste0(dataset_names, "p")
+    
+    msg_label <- if (is_remote) "person-level" else "person-level sample"
+    message_to_print_in_the_end <- message(paste0(
+      "The list contains the following `", msg_label, "` data frames: ",
+      paste(names(list_with_data), collapse = ", "), "."
+    ))
+    
+  } else if (sum(vars %in% setdiff(cfg$household_variables, cfg$person_variables)) > 0 &&
+             sum(vars %in% setdiff(cfg$person_variables, cfg$household_variables)) > 0) {
+    # 4) both household and person variables: load both, merge
+    
+    hvars <- vars[vars %in% cfg$household_variables]
+    pvars <- vars[vars %in% cfg$person_variables]
+    
+    if (is_remote) {
+      files_h <- purrr::map(dataset_names, ~ read_file(.x, h_suffix, unique(c(hvars, cfg$key_vars_household))))
+      files_p <- purrr::map(dataset_names, ~ read_file(.x, p_suffix, unique(c(pvars, cfg$key_vars_person))))
+      list_with_data <- purrr::map2(files_h, files_p, join_and_clean)
+      names(list_with_data) <- dataset_names
+    } else {
+      list_with_data <- purrr::map(dataset_names, ~ data_to_load[[.x]] %>%
+                                     dplyr::select(dplyr::any_of(unique(c(hvars, pvars, cfg$key_vars_household, cfg$key_vars_person)))))
+      names(list_with_data) <- dataset_names
+    }
+    
+    msg_label <- if (is_remote) "person-level" else "person-level sample"
+    message_to_print_in_the_end <- message(paste0(
+      "The list contains the following `", msg_label, "` data frames: ",
+      paste(names(list_with_data), collapse = ", "), "."
+    ))
+    
+  } else if (sum(vars %in% cfg$all_variables) == 0) {
+    # 5) no valid variables
+    stop(glue::glue("No valid {toupper(database)} variable names specified.")) # already ensured by check_invalid_vars()
+    
+  } else if (sum(vars %in% cfg$all_variables) > 0) {
+    # 6) mix of invalid + "both_hp" variables: default to household
+    
+    vars_valid <- vars[vars %in% cfg$all_variables]
+    assertthat::assert_that(all(vars_valid %in% cfg$both_hp_variables))
+    
+    col_select <- unique(c(vars_valid, cfg$key_vars_household))
+    
+    if (is_remote) {
+      list_with_data <- purrr::map(dataset_names, ~ read_file(.x, h_suffix, col_select))
+    } else {
+      list_with_data <- purrr::map(dataset_names, ~ data_to_load[[.x]] %>%
+                                     dplyr::filter(if ("pid" %in% names(.)) pid == 1 else TRUE) %>%
+                                     dplyr::select(dplyr::any_of(col_select)))
+    }
+    names(list_with_data) <- paste0(dataset_names, "h")
+    
+    msg_label <- if (is_remote) "" else "sample "
+    message_to_print_in_the_end <- message(paste0(
+      "The list contains the following `", msg_label, "data frames: ",
+      paste(names(list_with_data), collapse = ", "), ".\n",
+      "NOTE: The selected variables are not exclusive to either household or individual-level datasets. The imported datasets have been defaulted to `household-level`."
+    ))
+  }
+  
+  return(list(data = list_with_data, message = message_to_print_in_the_end))
 }
-
 
 
 #' Subset Datasets Based on Expression
@@ -787,66 +414,58 @@ variable_selection_for_lissyuse <- function(
 #' Supports both LWS and LIS datasets.
 #'
 #' @param intermediate_data_to_filter List of data frames to subset.
-#' @param lws Logical.
+#' @param database A character value. One of "lis" (default), "lws", or "lcs".
 #' @param subset_expr An expression used to filter the datasets.
 #'
 #' @return List. A subsetted version of the input list based on the provided expression.
 #'
 #' @keywords internal
 subset_datasets <- function(
-  intermediate_data_to_filter,
-  lws = FALSE,
-  subset_expr
+    intermediate_data_to_filter,
+    database = "lis",
+    subset_expr
 ) {
+  # NOTE: 'database' was already unused inside the original function body —
+  # kept as a parameter for API consistency with the rest of the pipeline,
+  # but it plays no role in the filtering logic itself.
   
   dataset_list <- intermediate_data_to_filter
-
-  # Apply filtering logic
+  
   filtered_datasets <- lapply(names(dataset_list), function(dataset_name) {
     data <- dataset_list[[dataset_name]]
-
-    # Check if all variables in the subset condition exist in the dataset
+    
     missing_vars <- setdiff(all.vars(subset_expr), names(data))
     if (length(missing_vars) > 0) {
       message(sprintf(
         "Skipping '%s' because it is missing variables: %s",
-        dataset_name,
-        paste(missing_vars, collapse = ", ")
+        dataset_name, paste(missing_vars, collapse = ", ")
       ))
-      return(data) # Return unfiltered dataset
+      return(data)
     }
-
-    # Check if the dataset contains rows with values matching the condition
+    
     matching_rows <- dplyr::filter(data, !!subset_expr)
-
+    
     if (is.null(matching_rows) || nrow(matching_rows) == 0) {
       message(sprintf(
         "Skipping filtering for '%s' because no rows match the condition.",
         dataset_name
       ))
-      return(data) # Return unfiltered dataset
+      return(data)
     }
-
-    # Calculate the percentage of rows deleted
+    
     deleted_percentage <- (nrow(data) - nrow(matching_rows)) / nrow(data) * 100
-
-    # Log the result
+    
     message(sprintf(
       "Applying filtering on '%s'. Rows before: %d, Rows after: %d, Rows deleted: %.2f%%",
-      dataset_name,
-      nrow(data),
-      nrow(matching_rows),
-      deleted_percentage
+      dataset_name, nrow(data), nrow(matching_rows), deleted_percentage
     ))
-
+    
     return(matching_rows)
   })
-
+  
   names(filtered_datasets) <- names(dataset_list)
-
   return(filtered_datasets)
 }
-
 
 
 

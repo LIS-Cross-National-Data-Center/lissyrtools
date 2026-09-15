@@ -8,7 +8,7 @@ variable_selection_for_lissyuse(
   data_to_load,
   path_to_files,
   vars = NULL,
-  lws = FALSE
+  database = "lis"
 )
 }
 \arguments{
@@ -18,7 +18,7 @@ variable_selection_for_lissyuse(
 
 \item{vars}{Optional character vector of variable names to select. If \code{NULL}, all variables are considered.}
 
-\item{lws}{Logical.}
+\item{database}{A character value. One of "lis" (default), "lws", or "lcs".}
 }
 \value{
 A list containing the data frames selected.

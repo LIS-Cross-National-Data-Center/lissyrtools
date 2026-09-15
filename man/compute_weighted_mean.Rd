@@ -7,7 +7,7 @@
 compute_weighted_mean(var, wgt = NULL, na.rm = TRUE)
 }
 \arguments{
-\item{var}{A column refering to one of the variables in a LIS or LWS data frame.}
+\item{var}{A column refering to one of the variables in a LIS, LWS, LCS data frame.}
 
 \item{wgt}{A numeric vector of weights (e.g., .x$hpopwgt, .x$pwgt). Must be the same length as \code{x}.}
 

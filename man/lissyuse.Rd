@@ -10,7 +10,8 @@ lissyuse(
   subset = NULL,
   from = NULL,
   to = NULL,
-  lws = FALSE
+  database = "lis",
+  ...
 )
 }
 \arguments{
@@ -24,7 +25,7 @@ lissyuse(
 
 \item{to}{A numeric value representing the year (inclusive) up to which the LIS/LWS datasets should be loaded.}
 
-\item{lws}{A logical value indicating whether to load LWS data. If TRUE, LWS data is loaded; otherwise (default: FALSE), LIS data is loaded instead. Note that this does not eliminate the need to set the ‘Project’ field accordingly in the LISSY remote system.}
+\item{database}{A character value. One of "lis" (default), "lws", or "lcs". Note that this does not eliminate the need to set the ‘Project’ field accordingly in the LISSY remote system.}
 }
 \value{
 A list whose elements will be a data frame named after their respective dataset. See the naming formats in the examples below. Each data frame will contain as many columns as the selected variables, plus the default technical ones.
@@ -59,7 +60,7 @@ names(lis_datasets)
 
 # ------------ LWS ------------------ 
 
-lws_datasets <- lissyuse(data = c("us", "uk17", "uk19"), vars = "dnw", from = 2015, to = 2021, lws = TRUE)
+lws_datasets <- lissyuse(data = c("us", "uk17", "uk19"), vars = "dnw", from = 2015, to = 2021, database = 'lws')
 
 names(lws_datasets)
 }

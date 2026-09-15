@@ -4,14 +4,14 @@
 \alias{variable_exists}
 \title{Inspect whether a given variable contains more than just non-missing or non-zero values for a selected group of countries in the LIS or LWS databases.}
 \usage{
-variable_exists(variable, iso2, lws = FALSE, share = FALSE)
+variable_exists(variable, iso2, database = "lis", share = FALSE, ...)
 }
 \arguments{
 \item{variable}{A unit-length character vector containing specified LIS/LWS variables.}
 
 \item{iso2}{A character vector with valid iso2 codes of countries present in LIS/LWS.}
 
-\item{lws}{A logical value, that guides the tool to search in the LIS or LWS database. The argument is FALSE by default, taking LIS as the database to be investigated if nothing is specified.}
+\item{database}{A character value. One of "lis" (default), "lws", or "lcs".}
 
 \item{share}{A logical value indicating whether to output the share of datasets, across the entire time series for each country, where a variable has more than just non-missing or non-zero values, instead of displaying its presence year by year.}
 }

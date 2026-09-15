@@ -1,14 +1,14 @@
 
 
-#' Apply IQR-Based Top and Bottom Coding to LIS/LWS Variables
+#' Apply IQR-Based Top and Bottom Coding to LIS/LWS/LCS Variables
 #'
 #' @description
-#' This function performs top and/or bottom coding on a specified variable across a list of LIS/LWS datasets.
+#' This function performs top and/or bottom coding on a specified variable across a list of LIS/LWS/LCS datasets.
 #' It applies an interquartile range (IQR)-based rule on the \code{log()} transformation of the variable.
 #' Optionally, weights can be supplied, and the transformation can be one- or two-sided.
 #' 
 #' 
-#' @param data_list A named list of data frames, from LIS or LWS microdata.
+#' @param data_list A named list of data frames, from LIS, LWS or LCS microdata.
 #' @param var_name Character string. Name of the variable to code (e.g., "dhi").
 #' @param wgt_name Optional character string. Name of the weight variable to use in computing weighted percentiles.
 #' @param times Numeric. The IQR multiplier for determining bounds (default is 3).
@@ -129,7 +129,8 @@ apply_iqr_top_bottom_coding <- function(
     ((var_name %in%
       c(
         lissyrtools::lis_household_variables,
-        lissyrtools::lws_household_variables
+        lissyrtools::lws_household_variables, 
+        lissyrtools::lcs_household_variables
       )) &&
       (nrow(data_list[[1]]) > length(unique(data_list[[1]]$hid))))
   ) {
@@ -139,10 +140,10 @@ apply_iqr_top_bottom_coding <- function(
       "but the dataset appears to be at the individual level."
     ))
   } else if (
-    !(var_name %in% c(lissyrtools::lis_variables, lissyrtools::lws_variables))
+    !(var_name %in% c(lissyrtools::lis_variables, lissyrtools::lws_variables, lissyrtools::lcs_variables))
   ) {
     warning(glue::glue(
-      "Variable '{var_name}' not recognized as standard LIS/LWS variable: please ensure it matches the level ",
+      "Variable '{var_name}' not recognized as standard LIS/LWS/LCS variable: please ensure it matches the level ",
       "(household or individual) of the datasets being used."
     ))
   }

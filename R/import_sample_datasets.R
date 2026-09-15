@@ -1,14 +1,20 @@
+
+
 #' Import Sample Datasets to lissyuse
 #'
 #' @description
 #' Internal helper to import sample datasets into the `lissyuse` environment.
 #'
 #' @param data Optional. A named list of datasets to import. If `NULL`, all the default set is used.
-#' @param lws Logical. If `TRUE`, use LWS sample datasets; otherwise, use LIS samples.
+#' @param database A character value. One of "lis" (default), "lws", or "lcs".
 #'
 #' @keywords internal
 #' @return A list.
-import_sample_datasets_to_lissyuse <- function(data = NULL, lws = FALSE) {
+import_sample_datasets_to_lissyuse <- function(data = NULL, database = "lis") {
+  
+  assertthat::assert_that(database %in% c("lis", "lws", "lcs"),
+                          msg = glue::glue("'database' must be one of 'lis', 'lws', or 'lcs'. Got '{database}' instead."))
+  
   # All available datasets grouped by country
   all_datasets <- list(
     lis = list(
@@ -50,31 +56,43 @@ import_sample_datasets_to_lissyuse <- function(data = NULL, lws = FALSE) {
         us19 = us19_h_lws %>%
           dplyr::left_join(us19_p_lws, by = lissyrtools::lws_both_hp_variables)
       )
+    ),
+    lcs = list(
+      es = list(
+        es16 = es16_h_lcs %>%
+          dplyr::left_join(es16_p_lcs, by = lissyrtools::lcs_both_hp_variables),
+        es24 = es24_h_lcs %>%
+          dplyr::left_join(es24_p_lcs, by = lissyrtools::lcs_both_hp_variables)
+      ),
+      mx = list(
+        mx10 = mx10_h_lcs %>%
+          dplyr::left_join(mx10_p_lcs, by = lissyrtools::lcs_both_hp_variables),
+        mx20 = mx20_h_lcs %>%
+          dplyr::left_join(mx20_p_lcs, by = lissyrtools::lcs_both_hp_variables)
+      )
     )
   )
-
+  
   # Determine dataset type
-  dataset_type <- if (lws) "lws" else "lis"
-  datasets <- all_datasets[[dataset_type]]
-
+  datasets <- all_datasets[[database]]
   valid_values <- unique(c(
     names(datasets), # it, mx, us
     unlist(lapply(datasets, names)) # it14, it16, it20, mx14 etc
   ))
-
+  
   # Check validity
   if (is.null(data)) {
     selected_keys <- valid_values
   } else if (any(!(data %in% valid_values))) {
     stop(sprintf(
-      "Invalid value for 'data'. When lws = %s, valid values are: %s.",
-      as.character(lws),
+      "Invalid value for 'data'. When database = '%s', valid values are: %s.",
+      database,
       paste(shQuote(valid_values), collapse = ", ")
     ))
   } else {
     selected_keys <- data
   }
-
+  
   # Helper to resolve high-level country keys into full year-version keys
   resolve_keys <- function(keys) {
     expanded <- unlist(lapply(keys, function(k) {
@@ -86,9 +104,9 @@ import_sample_datasets_to_lissyuse <- function(data = NULL, lws = FALSE) {
     }))
     unique(expanded)
   }
-
+  
   resolved_keys <- resolve_keys(selected_keys)
-
+  
   # Now extract the datasets and name them properly
   data_to_load <- list()
   for (k in resolved_keys) {
@@ -98,6 +116,5 @@ import_sample_datasets_to_lissyuse <- function(data = NULL, lws = FALSE) {
       }
     }
   }
-
   return(data_to_load)
 }

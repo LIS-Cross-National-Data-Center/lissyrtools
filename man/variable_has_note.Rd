@@ -4,14 +4,14 @@
 \alias{variable_has_note}
 \title{Verify if a given variable has a note, for a selected group of countries, in LIS or LWS databases.}
 \usage{
-variable_has_note(variable, iso2, lws = FALSE)
+variable_has_note(variable, iso2, database = "lis", ...)
 }
 \arguments{
 \item{variable}{A unit-length character vector containing specified LIS/LWS variables.}
 
-\item{iso2}{A character vector with valid iso2 codes of countries present in LIS/LWS}
+\item{iso2}{A character vector with valid iso2 codes of countries present in LIS/LWS.}
 
-\item{lws}{A logical value, that guides the tool to search in the LIS or LWS database. The argument is FALSE by defualt, taking LIS as the databse to invetigated if nothing is specified.}
+\item{database}{A character value. One of "lis" (default), "lws", or "lcs".}
 }
 \value{
 A list, made of character vectors. Each elements corresponds to a country in LIS or LWS databases.
@@ -22,4 +22,7 @@ Verify if a given variable has a note, for a selected group of countries, in LIS
 \examples{
 variable_has_note(variable = "area_c", iso2 = "br")
 variable_has_note(variable = "basb", iso2 = c("fr", "de", "us", "uk"), lws = TRUE)
+
+To check the notes on METIS go to: https://www.lisdatacenter.org/frontend#/home, and select a database and a given country:.
+Afterwards, head to 'RESULTS' > 'Dataset information' > 'Code Books'.
 }

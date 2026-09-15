@@ -86,8 +86,8 @@ variable_labels <- function(vars = NULL, pattern = NULL) {
 #' Verify if a given variable has a note, for a selected group of countries, in LIS or LWS databases. 
 #'
 #' @param variable A unit-length character vector containing specified LIS/LWS variables. 
-#' @param iso2 A character vector with valid iso2 codes of countries present in LIS/LWS 
-#' @param lws A logical value, that guides the tool to search in the LIS or LWS database. The argument is FALSE by defualt, taking LIS as the databse to invetigated if nothing is specified.
+#' @param iso2 A character vector with valid iso2 codes of countries present in LIS/LWS. 
+#' @param database A character value. One of "lis" (default), "lws", or "lcs".    
 #'
 #' @return A list, made of character vectors. Each elements corresponds to a country in LIS or LWS databases. 
 #' @export
@@ -98,7 +98,47 @@ variable_labels <- function(vars = NULL, pattern = NULL) {
 #' 
 #' To check the notes on METIS go to: https://www.lisdatacenter.org/frontend#/home, and select a database and a given country:.
 #' Afterwards, head to 'RESULTS' > 'Dataset information' > 'Code Books'.
-variable_has_note <- function(variable, iso2, lws = FALSE) {
+variable_has_note <- function(variable, iso2, database = "lis", ...) {
+  
+  dots <- list(...)
+  
+  if ("lws" %in% names(dots)) {
+    
+    if (!is.logical(dots$lws) || length(dots$lws) != 1) {
+      stop("'lws' must be TRUE or FALSE.", call. = FALSE)
+    }
+    
+    # Was `database` explicitly supplied?
+    database_supplied <- "database" %in% names(as.list(match.call()))
+    
+    # What database does the old `lws` argument imply?
+    old_database <- if (isTRUE(dots$lws)) "lws" else "lis"
+    
+    # If database was explicitly supplied, check for a conflict
+    if (database_supplied && database != old_database) {
+      stop(
+        "The deprecated argument 'lws' conflicts with ",
+        "database = \"", database, "\". ",
+        "Please use 'database' instead.",
+        call. = FALSE
+      )
+    }
+    
+    # Backwards compatibility: lws determines database
+    database <- old_database
+    
+    warning(
+      "The argument 'lws' is deprecated and no longer used. ",
+      "Please use 'database' instead, which accepts ",
+      "\"lis\" (default), \"lws\", or \"lcs\".",
+      call. = FALSE
+    )
+  }
+  
+  database <- match.arg(database, c("lis", "lws", "lcs"))
+  assertthat::assert_that(database %in% c("lis", "lws", "lcs"),
+                          msg = glue::glue("'database' must be one of 'lis', 'lws', or 'lcs'. Got '{database}' instead."))
+  
   
   # Ensure that argument 'variable' only accepts one character
   
@@ -112,11 +152,18 @@ variable_has_note <- function(variable, iso2, lws = FALSE) {
   
   # Ensure the validity of the variable
   
-  if (lws) {
+  if (database == "lws") {
     invalid_var <- variable[!variable %in% lissyrtools::lws_variables]
     if (length(invalid_var) > 0) {
       stop(glue::glue(
         "Invalid variable: {paste(invalid_var)} not found in 'lissyrtools::lws_variables'."
+      ))
+    }
+  } else if (database == "lcs") {
+    invalid_var <- variable[!variable %in% lissyrtools::lcs_variables]
+    if (length(invalid_var) > 0) {
+      stop(glue::glue(
+        "Invalid variable: {paste(invalid_var)} not found in 'lissyrtools::lcs_variables'."
       ))
     }
   } else {
@@ -130,8 +177,10 @@ variable_has_note <- function(variable, iso2, lws = FALSE) {
   
   # Ensure the validity of the iso2 codes
   
-  valid_iso2 <- if (lws) {
+  valid_iso2 <- if (database == "lws") {
     lissyrtools::get_countries_lws()
+  } else if (database == "lcs") {
+    lissyrtools::get_countries_lcs()
   } else {
     lissyrtools::get_countries_lis()
   }
@@ -143,7 +192,7 @@ variable_has_note <- function(variable, iso2, lws = FALSE) {
     stop(
       glue::glue(
         "None of the provided iso2 codes in argument 'iso2' are valid: {toString(iso2)}. ",
-        "Valid codes are stored in lissyrtools::get_countries_{ifelse(lws, 'lws', 'lis')}()."
+        "Valid codes are stored in lissyrtools::get_countries_{database}()."
       )
     )
   } else if (length(invalid_iso2) > 0) {
@@ -151,16 +200,25 @@ variable_has_note <- function(variable, iso2, lws = FALSE) {
     warning(
       glue::glue(
         "The argument 'iso2' contains invalid iso2 codes: {toString(invalid_iso2)}. ",
-        "These iso2 codes are not in the valid list for the selected database. See: lissyrtools::get_countries_{ifelse(lws, 'lws', 'lis')}()."
+        "These iso2 codes are not in the valid list for the selected database. See: lissyrtools::get_countries_{database}()."
       )
     )
   }
   
   # body of the function
   process_country <- function(i) {
-    db <- if (lws) "LWS" else "LIS"
-    get_years_function <- if (lws) {
+    db <- if (database == "lws") {
+      "LWS"
+    } else if (database == "lcs") {
+      "LCS"
+    } else {
+      "LIS"
+    }
+    
+    get_years_function <- if (database == "lws") {
       lissyrtools::get_years_lws
+    } else if (database == "lcs") {
+      lissyrtools::get_years_lcs
     } else {
       lissyrtools::get_years_lis
     }
@@ -314,5 +372,53 @@ get_surveys_lws <- function(iso2) {
   return(result_list)
 }
 
+
+#' Print the survey used to construct the LCS datasets for a given country.
+#'
+#' @param iso2 A character vector with valid iso2 codes of countries present in LCS 
+#'
+#' @return A list, made of character vectors. Each elements corresponds to a country in LCS.
+#' @export
+#'
+#' @examples
+#' get_surveys_lcs("it")
+#' get_surveys_lcs(iso2 = c("lu", "es"))
+get_surveys_lcs <- function(iso2) {
+  
+  # Ensure the validity of the iso2 codes
+  valid_iso2 <- lissyrtools::get_countries_lcs()
+  invalid_iso2 <- iso2[!iso2 %in% valid_iso2]
+  if (length(invalid_iso2) == length(iso2)) {
+    # If no valid iso2 codes, stop with an error
+    stop(
+      glue::glue(
+        "None of the provided iso2 codes in argument 'iso2' are valid: {toString(iso2)}. ",
+        "Valid codes are stored in lissyrtools::get_countries_lcs()."
+      )
+    )
+  } else if (length(invalid_iso2) > 0) {
+    # If some codes are invalid, issue a warning
+    warning(
+      glue::glue(
+        "The argument 'iso2' contains invalid iso2 codes: {toString(invalid_iso2)}. ",
+        "These iso2 codes are not in the valid list for the selected database. See: lissyrtools::get_countries_lcs()."
+      )
+    )
+  }
+  # body of the function
+  process_country <- function(i) {
+    surveys_to_output <- lissyrtools::datasets %>%
+      dplyr::filter(database == "LCS" & iso2 == i) %>%
+      dplyr::select(year, survey) %>%
+      dplyr::arrange(year) %>%
+      tibble::deframe()
+    #attributes(surveys_to_output)[1] <- NULL
+    return(surveys_to_output)
+  }
+  to_be_used_iso2 <- iso2[iso2 %in% valid_iso2]
+  result_list <- purrr::map(to_be_used_iso2, process_country)
+  names(result_list) <- to_be_used_iso2
+  return(result_list)
+}
 
 

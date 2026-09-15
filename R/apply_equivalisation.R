@@ -6,7 +6,7 @@
 #' It divides the variable by the number of household members raised to a power (`eq_scale`), 
 #' which defaults to 0.5 (i.e., the square root equivalence scale).
 #'
-#' @param data_list A named list of data frames, from LIS or LWS microdata.
+#' @param data_list A named list of data frames, from LIS, LWS or LCS microdata.
 #' @param var_name A string. The name of the variable to be equivalised.
 #' @param eq_scale A numeric value between 0 and 1. The equivalence scale to apply. 
 #'        Defaults to `0.5`, corresponding to square-root equivalisation.
@@ -66,7 +66,7 @@ apply_sqrt_equivalisation <- function(data_list, var_name, eq_scale = 0.5) {
   # Optional warning for likely person-level variable
   if (
     var_name %in%
-      c(lissyrtools::lis_person_variables, lissyrtools::lws_person_variables)
+      c(lissyrtools::lis_person_variables, lissyrtools::lws_person_variables, lissyrtools::lcs_person_variables)
   ) {
     warning(glue::glue(
       "'{var_name}' appears to be a person-level variable and might not require equivalisation."
@@ -97,7 +97,7 @@ apply_sqrt_equivalisation <- function(data_list, var_name, eq_scale = 0.5) {
 #' using either the standard or modified OECD equivalence scale. It accounts for 
 #' household composition by assigning different weights to additional adults and children.
 #' 
-#' @param data_list A named list of data frames, from LIS or LWS microdata.
+#' @param data_list A named list of data frames, from LIS, LWS or LCS microdata.
 #' @param var_name A string. The name of the variable to be equivalised.
 #' @param modified Logical. If `TRUE` (default), the modified OECD scale is used 
 #'        (0.5 for additional adults, 0.3 for children). If `FALSE`, the original OECD scale 
@@ -162,7 +162,7 @@ apply_oecd_equivalisation <- function(data_list, var_name, modified = TRUE) {
   # Optional warning for likely person-level variable
   if (
     var_name %in%
-      c(lissyrtools::lis_person_variables, lissyrtools::lws_person_variables)
+      c(lissyrtools::lis_person_variables, lissyrtools::lws_person_variables, lissyrtools::lcs_person_variables)
   ) {
     warning(glue::glue(
       "'{var_name}' appears to be a person-level variable and might not require equivalisation."

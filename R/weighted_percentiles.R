@@ -153,11 +153,12 @@ run_weighted_percentiles <- function(
     recommended_categoricals <- c(
       lissyrtools::lis_categorical_variables,
       lissyrtools::lws_wealth_categorical_variables,
+      setdiff(lissyrtools::lcs_categorical_variables, lissyrtools::lis_categorical_variables),
       "inum"
     )
     if (!by %in% recommended_categoricals) {
       warning(sprintf(
-        "The `by` variable is not recognized as a categorical variable in `lissyrtools::lis_categorical_variables`, `lissyrtools::lws_wealth_categorical_variables`, or as the variable 'inum'."
+        "The `by` variable is not recognized as a categorical variable in `lissyrtools::lis_categorical_variables`, `lissyrtools::lws_wealth_categorical_variables`, `lissyrtools::lcs_categorical_variables`, or as the variable 'inum'."
       ))
     }
 

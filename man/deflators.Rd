@@ -16,6 +16,6 @@ deflators
 \description{
 A dataset containing the Consumer Price Index (CPI) and Purchasing Power Parity (PPP)
 deflators that can be used to directly compare absolute monetary values across different
-LIS and LWS datasets.
+LIS, LWS and LCS datasets.
 }
 \keyword{datasets}

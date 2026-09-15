@@ -4,12 +4,12 @@
 \alias{check_empty_data}
 \title{Checks for Empty Data Input}
 \usage{
-check_empty_data(data, lws = FALSE)
+check_empty_data(data, database = "lis")
 }
 \arguments{
 \item{data}{A character vector.}
 
-\item{lws}{Logical. If \code{TRUE}, suggests loading all LWS countries; otherwise, suggests LIS countries.}
+\item{database}{A character value. One of "lis" (default), "lws", or "lcs".}
 }
 \value{
 Stops with an informative error message if \code{data} is \code{NULL}.

@@ -40,6 +40,27 @@ get_countries_lws <- function() {
 }
 
 
+#' Print all the country code in LCS
+#'
+#' @returns A data frame.
+#'
+#' @examples
+#' get_countries_lcs()
+get_countries_lcs <- function() {
+  output <- lissyrtools::datasets %>%
+    dplyr::filter(database == "LCS") %>%
+    dplyr::group_by(cname) %>%
+    dplyr::filter(year == max(year)) %>%
+    dplyr::ungroup() %>%
+    dplyr::select(cname, iso2) %>%
+    tibble::deframe()
+  
+  return(output)
+}
+
+
+
+
 #' Print all the existing years in LIS for a given country.
 #'
 #' @param iso2 A character vector with valid iso2 codes of countries present in LIS.
@@ -139,6 +160,52 @@ get_years_lws <- function(iso2) {
     return(years_to_output)
   }
 
+  to_be_used_iso2 <- iso2[iso2 %in% valid_iso2]
+  result_list <- purrr::map(to_be_used_iso2, process_country)
+  names(result_list) <- to_be_used_iso2
+  return(result_list)
+}
+
+
+
+
+#' Print all the existing years in LCS for a given country.
+#'
+#' @param iso2 A character vector with valid iso2 codes of countries present in LCS.
+#'
+#' @returns A list, made of numeric vectors. Each elements corresponds to a country in LCS.
+#'
+#' @examples
+#' get_years_lcs("it")
+#' get_years_lcs(iso2 = c("de", "jp"))
+get_years_lcs <- function(iso2) {
+  valid_iso2 <- lissyrtools::get_countries_lcs()
+  invalid_iso2 <- iso2[!iso2 %in% valid_iso2]
+  
+  if (length(invalid_iso2) == length(iso2)) {
+    stop(
+      glue::glue(
+        "None of the provided iso2 codes in argument 'iso2' are valid: {toString(iso2)}. ",
+        "Valid codes are stored in lissyrtools::get_countries_lcs()."
+      )
+    )
+  } else if (length(invalid_iso2) > 0) {
+    warning(
+      glue::glue(
+        "The argument 'iso2' contains invalid iso2 codes: {toString(invalid_iso2)}. ",
+        "These iso2 codes are not in the valid list for the selected database. See: lissyrtools::get_countries_lcs()."
+      )
+    )
+  }
+  
+  process_country <- function(i) {
+    lissyrtools::datasets %>%
+      dplyr::filter(database == "LCS" & iso2 == i) %>%
+      dplyr::select(year) %>%
+      dplyr::arrange(year) %>%
+      dplyr::pull()
+  }
+  
   to_be_used_iso2 <- iso2[iso2 %in% valid_iso2]
   result_list <- purrr::map(to_be_used_iso2, process_country)
   names(result_list) <- to_be_used_iso2

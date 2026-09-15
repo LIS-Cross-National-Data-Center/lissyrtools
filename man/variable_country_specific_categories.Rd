@@ -9,8 +9,9 @@ variable_country_specific_categories(
   iso2,
   from = NULL,
   to = NULL,
-  lws = FALSE,
-  n_categories = FALSE
+  database = "lis",
+  n_categories = FALSE,
+  ...
 )
 }
 \arguments{
@@ -22,7 +23,7 @@ variable_country_specific_categories(
 
 \item{to}{A numeric value representing the year (inclusive) up to which the LIS/LWS datasets should be considered.}
 
-\item{lws}{A logical value, that guides the tool to search in the LIS or LWS database. The argument is FALSE by default, taking LIS as the databse to be investigated if nothing is specified.}
+\item{database}{A character value. One of "lis" (default), "lws", or "lcs".}
 
 \item{n_categories}{A logical value indicating whether to output the number of categories of a single country-specific variable, across the entire time series for a given country.}
 }

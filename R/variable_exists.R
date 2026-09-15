@@ -4,7 +4,7 @@
 #'
 #' @param variable A unit-length character vector containing specified LIS/LWS variables. 
 #' @param iso2 A character vector with valid iso2 codes of countries present in LIS/LWS. 
-#' @param lws  A logical value, that guides the tool to search in the LIS or LWS database. The argument is FALSE by default, taking LIS as the database to be investigated if nothing is specified.
+#' @param database A character value. One of "lis" (default), "lws", or "lcs".
 #' @param share A logical value indicating whether to output the share of datasets, across the entire time series for each country, where a variable has more than just non-missing or non-zero values, instead of displaying its presence year by year.           
 #'
 #' @return A list made of character vectors. If share = TRUE, then a list with a numeric vector. 
@@ -14,7 +14,46 @@
 #' variable_exists(variable = "area_c", iso2 = "br")
 #' variable_exists(variable = "basb", iso2 = c("fr", "de", "us", "uk"), lws = TRUE)
 #' variable_exists(variable = "basb", iso2 = c("fr", "de", "us", "uk"), lws = TRUE, share = TRUE)
-variable_exists <- function(variable, iso2, lws = FALSE, share = FALSE) {
+variable_exists <- function(variable, iso2, database = "lis", share = FALSE, ...) {
+  
+  dots <- list(...)
+  
+  if ("lws" %in% names(dots)) {
+    
+    if (!is.logical(dots$lws) || length(dots$lws) != 1) {
+      stop("'lws' must be TRUE or FALSE.", call. = FALSE)
+    }
+    
+    # Was `database` explicitly supplied?
+    database_supplied <- "database" %in% names(as.list(match.call()))
+    
+    # What database does the old `lws` argument imply?
+    old_database <- if (isTRUE(dots$lws)) "lws" else "lis"
+    
+    # If database was explicitly supplied, check for a conflict
+    if (database_supplied && database != old_database) {
+      stop(
+        "The deprecated argument 'lws' conflicts with ",
+        "database = \"", database, "\". ",
+        "Please use 'database' instead.",
+        call. = FALSE
+      )
+    }
+    
+    # Backwards compatibility: lws determines database
+    database <- old_database
+    
+    warning(
+      "The argument 'lws' is deprecated and no longer used. ",
+      "Please use 'database' instead, which accepts ",
+      "\"lis\" (default), \"lws\", or \"lcs\".",
+      call. = FALSE
+    )
+  }
+  
+  database <- match.arg(database, c("lis", "lws", "lcs"))
+  assertthat::assert_that(database %in% c("lis", "lws", "lcs"),
+                          msg = glue::glue("'database' must be one of 'lis', 'lws', or 'lcs'. Got '{database}' instead."))
   
   # Ensure that argument 'variable' only accepts one character
   
@@ -28,11 +67,18 @@ variable_exists <- function(variable, iso2, lws = FALSE, share = FALSE) {
   
   # ensure the validity of the variable
   
-  if (lws) {
+  if (database == "lws") {
     invalid_var <- variable[!variable %in% lissyrtools::lws_variables]
     if (length(invalid_var) > 0) {
       stop(glue::glue(
         "Invalid variable: {paste(invalid_var)} not found in 'lissyrtools::lws_variables'."
+      ))
+    }
+  } else if (database == "lcs") {
+    invalid_var <- variable[!variable %in% lissyrtools::lcs_variables]
+    if (length(invalid_var) > 0) {
+      stop(glue::glue(
+        "Invalid variable: {paste(invalid_var)} not found in 'lissyrtools::lcs_variables'."
       ))
     }
   } else {
@@ -46,8 +92,10 @@ variable_exists <- function(variable, iso2, lws = FALSE, share = FALSE) {
   
   # ensure the validity of the iso2 codes
   
-  valid_iso2 <- if (lws) {
+  valid_iso2 <- if (database == "lws") {
     lissyrtools::get_countries_lws()
+  } else if (database == "lcs") {
+    lissyrtools::get_countries_lcs()
   } else {
     lissyrtools::get_countries_lis()
   }
@@ -59,7 +107,7 @@ variable_exists <- function(variable, iso2, lws = FALSE, share = FALSE) {
     stop(
       glue::glue(
         "None of the provided iso2 codes in argument 'iso2' are valid: {toString(iso2)}. ",
-        "Valid codes are stored in lissyrtools::get_countries_{ifelse(lws, 'lws', 'lis')}()."
+        "Valid codes are stored in lissyrtools::get_countries_{database}()."
       )
     )
   } else if (length(invalid_iso2) > 0) {
@@ -67,7 +115,7 @@ variable_exists <- function(variable, iso2, lws = FALSE, share = FALSE) {
     warning(
       glue::glue(
         "The argument 'iso2' contains invalid iso2 codes: {toString(invalid_iso2)}. ",
-        "These iso2 codes are not in the valid list for the selected database. See: lissyrtools::get_countries_{ifelse(lws, 'lws', 'lis')}()."
+        "These iso2 codes are not in the valid list for the selected database. See: lissyrtools::get_countries_{database}()."
       )
     )
   }
@@ -75,9 +123,18 @@ variable_exists <- function(variable, iso2, lws = FALSE, share = FALSE) {
   # body of the function
   if (share == FALSE) {
     process_country <- function(i) {
-      db <- if (lws) "LWS" else "LIS"
-      get_years_function <- if (lws) {
+      db <- if (database == "lws") {
+        "LWS"
+      } else if (database == "lcs") {
+        "LCS"
+      } else {
+        "LIS"
+      }
+      
+      get_years_function <- if (database == "lws") {
         lissyrtools::get_years_lws
+      } else if (database == "lcs") {
+        lissyrtools::get_years_lcs
       } else {
         lissyrtools::get_years_lis
       }
@@ -121,7 +178,13 @@ variable_exists <- function(variable, iso2, lws = FALSE, share = FALSE) {
     
   } else if (share == TRUE) {
     
-    db <- if (lws) "LWS" else "LIS"
+    db <- if (database == "lws") {
+      "LWS"
+    } else if (database == "lcs") {
+      "LCS"
+    } else {
+      "LIS"
+    }
     
     to_be_used_iso2 <- iso2[iso2 %in% valid_iso2]
     
@@ -146,7 +209,7 @@ variable_exists <- function(variable, iso2, lws = FALSE, share = FALSE) {
     
     names(result) <- paste0(
       "Share of years across the series in ",
-      dplyr::if_else(lws, "LWS", "LIS"),
+      db,
       " where: ",
       variable,
       " has values other than zeros and missings."
@@ -155,3 +218,7 @@ variable_exists <- function(variable, iso2, lws = FALSE, share = FALSE) {
     
   }
 }
+
+
+
+
