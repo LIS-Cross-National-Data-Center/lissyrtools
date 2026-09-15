@@ -17,5 +17,5 @@ Print all the existing years in LCS for a given country.
 }
 \examples{
 get_years_lcs("it")
-get_years_lcs(iso2 = c("de", "jp"))
+get_years_lcs(iso2 = c("lu", "es"))
 }

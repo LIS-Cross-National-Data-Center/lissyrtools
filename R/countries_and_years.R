@@ -177,7 +177,7 @@ get_years_lws <- function(iso2) {
 #'
 #' @examples
 #' get_years_lcs("it")
-#' get_years_lcs(iso2 = c("de", "jp"))
+#' get_years_lcs(iso2 = c("lu", "es"))
 get_years_lcs <- function(iso2) {
   valid_iso2 <- lissyrtools::get_countries_lcs()
   invalid_iso2 <- iso2[!iso2 %in% valid_iso2]
