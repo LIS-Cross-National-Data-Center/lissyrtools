@@ -9,13 +9,13 @@
 ## Citation
 
 Marques G, Espasa Reig J (2026). *lissyrtools: Tools for LISSY Jobs*. R
-package version 0.2.5,
+package version 0.2.6,
 <https://lis-cross-national-data-center.github.io/lissyrtools/>.
 
     @Manual{,
       title = {lissyrtools: Tools for LISSY Jobs},
       author = {Gonçalo Marques and Josep {Espasa Reig}},
       year = {2026},
-      note = {R package version 0.2.5},
+      note = {R package version 0.2.6},
       url = {https://lis-cross-national-data-center.github.io/lissyrtools/},
     }

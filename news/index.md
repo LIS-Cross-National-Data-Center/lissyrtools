@@ -1,5 +1,13 @@
 # Changelog
 
+## lissyrtools 0.2.6 (2026-09-23)
+
+### Minor changes
+
+- Attempt to better align the selection of argument `database` in
+  [`lissyuse()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/lissyuse.md)
+  with the Project selected in the dropdown menu in LISSY.
+
 ## lissyrtools 0.2.5 (2026-09-15)
 
 ### New functions
