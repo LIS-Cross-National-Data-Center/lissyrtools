@@ -95,13 +95,21 @@ lissyuse <- function(
   assertthat::assert_that(database %in% c("lis", "lws", "lcs"),
                           msg = glue::glue("'database' must be one of 'lis', 'lws', or 'lcs'. Got '{database}' instead."))
   
-  # 0) Define paths and location  ---------------------------------------------------------
-  
-  if (!exists("define_path")) {
-    data_to_load <- import_sample_datasets_to_lissyuse(data, database) # local machine ----> only access to sample datasets
-  } else {
-    path_to_files <- define_path(database)[[1]]
-    location <- define_path(database)[[2]]
+    # 0) Define paths and location  ---------------------------------------------------------
+    
+    if (!exists("define_path")) {
+      data_to_load <- import_sample_datasets_to_lissyuse(data, database) # local machine ----> only access to sample datasets
+    } else {
+      path_to_files <- define_path(database)[[1]]
+      location <- define_path(database)[[2]]
+      
+      
+    if (location == "L") {
+      project = stringr::str_sub(LIS_DIR, -10,-8)
+      assertthat::assert_that(path_to_files == LIS_DIR,
+                              msg = glue::glue("MISMATCH: In function 'lissyuse()'! The argument 'database' is equal to: '{database}', while the value in the Project dropdown menu is: {project}. Please align both. Recall that the argument 'database' is 'lis' by default if nothing is specified."))
+    }  
+      
     
     # 1) Argument {data}  -------------------------------------
     
