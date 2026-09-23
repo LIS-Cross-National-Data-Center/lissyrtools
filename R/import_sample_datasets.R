@@ -65,8 +65,8 @@ import_sample_datasets_to_lissyuse <- function(data = NULL, database = "lis") {
           dplyr::left_join(es24_p_lcs, by = lissyrtools::lcs_both_hp_variables)
       ),
       mx = list(
-        mx10 = mx10_h_lcs %>%
-          dplyr::left_join(mx10_p_lcs, by = lissyrtools::lcs_both_hp_variables),
+        mx16 = mx16_h_lcs %>%
+          dplyr::left_join(mx16_p_lcs, by = lissyrtools::lcs_both_hp_variables),
         mx20 = mx20_h_lcs %>%
           dplyr::left_join(mx20_p_lcs, by = lissyrtools::lcs_both_hp_variables)
       )
