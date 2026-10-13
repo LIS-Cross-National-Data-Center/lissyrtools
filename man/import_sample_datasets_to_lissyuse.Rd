@@ -10,6 +10,10 @@ import_sample_datasets_to_lissyuse(data = NULL, database = "lis")
 \item{data}{Optional. A named list of datasets to import. If \code{NULL}, all the default set is used.}
 
 \item{database}{A character value. One of "lis" (default), "lws", or "lcs".}
+
+\item{from}{A numeric value representing the year (inclusive) after which the LIS/LWS datasets should be loaded.}
+
+\item{to}{A numeric value representing the year (inclusive) up to which the LIS/LWS datasets should be loaded.}
 }
 \value{
 A list.

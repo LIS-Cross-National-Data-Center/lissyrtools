@@ -7,6 +7,8 @@
 #'
 #' @param data Optional. A named list of datasets to import. If `NULL`, all the default set is used.
 #' @param database A character value. One of "lis" (default), "lws", or "lcs".
+#' @param from A numeric value representing the year (inclusive) after which the LIS/LWS datasets should be loaded.
+#' @param to A numeric value representing the year (inclusive) up to which the LIS/LWS datasets should be loaded.
 #'
 #' @keywords internal
 #' @return A list.
@@ -116,5 +118,21 @@ import_sample_datasets_to_lissyuse <- function(data = NULL, database = "lis") {
       }
     }
   }
+  
+  # Filter by year range (dataset names are ccyy, e.g. "it14" -> 2014)
+  if (!is.null(from) || !is.null(to)) {
+    yy   <- as.numeric(substr(names(data_to_load), 3, 4))
+    year <- ifelse(yy > 50, 1900 + yy, 2000 + yy)   # same convention as ccyy
+    keep <- rep(TRUE, length(year))
+    if (!is.null(from)) keep <- keep & year >= from
+    if (!is.null(to))   keep <- keep & year <= to
+    data_to_load <- data_to_load[keep]
+  }
+  
+  if (length(data_to_load) == 0) {
+    stop("No sample datasets matched the provided criteria. Please check 'data', 'from' and 'to'.",
+         call. = FALSE)
+  }
+  
   return(data_to_load)
 }

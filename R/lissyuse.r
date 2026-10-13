@@ -98,7 +98,7 @@ lissyuse <- function(
     # 0) Define paths and location  ---------------------------------------------------------
     
     if (!exists("define_path")) {
-      data_to_load <- import_sample_datasets_to_lissyuse(data, database) # local machine ----> only access to sample datasets
+      data_to_load <- import_sample_datasets_to_lissyuse(data, database, from, to) # local machine ----> only access to sample datasets
     } else {
       path_to_files <- define_path(database)[[1]]
       location <- define_path(database)[[2]]
