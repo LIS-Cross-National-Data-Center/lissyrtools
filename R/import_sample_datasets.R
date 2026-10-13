@@ -12,7 +12,7 @@
 #'
 #' @keywords internal
 #' @return A list.
-import_sample_datasets_to_lissyuse <- function(data = NULL, database = "lis") {
+import_sample_datasets_to_lissyuse <- function(data = NULL, database = "lis", from = NULL, to = NULL) {
   
   assertthat::assert_that(database %in% c("lis", "lws", "lcs"),
                           msg = glue::glue("'database' must be one of 'lis', 'lws', or 'lcs'. Got '{database}' instead."))
