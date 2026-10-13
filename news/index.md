@@ -1,5 +1,14 @@
 # Changelog
 
+## lissyrtools 0.2.7 (2026-10-13)
+
+### Minor changes
+
+- Corrected the glitch in
+  [`import_sample_datasets_to_lissyuse()`](https://lis-cross-national-data-center.github.io/lissyrtools/reference/import_sample_datasets_to_lissyuse.md).
+  Now it includes the numeric arguments `from` and `to`.
+- Sample files are now stored as tibbles and not data.frames.
+
 ## lissyrtools 0.2.6 (2026-09-23)
 
 ### Minor changes

@@ -20,6 +20,16 @@ import_sample_datasets_to_lissyuse(data = NULL, database = "lis")
 
   A character value. One of "lis" (default), "lws", or "lcs".
 
+- from:
+
+  A numeric value representing the year (inclusive) after which the
+  LIS/LWS datasets should be loaded.
+
+- to:
+
+  A numeric value representing the year (inclusive) up to which the
+  LIS/LWS datasets should be loaded.
+
 ## Value
 
 A list.
